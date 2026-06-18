@@ -61,10 +61,11 @@ body {
   align-items: center;
   gap: 0;
   flex-shrink: 0;
-  background: #0a1628;
+  background: #ffffff;
   border-radius: 6px;
   overflow: hidden;
   height: 44px;
+  border: 1px solid var(--border);
 }
 
 .header-inst-logo {
@@ -78,7 +79,7 @@ body {
 .header-logo-divider {
   width: 1px;
   height: 28px;
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--border);
   flex-shrink: 0;
 }
 
@@ -1339,14 +1340,14 @@ aside {
 }
 
 .info-bar-logo-img {
-  height: 38px;
+  height: 50px;
   width: auto;
   object-fit: contain;
   display: block;
 }
 
 .info-bar-logo-wide {
-  height: 22px;
+  height: 30px;
 }
 
 .info-bar-text {
