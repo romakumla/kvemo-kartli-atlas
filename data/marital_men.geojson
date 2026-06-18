@@ -1,0 +1,173 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.540425,
+          41.389635
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ბოლნისი",
+        "Name_Eng": "Bolnisi",
+        "Married_2002": 623,
+        "Married_2014": 713,
+        "NMarried_2002": 327,
+        "NMarried_2014": 184,
+        "Widow_2002": 29,
+        "Widow_2014": 26,
+        "Divorced_2002": 20,
+        "Divorced_2014": 15,
+        "NoData_2002": 0,
+        "NoData_2014": 62
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.767228,
+          41.319781
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მარნეული",
+        "Name_Eng": "Marneuli",
+        "Married_2002": 686,
+        "Married_2014": 715,
+        "NMarried_2002": 283,
+        "NMarried_2014": 191,
+        "Widow_2002": 23,
+        "Widow_2014": 21,
+        "Divorced_2002": 7,
+        "Divorced_2014": 10,
+        "NoData_2002": 0,
+        "NoData_2014": 63
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.168937,
+          41.37849
+        ]
+      },
+      "properties": {
+        "Name_Geo": "დმანისი",
+        "Name_Eng": "Dmanisi",
+        "Married_2002": 687,
+        "Married_2014": 705,
+        "NMarried_2002": 268,
+        "NMarried_2014": 198,
+        "Widow_2002": 32,
+        "Widow_2014": 38,
+        "Divorced_2002": 14,
+        "Divorced_2014": 16,
+        "NoData_2002": 0,
+        "NoData_2014": 43
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.96018,
+          41.561461
+        ]
+      },
+      "properties": {
+        "Name_Geo": "რუსთავი",
+        "Name_Eng": "Rustavi",
+        "Married_2002": 649,
+        "Married_2014": 651,
+        "NMarried_2002": 304,
+        "NMarried_2014": 251,
+        "Widow_2002": 27,
+        "Widow_2014": 23,
+        "Divorced_2002": 19,
+        "Divorced_2014": 27,
+        "NoData_2002": 0,
+        "NoData_2014": 48
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.993211,
+          41.609989
+        ]
+      },
+      "properties": {
+        "Name_Geo": "წალკა",
+        "Name_Eng": "Tsalka",
+        "Married_2002": 704,
+        "Married_2014": 718,
+        "NMarried_2002": 254,
+        "NMarried_2014": 198,
+        "Widow_2002": 31,
+        "Widow_2014": 30,
+        "Divorced_2002": 10,
+        "Divorced_2014": 13,
+        "NoData_2002": 0,
+        "NoData_2014": 41
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.508201,
+          41.605414
+        ]
+      },
+      "properties": {
+        "Name_Geo": "თეთრიწყარო",
+        "Name_Eng": "Tetritskaro",
+        "Married_2002": 666,
+        "Married_2014": 652,
+        "NMarried_2002": 273,
+        "NMarried_2014": 239,
+        "Widow_2002": 44,
+        "Widow_2014": 48,
+        "Divorced_2002": 18,
+        "Divorced_2014": 25,
+        "NoData_2002": 0,
+        "NoData_2014": 36
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.15,
+          41.55
+        ]
+      },
+      "properties": {
+        "Name_Geo": "გარდაბანი",
+        "Name_Eng": "Gardabani",
+        "Married_2002": 649,
+        "Married_2014": 681,
+        "NMarried_2002": 310,
+        "NMarried_2014": 217,
+        "Widow_2002": 26,
+        "Widow_2014": 31,
+        "Divorced_2002": 15,
+        "Divorced_2014": 19,
+        "NoData_2002": 0,
+        "NoData_2014": 52
+      }
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.78283,
+          41.60636
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მოქმედი",
+        "Name_Eng": "Active",
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.090709,
+          41.507208
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მოქმედი",
+        "Name_Eng": "Active",
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.194965,
+          41.60714
+        ]
+      },
+      "properties": {
+        "Name_Geo": "შეჩერებული",
+        "Name_Eng": "Not Active",
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.394121,
+          41.407457
+        ]
+      },
+      "properties": {
+        "Name_Geo": "შეჩერებული",
+        "Name_Eng": "Not Active",
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.194392,
+          41.303454
+        ]
+      },
+      "properties": {
+        "Name_Geo": "შეჩერებული",
+        "Name_Eng": "Not Active",
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.995282,
+          41.200301
+        ]
+      },
+      "properties": {
+        "Name_Geo": "შეჩერებული",
+        "Name_Eng": "Not Active",
+        "Active": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [45.0, 41.65]}, "properties": {"Mw": 6.3, "Year": 1896, "Radius": 12, "Color": "#7B0000", "MagClass": "> 6"}}]}

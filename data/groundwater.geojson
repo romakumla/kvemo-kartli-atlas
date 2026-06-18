@@ -1,0 +1,135 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.524634,
+          41.380954
+        ]
+      },
+      "properties": {
+        "Number": "№41",
+        "Name_Geo": "ქვემობოლნისი",
+        "Name_Eng": "Kvemo Bolnisi",
+        "Type_Geo": "ჭაბურღილი",
+        "Type_Eng": "Borehole",
+        "Munic_Geo": "ბოლნისი",
+        "Temp_Geo": "ცივი",
+        "Mineral_M": 0.67,
+        "HCO3": 49.73,
+        "Cl": 0.0,
+        "SO4": 48.68,
+        "Na_K": 0.0,
+        "Ca": 62.31,
+        "Mg": 26.23
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.945287,
+          41.421584
+        ]
+      },
+      "properties": {
+        "Number": "№42",
+        "Name_Geo": "აზიზქენდი",
+        "Name_Eng": "Azizkendi",
+        "Type_Geo": "ჭაბურღილი",
+        "Type_Eng": "Borehole",
+        "Munic_Geo": "მარნეული",
+        "Temp_Geo": "ცივი",
+        "Mineral_M": 1.27,
+        "HCO3": 22.63,
+        "Cl": 0.0,
+        "SO4": 71.58,
+        "Na_K": 23.28,
+        "Ca": 55.14,
+        "Mg": 21.58
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.118901,
+          41.393927
+        ]
+      },
+      "properties": {
+        "Number": "№43",
+        "Name_Geo": "ვახტანგისი",
+        "Name_Eng": "Vakhtangisi",
+        "Type_Geo": "ჭაბურღილი",
+        "Type_Eng": "Borehole",
+        "Munic_Geo": "გარდაბანი",
+        "Temp_Geo": "ცივი",
+        "Mineral_M": 0.55,
+        "HCO3": 50.24,
+        "Cl": 0.0,
+        "SO4": 35.79,
+        "Na_K": 39.2,
+        "Ca": 42.22,
+        "Mg": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.832226,
+          41.215305
+        ]
+      },
+      "properties": {
+        "Number": "№01-TB",
+        "Name_Geo": "ბურმა",
+        "Name_Eng": "Burma",
+        "Type_Geo": "წყარო",
+        "Type_Eng": "Spring",
+        "Munic_Geo": "მარნეული",
+        "Temp_Geo": "ცივი",
+        "Mineral_M": 0.9,
+        "HCO3": 68.54,
+        "Cl": 0.0,
+        "SO4": 30.39,
+        "Na_K": 0.0,
+        "Ca": 0.0,
+        "Mg": 75.56
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.746406,
+          41.271303
+        ]
+      },
+      "properties": {
+        "Number": "№02-TB",
+        "Name_Geo": "დამია",
+        "Name_Eng": "Damia",
+        "Type_Geo": "წყარო",
+        "Type_Eng": "Spring",
+        "Munic_Geo": "მარნეული",
+        "Temp_Geo": "ცივი",
+        "Mineral_M": 0.4,
+        "HCO3": 82.0,
+        "Cl": 0.0,
+        "SO4": 0.0,
+        "Na_K": 0.0,
+        "Ca": 78.01,
+        "Mg": 0.0
+      }
+    }
+  ]
+}

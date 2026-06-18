@@ -1,0 +1,1820 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.438456,
+          41.515059
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.185903,
+          41.636273
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.229324,
+          41.639009
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.251921,
+          41.639915
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.328872,
+          41.664062
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.380312,
+          41.693694
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.187996,
+          41.565823
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.123021,
+          41.555726
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.231527,
+          41.511218
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.13558,
+          41.304484
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.196954,
+          41.25408
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.519887,
+          41.569713
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.563537,
+          41.579789
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.582271,
+          41.578878
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.598824,
+          41.578348
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.613931,
+          41.578163
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.622265,
+          41.569137
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.592751,
+          41.567843
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.590518,
+          41.559088
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.642549,
+          41.56374
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.597466,
+          41.618021
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.521931,
+          41.671263
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.664718,
+          41.593666
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.682302,
+          41.562884
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.695103,
+          41.528182
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.775969,
+          41.603508
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.782899,
+          41.625777
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.986397,
+          41.541585
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.950284,
+          41.561745
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.927366,
+          41.557117
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.994533,
+          41.514019
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.004222,
+          41.491356
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.036191,
+          41.379731
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.029189,
+          41.403362
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.026858,
+          41.417886
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.004628,
+          41.452009
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.993838,
+          41.466698
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.93173,
+          41.423678
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.892296,
+          41.447314
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.541097,
+          41.391301
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.169188,
+          41.64273
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.156991,
+          41.65031
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.973909,
+          41.790173
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.019753,
+          41.78971
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.618276,
+          41.608679
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.439374,
+          41.704649
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.546694,
+          41.571792
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.713366,
+          41.612108
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.754747,
+          41.613054
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.734831,
+          41.544426
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.591596,
+          41.580057
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.38648,
+          41.521781
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.554189,
+          41.574436
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.148845,
+          41.630741
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.2146,
+          41.252401
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.224267,
+          41.256511
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.689262,
+          41.575402
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.71368,
+          41.568269
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.726901,
+          41.607186
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.564463,
+          41.673609
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.15095,
+          41.662429
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.591721,
+          41.580232
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.618864,
+          41.577001
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.149641,
+          41.631368
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.977806,
+          41.792424
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.962916,
+          41.816631
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.321387,
+          41.207717
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.324679,
+          41.212339
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.315125,
+          41.220336
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.313886,
+          41.221283
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.591374,
+          41.580221
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.629903,
+          41.578613
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.627642,
+          41.579588
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.618864,
+          41.577001
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.670342,
+          41.561776
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.670289,
+          41.565108
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.148204,
+          41.630187
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.768995,
+          41.602144
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.764089,
+          41.61133
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.979274,
+          41.793091
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.96288,
+          41.81646
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.386367,
+          41.429625
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.356487,
+          41.421869
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.32149,
+          41.409769
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.244593,
+          41.285669
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.163763,
+          41.378735
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.200987,
+          41.249921
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.192491,
+          41.251717
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.415233,
+          41.503195
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.354415,
+          41.646311
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.511869,
+          41.708363
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.640118,
+          41.594724
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.626744,
+          41.579279
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.681271,
+          41.570778
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.669747,
+          41.565584
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.703232,
+          41.581573
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.683933,
+          41.585845
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.196614,
+          41.393309
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.00873,
+          41.464941
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.957937,
+          41.495108
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.994919,
+          41.517544
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.9783,
+          41.792217
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.900788,
+          41.785863
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.91457,
+          41.802357
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.382372,
+          41.428798
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.39116,
+          41.433391
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.603454,
+          41.603607
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.668678,
+          41.594107
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.431872,
+          41.650025
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.601345,
+          41.657827
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.897997,
+          41.800208
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.126097,
+          41.591479
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.152407,
+          41.532877
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.148407,
+          41.630278
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.76855,
+          41.602368
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.603166,
+          41.603718
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.5309,
+          41.573766
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.291869,
+          41.661182
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.051853,
+          41.736787
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.157802,
+          41.744068
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.043287,
+          41.802623
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მეწყერი",
+        "Name_Eng": "Landslide",
+        "Hazard": "mewyeri"
+      }
+    }
+  ]
+}

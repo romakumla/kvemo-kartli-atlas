@@ -1,0 +1,96 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.539111,
+          41.449916
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ბოლნისი"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.815505,
+          41.471373
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მარნეული"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.203376,
+          41.332192
+        ]
+      },
+      "properties": {
+        "Name_Geo": "დმანისი"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.011485,
+          41.543519
+        ]
+      },
+      "properties": {
+        "Name_Geo": "რუსთავი"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.091341,
+          41.59518
+        ]
+      },
+      "properties": {
+        "Name_Geo": "წალკა"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.461791,
+          41.544354
+        ]
+      },
+      "properties": {
+        "Name_Geo": "თეთრიწყარო"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.090542,
+          41.459657
+        ]
+      },
+      "properties": {
+        "Name_Geo": "გარდაბანი"
+      }
+    }
+  ]
+}

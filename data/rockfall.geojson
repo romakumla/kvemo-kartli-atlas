@@ -1,0 +1,1400 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.729134,
+          41.649662
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.763671,
+          41.670047
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.804793,
+          41.692015
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.846646,
+          41.678245
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.853496,
+          41.645868
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.890072,
+          41.654286
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.915509,
+          41.669092
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.943505,
+          41.6548
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.865278,
+          41.523547
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.185903,
+          41.636273
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.229324,
+          41.639009
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.251921,
+          41.639915
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.380312,
+          41.693694
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.187996,
+          41.565823
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.25317,
+          41.571668
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.145682,
+          41.543908
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.123021,
+          41.555726
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.101224,
+          41.541185
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.158991,
+          41.493452
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.212756,
+          41.470247
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.231527,
+          41.511218
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.139908,
+          41.359412
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.195365,
+          41.328661
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.29965,
+          41.28484
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.338104,
+          41.328483
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.364332,
+          41.348034
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.347368,
+          41.356304
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.394056,
+          41.365198
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.322396,
+          41.415078
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.377429,
+          41.470954
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.488938,
+          41.513588
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.590518,
+          41.559088
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.628551,
+          41.60625
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.597466,
+          41.618021
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.682302,
+          41.562884
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.782899,
+          41.625777
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.950284,
+          41.561745
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.927366,
+          41.557117
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.599608,
+          41.447177
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.169188,
+          41.64273
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.156991,
+          41.65031
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.973909,
+          41.790173
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.019753,
+          41.78971
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.382179,
+          41.497326
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.148845,
+          41.630741
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.119402,
+          41.367604
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.354246,
+          41.360533
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.15095,
+          41.662429
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.30004,
+          41.224677
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.290053,
+          41.232095
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.281464,
+          41.240945
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.260127,
+          41.578557
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.368141,
+          41.362754
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.357667,
+          41.354373
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.121224,
+          41.366402
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.069734,
+          41.669687
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.893487,
+          41.661856
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.149641,
+          41.631368
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.321182,
+          41.227596
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.291914,
+          41.229834
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.285234,
+          41.236224
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.283499,
+          41.238844
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.283824,
+          41.242935
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.318784,
+          41.306823
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.32179,
+          41.30839
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.33486,
+          41.321176
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.344437,
+          41.334914
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.350016,
+          41.341124
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.215097,
+          41.465659
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.229246,
+          41.480328
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.237553,
+          41.486932
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.254165,
+          41.510073
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.518835,
+          41.44882
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.381156,
+          41.369616
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.261672,
+          41.513823
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.263199,
+          41.521832
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.26017,
+          41.527847
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.197639,
+          41.5529
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.17773,
+          41.554156
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.154671,
+          41.544981
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.140677,
+          41.542437
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.363578,
+          41.347668
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.314007,
+          41.301021
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.285973,
+          41.235175
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.288973,
+          41.232563
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.251946,
+          41.573704
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.254008,
+          41.574861
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.702977,
+          41.4747
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.696928,
+          41.48017
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.126097,
+          41.591479
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.125461,
+          41.547907
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.886952,
+          41.659803
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.873784,
+          41.66969
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კლდეზვავი",
+        "Name_Eng": "Rockfoll",
+        "Hazard": "kldezvavi_qvaTacvena"
+      }
+    }
+  ]
+}

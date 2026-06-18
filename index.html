@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ka">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>საქართველოს თემატური ატლასი</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="libs/leaflet.css" />
+  <script src="libs/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <script src="libs/chart.umd.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=BPG+Nino+Mtavruli&family=Fira+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .clickable {
+      cursor: pointer;
+    }
+
+    .modal-code-highlight {
+      font-weight: 600;
+      color: var(--red);
+    }
+
+    .chapter-icon-img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+    }
+
+    .chapter-color-population {
+      background: #5BA3D022;
+    }
+
+    .chapter-color-nature {
+      background: #4EA44E22;
+    }
+
+    .chapter-color-history {
+      background: #8B691422;
+    }
+
+    .chapter-color-economics {
+      background: #E8A80022;
+    }
+
+    .chapter-color-education {
+      background: #7EB05C22;
+    }
+
+    .chapter-color-health {
+      background: #C84B3122;
+    }
+
+    .contact-map-wrap {
+      margin-top: 16px;
+    }
+
+    .map-frame {
+      border: 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .map-link-note {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .map-link-url {
+      color: var(--text-muted);
+    }
+
+    .legend-content {
+      margin-top: 16px;
+    }
+
+    .map-info-wrapper {
+      margin-top: 16px;
+    }
+
+    .legend-panel-label {
+      margin-top: 12px;
+    }
+
+    .zoom-panel-label {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header id="appHeader">
+    <div class="header-inner">
+      <div class="header-logo clickable" onclick="window.location.reload()" title="მთავარ გვერდზე დაბრუნება">
+        <img src="files/logo-foundation.png" alt="შოთა რუსთაველის ეროვნული სამეცნიერო ფონდი" class="header-atlas-logo">
+        <div class="header-logo-divider"></div>
+        <img src="files/logo-institute.png" alt="ვახუშტი ბაგრატიონის გეოგრაფიის ინსტიტუტი" class="header-inst-logo">
+      </div>
+      <div class="header-center">
+        <div class="header-title">
+          <span class="title-geo">ქვემო ქართლის რეგიონის</span>
+          <span class="title-sub">ინტერაქტიული ატლასი</span>
+        </div>
+      </div>
+      <div class="header-meta">
+        <nav class="site-nav">
+          <a href="#" class="nav-link" onclick="openModal('modal-about'); return false;">მთავარი</a>
+          <a href="#" class="nav-link nav-link-active" onclick="openModal('modal-atlas'); return false;">ატლასი</a>
+          <a href="#" class="nav-link" onclick="openModal('modal-team'); return false;">გუნდი</a>
+          <a href="#" class="nav-link" onclick="openModal('modal-contact'); return false;">კონტაქტი</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Modals ===== -->
+
+  <!-- მთავარი -->
+  <div class="atlas-modal" id="modal-about" onclick="if(event.target===this)closeModal('modal-about')">
+    <div class="atlas-modal-box">
+      <button class="atlas-modal-close" onclick="closeModal('modal-about')">&times;</button>
+      <div class="atlas-modal-header">
+        <svg viewBox="0 0 32 32" fill="none" width="36" height="36">
+          <circle cx="16" cy="16" r="15" stroke="#C8102E" stroke-width="2" />
+          <circle cx="16" cy="16" r="4" fill="#C8102E" />
+          <line x1="16" y1="4" x2="16" y2="12" stroke="#C8102E" stroke-width="1.5" />
+          <line x1="16" y1="20" x2="16" y2="28" stroke="#C8102E" stroke-width="1.5" />
+          <line x1="4" y1="16" x2="12" y2="16" stroke="#C8102E" stroke-width="1.5" />
+          <line x1="20" y1="16" x2="28" y2="16" stroke="#C8102E" stroke-width="1.5" />
+        </svg>
+        <div>
+          <div class="atlas-modal-title">ქვემო ქართლის რეგიონის ინტერაქტული გეოგრაფიული ატლასი</div>
+          <div class="atlas-modal-sub">ციფრული გეოსაინფორმაციო პლატფორმა</div>
+        </div>
+      </div>
+      <div class="atlas-modal-body">
+        <p>ქვემო ქართლის თემატური ვებ-ატლასი წარმოადგენს ციფრულ გეოსაინფორმაციო პლატფორმას, რომელიც ერთ სივრცეში
+          აერთიანებს რეგიონის მრავალფეროვან სტატისტიკურ და სივრცულ მონაცემებს.</p>
+        <p>პროექტი შექმნილია ივანე ჯავახიშვილის თბილისის სახელმწიფო უნივერსიტეტის ვახუშტი ბაგრატიონის გეოგრაფიის
+          ინსტიტუტის კარტოგრაფიისა და გეოინფორმატიკის განყოფილების მიერ, შოთა რუსთაველის ეროვნული სამეცნიერო ფონდის
+          საგრანტო კონკურსი ფუნდამენტური კვლევებისათვის <span class="modal-code-highlight">(FR-22-4153)</span> —
+          „ტერიტორიის ბუნებრივ-რესურსული და სოციალურ-ეკონომიკური პოტენციურიალის ვიზუალიზაცია თანამედროვე ვებ
+          კარტოგრაფიის მეთოდოლოგიის გამოყენებით".</p>
+        <p>ატლასი მოიცავს ისეთ თემებს, როგორიცაა მოსახლეობა, ბუნებრივი გარემო, ისტორია, ეკონომიკა, განათლება, ჯანდაცვა
+          და სოციალური მომსახურება.</p>
+        <div class="atlas-modal-stats">
+          <div class="modal-stat"><span class="modal-stat-num">7</span><span
+              class="modal-stat-label">მუნიციპალიტეტი</span></div>
+          <div class="modal-stat"><span class="modal-stat-num">30+</span><span class="modal-stat-label">თემატური
+              რუკა</span></div>
+          <div class="modal-stat"><span class="modal-stat-num">50+</span><span class="modal-stat-label">მონაცემთა
+              ფენა</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ატლასი -->
+  <div class="atlas-modal" id="modal-atlas" onclick="if(event.target===this)closeModal('modal-atlas')">
+    <div class="atlas-modal-box">
+      <button class="atlas-modal-close" onclick="closeModal('modal-atlas')">&times;</button>
+      <div class="atlas-modal-header">
+        <div class="atlas-modal-title">ატლასის შესახებ</div>
+      </div>
+      <div class="atlas-modal-body">
+        <p>ატლასი შედგება შემდეგი თემატური მოდულებისგან:</p>
+        <div class="atlas-modal-chapters">
+          <div class="modal-chapter"><span class="chapter-icon chapter-color-population"><img
+                src="files/icons/population.png" alt="მოსახლეობა" class="chapter-icon-img"></span>
+            <div><b>მოსახლეობა</b><br><span>სიმჭიდროვე, ეთნიკური, ქორწინება, სიკვდილ-შობადობა, IDP</span></div>
+          </div>
+          <div class="modal-chapter"><span class="chapter-icon chapter-color-nature"><img src="files/icons/nature.png"
+                alt="ბუნება" class="chapter-icon-img"></span>
+            <div><b>ბუნება</b><br><span>რელიეფი, კლიმატი, ნიადაგი, მცენარეულობა, საფრთხეები</span></div>
+          </div>
+          <div class="modal-chapter"><span class="chapter-icon chapter-color-history"><img src="files/icons/history.png"
+                alt="ისტორია" class="chapter-icon-img"></span>
+            <div><b>ისტორია</b><br><span>არქეოლოგია, ბრძოლები, გამაგრებები, ეპარქიები</span></div>
+          </div>
+          <div class="modal-chapter"><span class="chapter-icon chapter-color-economics"><img
+                src="files/icons/economics.png" alt="ეკონომიკა" class="chapter-icon-img"></span>
+            <div><b>ეკონომიკა</b><br><span>სოფ. მეურნეობა, ენერგეტიკა, მიწის საკუთრება, მზე</span></div>
+          </div>
+          <div class="modal-chapter"><span class="chapter-icon chapter-color-education"><img
+                src="files/icons/education.png" alt="განათლება" class="chapter-icon-img"></span>
+            <div><b>განათლება</b><br><span>სკოლები, საბავშვო ბაღები, ოიკონიმია</span></div>
+          </div>
+          <div class="modal-chapter"><span class="chapter-icon chapter-color-health"><img src="files/icons/health.png"
+                alt="ჯანდაცვა" class="chapter-icon-img"></span>
+            <div><b>ჯანდაცვა და სოც. მომსახ.</b><br><span>ჯანდაცვის ინფრასტრ., სოც. დახმარება, ზოონოზური დაავ.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- გუნდი -->
+  <div class="atlas-modal" id="modal-team" onclick="if(event.target===this)closeModal('modal-team')">
+    <div class="atlas-modal-box">
+      <button class="atlas-modal-close" onclick="closeModal('modal-team')">&times;</button>
+      <div class="atlas-modal-header">
+        <div class="atlas-modal-title">გუნდი</div>
+      </div>
+      <div class="atlas-modal-body">
+        <div class="atlas-team-grid">
+          <div class="team-card">
+            <div class="team-avatar"><img src="files/team/liparteliani.jpg" alt="გულიკო ლიპარტელიანი"
+                class="team-photo"></div>
+            <div class="team-name">გულიკო ლიპარტელიანი</div>
+            <div class="team-role">კარტოგრაფი, გეოგ. აკად. დოქტორი</div>
+            <div class="team-subrole">განყოფ. ხელმძღვანელი · პროექტის ხელმძღვანელი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">🗺️</div>
+            <div class="team-name">რომან კუმლაძე</div>
+            <div class="team-role">კარტოგრაფი</div>
+            <div class="team-subrole">მეცნიერ-თანამშრომელი · პროექტის კოორდინატორი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">🗺️</div>
+            <div class="team-name">მანანა ქურთუბაძე</div>
+            <div class="team-role">დამოუკიდებელი კარტოგრაფი</div>
+
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">🗺️</div>
+            <div class="team-name">თამარ ცხაკაია-გაგუა</div>
+            <div class="team-role">კარტოგრაფი</div>
+            <div class="team-subrole">ინჟინერი · პროექტის მკვლევარი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="files/team/chichinadze.jpg" alt="თამარ ჭიჭინაძე" class="team-photo">
+            </div>
+            <div class="team-name">თამარ ჭიჭინაძე</div>
+            <div class="team-role">კარტოგრაფი</div>
+            <div class="team-subrole">უფ. მეცნიერ-თანამშრომელი · პროექტის მკვლევარი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar">🌊</div>
+            <div class="team-name">ნიკოლოზ სუქნიძე</div>
+            <div class="team-role">ჰიდროლოგ-კლიმატოლოგი</div>
+            <div class="team-subrole">მეცნიერ-თანამშრომელი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="files/team/natosologhashvili.jpg" alt="ნატო სოლოღაშვილი"
+                class="team-photo"></div>
+            <div class="team-name">ნატო სოლოღაშვილი</div>
+            <div class="team-role">კარტოგრაფი</div>
+            <div class="team-subrole">სპეციალისტი · პროექტის მკვლევარი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="files/team/sophiokhorbaladze.jpg" alt="სოფიო ხორბალაძე"
+                class="team-photo"></div>
+            <div class="team-name">სოფიო ხორბალაძე</div>
+            <div class="team-role">კარტოგრაფი</div>
+            <div class="team-subrole">სპეციალისტი · პროექტის მკვლევარი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="files/team/gvantsatsirgvava.jpg" alt="გვანცა წირღვავა"
+                class="team-photo"></div>
+            <div class="team-name">გვანცა წირღვავა</div>
+            <div class="team-role">კარტოგრაფი</div>
+            <div class="team-subrole">სპეციალისტი · პროექტის მკვლევარი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="files/team/rusudanghvinadze.jpg" alt="რუსუდან ღვინაძე"
+                class="team-photo"></div>
+            <div class="team-name">რუსუდან ღვინაძე</div>
+            <div class="team-role">კარტოგრაფი</div>
+            <div class="team-subrole">სპეციალისტი · პროექტის მკვლევარი</div>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="files/team/anisherozia.jpg" alt="ანნა შეროზია" class="team-photo"></div>
+            <div class="team-name">ანნა შეროზია</div>
+            <div class="team-role">კარტოგრაფი</div>
+            <div class="team-subrole">ინჟინერი · პროექტის მკვლევარი</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- კონტაქტი -->
+  <div class="atlas-modal" id="modal-contact" onclick="if(event.target===this)closeModal('modal-contact')">
+    <div class="atlas-modal-box">
+      <button class="atlas-modal-close" onclick="closeModal('modal-contact')">&times;</button>
+      <div class="atlas-modal-header">
+        <div class="atlas-modal-title">კონტაქტი</div>
+      </div>
+      <div class="atlas-modal-body">
+        <div class="contact-list">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span>მ. თამარაშვილის ქუჩა 6, 0177, თბილისი, საქართველო</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <a href="tel:0322391686">032 239 16 86</a>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <a href="mailto:contact_vbig@tsu.ge">contact_vbig@tsu.ge</a>
+          </div>
+        </div>
+        <!-- Google Maps embed -->
+        <div class="contact-map contact-map-wrap">
+          <iframe src="https://maps.google.com/maps?q=41.72045147167244,44.743928078892836&z=17&output=embed"
+            width="100%" height="220" class="map-frame" allowfullscreen loading="lazy">
+          </iframe>
+          <div class="map-link-note">
+            <a href="https://www.google.com/maps?q=41.72045147167244,44.743928078892836" target="_blank"
+              class="map-link-url">Google Maps-ზე გახსნა ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div id="appBody">
+
+    <!-- Left sidebar: layer panel -->
+    <aside id="layerPanel">
+      <div class="panel-section">
+
+        <!-- მთავარი grid — ყველა თემატური ფენა -->
+        <div id="mainLayerView">
+          <div class="panel-label">თემატური ფენები</div>
+          <div class="layer-grid">
+
+            <div class="layer-item" id="popParent">
+              <input type="checkbox" id="chkPopulation" />
+              <label for="chkPopulation">
+                <div class="layer-icon population-icon"><img src="files/icons/population.png" alt="მოსახლეობა"></div>
+                <span>მოსახლეობა</span>
+              </label>
+            </div>
+
+            <div class="layer-item" id="natureParent">
+              <input type="checkbox" id="chkNature" />
+              <label for="chkNature">
+                <div class="layer-icon nature-icon"><img src="files/icons/nature.png" alt="ბუნება"></div>
+                <span>ბუნება</span>
+              </label>
+            </div>
+
+            <div class="layer-item" id="economyParent">
+              <input type="checkbox" id="chkEconomy" />
+              <label for="chkEconomy">
+                <div class="layer-icon economy-icon"><img src="files/icons/economics.png" alt="ეკონომიკა"></div>
+                <span>ეკონომიკა</span>
+              </label>
+            </div>
+
+            <div class="layer-item" id="historyParent">
+              <input type="checkbox" id="chkHistory" />
+              <label for="chkHistory">
+                <div class="layer-icon history-icon"><img src="files/icons/history.png" alt="ისტორია"></div>
+                <span>ისტორია</span>
+              </label>
+            </div>
+
+            <div class="layer-item" id="educationParent">
+              <input type="checkbox" id="chkEducation" />
+              <label for="chkEducation">
+                <div class="layer-icon education-icon"><img src="files/icons/education.png" alt="განათლება"></div>
+                <span>განათლება და კულტურა</span>
+              </label>
+            </div>
+
+            <div class="layer-item disabled">
+              <input type="checkbox" id="chkTourism" disabled />
+              <label for="chkTourism">
+                <div class="layer-icon tourism-icon"><img src="files/icons/tourism.png" alt="ტურიზმი"></div>
+                <span>ტურიზმი</span>
+                <span class="soon-badge">მალე</span>
+              </label>
+            </div>
+
+            <div class="layer-item" id="healthParent">
+              <input type="checkbox" id="chkHealth" />
+              <label for="chkHealth">
+                <div class="layer-icon health-icon"><img src="files/icons/health.png" alt="ჯანდაცვა"></div>
+                <span>ჯანდაცვა და სოც. მომსახ.</span>
+              </label>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- მოსახლეობის ქვე-ფენების view -->
+        <div id="sublayerView" class="hidden">
+          <div class="sublayer-header">
+            <button id="btnBack" class="back-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+              უკან
+            </button>
+            <div class="panel-label panel-label-reset">მოსახლეობა</div>
+          </div>
+          <div class="sublayer-group" id="sublayerGroup">
+            <button class="sublayer-btn" data-sublayer="population">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+              მოსახლეობა
+            </button>
+            <button class="sublayer-btn" data-sublayer="ethnics">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+              </svg>
+              ეროვნება
+            </button>
+            <button class="sublayer-btn" data-sublayer="religion">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M18 4h-2V2h-2v2h-4V2H8v2H6C4.9 4 4 4.9 4 6v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H6V9h12v11z" />
+              </svg>
+              აღმსარებლობა
+            </button>
+            <button class="sublayer-btn" data-sublayer="death_rate">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+              </svg>
+              მოკვდავობა
+            </button>
+            <button class="sublayer-btn" data-sublayer="birth_rate">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
+              შობადობა
+            </button>
+            <button class="sublayer-btn" data-sublayer="density">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
+              </svg>
+              სიმჭიდროვე
+            </button>
+            <button class="sublayer-btn" data-sublayer="marital">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+              </svg>
+              ქორწინებ. მდგ.
+            </button>
+            <button class="sublayer-btn" data-sublayer="idp">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6-4.5 7.5L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5V2.05z" />
+              </svg>
+              იძულ. გადაადგ.
+            </button>
+          </div>
+        </div>
+
+        <!-- ბუნების ქვე-ფენების view -->
+        <div id="natureView" class="hidden">
+          <div class="sublayer-header">
+            <button id="btnNatureBack" class="back-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+              უკან
+            </button>
+            <div class="panel-label panel-label-nature">ბუნება</div>
+          </div>
+          <div class="sublayer-group" id="natureSublayerGroup">
+            <button class="sublayer-btn active" data-naturesub="agrovlimat">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-13 4.5s-6 7.5-4 10.5c-.23-.5-.45-1-.68-1.48C4.41 14.5 5.5 10 17 8z" />
+              </svg>
+              აგროკლიმ. დარაიონება
+            </button>
+            <button class="sublayer-btn" data-naturesub="meteo">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z" />
+              </svg>
+              მეტეოსადგურები
+            </button>
+            <button class="sublayer-btn" data-naturesub="hydro">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z" />
+              </svg>
+              ჰიდრო. სადგურები
+            </button>
+            <button class="sublayer-btn" data-naturesub="landscape">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z" />
+              </svg>
+              ლანდშაფტები
+            </button>
+            <button class="sublayer-btn" data-naturesub="landscape_antrop">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 3L2 12h3v8h6v-5h2v5h6v-8h3L12 3zm0 12.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+              </svg>
+              ანთრ. ლანდშაფტები
+            </button>
+            <button class="sublayer-btn" data-naturesub="hazard">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+              </svg>
+              მეწყ./კლდეზვავი
+            </button>
+            <button class="sublayer-btn" data-naturesub="madflow">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-2.95 1.58-5.55 4-6.93v13.41A7.935 7.935 0 0012 20zm6-2.66A7.97 7.97 0 0020 12c0-3.33-2.04-6.19-5-7.37V17.34z" />
+              </svg>
+              ღვარცოფები
+            </button>
+            <button class="sublayer-btn" data-naturesub="groundwater">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" />
+              </svg>
+              მიწ. მტკ. წყლები
+            </button>
+            <button class="sublayer-btn" data-naturesub="earthquake">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M11.25 5.25v6.5l4.5 2.67-.75 1.23L9.75 13V5.25h1.5zM21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9zm-2 0c0-3.87-3.13-7-7-7s-7 3.13-7 7 3.13 7 7 7 7-3.13 7-7z" />
+              </svg>
+              მიწისძვრები
+            </button>
+            <button class="sublayer-btn" data-naturesub="geology">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z" />
+              </svg>
+              გეოლოგია
+            </button>
+            <button class="sublayer-btn" data-naturesub="forest">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
+              </svg>
+              ტყეები
+            </button>
+            <button class="sublayer-btn" data-naturesub="vegetation">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M6.5 10h-2v7h2v-7zm6 0h-2v7h2v-7zm8.5 9H2v2h19v-2zm-2.5-9h-2v7h2v-7zM11.5 1L2 6v2h19V6l-9.5-5z" />
+              </svg>
+              მცენარეული საფარი
+            </button>
+            <button class="sublayer-btn" data-naturesub="avg_temp">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M15 13V5a3 3 0 0 0-6 0v8a5 5 0 1 0 6 0zm-3 7a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z" />
+              </svg>
+              საშ. ტემპერატურა
+            </button>
+            <button class="sublayer-btn" data-naturesub="max_temp">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M11 14.17V5h2v9.17c1.17.41 2 1.51 2 2.83 0 1.66-1.34 3-3 3s-3-1.34-3-3c0-1.32.83-2.42 2-2.83z" />
+              </svg>
+              მაქს. ტემპერატურა
+            </button>
+            <button class="sublayer-btn" data-naturesub="precip">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 16v-4H7l5-8v4h4l-5 8z" />
+              </svg>
+              ნალექები
+            </button>
+            <button class="sublayer-btn" data-naturesub="hot_days">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z" />
+              </svg>
+              ცხელი დღეები
+            </button>
+            <button class="sublayer-btn" data-naturesub="trop_nights">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M10 2c-1.82 0-3.53.5-5 1.35C7.99 5.08 10 8.3 10 12s-2.01 6.92-5 8.65C6.47 21.5 8.18 22 10 22c5.52 0 10-4.48 10-10S15.52 2 10 2z" />
+              </svg>
+              ტროპ. ღამეები
+            </button>
+            <button class="sublayer-btn" data-naturesub="frost_days">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M22 11h-4.17l3.24-3.24-1.41-1.42L15 11h-2V9l4.66-4.66-1.42-1.41L13 6.17V2h-2v4.17L7.76 2.93 6.34 4.34 11 9v2H9L4.34 6.34 2.93 7.76 6.17 11H2v2h4.17l-3.24 3.24 1.41 1.42L9 13h2v2l-4.66 4.66 1.42 1.41L11 17.83V22h2v-4.17l3.24 3.24 1.42-1.41L13 15v-2h2l4.66 4.66 1.41-1.42L17.83 13H22v-2z" />
+              </svg>
+              ყინვიანი დღეები
+            </button>
+            <button class="sublayer-btn" data-naturesub="heat_waves">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M13.5 .67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z" />
+              </svg>
+              სითბური ტალღები
+            </button>
+            <button class="sublayer-btn" data-naturesub="drought">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+              </svg>
+              გვალვის ინდექსი
+            </button>
+            <button class="sublayer-btn" data-naturesub="hail_total">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M17.66 8L12 2.35 6.34 8C4.78 9.56 4 11.64 4 13.64c0 2 .78 4.11 2.34 5.67 1.56 1.56 3.61 2.35 5.66 2.35 2.05 0 4.1-.79 5.66-2.35C19.22 17.75 20 15.64 20 13.64c0-2-.78-4.08-2.34-5.64zM6 14c.01-2 .62-3.27 1.76-4.4L12 5.27l4.24 4.38C17.38 10.77 17.99 12 18 14H6z" />
+              </svg>
+              სეტყვა
+            </button>
+
+            <button class="sublayer-btn" data-naturesub="soils">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M11 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6v18zm2 0V3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6z" />
+              </svg>
+              ნიადაგები
+            </button>
+            <button class="sublayer-btn" data-naturesub="soils_born">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z" />
+              </svg>
+              ნიადაგ-წარმ. ქანები
+            </button>
+          </div>
+        </div>
+
+        <!-- ისტორიის ქვე-ფენების view -->
+        <div id="historyView" class="hidden">
+          <div class="sublayer-header">
+            <button id="btnHistoryBack" class="back-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+              უკან
+            </button>
+            <div class="panel-label panel-label-nature">ისტორია</div>
+          </div>
+          <div class="sublayer-group" id="historySublayerGroup">
+            <button class="sublayer-btn active" data-histsub="archaeology">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
+              </svg>
+              არქეოლოგია
+            </button>
+            <button class="sublayer-btn" data-histsub="battles">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M17.5 12c0 .28-.02.54-.05.8l1.42 1.12c.13.1.16.29.07.43l-1.34 2.33c-.09.15-.27.2-.43.14l-1.67-.68c-.35.27-.72.5-1.12.68l-.25 1.78c-.03.16-.17.28-.33.28h-2.68c-.16 0-.3-.12-.33-.28l-.25-1.78c-.4-.18-.77-.41-1.12-.68l-1.67.68c-.15.06-.33 0-.43-.14L6.06 14.35c-.09-.14-.06-.33.07-.43l1.42-1.12c-.03-.26-.05-.53-.05-.8s.02-.54.05-.8L6.13 10.08c-.13-.1-.16-.29-.07-.43L7.4 7.32c.09-.15.27-.2.43-.14l1.67.68c.35-.27.72-.5 1.12-.68l.25-1.78c.03-.16.17-.28.33-.28h2.68c.16 0 .3.12.33.28l.25 1.78c.4.18.77.41 1.12.68l1.67-.68c.15-.06.33 0 .43.14l1.34 2.33c.09.14.06.33-.07.43l-1.42 1.12c.03.26.05.53.05.8z" />
+              </svg>
+              ბრძოლები
+            </button>
+            <button class="sublayer-btn" data-histsub="germans">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M12 3L4 9v12h5v-7h6v7h5V9l-8-6z" />
+              </svg>
+              გერმ. დასახლებები
+            </button>
+            <button class="sublayer-btn" data-histsub="forts">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M6 2v4h2V4h2v2h4V4h2v2h2V2h2v20h-4v-6c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v6H4V2h2zm4 14h4v6h-4v-6z" />
+              </svg>
+              თავდაც. ნაგებობები
+            </button>
+            <button class="sublayer-btn" data-histsub="eparchies">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M11 2v3H8v2h3v3h2V7h3V5h-3V2h-2zm-7 9v11h7v-5h2v5h7V11l-8-4-8 4z" />
+              </svg>
+              ეპარქიები
+            </button>
+            <button class="sublayer-btn" data-histsub="petroglyphs">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M12 2L2 9l4 13h12l4-13-10-7zm0 2.5L19.5 10 16.7 19H7.3L4.5 10 12 4.5z" />
+              </svg>
+              პეტროგლიფები
+            </button>
+            <button class="sublayer-btn" data-histsub="megaliths">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M4 4h7v7H4V4zm9 0h7v7h-7V4zm-9 9h7v7H4v-7zm9 0h7v7h-7v-7z" />
+              </svg>
+              მეგალითები
+            </button>
+          </div>
+        </div>
+
+        <!-- ეკონომიკის ქვე-ფენების view -->
+        <div id="economyView" class="hidden">
+          <div class="sublayer-header">
+            <button id="btnEconomyBack" class="back-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+              უკან
+            </button>
+            <div class="panel-label panel-label-nature">ეკონომიკა</div>
+          </div>
+          <div class="sublayer-group" id="economySublayerGroup">
+            <button class="sublayer-btn active" data-econsub="botanica">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zM5.6 10.25c0 1.38 1.12 2.5 2.5 2.5.53 0 1.01-.16 1.42-.44l-.02.19c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5l-.02-.19c.41.28.89.44 1.42.44 1.38 0 2.5-1.12 2.5-2.5 0-1-.59-1.85-1.43-2.25.84-.4 1.43-1.25 1.43-2.25 0-1.38-1.12-2.5-2.5-2.5-.53 0-1.01.16-1.42.44l.02-.19C16.5 2.12 15.38 1 14 1s-2.5 1.12-2.5 2.5l.02.19C11.11 3.41 10.63 3.25 10.1 3.25c-1.38 0-2.5 1.12-2.5 2.5 0 1 .59 1.85 1.43 2.25-.84.4-1.43 1.25-1.43 2.25zM12 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 9.38 9.5 8 10.62 5.5 12 5.5zM3 13c0 4.97 4.03 9 9 9 0-4.97-4.03-9-9-9z" />
+              </svg>
+              ბოტ.-აგრონ. ზონები
+            </button>
+            <button class="sublayer-btn" data-econsub="energetika">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+              </svg>
+              ელექტროენერგეტიკა
+            </button>
+            <button class="sublayer-btn" data-econsub="crop_zones">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M3 3h8v8H3V3zm10 0h8v5h-8V3zM3 13h8v8H3v-8zm10 5h8v3h-8v-3zm0-5h8v3h-8v-3z" />
+              </svg>
+              კულტ. მცენ. ზონები
+            </button>
+            <button class="sublayer-btn" data-econsub="land">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M12 2L2 7v2h20V7L12 2zM4 10v8H2v2h20v-2h-2v-8h-2v8h-3v-8h-2v8h-2v-8H9v8H6v-8H4z" />
+              </svg>
+              მიწის საკუთრება
+            </button>
+            <button class="sublayer-btn" data-econsub="sun">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z" />
+              </svg>
+              მზის ნათება
+            </button>
+            <button class="sublayer-btn" data-econsub="agri">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 2C9 2 6 4 6 8c0 3 2 5 4 6v6h4v-6c2-1 4-3 4-6 0-4-3-6-6-6zm-1 11.9C9.2 13.1 8 11.5 8 8c0-2.8 1.8-4 4-4s4 1.2 4 4c0 3.5-1.2 5.1-3 5.9V20h-2v-6.1z" />
+              </svg>
+              სოფ. მეურნ. ბენეფიც.
+            </button>
+            <button class="sublayer-btn" data-econsub="agrispec">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M4 3h7v7H4V3zm9 0h7v7h-7V3zm-9 9h7v9H4v-9zm9 4h7v5h-7v-5z" />
+              </svg>
+              სოფ. მეურნ. სპეციალიზაცია
+            </button>
+          </div>
+        </div>
+
+        <!-- განათლების ქვე-ფენების view -->
+        <div id="educationView" class="hidden">
+          <div class="sublayer-header">
+            <button id="btnEducationBack" class="back-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+              უკან
+            </button>
+            <div class="panel-label panel-label-nature">განათლება და კულტურა</div>
+          </div>
+          <div class="sublayer-group" id="educationSublayerGroup">
+            <button class="sublayer-btn active" data-edusub="schools">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z" />
+              </svg>
+              ზოგადი განათლება
+            </button>
+            <button class="sublayer-btn" data-edusub="kindergarten">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 2a3 3 0 100 6 3 3 0 000-6zm-7 9c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm14 0c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm-7 2c-2.5 0-4.5 2-4.5 4.5V21h9v-3.5c0-2.5-2-4.5-4.5-4.5z" />
+              </svg>
+              სკოლამდელი აღზრდა
+            </button>
+            <button class="sublayer-btn" data-edusub="oikonymy">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" />
+              </svg>
+              ოიკონიმია
+            </button>
+          </div>
+        </div>
+
+        <!-- ჯანდაცვის ქვე-ფენების view -->
+        <div id="healthView" class="hidden">
+          <div class="sublayer-header">
+            <button id="btnHealthBack" class="back-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+              </svg>
+              უკან
+            </button>
+            <div class="panel-label panel-label-nature">ჯანდაცვა და სოც. მომსახ.</div>
+          </div>
+          <div class="sublayer-group" id="healthSublayerGroup">
+            <button class="sublayer-btn active" data-healthsub="health">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z" />
+              </svg>
+              ჯანდაცვის ინფრასტრუქტურა
+            </button>
+            <button class="sublayer-btn" data-healthsub="social">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M11.5 2C9.01 2 7 4.01 7 6.5S9.01 11 11.5 11 16 8.99 16 6.5 13.99 2 11.5 2zm0 7C10.12 9 9 7.88 9 6.5S10.12 4 11.5 4 14 5.12 14 6.5 12.88 9 11.5 9zM21 23v-1c0-3.87-3.13-7-7-7h-5c-3.87 0-7 3.13-7 7v1h2v-1c0-2.76 2.24-5 5-5h5c2.76 0 5 2.24 5 5v1h2z" />
+              </svg>
+              სოციალური დახმარება
+            </button>
+            <button class="sublayer-btn" data-healthsub="zoo">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+                <path
+                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+              </svg>
+              ზოონოზური დაავადებები
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <div class="panel-section" id="filterSection">
+        <div class="panel-label">ფილტრი</div>
+
+        <div class="filter-group">
+          <label class="filter-label">ტიპი</label>
+          <div class="type-pills" id="typePills">
+            <button class="pill active" data-type="all">ყველა</button>
+            <button class="pill" data-type="სოფელი">სოფელი</button>
+            <button class="pill" data-type="დაბა">დაბა</button>
+            <button class="pill" data-type="ქალაქი">ქალაქი</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label" for="muniSelect">მუნიციპალიტეტი</label>
+          <select id="muniSelect" class="filter-select">
+            <option value="all">ყველა</option>
+            <option value="ბოლნისის მუნიციპა">ბოლნისი</option>
+            <option value="გარდაბნის მუნიციპ">გარდაბანი</option>
+            <option value="დმანისის მუნიციპა">დმანისი</option>
+            <option value="თეთრიწყაროს მუნიც">თეთრიწყარო</option>
+            <option value="მარნეულის მუნიციპ">მარნეული</option>
+            <option value="ქალაქ რუსთავის მუნ">რუსთავი</option>
+            <option value="წალკის მუნიციპალი">წალკა</option>
+          </select>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-box">
+            <span class="stat-num" id="statTotal">367</span>
+            <span class="stat-lbl">სულ</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num" id="statVisible">367</span>
+            <span class="stat-lbl">ნაჩვენები</span>
+          </div>
+        </div>
+
+        <button id="btnCensus" class="census-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+            <path
+              d="M9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4zm2 2H5V5h14v14zm0-16H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+          </svg>
+          აღწერის შედარება
+        </button>
+      </div>
+    </aside>
+
+    <!-- Map area -->
+    <div id="mapWrapper">
+      <div id="map"></div>
+
+      <!-- Search box -->
+      <div id="mapSearch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input id="mapSearchInput" type="text" placeholder="დასახლების სახელი...">
+        <button id="mapSearchClear" class="hidden">✕</button>
+        <div id="mapSearchResults"></div>
+      </div>
+
+      <!-- Coordinates bar -->
+      <div id="mapCoords">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11">
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+        </svg>
+        <span id="mapCoordsText">—</span>
+      </div>
+
+      <!-- Print button — bottom right -->
+      <button id="btnPrint" title="ბეჭდვა">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+          <path
+            d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z" />
+        </svg>
+        ბეჭდვა
+      </button>
+
+      <!-- Info popup card -->
+      <div id="infoCard" class="hidden">
+        <button id="infoClose">✕</button>
+        <div id="infoCardContent"></div>
+      </div>
+
+
+    </div>
+
+    <!-- Right sidebar: basemap panel -->
+    <aside id="basemapPanel">
+      <div class="panel-label">ფონური რუკა</div>
+      <div class="basemap-list">
+
+        <!-- Light -->
+        <div class="basemap-item active" data-basemap="light">
+          <svg class="basemap-thumb" viewBox="0 0 52 40" xmlns="http://www.w3.org/2000/svg">
+            <rect width="52" height="40" rx="6" fill="#f5f2eb" />
+            <!-- roads -->
+            <line x1="0" y1="20" x2="52" y2="20" stroke="#ddd" stroke-width="2.5" />
+            <line x1="26" y1="0" x2="26" y2="40" stroke="#ddd" stroke-width="2.5" />
+            <line x1="0" y1="10" x2="30" y2="10" stroke="#e5e0d8" stroke-width="1.5" />
+            <line x1="22" y1="30" x2="52" y2="30" stroke="#e5e0d8" stroke-width="1.5" />
+            <!-- park -->
+            <rect x="30" y="22" width="14" height="10" rx="2" fill="#daecc7" opacity="0.8" />
+            <!-- block -->
+            <rect x="6" y="22" width="10" height="8" rx="1.5" fill="#e8e2d8" />
+            <rect x="8" y="6" width="14" height="9" rx="1.5" fill="#e8e2d8" />
+            <!-- label dot -->
+            <circle cx="26" cy="20" r="2" fill="#aaa" />
+          </svg>
+          <span>Light</span>
+        </div>
+
+        <!-- OSM -->
+        <div class="basemap-item" data-basemap="osm">
+          <svg class="basemap-thumb" viewBox="0 0 52 40" xmlns="http://www.w3.org/2000/svg">
+            <rect width="52" height="40" rx="6" fill="#f2efe9" />
+            <!-- green areas -->
+            <rect x="28" y="2" width="18" height="14" rx="2" fill="#c8e6a0" opacity="0.9" />
+            <rect x="4" y="22" width="12" height="12" rx="2" fill="#c8e6a0" opacity="0.9" />
+            <!-- water -->
+            <path d="M0 32 Q13 28 26 32 Q39 36 52 32 L52 40 L0 40Z" fill="#a8d4f5" opacity="0.7" />
+            <!-- roads -->
+            <line x1="0" y1="20" x2="52" y2="20" stroke="#f8c471" stroke-width="3" />
+            <line x1="18" y1="0" x2="18" y2="22" stroke="#fff" stroke-width="2" />
+            <line x1="18" y1="22" x2="52" y2="22" stroke="#fff" stroke-width="1.5" />
+            <!-- building -->
+            <rect x="30" y="24" width="10" height="8" rx="1" fill="#ddd" />
+          </svg>
+          <span>OSM</span>
+        </div>
+
+        <!-- Satellite -->
+        <div class="basemap-item" data-basemap="satellite">
+          <svg class="basemap-thumb" viewBox="0 0 52 40" xmlns="http://www.w3.org/2000/svg">
+            <rect width="52" height="40" rx="6" fill="#2a3d1e" />
+            <!-- fields -->
+            <rect x="0" y="0" width="26" height="20" rx="0" fill="#3a5a28" />
+            <rect x="26" y="0" width="26" height="20" rx="0" fill="#4a6e2e" />
+            <rect x="0" y="20" width="26" height="20" rx="0" fill="#2d4e1a" />
+            <rect x="26" y="20" width="26" height="20" rx="0" fill="#365c20" />
+            <!-- rounded corners -->
+            <rect width="52" height="40" rx="6" fill="none" />
+            <!-- field lines -->
+            <line x1="26" y1="0" x2="26" y2="40" stroke="#1a2d10" stroke-width="1" />
+            <line x1="0" y1="20" x2="52" y2="20" stroke="#1a2d10" stroke-width="1" />
+            <!-- roads -->
+            <line x1="10" y1="0" x2="10" y2="40" stroke="#c8a84b" stroke-width="1.5" opacity="0.7" />
+            <line x1="0" y1="30" x2="52" y2="28" stroke="#c8a84b" stroke-width="1.5" opacity="0.7" />
+            <!-- building cluster -->
+            <rect x="28" y="22" width="5" height="4" rx="0.5" fill="#8899aa" opacity="0.8" />
+            <rect x="34" y="23" width="4" height="3" rx="0.5" fill="#8899aa" opacity="0.8" />
+            <clipPath id="sat-clip">
+              <rect width="52" height="40" rx="6" />
+            </clipPath>
+            <rect width="52" height="40" rx="6" fill="none" clip-path="url(#sat-clip)" />
+          </svg>
+          <span>Satellite</span>
+        </div>
+
+        <!-- Dark -->
+        <div class="basemap-item" data-basemap="dark">
+          <svg class="basemap-thumb" viewBox="0 0 52 40" xmlns="http://www.w3.org/2000/svg">
+            <rect width="52" height="40" rx="6" fill="#1a1a2e" />
+            <!-- city grid glow -->
+            <line x1="0" y1="20" x2="52" y2="20" stroke="#4a6fa5" stroke-width="2" opacity="0.8" />
+            <line x1="26" y1="0" x2="26" y2="40" stroke="#4a6fa5" stroke-width="2" opacity="0.8" />
+            <line x1="0" y1="10" x2="26" y2="10" stroke="#3a5080" stroke-width="1" opacity="0.6" />
+            <line x1="26" y1="30" x2="52" y2="30" stroke="#3a5080" stroke-width="1" opacity="0.6" />
+            <line x1="13" y1="0" x2="13" y2="20" stroke="#3a5080" stroke-width="1" opacity="0.5" />
+            <line x1="39" y1="20" x2="39" y2="40" stroke="#3a5080" stroke-width="1" opacity="0.5" />
+            <!-- glowing dots = city lights -->
+            <circle cx="8" cy="15" r="1.5" fill="#ffe066" opacity="0.9" />
+            <circle cx="18" cy="8" r="1" fill="#ffe066" opacity="0.7" />
+            <circle cx="35" cy="12" r="2" fill="#ffe066" opacity="0.8" />
+            <circle cx="44" cy="25" r="1.5" fill="#ffe066" opacity="0.9" />
+            <circle cx="30" cy="33" r="1" fill="#ffe066" opacity="0.7" />
+            <circle cx="14" cy="27" r="1.5" fill="#ffe066" opacity="0.8" />
+          </svg>
+          <span>Dark</span>
+        </div>
+
+      </div>
+
+      <!-- Thematic legend — always visible, updated by each layer -->
+      <div id="legendContent" class="legend-content"></div>
+
+      <!-- Settlement dots — shown only on population maps -->
+      <div id="settlementLegend" class="hidden">
+        <div class="panel-label legend-panel-label">დასახლებები</div>
+        <div class="legend">
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#C8102E;border:2px solid #8B0000;"></span>
+            <span>ქალაქი</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#E8821A;border:2px solid #A05010;"></span>
+            <span>დაბა</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#4A90D9;border:2px solid #1A5090;"></span>
+            <span>სოფელი</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Info Button -->
+      <div class="map-info-wrapper">
+        <button id="mapInfoBtn" class="map-info-btn hidden">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+          </svg>
+          რუკის შესახებ
+        </button>
+      </div>
+
+      <!-- Zoom info -->
+      <div class="panel-label zoom-panel-label">მასშტაბი</div>
+      <div class="zoom-hint">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="14">
+          <path
+            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+        </svg>
+        zoom ≥ 12-ზე სახელები ჩანს
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Bottom chart panel -->
+  <div id="chartPanel">
+    <div id="chartEmpty">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="20">
+        <path
+          d="M9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4zm2 2H5V5h14v14zm0-16H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c0 1.1.9-2 2-2V5c0-1.1-.9-2-2-2z" />
+      </svg>
+      <span>რუკაზე ობიექტზე დაწკაპეთ სტატისტიკის სანახავად</span>
+    </div>
+    <canvas id="chartCanvas" class="hidden"></canvas>
+  </div>
+
+  <!-- Info bar — visible on page load, hidden when chart opens -->
+  <div id="infoBar">
+    <div class="info-bar-inner">
+      <div class="info-bar-logos">
+        <img src="files/logo-foundation.png" alt="შოთა რუსთაველის ეროვნული სამეცნიერო ფონდი" class="info-bar-logo-img">
+        <img src="files/logo-institute.png" alt="ვახუშტი ბაგრატიონის გეოგრაფიის ინსტიტუტი"
+          class="info-bar-logo-img info-bar-logo-wide">
+      </div>
+      <div class="info-bar-divider"></div>
+      <div class="info-bar-text">
+        <span class="info-bar-title">ქვემო ქართლის რეგიონის ინტერაქტიული გეოგრაფიული ატლასი</span>
+        <span class="info-bar-sub">ვახუშტი ბაგრატიონის სახელობის გეოგრაფიის ინსტიტუტი</span>
+        <span class="info-bar-sub">შოთა რუსთაველის საქართველოს ეროვნული სამეცნიერო ფონდის პროექტი FR-22-4153</span>
+      </div>
+      <div class="info-bar-divider"></div>
+      <div class="info-bar-contacts">
+        <a href="mailto:contact_vbig@tsu.ge" class="info-bar-link" title="ელ.ფოსტა">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path
+              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          <span>contact_vbig@tsu.ge</span>
+        </a>
+        <a href="tel:0322391686" class="info-bar-link" title="ტელეფონი">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <span>032 239 16 86</span>
+        </a>
+        <a href="https://www.facebook.com" target="_blank" class="info-bar-social" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+          </svg>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" class="info-bar-social" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Census Modal — body დონეზე, ყველაფრის თავზე -->
+  <div id="censusOverlay" class="hidden"></div>
+  <div id="censusModal" class="hidden">
+    <div class="census-header">
+      <div>
+        <div class="census-title">მოსახლეობის დინამიკა</div>
+        <div class="census-subtitle" id="censusSubtitle">1989 · 2002 · 2014 წლის აღწერა</div>
+      </div>
+      <button id="censusClose">✕</button>
+    </div>
+    <div class="census-body">
+      <div class="census-scope-row">
+        <button class="scope-btn active" data-scope="selected">არჩეული პუნქტი</button>
+        <button class="scope-btn" data-scope="muni">მუნიციპ. ჯამი</button>
+        <button class="scope-btn" data-scope="all">რეგიონი სულ</button>
+        <button class="scope-btn" data-scope="compare">შედარება</button>
+      </div>
+      <!-- Census chart / table -->
+      <div id="censusChartWrap">
+        <canvas id="censusCanvas"></canvas>
+      </div>
+      <div class="census-table" id="censusTable"></div>
+      <!-- Compare panel (hidden until scope=compare) -->
+      <div id="censusComparePanel" class="hidden">
+        <div class="census-compare-metrics">
+          <button class="cmp-metric-btn active" data-metric="population">მოსახლეობა</button>
+          <button class="cmp-metric-btn" data-metric="density">სიმჭიდროვე</button>
+          <button class="cmp-metric-btn" data-metric="birth">შობადობა</button>
+          <button class="cmp-metric-btn" data-metric="death">მოკვდავობა</button>
+        </div>
+        <div class="census-compare-selectors">
+          <select id="cmpA" aria-label="Compare selection A"></select>
+          <select id="cmpB" aria-label="Compare selection B"></select>
+        </div>
+        <div id="cmpChartWrap"><canvas id="cmpCanvas"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+
+  <script>
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.atlas-modal.open').forEach(function (m) {
+          m.classList.remove('open');
+        });
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+
+</html>

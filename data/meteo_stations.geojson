@@ -1,0 +1,705 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.566667,
+          41.45
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ბოლნისი",
+        "Name_Eng": "Bolnisi",
+        "Station_ID": "415446A",
+        "Station_Ty": "AWS",
+        "Type_Geo": "ავტომატური მეტეოსადგური, ტრადიციული მეტეოსადგური",
+        "Type_Eng": "Active Automatic meteorological station, Traditional meteorological station",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Bolnisi",
+        "Elevation": 536,
+        "Begin_Obs": 2010,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.789276,
+          41.466082
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მარნეული",
+        "Name_Eng": "Marneuli",
+        "Station_ID": "415448A",
+        "Station_Ty": "AWS",
+        "Type_Geo": "ავტომატური მეტეოსადგური",
+        "Type_Eng": "Active Automatic meteorological station",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Marneuli",
+        "Elevation": 392,
+        "Begin_Obs": 2010,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.471285,
+          41.558858
+        ]
+      },
+      "properties": {
+        "Name_Geo": "თეთრიწყარო",
+        "Name_Eng": "Tetritskaro",
+        "Station_ID": "416445A",
+        "Station_Ty": "AWS",
+        "Type_Geo": "ავტომატური მეტეოსადგური",
+        "Type_Eng": "Active Automatic meteorological station",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Tetri-tskaro",
+        "Elevation": 1125,
+        "Begin_Obs": 2017,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.957147,
+          41.633336
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ველი",
+        "Name_Eng": "Veli",
+        "Station_ID": "416449A",
+        "Station_Ty": "AWSa",
+        "Type_Geo": "ავტომატური მეტეოსადგური",
+        "Type_Eng": "Active Automatic meteorological station",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Gardabani",
+        "Elevation": 360,
+        "Begin_Obs": 2010,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.516667,
+          41.7
+        ]
+      },
+      "properties": {
+        "Name_Geo": "დრე",
+        "Name_Eng": "Dre",
+        "Station_ID": "417445A",
+        "Station_Ty": "AWSp",
+        "Type_Geo": "ავტომატური მეტეოსადგური",
+        "Type_Eng": "Active Automatic meteorological post",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Tbilisi",
+        "Elevation": 1222,
+        "Begin_Obs": 2015,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.316667,
+          41.216667
+        ]
+      },
+      "properties": {
+        "Name_Geo": "გუგუთი",
+        "Name_Eng": "Guguti",
+        "Station_ID": "412443A",
+        "Station_Ty": "AWSp",
+        "Type_Geo": "ავტომატური მეტეოსადგური",
+        "Type_Eng": "Active Automatic meteorological post",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Dmanisi",
+        "Elevation": 1450,
+        "Begin_Obs": 2010,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.516667,
+          41.666667
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ორბეთი",
+        "Name_Eng": "Orbeti",
+        "Station_ID": "417446A",
+        "Station_Ty": "AWSp",
+        "Type_Geo": "ავტომატური მეტეოსადგური",
+        "Type_Eng": "Active Automatic meteorological post",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Tetri-tskaro",
+        "Elevation": 1318,
+        "Begin_Obs": 2015,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.066667,
+          41.333333
+        ]
+      },
+      "properties": {
+        "Name_Geo": "წითელიხიდი",
+        "Name_Eng": "Tsiteli Khidi",
+        "Station_ID": "413451A",
+        "Station_Ty": "AWSp",
+        "Type_Geo": "ავტომატური მეტეოსადგური",
+        "Type_Eng": "Active Automatic meteorological post",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Marneuli",
+        "Elevation": 275,
+        "Begin_Obs": 2010,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.390255,
+          41.703612
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მანგლისი",
+        "Name_Eng": "Manglisi",
+        "Station_ID": "417444A",
+        "Station_Ty": "AWSr",
+        "Type_Geo": "ავტომატური ნალექმზომი საგუშაგო",
+        "Type_Eng": "Active Automatic precipitation station",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Tetri-tskaro",
+        "Elevation": 1202,
+        "Begin_Obs": 2015,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.933333,
+          41.6
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ედიკილისა",
+        "Name_Eng": "Edikilisa",
+        "Station_ID": "41364356",
+        "Station_Ty": "MP",
+        "Type_Geo": "ტრადიციული მეტეოსაგუშაგო",
+        "Type_Eng": "Closed Traditional meteorological post",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Tsalka",
+        "Elevation": 1517,
+        "Begin_Obs": 1993,
+        "End_Obs": 1993,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.485591,
+          41.549307
+        ]
+      },
+      "properties": {
+        "Name_Geo": "თეთრიწყარო",
+        "Name_Eng": "Tetri-tskaro",
+        "Station_ID": "41334428",
+        "Station_Ty": "MP",
+        "Type_Geo": "ტრადიციული მეტეოსადგური, ტრადიციული მეტეოსაგუშაგო",
+        "Type_Eng": "Closed Traditional meteorological station, Traditional meteorological post",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Tetri-tskaro",
+        "Elevation": 1125,
+        "Begin_Obs": 1891,
+        "End_Obs": 1924,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.1,
+          41.6
+        ]
+      },
+      "properties": {
+        "Name_Geo": "წალკა",
+        "Name_Eng": "Tsalka",
+        "Station_ID": "41364405",
+        "Station_Ty": "MP",
+        "Type_Geo": "ავტომატური მეტეოსადგური, ტრადიციული მეტეოსაგუშაგო",
+        "Type_Eng": "Active Automatic meteorological station, Traditional meteorological post",
+        "Function_G": "მოქმედი",
+        "Function_E": "Active",
+        "District": "Tsalka",
+        "Elevation": 1468,
+        "Begin_Obs": 2007,
+        "End_Obs": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.933333,
+          41.633333
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ველი",
+        "Name_Eng": "Veli",
+        "Station_ID": "41364505",
+        "Station_Ty": "MP",
+        "Type_Geo": "ტრადიციული მეტეოსაგუშაგო",
+        "Type_Eng": "Closed Traditional meteorological post",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Gardabani",
+        "Elevation": 360,
+        "Begin_Obs": 2002,
+        "End_Obs": 2006,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.21075,
+          41.326854
+        ]
+      },
+      "properties": {
+        "Name_Geo": "დმანისი",
+        "Name_Eng": "Dmanisi",
+        "Station_ID": "413442",
+        "Station_Ty": "MS",
+        "Type_Geo": "ტრადიციული მეტეოსადგური",
+        "Type_Eng": "Closed Traditional meteorological station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Dmanisi",
+        "Elevation": 1309,
+        "Begin_Obs": 1935,
+        "End_Obs": 1992,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.1,
+          41.45
+        ]
+      },
+      "properties": {
+        "Name_Geo": "გარდაბანი",
+        "Name_Eng": "Gardabani",
+        "Station_ID": "415451",
+        "Station_Ty": "MS",
+        "Type_Geo": "ტრადიციული მეტეოსადგური",
+        "Type_Eng": "Closed Traditional meteorological station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Gardabani",
+        "Elevation": 300,
+        "Begin_Obs": 1896,
+        "End_Obs": 2006,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.379207,
+          41.695063
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მანგლისი",
+        "Name_Eng": "Manglisi",
+        "Station_ID": "417444",
+        "Station_Ty": "MS",
+        "Type_Geo": "ტრადიციული მეტეოსადგური",
+        "Type_Eng": "Closed Traditional meteorological station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Tetri-tskaro",
+        "Elevation": 1202,
+        "Begin_Obs": 1882,
+        "End_Obs": 2005,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.803269,
+          41.498464
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მარნეული",
+        "Name_Eng": "Marneuli",
+        "Station_ID": "416448",
+        "Station_Ty": "MS",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Marneuli",
+        "Elevation": 432,
+        "Begin_Obs": 1934,
+        "End_Obs": 1965,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.8,
+          41.483333
+        ]
+      },
+      "properties": {
+        "Name_Geo": "მარნეული",
+        "Name_Eng": "Marneuli",
+        "Station_ID": "415448",
+        "Station_Ty": "MS",
+        "Type_Geo": "ტრადიციული მეტეოსადგური, ტრადიციული მეტეოსაგუშაგო",
+        "Type_Eng": "Closed Traditional meteorological station, Traditional meteorological post",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Marneuli",
+        "Elevation": 432,
+        "Begin_Obs": 2000,
+        "End_Obs": 2006,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.116764,
+          41.592981
+        ]
+      },
+      "properties": {
+        "Name_Geo": "წალკა",
+        "Name_Eng": "Tsalka",
+        "Station_ID": "416441",
+        "Station_Ty": "MS",
+        "Type_Geo": "ტრადიციული მეტეოსადგური",
+        "Type_Eng": "Closed Traditional meteorological station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Tsalka",
+        "Elevation": 1468,
+        "Begin_Obs": 1931,
+        "End_Obs": 2006,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.366667,
+          41.366667
+        ]
+      },
+      "properties": {
+        "Name_Geo": "დიდი დმანისი",
+        "Name_Eng": "Didi Dmanisi",
+        "Station_ID": "41224422",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Dmanisi",
+        "Elevation": 880,
+        "Begin_Obs": 1946,
+        "End_Obs": 1999,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.816667,
+          41.616667
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კუშჩი",
+        "Name_Eng": "Kushchi",
+        "Station_ID": "41374349",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Tsalka",
+        "Elevation": 1500,
+        "Begin_Obs": 1944,
+        "End_Obs": 1987,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.583333,
+          41.583333
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ფარცხისი",
+        "Name_Eng": "Partskhisi",
+        "Station_ID": "41354435",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Tetri-tskaro",
+        "Elevation": 710,
+        "Begin_Obs": 1948,
+        "End_Obs": 1991,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.433333,
+          41.45
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ქვეში",
+        "Name_Eng": "Qveshi",
+        "Station_ID": "41274426",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Bolnisi",
+        "Elevation": 580,
+        "Begin_Obs": 1932,
+        "End_Obs": 1965,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.783333,
+          41.233333
+        ]
+      },
+      "properties": {
+        "Name_Geo": "სადახლო",
+        "Name_Eng": "Sadakhlo",
+        "Station_ID": "41504449",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Marneuli",
+        "Elevation": 419,
+        "Begin_Obs": 1904,
+        "End_Obs": 1993,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.516667,
+          41.35
+        ]
+      },
+      "properties": {
+        "Name_Geo": "სამწევრისი",
+        "Name_Eng": "Samtsevrisi",
+        "Station_ID": "41214431",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Bolnisi",
+        "Elevation": 645,
+        "Begin_Obs": 1946,
+        "End_Obs": 1992,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.167259,
+          41.715027
+        ]
+      },
+      "properties": {
+        "Name_Geo": "სართიჭალა",
+        "Name_Eng": "Sartitchala",
+        "Station_ID": "41434510",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Gardabani",
+        "Elevation": 690,
+        "Begin_Obs": 1913,
+        "End_Obs": 1964,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.75,
+          41.316667
+        ]
+      },
+      "properties": {
+        "Name_Geo": "შაუმიანი",
+        "Name_Eng": "Shaumiani",
+        "Station_ID": "41194445",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Marneuli",
+        "Elevation": 650,
+        "Begin_Obs": 1947,
+        "End_Obs": 1992,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.166667,
+          41.716667
+        ]
+      },
+      "properties": {
+        "Name_Geo": "თეჯისი",
+        "Name_Eng": "Tejisi",
+        "Station_ID": "41434410",
+        "Station_Ty": "RAIN",
+        "Type_Geo": "ტრადიციული ნალექმზომი საგუშაგო",
+        "Type_Eng": "Closed Traditional precipitation gauge station",
+        "Function_G": "დახურული",
+        "Function_E": "Closed",
+        "District": "Tsalka",
+        "Elevation": 1500,
+        "Begin_Obs": 1931,
+        "End_Obs": 1962,
+        "Active": false
+      }
+    }
+  ]
+}

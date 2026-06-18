@@ -1,0 +1,797 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.534792,
+          41.71425
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ვანეთი",
+        "Name_Eng": "Vaneti",
+        "River": "ვერე",
+        "River_Eng": "Vere",
+        "Status": "მოქმედი",
+        "Status_Eng": "Active",
+        "Year_": "1930-32, 41-44, 46-48, 50-55, 76-2018",
+        "Year_Open": 1930,
+        "Year_Close": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.547704,
+          41.571878
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ფარცხისი",
+        "Name_Eng": "Partskhisi",
+        "River": "ალგეთი",
+        "River_Eng": "Algeti",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1938, 40-90",
+        "Year_Open": 1938,
+        "Year_Close": 1990,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.900953,
+          41.616676
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კუშჩი",
+        "Name_Eng": "Kushchi",
+        "River": "ქცია",
+        "River_Eng": "Ktsia",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1933, 36-87",
+        "Year_Open": 1936,
+        "Year_Close": 1946,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.961003,
+          41.580738
+        ]
+      },
+      "properties": {
+        "Name_Geo": "განთიადი (ედიქილისა)",
+        "Name_Eng": "Gantiadi (ediqilisa)",
+        "River": "ქცია",
+        "River_Eng": "Ktsia",
+        "Status": "მოქმედი",
+        "Status_Eng": "Active",
+        "Year_": "1946-93",
+        "Year_Open": 1988,
+        "Year_Close": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.075196,
+          41.587228
+        ]
+      },
+      "properties": {
+        "Name_Geo": "წალკა",
+        "Name_Eng": "Tsalka",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1927-47",
+        "Year_Open": 1927,
+        "Year_Close": 1948,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.146429,
+          41.595321
+        ]
+      },
+      "properties": {
+        "Name_Geo": "დაშბაში",
+        "Name_Eng": "Dashbashi",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1939, 40, 46-62",
+        "Year_Open": 1939,
+        "Year_Close": 1941,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.133602,
+          41.559535
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ხრამჰესის გენშენობა",
+        "Name_Eng": "Khramhesi Genshenoba",
+        "River": "ქცია-ხრამი (შემოვლითი არხი)",
+        "River_Eng": "Ktsia-Khrami (Channel)",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1949-88",
+        "Year_Open": 1949,
+        "Year_Close": 1988,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.109501,
+          41.552797
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ხრამჰესი (მუშათა დასახლება)",
+        "Name_Eng": "Khramhesi (Mushata dasakhleba)",
+        "River": "ხრამჰესი (საგდები არხი)",
+        "River_Eng": "Khramhesi (Sagdebi Arkhi)",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1948-61, 63-68, 75-94, 96, 97",
+        "Year_Open": 1948,
+        "Year_Close": 1997,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.125251,
+          41.531767
+        ]
+      },
+      "properties": {
+        "Name_Geo": "თრიალეთი",
+        "Name_Eng": "Trialeti",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1929-40, 45-56",
+        "Year_Open": 1929,
+        "Year_Close": 1955,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.265811,
+          41.503835
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კაკლიანი",
+        "Name_Eng": "Kakliani",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1930-33, 45-47, 49-56",
+        "Year_Open": 1930,
+        "Year_Close": 1956,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.225651,
+          41.470158
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ჩათახი",
+        "Name_Eng": "Chatakhi",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1956-87",
+        "Year_Open": 1956,
+        "Year_Close": 1988,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.389515,
+          41.46946
+        ]
+      },
+      "properties": {
+        "Name_Geo": "წყნარი",
+        "Name_Eng": "Tsknari",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1932-35",
+        "Year_Open": 1932,
+        "Year_Close": 1935,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.529429,
+          41.491941
+        ]
+      },
+      "properties": {
+        "Name_Geo": "დაღეთი",
+        "Name_Eng": "Dageti",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1938-98",
+        "Year_Open": 1932,
+        "Year_Close": 1999,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.700895,
+          41.453272
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ნახიდური",
+        "Name_Eng": "Nakhiduri",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1937, 38, 41-62",
+        "Year_Open": 1937,
+        "Year_Close": 1962,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.836778,
+          41.384192
+        ]
+      },
+      "properties": {
+        "Name_Geo": "იმირი",
+        "Name_Eng": "Imiri",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "მოქმედი",
+        "Status_Eng": "Active",
+        "Year_": "1941-89, 2003-06",
+        "Year_Open": 1941,
+        "Year_Close": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.044516,
+          41.327768
+        ]
+      },
+      "properties": {
+        "Name_Geo": "წითელიხიდი",
+        "Name_Eng": "TsiTelikhidi",
+        "River": "ქცია-ხრამი",
+        "River_Eng": "Ktsia-Khrami",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1927-35, 39-92",
+        "Year_Open": 1927,
+        "Year_Close": 1993,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.893647,
+          41.598161
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კუშჩი",
+        "Name_Eng": "Kushchi",
+        "River": "ოზნი",
+        "River_Eng": "Ozni",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1961-76",
+        "Year_Open": 1961,
+        "Year_Close": 1977,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.89559,
+          41.578721
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ნარდევანი",
+        "Name_Eng": "Nardevani",
+        "River": "ნარდევანი",
+        "River_Eng": "Nardevani",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1949-56",
+        "Year_Open": 1949,
+        "Year_Close": 1957,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          43.930029,
+          41.580112
+        ]
+      },
+      "properties": {
+        "Name_Geo": "თიქილისა",
+        "Name_Eng": "Tikilisa",
+        "River": "თიქილისა",
+        "River_Eng": "Tikilisa",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1948-61, 78-82",
+        "Year_Open": 1948,
+        "Year_Close": 1982,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.123955,
+          41.63549
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ბეშთაშენის ზემოთ",
+        "Name_Eng": "Beshtashenis Zemot",
+        "River": "აღრი",
+        "River_Eng": "Agari",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1939-91, 93",
+        "Year_Open": 1939,
+        "Year_Close": 1993,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.123577,
+          41.614924
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ბეშთაშენი",
+        "Name_Eng": "Beshtasheni",
+        "River": "ყორსუჩაი",
+        "River_Eng": "Korsuchai",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1948-61, 81, 82",
+        "Year_Open": 1947,
+        "Year_Close": 1983,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.15022,
+          41.514222
+        ]
+      },
+      "properties": {
+        "Name_Geo": "თრიალეთი",
+        "Name_Eng": "Trialeti",
+        "River": "ჯუჯიანი",
+        "River_Eng": "Jujiani",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1930, 31, 33, 50-86",
+        "Year_Open": 1930,
+        "Year_Close": 1986,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.132747,
+          41.447628
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ახა",
+        "Name_Eng": "Akha",
+        "River": "შავწყაროსწყალი",
+        "River_Eng": "Shavtskarostskali",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1932-35, 45-64",
+        "Year_Open": 1932,
+        "Year_Close": 1965,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.178611,
+          41.452731
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ყიზილაჯლო",
+        "Name_Eng": "Kizilajlo",
+        "River": "შავწყაროსწყალი",
+        "River_Eng": "Shavtskarostskali",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1954-67, 70-92",
+        "Year_Open": 1954,
+        "Year_Close": 1993,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.362063,
+          41.547783
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ჯიგრაშენი",
+        "Name_Eng": "Jigrasheni",
+        "River": "ასლანურა",
+        "River_Eng": "Aslanura",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1946-58",
+        "Year_Open": 1946,
+        "Year_Close": 1994,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.367319,
+          41.340157
+        ]
+      },
+      "properties": {
+        "Name_Geo": "დიდი დმანისი",
+        "Name_Eng": "didi dmanisi",
+        "River": "მაშავერა",
+        "River_Eng": "Mashavera",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1941-98",
+        "Year_Open": 1941,
+        "Year_Close": 1994,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.553187,
+          41.42749
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ბოლნისი",
+        "Name_Eng": "Bolnisi",
+        "River": "მაშავერა",
+        "River_Eng": "Mashavera",
+        "Status": "მოქმედი",
+        "Status_Eng": "Active",
+        "Year_": "2021",
+        "Year_Open": 2021,
+        "Year_Close": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.412749,
+          41.369241
+        ]
+      },
+      "properties": {
+        "Name_Geo": "კაზრეთი",
+        "Name_Eng": "Kazreti",
+        "River": "მაშავერა",
+        "River_Eng": "Mashavera",
+        "Status": "მოქმედი",
+        "Status_Eng": "Active",
+        "Year_": "1936-39, 77-93, 2004-18",
+        "Year_Open": 1977,
+        "Year_Close": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.550814,
+          41.376078
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ხატისსოფელი",
+        "Name_Eng": "Khatissopeli",
+        "River": "ბოლნისისწყალი",
+        "River_Eng": "Bolnisistskali",
+        "Status": "მოქმედი",
+        "Status_Eng": "Active",
+        "Year_": "2021",
+        "Year_Open": 2021,
+        "Year_Close": null,
+        "Active": true
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.491951,
+          41.327467
+        ]
+      },
+      "properties": {
+        "Name_Geo": "სამწევრისი",
+        "Name_Eng": "Samtsevrisi",
+        "River": "ბოლნისისწყალი",
+        "River_Eng": "Bolnisistskali",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "36, 37, 41, 43-94, 97, 98",
+        "Year_Open": 1936,
+        "Year_Close": 1999,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.72208,
+          41.304722
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ნაღვარევი (შაუმიანი)",
+        "Name_Eng": "Nagvarevi (Saumiani)",
+        "River": "შულავერი",
+        "River_Eng": "Shulaveri",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1928-35, 41- 47, 49-93",
+        "Year_Open": 1928,
+        "Year_Close": 1994,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.798279,
+          41.238013
+        ]
+      },
+      "properties": {
+        "Name_Geo": "სადახლო",
+        "Name_Eng": "Sadakhlo",
+        "River": "დებედა",
+        "River_Eng": "Debeda",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "1931-34, 36, 39, 40, 54-93",
+        "Year_Open": 1931,
+        "Year_Close": 1994,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.185266,
+          41.703146
+        ]
+      },
+      "properties": {
+        "Name_Geo": "სართიჭალა",
+        "Name_Eng": "Sartichala",
+        "River": "",
+        "River_Eng": "",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "",
+        "Year_Open": 0,
+        "Year_Close": null,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.992041,
+          41.560383
+        ]
+      },
+      "properties": {
+        "Name_Geo": "რუსთავი",
+        "Name_Eng": "RusTavi",
+        "River": "მტკვარი",
+        "River_Eng": "Mtkvari",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "",
+        "Year_Open": 0,
+        "Year_Close": null,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          44.675972,
+          41.542148
+        ]
+      },
+      "properties": {
+        "Name_Geo": "შავსაყდარი",
+        "Name_Eng": "Shavsakdari",
+        "River": "ალგეთი",
+        "River_Eng": "Algeti",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "",
+        "Year_Open": 1930,
+        "Year_Close": 1937,
+        "Active": false
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          45.081698,
+          41.751246
+        ]
+      },
+      "properties": {
+        "Name_Geo": "ახალსოფელი",
+        "Name_Eng": "Akhalsopeli",
+        "River": "საცხენისი",
+        "River_Eng": "Satskhenisi",
+        "Status": "დახურული",
+        "Status_Eng": "Closed",
+        "Year_": "",
+        "Year_Open": 0,
+        "Year_Close": null,
+        "Active": false
+      }
+    }
+  ]
+}
