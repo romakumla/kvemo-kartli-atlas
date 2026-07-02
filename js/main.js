@@ -14052,13 +14052,14 @@ var MUNI_NAMES = [
 // ============================================================
 // 📱 Mobile panel toggles
 // ============================================================
-(function() {
+function initMobilePanels() {
   var leftBtn    = document.getElementById('mobLeftBtn');
   var rightBtn   = document.getElementById('mobRightBtn');
   var backdrop   = document.getElementById('mobBackdrop');
   var leftPanel  = document.getElementById('layerPanel');
   var rightPanel = document.getElementById('basemapPanel');
-  if (!leftBtn) return; // desktop — skip
+
+  if (!leftBtn || !rightBtn) return;
 
   function closeAll() {
     leftPanel.classList.remove('mob-open');
@@ -14066,7 +14067,8 @@ var MUNI_NAMES = [
     backdrop.classList.remove('visible');
   }
 
-  leftBtn.addEventListener('click', function() {
+  leftBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
     var isOpen = leftPanel.classList.contains('mob-open');
     closeAll();
     if (!isOpen) {
@@ -14075,7 +14077,8 @@ var MUNI_NAMES = [
     }
   });
 
-  rightBtn.addEventListener('click', function() {
+  rightBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
     var isOpen = rightPanel.classList.contains('mob-open');
     closeAll();
     if (!isOpen) {
@@ -14086,10 +14089,16 @@ var MUNI_NAMES = [
 
   backdrop.addEventListener('click', closeAll);
 
-  // Close panel after selecting a layer (mobile UX)
   document.querySelectorAll('.layer-item input[type="checkbox"]').forEach(function(cb) {
     cb.addEventListener('change', function() {
-      if (window.innerWidth <= 768) closeAll();
+      if (window.innerWidth <= 768) setTimeout(closeAll, 300);
     });
   });
-})();
+}
+
+// Run after DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMobilePanels);
+} else {
+  initMobilePanels();
+}
