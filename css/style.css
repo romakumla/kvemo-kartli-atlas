@@ -1701,3 +1701,157 @@ aside {
     margin: 0;
   }
 }
+
+/* ============================================================
+   📱 MOBILE — max-width: 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* CSS variables */
+  :root {
+    --header-h: 48px;
+    --chart-h: 0px;
+    --side-w: 100vw;
+  }
+
+  /* ===== Header ===== */
+  #appHeader { padding: 0 10px; }
+
+  .header-logo { height: 34px; }
+  .header-inst-logo { height: 34px; padding: 3px 7px; }
+  .header-atlas-logo { height: 34px; padding: 3px 7px; }
+
+  .header-center { display: none; } /* სათაური იმალება */
+
+  .site-nav { gap: 2px; margin-right: 6px; }
+  .nav-link { font-size: 10px; padding: 4px 7px; }
+
+  /* ===== App Body ===== */
+  #appBody {
+    flex-direction: column;
+    height: calc(100vh - var(--header-h));
+    position: relative;
+  }
+
+  /* ===== Left panel — overlay ===== */
+  #layerPanel {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    width: 260px;
+    height: calc(100vh - var(--header-h));
+    z-index: 3000;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 3px 0 16px rgba(0,0,0,0.15);
+    border-right: 1px solid var(--border);
+  }
+  #layerPanel.mob-open {
+    transform: translateX(0);
+  }
+
+  /* ===== Right panel (basemap) — overlay ===== */
+  #basemapPanel {
+    position: fixed;
+    top: var(--header-h);
+    right: 0;
+    width: 200px;
+    height: calc(100vh - var(--header-h));
+    z-index: 3000;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    box-shadow: -3px 0 16px rgba(0,0,0,0.15);
+  }
+  #basemapPanel.mob-open {
+    transform: translateX(0);
+  }
+
+  /* ===== Map ===== */
+  #mapWrapper {
+    width: 100vw;
+    height: calc(100vh - var(--header-h));
+    flex: 1;
+  }
+
+  /* ===== Chart + infoBar — hidden on mobile ===== */
+  #chartPanel, #infoBar { display: none !important; }
+
+  /* ===== infoCard — full width bottom sheet ===== */
+  #infoCard {
+    position: fixed !important;
+    bottom: 60px !important;
+    left: 10px !important;
+    right: 10px !important;
+    top: auto !important;
+    max-width: none !important;
+    max-height: 50vh;
+    overflow-y: auto;
+    z-index: 4000;
+    border-radius: 14px;
+  }
+
+  /* ===== Search ===== */
+  #mapSearch {
+    top: 8px;
+    width: calc(100vw - 120px);
+    left: 50px;
+    transform: none;
+  }
+
+  /* ===== Coords ===== */
+  #mapCoords { display: none; }
+
+  /* ===== Print button ===== */
+  #btnPrint { display: none; }
+
+  /* ===== Mobile toggle buttons ===== */
+  #mobLeftBtn, #mobRightBtn {
+    position: fixed;
+    bottom: 16px;
+    z-index: 3500;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text);
+    transition: background 0.15s;
+  }
+  #mobLeftBtn { left: 16px; }
+  #mobRightBtn { right: 16px; }
+  #mobLeftBtn:hover, #mobRightBtn:hover {
+    background: var(--red-light);
+    color: var(--red);
+  }
+
+  /* ===== Overlay backdrop ===== */
+  #mobBackdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 2999;
+  }
+  #mobBackdrop.visible { display: block; }
+
+  /* ===== Map info popup ===== */
+  #mapInfoPopup {
+    bottom: 60px !important;
+    right: 10px !important;
+    left: 10px !important;
+    width: auto !important;
+  }
+
+  /* ===== Layer icon ===== */
+  .layer-icon img { width: 28px; height: 28px; }
+
+  /* ===== Census modal ===== */
+  .census-content { padding: 10px; }
+  .census-scope-row { flex-wrap: wrap; gap: 4px; }
+  .scope-btn { font-size: 10px; padding: 4px 8px; }
+}
