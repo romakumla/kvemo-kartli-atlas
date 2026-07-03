@@ -1718,16 +1718,29 @@ aside {
   }
 
   /* ===== Header ===== */
-  #appHeader { padding: 0 10px; }
+  #appHeader { padding: 0 8px; }
 
-  .header-logo { height: 34px; }
-  .header-inst-logo { height: 34px; padding: 3px 7px; }
-  .header-atlas-logo { height: 34px; padding: 3px 7px; }
+  /* ლოგო — დამალვა, ადგილი ბმულებისთვის */
+  .header-logo { display: none; }
+  .header-center { display: none; }
 
-  .header-center { display: none; } /* სათაური იმალება */
-
-  .site-nav { gap: 2px; margin-right: 6px; }
-  .nav-link { font-size: 10px; padding: 4px 7px; }
+  /* ნავიგაცია — მთელი სიგანე */
+  .header-meta {
+    width: 100%;
+    justify-content: center;
+  }
+  .site-nav {
+    gap: 2px;
+    margin-right: 0;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .nav-link {
+    font-size: 10px;
+    padding: 5px 6px;
+    white-space: nowrap;
+  }
 
   /* ===== App Body ===== */
   #appBody {
@@ -1742,6 +1755,7 @@ aside {
     top: var(--header-h);
     left: 0;
     width: 260px;
+    min-width: 260px !important;
     height: calc(100vh - var(--header-h));
     z-index: 3000;
     transform: translateX(-100%);
