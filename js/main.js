@@ -14036,17 +14036,8 @@ var MUNI_NAMES = [
   "გარდაბანი",
 ];
 
-// Populate selects
-["compareA", "compareB"].forEach(function (id, idx) {
-  var sel = document.getElementById(id);
-  MUNI_NAMES.forEach(function (name) {
-    var opt = document.createElement("option");
-    opt.value = name;
-    opt.textContent = name;
-    sel.appendChild(opt);
-  });
-  sel.value = idx === 0 ? "ბოლნისი" : "მარნეული";
-});
+// Populate selects (compareA/B removed — now using cmpA/cmpB in census modal)
+// ["compareA", "compareB"] no longer in DOM
 
 // Dataset sources — pull from existing data objects
 
