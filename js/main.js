@@ -14067,7 +14067,8 @@ function initMobilePanels() {
     backdrop.classList.remove('visible');
   }
 
-  leftBtn.addEventListener('click', function(e) {
+  function toggleLeft(e) {
+    e.preventDefault();
     e.stopPropagation();
     var isOpen = leftPanel.classList.contains('mob-open');
     closeAll();
@@ -14075,9 +14076,10 @@ function initMobilePanels() {
       leftPanel.classList.add('mob-open');
       backdrop.classList.add('visible');
     }
-  });
+  }
 
-  rightBtn.addEventListener('click', function(e) {
+  function toggleRight(e) {
+    e.preventDefault();
     e.stopPropagation();
     var isOpen = rightPanel.classList.contains('mob-open');
     closeAll();
@@ -14085,9 +14087,16 @@ function initMobilePanels() {
       rightPanel.classList.add('mob-open');
       backdrop.classList.add('visible');
     }
-  });
+  }
+
+  // Both click and touchend for mobile
+  leftBtn.addEventListener('click', toggleLeft);
+  leftBtn.addEventListener('touchend', toggleLeft);
+  rightBtn.addEventListener('click', toggleRight);
+  rightBtn.addEventListener('touchend', toggleRight);
 
   backdrop.addEventListener('click', closeAll);
+  backdrop.addEventListener('touchend', closeAll);
 
   document.querySelectorAll('.layer-item input[type="checkbox"]').forEach(function(cb) {
     cb.addEventListener('change', function() {
@@ -14100,5 +14109,5 @@ function initMobilePanels() {
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initMobilePanels);
 } else {
-  initMobilePanels();
+  setTimeout(initMobilePanels, 100);
 }
