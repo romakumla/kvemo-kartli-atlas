@@ -2091,7 +2091,8 @@ function loadCmpData(cb){
 function initCmpSelectors(){
   ["cmpA","cmpB"].forEach(function(id,idx){
     var sel=document.getElementById(id);
-    if(!sel||sel.options.length>1) return;
+    if(!sel) return;
+    if(sel.options.length>1) return;
     MUNI_NAMES.forEach(function(name){
       var opt=document.createElement("option");
       opt.value=name; opt.textContent=name; sel.appendChild(opt);
