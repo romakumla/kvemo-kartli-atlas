@@ -34,6 +34,13 @@ body {
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* ===== Header ===== */
 #appHeader {
   height: var(--header-h);

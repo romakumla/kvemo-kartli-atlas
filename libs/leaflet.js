@@ -7482,4 +7482,3 @@
     (window.L = t));
 });
 //# sourceMappingURL=leaflet.js.map
-fetch("data/regions.geojson");
