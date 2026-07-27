@@ -2033,147 +2033,269 @@ function closeCensus() {
 document.getElementById("censusClose").addEventListener("click", closeCensus);
 document.getElementById("censusOverlay").addEventListener("click", closeCensus);
 
-
-
 // ============================================================
 // შედარება — census modal-ში ინტეგრირებული
 // ============================================================
 var _cmpMetric = "population";
-var _cmpChart  = null;
+var _cmpChart = null;
 
-var _COMPARE_DENSITY = null, _COMPARE_BIRTH = null, _COMPARE_DEATH = null;
+var _COMPARE_DENSITY = null,
+  _COMPARE_BIRTH = null,
+  _COMPARE_DEATH = null;
 var _POP_DATA = {
-  "ბოლნისი":   {p1989:75800, p2002:73000, p2014:66200},
-  "მარნეული":  {p1989:102000,p2002:101000,p2014:108700},
-  "დმანისი":   {p1989:30600, p2002:18600, p2014:13900},
-  "რუსთავი":   {p1989:159000,p2002:116400,p2014:122500},
-  "წალკა":     {p1989:32600, p2002:15800, p2014:15100},
-  "თეთრიწყარო":{p1989:24900, p2002:17600, p2014:16500},
-  "გარდაბანი": {p1989:87900, p2002:96200, p2014:115600}
+  ბოლნისი: { p1989: 75800, p2002: 73000, p2014: 66200 },
+  მარნეული: { p1989: 102000, p2002: 101000, p2014: 108700 },
+  დმანისი: { p1989: 30600, p2002: 18600, p2014: 13900 },
+  რუსთავი: { p1989: 159000, p2002: 116400, p2014: 122500 },
+  წალკა: { p1989: 32600, p2002: 15800, p2014: 15100 },
+  თეთრიწყარო: { p1989: 24900, p2002: 17600, p2014: 16500 },
+  გარდაბანი: { p1989: 87900, p2002: 96200, p2014: 115600 },
 };
-var MUNI_NAMES = ["ბოლნისი","მარნეული","დმანისი","რუსთავი","წალკა","თეთრიწყარო","გარდაბანი"];
+var MUNI_NAMES = [
+  "ბოლნისი",
+  "მარნეული",
+  "დმანისი",
+  "რუსთავი",
+  "წალკა",
+  "თეთრიწყარო",
+  "გარდაბანი",
+];
 
-function _midVal(s){
-  if(!s) return 0;
-  s=String(s).replace(/>|</g,"").trim();
-  var d=s.indexOf("-");
-  if(d>0){var a=parseFloat(s)||0,b=parseFloat(s.slice(d+1))||a;return(a+b)/2;}
-  return parseFloat(s)||0;
+function _midVal(s) {
+  if (!s) return 0;
+  s = String(s).replace(/>|</g, "").trim();
+  var d = s.indexOf("-");
+  if (d > 0) {
+    var a = parseFloat(s) || 0,
+      b = parseFloat(s.slice(d + 1)) || a;
+    return (a + b) / 2;
+  }
+  return parseFloat(s) || 0;
 }
 
-function loadCmpData(cb){
-  var done=0, need=(!_COMPARE_DENSITY?1:0)+(!_COMPARE_BIRTH?1:0)+(!_COMPARE_DEATH?1:0);
-  if(need===0){cb();return;}
-  function tick(){if(++done>=need)cb();}
-  if(!_COMPARE_DENSITY){
-    fetch("data/density.geojson").then(function(r){return r.json();}).then(function(d){
-      _COMPARE_DENSITY={};
-      d.features.forEach(function(f){var p=f.properties;_COMPARE_DENSITY[p.Name_Geo]={d1989:p.De_1989,d2002:p.De_2002,d2014:p.De_2014,d2024:p.De_2024};});
-      tick();
-    });
+function loadCmpData(cb) {
+  var done = 0,
+    need =
+      (!_COMPARE_DENSITY ? 1 : 0) +
+      (!_COMPARE_BIRTH ? 1 : 0) +
+      (!_COMPARE_DEATH ? 1 : 0);
+  if (need === 0) {
+    cb();
+    return;
   }
-  if(!_COMPARE_BIRTH){
-    fetch("data/birth_rate.geojson").then(function(r){return r.json();}).then(function(d){
-      _COMPARE_BIRTH={};
-      d.features.forEach(function(f){var p=f.properties;_COMPARE_BIRTH[p.Name_Geo]={b2012:p.Birth_2012,b2022:p.Birth_2022};});
-      tick();
-    });
+  function tick() {
+    if (++done >= need) cb();
   }
-  if(!_COMPARE_DEATH){
-    fetch("data/death_rate.geojson").then(function(r){return r.json();}).then(function(d){
-      _COMPARE_DEATH={};
-      d.features.forEach(function(f){var p=f.properties;_COMPARE_DEATH[p.Name_Geo]={d2012:p.Death_2012,d2022:p.Death_2022};});
-      tick();
-    });
+  if (!_COMPARE_DENSITY) {
+    fetch("data/density.geojson")
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (d) {
+        _COMPARE_DENSITY = {};
+        d.features.forEach(function (f) {
+          var p = f.properties;
+          _COMPARE_DENSITY[p.Name_Geo] = {
+            d1989: p.De_1989,
+            d2002: p.De_2002,
+            d2014: p.De_2014,
+            d2024: p.De_2024,
+          };
+        });
+        tick();
+      });
+  }
+  if (!_COMPARE_BIRTH) {
+    fetch("data/birth_rate.geojson")
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (d) {
+        _COMPARE_BIRTH = {};
+        d.features.forEach(function (f) {
+          var p = f.properties;
+          _COMPARE_BIRTH[p.Name_Geo] = {
+            b2012: p.Birth_2012,
+            b2022: p.Birth_2022,
+          };
+        });
+        tick();
+      });
+  }
+  if (!_COMPARE_DEATH) {
+    fetch("data/death_rate.geojson")
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (d) {
+        _COMPARE_DEATH = {};
+        d.features.forEach(function (f) {
+          var p = f.properties;
+          _COMPARE_DEATH[p.Name_Geo] = {
+            d2012: p.Death_2012,
+            d2022: p.Death_2022,
+          };
+        });
+        tick();
+      });
   }
 }
 
-function initCmpSelectors(){
-  ["cmpA","cmpB"].forEach(function(id,idx){
-    var sel=document.getElementById(id);
-    if(!sel) return;
-    if(sel.options.length>1) return;
-    MUNI_NAMES.forEach(function(name){
-      var opt=document.createElement("option");
-      opt.value=name; opt.textContent=name; sel.appendChild(opt);
+function initCmpSelectors() {
+  ["cmpA", "cmpB"].forEach(function (id, idx) {
+    var sel = document.getElementById(id);
+    if (!sel) return;
+    if (sel.options.length > 1) return;
+    MUNI_NAMES.forEach(function (name) {
+      var opt = document.createElement("option");
+      opt.value = name;
+      opt.textContent = name;
+      sel.appendChild(opt);
     });
-    sel.value=idx===0?"ბოლნისი":"მარნეული";
+    sel.value = idx === 0 ? "ბოლნისი" : "მარნეული";
   });
 }
 
-function renderCmpChart(){
-  var nameA=document.getElementById("cmpA").value;
-  var nameB=document.getElementById("cmpB").value;
-  if(!nameA||!nameB) return;
-  loadCmpData(function(){_doCmpChart(nameA,nameB);});
+function renderCmpChart() {
+  var nameA = document.getElementById("cmpA").value;
+  var nameB = document.getElementById("cmpB").value;
+  if (!nameA || !nameB) return;
+  loadCmpData(function () {
+    _doCmpChart(nameA, nameB);
+  });
 }
 
-function _doCmpChart(nameA,nameB){
-  var m=_cmpMetric, labels, dataA, dataB, ylabel;
-  if(m==="population"){
-    labels=["1989","2002","2014"]; ylabel="მოსახლ. (კაცი)";
-    var pA=_POP_DATA[nameA]||{},pB=_POP_DATA[nameB]||{};
-    dataA=[pA.p1989||0,pA.p2002||0,pA.p2014||0];
-    dataB=[pB.p1989||0,pB.p2002||0,pB.p2014||0];
-  } else if(m==="density"){
-    labels=["1989","2002","2014","2024"]; ylabel="სიმჭ. (კაცი/კმ²)";
-    var dA=(_COMPARE_DENSITY&&_COMPARE_DENSITY[nameA])||{};
-    var dB=(_COMPARE_DENSITY&&_COMPARE_DENSITY[nameB])||{};
-    dataA=[dA.d1989||0,dA.d2002||0,dA.d2014||0,dA.d2024||0];
-    dataB=[dB.d1989||0,dB.d2002||0,dB.d2014||0,dB.d2024||0];
-  } else if(m==="birth"){
-    labels=["2012","2022"]; ylabel="შობ. კოეფ. (‰)";
-    var bA=(_COMPARE_BIRTH&&_COMPARE_BIRTH[nameA])||{};
-    var bB=(_COMPARE_BIRTH&&_COMPARE_BIRTH[nameB])||{};
-    dataA=[_midVal(bA.b2012),_midVal(bA.b2022)];
-    dataB=[_midVal(bB.b2012),_midVal(bB.b2022)];
+function _doCmpChart(nameA, nameB) {
+  var m = _cmpMetric,
+    labels,
+    dataA,
+    dataB,
+    ylabel;
+  if (m === "population") {
+    labels = ["1989", "2002", "2014"];
+    ylabel = "მოსახლ. (კაცი)";
+    var pA = _POP_DATA[nameA] || {},
+      pB = _POP_DATA[nameB] || {};
+    dataA = [pA.p1989 || 0, pA.p2002 || 0, pA.p2014 || 0];
+    dataB = [pB.p1989 || 0, pB.p2002 || 0, pB.p2014 || 0];
+  } else if (m === "density") {
+    labels = ["1989", "2002", "2014", "2024"];
+    ylabel = "სიმჭ. (კაცი/კმ²)";
+    var dA = (_COMPARE_DENSITY && _COMPARE_DENSITY[nameA]) || {};
+    var dB = (_COMPARE_DENSITY && _COMPARE_DENSITY[nameB]) || {};
+    dataA = [dA.d1989 || 0, dA.d2002 || 0, dA.d2014 || 0, dA.d2024 || 0];
+    dataB = [dB.d1989 || 0, dB.d2002 || 0, dB.d2014 || 0, dB.d2024 || 0];
+  } else if (m === "birth") {
+    labels = ["2012", "2022"];
+    ylabel = "შობ. კოეფ. (‰)";
+    var bA = (_COMPARE_BIRTH && _COMPARE_BIRTH[nameA]) || {};
+    var bB = (_COMPARE_BIRTH && _COMPARE_BIRTH[nameB]) || {};
+    dataA = [_midVal(bA.b2012), _midVal(bA.b2022)];
+    dataB = [_midVal(bB.b2012), _midVal(bB.b2022)];
   } else {
-    labels=["2012","2022"]; ylabel="სიკვდ. კოეფ. (‰)";
-    var deA=(_COMPARE_DEATH&&_COMPARE_DEATH[nameA])||{};
-    var deB=(_COMPARE_DEATH&&_COMPARE_DEATH[nameB])||{};
-    dataA=[_midVal(deA.d2012),_midVal(deA.d2022)];
-    dataB=[_midVal(deB.d2012),_midVal(deB.d2022)];
+    labels = ["2012", "2022"];
+    ylabel = "სიკვდ. კოეფ. (‰)";
+    var deA = (_COMPARE_DEATH && _COMPARE_DEATH[nameA]) || {};
+    var deB = (_COMPARE_DEATH && _COMPARE_DEATH[nameB]) || {};
+    dataA = [_midVal(deA.d2012), _midVal(deA.d2022)];
+    dataB = [_midVal(deB.d2012), _midVal(deB.d2022)];
   }
-  var ctx=document.getElementById("cmpCanvas").getContext("2d");
-  if(_cmpChart)_cmpChart.destroy();
-  _cmpChart=new Chart(ctx,{type:"bar",
-    data:{labels:labels,datasets:[
-      {label:nameA,data:dataA,backgroundColor:"#3E8BBE99",borderColor:"#1A5F8A",borderWidth:1.5,borderRadius:4},
-      {label:nameB,data:dataB,backgroundColor:"#E8621A99",borderColor:"#A83D08",borderWidth:1.5,borderRadius:4}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:true,position:"top",labels:{font:{family:"Fira Sans",size:10},boxWidth:12}},
-        title:{display:true,text:nameA+" vs "+nameB,font:{family:"Fira Sans",size:12,weight:"600"},color:"#1A1A18"}},
-      scales:{y:{beginAtZero:true,ticks:{font:{family:"Fira Sans",size:9}},title:{display:true,text:ylabel,font:{size:9}}},
-              x:{ticks:{font:{family:"Fira Sans",size:10},maxRotation:0},grid:{display:false}}}}});
+  var ctx = document.getElementById("cmpCanvas").getContext("2d");
+  if (_cmpChart) _cmpChart.destroy();
+  _cmpChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: nameA,
+          data: dataA,
+          backgroundColor: "#3E8BBE99",
+          borderColor: "#1A5F8A",
+          borderWidth: 1.5,
+          borderRadius: 4,
+        },
+        {
+          label: nameB,
+          data: dataB,
+          backgroundColor: "#E8621A99",
+          borderColor: "#A83D08",
+          borderWidth: 1.5,
+          borderRadius: 4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+          labels: { font: { family: "Fira Sans", size: 10 }, boxWidth: 12 },
+        },
+        title: {
+          display: true,
+          text: nameA + " vs " + nameB,
+          font: { family: "Fira Sans", size: 12, weight: "600" },
+          color: "#1A1A18",
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { font: { family: "Fira Sans", size: 9 } },
+          title: { display: true, text: ylabel, font: { size: 9 } },
+        },
+        x: {
+          ticks: { font: { family: "Fira Sans", size: 10 }, maxRotation: 0 },
+          grid: { display: false },
+        },
+      },
+    },
+  });
 }
 
 // Wire compare panel inside census modal
-document.querySelectorAll(".scope-btn").forEach(function(btn){
-  btn.addEventListener("click",function(){
-    document.querySelectorAll(".scope-btn").forEach(function(b){b.classList.remove("active");});
+document.querySelectorAll(".scope-btn").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    document.querySelectorAll(".scope-btn").forEach(function (b) {
+      b.classList.remove("active");
+    });
     this.classList.add("active");
-    censusScope=this.dataset.scope;
-    var isCompare=censusScope==="compare";
-    document.getElementById("censusChartWrap").style.display=isCompare?"none":"block";
-    document.getElementById("censusTable").style.display=isCompare?"none":"block";
-    document.getElementById("censusComparePanel").style.display=isCompare?"block":"none";
-    if(isCompare){initCmpSelectors();renderCmpChart();}
-    else{renderCensusModal();}
+    censusScope = this.dataset.scope;
+    var isCompare = censusScope === "compare";
+    document.getElementById("censusChartWrap").style.display = isCompare
+      ? "none"
+      : "block";
+    document.getElementById("censusTable").style.display = isCompare
+      ? "none"
+      : "block";
+    document.getElementById("censusComparePanel").style.display = isCompare
+      ? "block"
+      : "none";
+    if (isCompare) {
+      initCmpSelectors();
+      renderCmpChart();
+    } else {
+      renderCensusModal();
+    }
   });
 });
 
-document.querySelectorAll(".cmp-metric-btn").forEach(function(btn){
-  btn.addEventListener("click",function(){
-    document.querySelectorAll(".cmp-metric-btn").forEach(function(b){b.classList.remove("active");});
+document.querySelectorAll(".cmp-metric-btn").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    document.querySelectorAll(".cmp-metric-btn").forEach(function (b) {
+      b.classList.remove("active");
+    });
     this.classList.add("active");
-    _cmpMetric=this.dataset.metric;
+    _cmpMetric = this.dataset.metric;
     renderCmpChart();
   });
 });
 
-document.getElementById("cmpA").addEventListener("change",renderCmpChart);
-document.getElementById("cmpB").addEventListener("change",renderCmpChart);
+document.getElementById("cmpA").addEventListener("change", renderCmpChart);
+document.getElementById("cmpB").addEventListener("change", renderCmpChart);
 // ===== Agrovlimat layer =====
 var agrovlimatLayer = null;
 var agrovlimatData = null;
@@ -2673,6 +2795,13 @@ var MAP_INFO = {
     cartographer: "ანი შეროზია",
     source: "კ. ხარაძე, 1972, 2019; დ. ბერძენიშვილი, 2014",
     year: "2019",
+  },
+  libraries: {
+    title: "ბიბლიოთეკები",
+    text: "",
+    source:
+      "რუკა 1:1 000 000, 2022, ავტ.: ნ. ყარალაშვილი. პარლამენტის ეროვნული ბიბლიოთეკა",
+    year: "2022",
   },
   health_infra: {
     title: "ჯანდაცვის ინფრასტრუქტურა",
@@ -12352,6 +12481,15 @@ function removeAllOikLayers() {
     map.removeLayer(oikLayer);
     oikLayer = null;
   }
+  if (libPolyLayer) {
+    map.removeLayer(libPolyLayer);
+    libPolyLayer = null;
+  }
+  if (libMarkLayer) {
+    if (libMarkLayer.clearLayers) libMarkLayer.clearLayers();
+    map.removeLayer(libMarkLayer);
+    libMarkLayer = null;
+  }
 }
 
 function removeAllEducationLayers() {
@@ -12446,8 +12584,218 @@ document.querySelectorAll("[data-edusub]").forEach(function (btn) {
     if (this.dataset.edusub === "schools") loadEducation();
     else if (this.dataset.edusub === "kindergarten") loadKindergarten();
     else if (this.dataset.edusub === "oikonymy") loadOikonymy();
+    else if (this.dataset.edusub === "libraries") loadLibraries();
   });
 });
+
+// ============================================================
+// ბიბლიოთეკები
+// ============================================================
+var libData = null;
+var libPolyLayer = null;
+var libMarkLayer = null;
+
+// წიგნების კლასები → ფერები
+var LIB_BOOK_COLORS = {
+  "200001-800000": "#DF6926",
+  "100001-200000": "#FAAC67",
+  "50001-100000": "#FDCB97",
+  "< 50000": "#FFEBCC",
+};
+
+function getLibColor(booksStr) {
+  if (!booksStr) return "#FFEBCC";
+  var s = booksStr.replace(/\s/g, "");
+  for (var k in LIB_BOOK_COLORS) {
+    if (k.replace(/\s/g, "") === s) return LIB_BOOK_COLORS[k];
+  }
+  return "#FFEBCC";
+}
+
+function loadLibraries() {
+  if (libData) {
+    buildLibLayer(libData);
+    loadNatureMuniCenters();
+    return;
+  }
+  fetch("data/libraries.geojson")
+    .then(function (r) {
+      return r.json();
+    })
+    .then(function (d) {
+      libData = d;
+      buildLibLayer(d);
+      loadNatureMuniCenters();
+    });
+}
+
+function buildLibLayer(data) {
+  if (libPolyLayer) {
+    map.removeLayer(libPolyLayer);
+    libPolyLayer = null;
+  }
+  if (libMarkLayer) {
+    if (libMarkLayer.clearLayers) libMarkLayer.clearLayers();
+    map.removeLayer(libMarkLayer);
+    libMarkLayer = null;
+  }
+
+  // ---- Choropleth — წიგნების რაოდ. ----
+  libPolyLayer = L.geoJSON(data, {
+    style: function (f) {
+      return {
+        fillColor: getLibColor(f.properties.Books_in_L),
+        fillOpacity: 0.75,
+        color: "transparent",
+        weight: 0,
+        opacity: 0,
+      };
+    },
+    onEachFeature: function (f, layer) {
+      var p = f.properties;
+      layer.bindTooltip(p.Name_Geo, {
+        direction: "center",
+        className: "village-label",
+        sticky: true,
+      });
+      layer.on("click", function () {
+        showInfoLibrary(p);
+        showBottomChartLibrary(data);
+      });
+    },
+  }).addTo(map);
+
+  // ---- Proportional squares — ბიბლ. რაოდ. ----
+  libMarkLayer = L.layerGroup().addTo(map);
+
+  data.features.forEach(function (f) {
+    var p = f.properties;
+    var cnt = parseFloat(p.Libreries) || 0;
+    if (cnt <= 0) return;
+    var coords = f.geometry.coordinates[0];
+    var lats = coords.map(function (c) { return c[1]; });
+    var lngs = coords.map(function (c) { return c[0]; });
+    var lat = (Math.min.apply(null, lats) + Math.max.apply(null, lats)) / 2;
+    var lng = (Math.min.apply(null, lngs) + Math.max.apply(null, lngs)) / 2;
+    var size = Math.round(8 + cnt * 1.5);
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '">' +
+      '<rect width="' + size + '" height="' + size + '" fill="#5A3E8A" opacity="0.85" stroke="#fff" stroke-width="1.5"/></svg>';
+    var icon = L.divIcon({ html: svg, iconSize: [size, size], iconAnchor: [size/2, size/2], className: "" });
+    var marker = L.marker([lat, lng], { icon: icon });
+    marker.bindTooltip(p.Name_Geo + ": " + cnt + " ბიბლ.", { direction: "top", className: "village-label" });
+    marker.on("click", function () { showInfoLibrary(p); showBottomChartLibrary(data); });
+    libMarkLayer.addLayer(marker);
+  });
+
+  updateLibLegend();
+  if (muniBorderOverlay) muniBorderOverlay.bringToFront();
+}
+
+function showInfoLibrary(p) {
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+    p.Name_Geo +
+    "</div>" +
+    '<span class="info-type-badge" style="background:#5A3E8A22;color:#5A3E8A;border:1px solid #5A3E8A;">ბიბლიოთეკები</span>' +
+    '<div style="margin-top:8px;font-size:11px;color:#444;line-height:2;">' +
+    "<b>ბიბლიოთეკები:</b> " +
+    (p.Libreries || "—") +
+    "<br>" +
+    "<b>წიგნების რაოდ.:</b> " +
+    (p.Books_in_L || "—") +
+    "</div>";
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+function showBottomChartLibrary(data) {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  var ctx = canvas.getContext("2d");
+  if (bottomChart) bottomChart.destroy();
+  var feats = data.features.slice().sort(function (a, b) {
+    return (
+      (parseFloat(b.properties.Libreries) || 0) -
+      (parseFloat(a.properties.Libreries) || 0)
+    );
+  });
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: feats.map(function (f) {
+        return f.properties.Name_Geo;
+      }),
+      datasets: [
+        {
+          label: "ბიბლიოთეკები",
+          data: feats.map(function (f) {
+            return parseFloat(f.properties.Libreries) || 0;
+          }),
+          backgroundColor: "#5A3E8ACC",
+          borderColor: "#3A1E6A",
+          borderWidth: 1.5,
+          borderRadius: 4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "ბიბლიოთეკები მუნ. მიხედვით",
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 6 },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { font: { family: "Fira Sans", size: 9 } },
+        },
+        x: {
+          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          grid: { display: false },
+        },
+      },
+    },
+  });
+}
+
+function updateLibLegend() {
+  var el = document.getElementById("legendContent");
+  if (!el) return;
+  var html =
+    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">წიგნების რაოდ. მუნ-ში</div>';
+  var classes = [
+    { label: "200 001 – 800 000", color: "#DF6926" },
+    { label: "100 001 – 200 000", color: "#FAAC67" },
+    { label: "50 001 – 100 000", color: "#FDCB97" },
+    { label: "< 50 000", color: "#FFEBCC" },
+  ];
+  classes.forEach(function (c) {
+    html +=
+      '<div style="display:flex;align-items:center;margin-bottom:5px;">' +
+      '<span style="display:inline-block;width:18px;height:13px;border-radius:2px;background:' +
+      c.color +
+      ';margin-right:7px;flex-shrink:0;border:1px solid rgba(0,0,0,.15);"></span>' +
+      '<span style="font-size:10px;">' +
+      c.label +
+      "</span></div>";
+  });
+  html +=
+    '<div style="margin-top:10px;padding-top:8px;border-top:1px solid #ddd;">' +
+    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:5px;">ბიბლიოთეკების რაოდ.</div>' +
+    '<div style="display:flex;align-items:center;gap:6px;">' +
+    '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><rect width="14" height="14" fill="#5A3E8A" opacity="0.85" stroke="#fff" stroke-width="1.5"/></svg>' +
+    '<span style="font-size:10px;">პროპ. კვადრატი (1 = 1 ბიბლ.)</span></div></div>' +
+    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">მუნ-ზე დაჭ. — სრული სტატ.</div>';
+  el.innerHTML = html;
+  setInfoBtn("libraries");
+}
 
 // ============================================================
 // ჯანდაცვა და სოციალური მომსახურება
@@ -14045,61 +14393,63 @@ var MUNI_NAMES = [
 // 📱 Mobile panel toggles
 // ============================================================
 function initMobilePanels() {
-  var leftBtn    = document.getElementById('mobLeftBtn');
-  var rightBtn   = document.getElementById('mobRightBtn');
-  var backdrop   = document.getElementById('mobBackdrop');
-  var leftPanel  = document.getElementById('layerPanel');
-  var rightPanel = document.getElementById('basemapPanel');
+  var leftBtn = document.getElementById("mobLeftBtn");
+  var rightBtn = document.getElementById("mobRightBtn");
+  var backdrop = document.getElementById("mobBackdrop");
+  var leftPanel = document.getElementById("layerPanel");
+  var rightPanel = document.getElementById("basemapPanel");
 
   if (!leftBtn || !rightBtn) return;
 
   function closeAll() {
-    leftPanel.classList.remove('mob-open');
-    rightPanel.classList.remove('mob-open');
-    backdrop.classList.remove('visible');
+    leftPanel.classList.remove("mob-open");
+    rightPanel.classList.remove("mob-open");
+    backdrop.classList.remove("visible");
   }
 
   function toggleLeft(e) {
     e.preventDefault();
     e.stopPropagation();
-    var isOpen = leftPanel.classList.contains('mob-open');
+    var isOpen = leftPanel.classList.contains("mob-open");
     closeAll();
     if (!isOpen) {
-      leftPanel.classList.add('mob-open');
-      backdrop.classList.add('visible');
+      leftPanel.classList.add("mob-open");
+      backdrop.classList.add("visible");
     }
   }
 
   function toggleRight(e) {
     e.preventDefault();
     e.stopPropagation();
-    var isOpen = rightPanel.classList.contains('mob-open');
+    var isOpen = rightPanel.classList.contains("mob-open");
     closeAll();
     if (!isOpen) {
-      rightPanel.classList.add('mob-open');
-      backdrop.classList.add('visible');
+      rightPanel.classList.add("mob-open");
+      backdrop.classList.add("visible");
     }
   }
 
   // Both click and touchend for mobile
-  leftBtn.addEventListener('click', toggleLeft);
-  leftBtn.addEventListener('touchend', toggleLeft);
-  rightBtn.addEventListener('click', toggleRight);
-  rightBtn.addEventListener('touchend', toggleRight);
+  leftBtn.addEventListener("click", toggleLeft);
+  leftBtn.addEventListener("touchend", toggleLeft);
+  rightBtn.addEventListener("click", toggleRight);
+  rightBtn.addEventListener("touchend", toggleRight);
 
-  backdrop.addEventListener('click', closeAll);
-  backdrop.addEventListener('touchend', closeAll);
+  backdrop.addEventListener("click", closeAll);
+  backdrop.addEventListener("touchend", closeAll);
 
-  document.querySelectorAll('.layer-item input[type="checkbox"]').forEach(function(cb) {
-    cb.addEventListener('change', function() {
-      if (window.innerWidth <= 768) setTimeout(closeAll, 300);
+  document
+    .querySelectorAll('.layer-item input[type="checkbox"]')
+    .forEach(function (cb) {
+      cb.addEventListener("change", function () {
+        if (window.innerWidth <= 768) setTimeout(closeAll, 300);
+      });
     });
-  });
 }
 
 // Run after DOM ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMobilePanels);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initMobilePanels);
 } else {
   setTimeout(initMobilePanels, 100);
 }
