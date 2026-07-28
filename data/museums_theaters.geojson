@@ -1,0 +1,236 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "ტანძია",
+    "Name_Eng": "Tandzia",
+    "Municipal_": "ბოლნისის მუნიციპა",
+    "Municipal1": "Bolnisi Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "სულხან-საბა ორბელიანის ბიოგრაფიული მუზეუმი",
+    "Museums_En": "Sulkhan-Saba Orbeliani Biographical Museum",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.366212,
+     41.452147
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "პატარა დმანისი",
+    "Name_Eng": "Patara Dmanisi",
+    "Municipal_": "დმანისის მუნიციპა",
+    "Municipal1": "Dmanisi Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "ისტორიულ-არქიტექტურული მუზეუმი",
+    "Museums_En": "Historical-Architectural Museum",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.341795,
+     41.328249
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "წერაქვი",
+    "Name_Eng": "Tserakvi",
+    "Municipal_": "მარნეულის მუნიციპ",
+    "Municipal1": "Marneuli Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "მიხეილ ჯავახიშვილის ბიოგრაფიული მუზეუმი",
+    "Museums_En": "Mikheil Javakhishvili Biographical Museum",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.656427,
+     41.296084
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "თეთრიწყარო",
+    "Name_Eng": "Tetritskaro",
+    "Municipal_": "თეთრიწყაროს მუნიც",
+    "Municipal1": "Tetritskaro Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "მხარეთმცოდნეობის მუზეუმი",
+    "Museums_En": "Museum of Local Lore and Ethnography",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.461791,
+     41.544354
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "შაუმიანი",
+    "Name_Eng": "Shaumiani",
+    "Municipal_": "მარნეულის მუნიციპ",
+    "Municipal1": "Marneuli Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "ალექსანდრე მელიქ-ფაშაევის ბიოგრაფიული მუსეუმი",
+    "Museums_En": "Alexandre Melik-Pashaevi Biographical Museum",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.762307,
+     41.352355
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "ნორიო",
+    "Name_Eng": "Norio",
+    "Municipal_": "გარდაბნის მუნიციპ",
+    "Municipal1": "Gardabani Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "ისტორიულ-ეთნოგრაფიული მუზეუმი",
+    "Museums_En": "Historical-Ethnographic Museum",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.976568,
+     41.790028
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "ბოლნისი",
+    "Name_Eng": "Bolnisi",
+    "Municipal_": "ბოლნისის მუნიციპა",
+    "Municipal1": "Bolnisi Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "მრავალპროფილური მუზეუმი",
+    "Museums_En": "Multidisciplinary Museum",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.539111,
+     41.449916
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "დმანისი",
+    "Name_Eng": "Dmanisi",
+    "Municipal_": "დმანისის მუნიციპა",
+    "Municipal1": "Dmanisi Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "საგამოფენო დარბაზი",
+    "Museums_En": "Exibition Hall",
+    "Theaters_G": "დიახ",
+    "Theaters_E": "Yes"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.203376,
+     41.332192
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "ქაფანახჩი",
+    "Name_Eng": "Kapanakhchi",
+    "Municipal_": "მარნეულის მუნიციპ",
+    "Municipal1": "Marneuli Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "აშუღი ქამანდარ აფანდიევის ბიოგრაფიული მუზეუმი",
+    "Museums_En": "Ashughi Kamandar apandaevi Biographical Museum",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     45.028035,
+     41.41869
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "რუსთავი",
+    "Name_Eng": "Rustavi",
+    "Municipal_": "ქალაქ რუსთავის მუნ",
+    "Municipal1": "Rustavi Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "ისტორიული მუზეუმი",
+    "Museums_En": "Historical Museum",
+    "Theaters_G": "დიახ",
+    "Theaters_E": "Yes"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     45.011485,
+     41.543519
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "Name_Geo": "გარდაბანი",
+    "Name_Eng": "Gardabani",
+    "Municipal_": "გარდაბნის მუნიციპ",
+    "Municipal1": "Gardabani Municipality",
+    "Region_Geo": "ქვემო ქართლი",
+    "Museums_Ge": "მხარეთმცოდნეობის მუზეუმი",
+    "Museums_En": "Museum of Local Lore and Ethnography",
+    "Theaters_G": "არა",
+    "Theaters_E": "No"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     45.090542,
+     41.459657
+    ]
+   }
+  }
+ ]
+}

@@ -2803,6 +2803,41 @@ var MAP_INFO = {
       "რუკა 1:1 000 000, 2022, ავტ.: ნ. ყარალაშვილი. პარლამენტის ეროვნული ბიბლიოთეკა",
     year: "2022",
   },
+  museums_theaters: {
+    title: "მუზეუმები და თეატრები",
+    text:
+      "ქვემო ქართლში 10 მუზეუმი და 2 თეატრია. ბოლნისის მუზეუმი (2020) რეგიონის საგანმანათლებლო-ტურისტული ცენტრია, სადაც წარმოდგენილია გერმანელთა ჩამოსახლების ისტორია. სოფ. ტანძიაში (ბოლნისი) მოქმედებს სულხან-საბა ორბელიანის სახლ-მუზეუმი (დაარსდა 1984 წ.), ხოლო დმანისის კულტურისა და ხელოვნების ცენტრში (2007) დაცულია დმანისის არქეოლოგიური აღმოჩენები, მათ შორის ადრექრისტიანული «ნაგზაურის» სტელა. შაუმიანში დირიჟორ ალექსანდრე მელიქ-ფაშაევის სახლ-მუზეუმმა 2018 წ. კულტურული მემკვიდრეობის ძეგლის სტატუსი მიიღო.",
+    author: "",
+    cartographer: "",
+    source:
+      "მუნიციპალიტეტების კულტურის სამსახურები; საქართველოს ეროვნული ბიბლიოთეკა; საქართველოს კულტურული მემკვიდრეობის დაცვის ეროვნული სააგენტო; დმანისის ტურისტული საინფორმაციო ცენტრი; ქამანდარ აფანდიევის (აშუღი ქამანდარი) მუზეუმი",
+  },
+  art_disciplines: {
+    title: "სახელოვნებო დარგების მიმართულებები",
+    text:
+      "მუნიციპალიტეტების კულტურის ცენტრები სახელოვნებო განათლების ექვს ძირითად მიმართულებას მოიცავს: სამუსიკო (ვოკალური, ინსტრუმენტული, საესტრადო), ქორეოგრაფია, თეატრალური დასი, სახვითი და გამოყენებითი ხელოვნება და ზეპირსიტყვიერება. ეთნიკურად აზერბაიჯანელი აშუღი ქამანდარ აფანდიევი (1932–2000), ბორჩალოს აშუღთა სკოლის წარმომადგენელი, დაიბადა სოფ. ქაფანახჩში (მარნეულის მუნიციპ.), სადაც დღეს მისი სახლ-მუზეუმი ინახავს აშუღური ხელოვნების ისტორიას.",
+    author: "",
+    cartographer: "",
+    source: "მუნიციპალიტეტების კულტურის ცენტრები; ქამანდარ აფანდიევის (აშუღი ქამანდარი) მუზეუმი",
+  },
+  tourism_climate: {
+    title: "გარემოს საკურორტო-ტურისტული შეფასება",
+    text:
+      "ტურიზმის განვითარების ხელშეწყობის მიზნით, მსოფლიოს მრავალ ქვეყანაში აქტუალურია გარემოს საკურორტო-ტურისტული შეფასება. ადგილის ბიო-კლიმატური რესურსების განსაზღვრა ეფუძნება ოროგრაფიის, კლიმატის, მცენარეული საფარისა და ეკოლოგიური პირობების კვლევას — ძირითადი ფაქტორებია ამინდი და კლიმატი. ბიოკლიმატოლოგიის კვლევებზე დაყრდნობით კანადაში შემუშავდა დასვენების კლიმატური ინდექსი (დკი), რომელიც მსოფლიოში პოპულარულია. ქვემო ქართლის 8 ლოკაციისთვის დკი გამოთვლილია მეტეოროლოგიური სადგურების მონაცემებზე დაყრდნობით — რეგიონის ბიოკლიმატური პირობები მთელი წლის განმავლობაში ხელსაყრელია საკურორტო-ტურისტული ინდუსტრიისთვის.",
+    author: "",
+    cartographer: "",
+    source:
+      "ქვემო ქართლის რეგიონული განვითარების სააგენტო; Amiranashvili et al. 2020; Scott et al. 2016; Amiranashvili, Kartvelishvili, Matzarakis 2020",
+  },
+  tourism_types: {
+    title: "ტურიზმის სახეობები",
+    text:
+      "მატერიალური კულტურისა და ბუნებრივი ძეგლების სიმრავლის მიუხედავად, ტურიზმის განვითარება ქვემო ქართლში გვიან დაიწყო. გამონაკლისია კურორტი მანგლისი, რომლის ათვისებასაც ხანგრძლივი ისტორია აქვს. რეგიონში ტურიზმის აღორძინებას ბიძგი მისცა დმანისში მსოფლიო მნიშვნელობის არქეოლოგიურმა აღმოჩენებმა, რასაც მოჰყვა კულტურულ-შემეცნებითი და სამეცნიერო ტურიზმის გააქტიურება. ტერიტორიაზე, რომელიც ათასწლეულების მანძილზე სხვადასხვა ცივილიზაციისა და ხალხის თანაცხოვრების ადგილი იყო, დიდი მნიშვნელობა შეიძინა ეთნოგრაფიულმა ტურიზმმა. ბუნებრივი რესურსების მრავალფეროვნებამ განაპირობა გამაჯანსაღებელი, ეკოლოგიური და სათავგადასავლო ტურიზმის განვითარების შესაძლებლობა. ტურისტული რესურსების ძირითადი მომხმარებელი ჯერჯერობით ადგილობრივი ტურისტები არიან, თუმცა რეგიონი სულ უფრო იზიდავს უცხოელ ტურისტებსაც.",
+    author: "",
+    cartographer: "",
+    source:
+      "საქართველოს პრეზიდენტის ბრძანებულება 22.07.2005; ქვემო ქართლისა და ჯავახეთის ბუნებრივ-ტურისტული პოტენციალის შეფასება და გამოყენების პერსპექტივები, 2009-2011; დაცული ტერიტორიების სააგენტო",
+  },
   health_infra: {
     title: "ჯანდაცვის ინფრასტრუქტურა",
     text: "რეგიონის ჯანდაცვა მუნ. ცენტრებში მრავალპროფ. კლინიკებს და სოფ. ამბულ. მოიცავს. მოქმედებს ჯანმრთ. ეროვ. სააგ-ს ქვემო ქართ. სამსახური.",
@@ -4122,12 +4157,15 @@ document.getElementById("chkNature").addEventListener("change", function (e) {
     document.getElementById("chkHistory").checked = false;
     document.getElementById("chkEconomy").checked = false;
     document.getElementById("chkEducation").checked = false;
+    document.getElementById("chkTourism").checked = false;
     document.getElementById("historyView").style.display = "none";
     document.getElementById("economyView").style.display = "none";
     document.getElementById("educationView").style.display = "none";
+    document.getElementById("tourismView").style.display = "none";
     removeAllHistoryLayers();
     removeAllEconomyLayers();
     removeAllEducationLayers();
+    removeAllTourismLayers();
     document.getElementById("mainLayerView").style.display = "none";
     document.getElementById("sublayerView").style.display = "none";
     document.getElementById("natureView").style.display = "";
@@ -9408,12 +9446,15 @@ document.getElementById("chkHistory").addEventListener("change", function (e) {
     document.getElementById("chkNature").checked = false;
     document.getElementById("chkEconomy").checked = false;
     document.getElementById("chkEducation").checked = false;
+    document.getElementById("chkTourism").checked = false;
     document.getElementById("economyView").style.display = "none";
     document.getElementById("educationView").style.display = "none";
+    document.getElementById("tourismView").style.display = "none";
     removeAllThematic();
     removeAllNatureLayers();
     removeAllEconomyLayers();
     removeAllEducationLayers();
+    removeAllTourismLayers();
     removeNeutralLayers();
     document.querySelectorAll("[data-histsub]").forEach(function (b) {
       b.classList.remove("active");
@@ -11437,11 +11478,14 @@ document.getElementById("chkEconomy").addEventListener("change", function (e) {
     document.getElementById("chkNature").checked = false;
     document.getElementById("chkHistory").checked = false;
     document.getElementById("chkEducation").checked = false;
+    document.getElementById("chkTourism").checked = false;
     document.getElementById("educationView").style.display = "none";
+    document.getElementById("tourismView").style.display = "none";
     removeAllThematic();
     removeAllNatureLayers();
     removeAllHistoryLayers();
     removeAllEducationLayers();
+    removeAllTourismLayers();
     removeNeutralLayers();
     document.querySelectorAll("[data-econsub]").forEach(function (b) {
       b.classList.remove("active");
@@ -12513,6 +12557,36 @@ function removeAllEducationLayers() {
     map.removeLayer(oikLayer);
     oikLayer = null;
   }
+  if (tourismLayer) {
+    map.removeLayer(tourismLayer);
+    tourismLayer = null;
+  }
+  if (artMuniLayer) {
+    map.removeLayer(artMuniLayer);
+    artMuniLayer = null;
+  }
+  if (artSettlementLayer) {
+    map.removeLayer(artSettlementLayer);
+    artSettlementLayer = null;
+  }
+  artExpandedMarker = null;
+  map.off("click", artMapClickCollapse);
+}
+
+function removeAllTourismLayers() {
+  if (tcMuniLayer) {
+    map.removeLayer(tcMuniLayer);
+    tcMuniLayer = null;
+  }
+  if (tcPointLayer) {
+    map.removeLayer(tcPointLayer);
+    tcPointLayer = null;
+  }
+  if (ttLayer) {
+    map.removeLayer(ttLayer);
+    ttLayer = null;
+  }
+  map.off("zoomend", updateTtLabels);
 }
 
 // ===== განათლება checkbox =====
@@ -12528,6 +12602,7 @@ document
       document.getElementById("natureView").style.display = "none";
       document.getElementById("historyView").style.display = "none";
       document.getElementById("economyView").style.display = "none";
+      document.getElementById("tourismView").style.display = "none";
       document.getElementById("educationView").style.display = "";
       showChartPanel();
       resetChartPanel();
@@ -12539,10 +12614,12 @@ document
       document.getElementById("chkNature").checked = false;
       document.getElementById("chkHistory").checked = false;
       document.getElementById("chkEconomy").checked = false;
+      document.getElementById("chkTourism").checked = false;
       removeAllThematic();
       removeAllNatureLayers();
       removeAllHistoryLayers();
       removeAllEconomyLayers();
+      removeAllTourismLayers();
       removeNeutralLayers();
       document.querySelectorAll("[data-edusub]").forEach(function (b) {
         b.classList.remove("active");
@@ -12571,6 +12648,79 @@ document
     loadNeutralLayers();
   });
 
+// ===== ტურიზმი checkbox (ამჟამად disabled — მალე გააქტიურდება) =====
+document
+  .getElementById("chkTourism")
+  .addEventListener("change", function (e) {
+    if (e.target.checked) {
+      document.getElementById("mainLayerView").style.display = "none";
+      document.getElementById("sublayerView").style.display = "none";
+      document.getElementById("natureView").style.display = "none";
+      document.getElementById("historyView").style.display = "none";
+      document.getElementById("economyView").style.display = "none";
+      document.getElementById("educationView").style.display = "none";
+      document.getElementById("healthView").style.display = "none";
+      document.getElementById("tourismView").style.display = "";
+      removeAllHistoryLayers();
+      removeAllEconomyLayers();
+      removeAllEducationLayers();
+      removeAllHealthLayers();
+      showChartPanel();
+      resetChartPanel();
+      hideSettlementLegend();
+      setInfoBtn(null);
+      document.getElementById("filterSection").style.display = "none";
+      document.getElementById("infoCard").classList.add("hidden");
+      document.getElementById("chkPopulation").checked = false;
+      document.getElementById("chkNature").checked = false;
+      document.getElementById("chkHistory").checked = false;
+      document.getElementById("chkEconomy").checked = false;
+      document.getElementById("chkEducation").checked = false;
+      document.getElementById("chkHealth").checked = false;
+      removeAllThematic();
+      removeAllNatureLayers();
+      removeNeutralLayers();
+      document.querySelectorAll("[data-toursub]").forEach(function (b) {
+        b.classList.remove("active");
+      });
+      document.querySelector("[data-toursub='tourism_climate']").classList.add("active");
+      loadTourismClimate();
+    } else {
+      document.getElementById("tourismView").style.display = "none";
+      document.getElementById("mainLayerView").style.display = "";
+      removeAllTourismLayers();
+      resetPopLegend();
+      loadNeutralLayers();
+    }
+  });
+
+document
+  .getElementById("btnTourismBack")
+  .addEventListener("click", function () {
+    document.getElementById("chkTourism").checked = false;
+    document.getElementById("tourismView").style.display = "none";
+    document.getElementById("mainLayerView").style.display = "";
+    removeAllTourismLayers();
+    resetChartPanel();
+    document.getElementById("infoCard").classList.add("hidden");
+    resetPopLegend();
+    loadNeutralLayers();
+  });
+
+document.querySelectorAll("[data-toursub]").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    document.querySelectorAll("[data-toursub]").forEach(function (b) {
+      b.classList.remove("active");
+    });
+    this.classList.add("active");
+    removeAllTourismLayers();
+    resetChartPanel();
+    document.getElementById("infoCard").classList.add("hidden");
+    if (this.dataset.toursub === "tourism_climate") loadTourismClimate();
+    else if (this.dataset.toursub === "tourism_types") loadTourismTypes();
+  });
+});
+
 document.querySelectorAll("[data-edusub]").forEach(function (btn) {
   btn.addEventListener("click", function () {
     document.querySelectorAll("[data-edusub]").forEach(function (b) {
@@ -12585,6 +12735,8 @@ document.querySelectorAll("[data-edusub]").forEach(function (btn) {
     else if (this.dataset.edusub === "kindergarten") loadKindergarten();
     else if (this.dataset.edusub === "oikonymy") loadOikonymy();
     else if (this.dataset.edusub === "libraries") loadLibraries();
+    else if (this.dataset.edusub === "tourism") loadTourism();
+    else if (this.dataset.edusub === "art_disciplines") loadArtDisciplines();
   });
 });
 
@@ -12795,6 +12947,1063 @@ function updateLibLegend() {
     '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">მუნ-ზე დაჭ. — სრული სტატ.</div>';
   el.innerHTML = html;
   setInfoBtn("libraries");
+}
+
+// ============================================================
+// მუზეუმები და თეატრები
+// ============================================================
+var tourismData = null;
+var tourismLayer = null;
+
+// მუზეუმის ტიპები → სიმბოლოები (ბეჭდური ატლასის სტილში)
+var TOURISM_TYPES = [
+  {
+    key: "historic_arch",
+    match: "ისტორიულ-არქიტექტურული",
+    label: "ისტორიულ-არქიტექტურული მუზეუმი",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.26 16.75"><defs><style>.cls-1{fill:#fdcc97;}.cls-2,.cls-3{fill:none;stroke:#231f20;}.cls-2{stroke-width:0.5px;}.cls-3{stroke-linecap:round;stroke-linejoin:round;}</style></defs><rect class="cls-1" x="0.25" y="0.25" width="16.76" height="16.25"/><rect class="cls-2" x="0.25" y="0.25" width="16.76" height="16.25"/><path class="cls-3" d="M15.6,6.36A.87.87,0,0,0,15,6.13a1,1,0,0,0-1.07,1,1.37,1.37,0,0,0,1.4,1.27h0a1.74,1.74,0,0,0,1.82-1.64,2.23,2.23,0,0,0-2.33-2.1H5.67a2.23,2.23,0,0,0-2.33,2.1A1.74,1.74,0,0,0,5.16,8.37,1.37,1.37,0,0,0,6.56,7.1a1,1,0,0,0-1.07-1,.88.88,0,0,0-.62.26" transform="translate(-1.62 -1.85)"/><line class="cls-3" x1="6.26" y1="5.9" x2="11" y2="5.89"/><line class="cls-3" x1="5.92" y1="7.62" x2="5.92" y2="13.98"/><line class="cls-3" x1="8.51" y1="7.62" x2="8.51" y2="13.98"/><line class="cls-3" x1="11.1" y1="7.62" x2="11.1" y2="13.98"/></svg>',
+  },
+  {
+    key: "historic_ethno",
+    match: "ისტორიულ-ეთნოგრაფიული",
+    label: "ისტორიულ-ეთნოგრაფიული მუზეუმი",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.93 16.67"><defs><style>.cls-1{fill:#fdcc97;}.cls-2,.cls-4{fill:none;stroke:#231f20;}.cls-2{stroke-width:0.5px;}.cls-3{fill:#231f20;}.cls-4{stroke-width:0.2px;}</style></defs><rect class="cls-1" x="0.25" y="0.25" width="16.43" height="16.17"/><rect class="cls-2" x="0.25" y="0.25" width="16.43" height="16.17"/><rect class="cls-3" x="2.09" y="6" width="2.05" height="6.72"/><rect class="cls-3" x="12.7" y="5.88" width="2.05" height="6.72"/><rect class="cls-3" x="1.2" y="13.32" width="14.51" height="1.1"/><polygon class="cls-3" points="8.47 1.45 15.97 5.38 0.96 5.38 8.47 1.45"/><path class="cls-3" d="M7.37,12a1.63,1.63,0,0,1,2.9-.92c-.42-2.25-3.8-1.1-2.9.92" transform="translate(-1.78 -1.89)"/><path class="cls-4" d="M7.37,12a1.63,1.63,0,0,1,2.9-.92C9.85,8.82,6.47,10,7.37,12Z" transform="translate(-1.78 -1.89)"/><path class="cls-3" d="M8.51,8.6a1.63,1.63,0,0,1,1.78,2.47c2-1.11-.15-4-1.78-2.47" transform="translate(-1.78 -1.89)"/><path class="cls-4" d="M8.51,8.6a1.63,1.63,0,0,1,1.78,2.47C12.29,10,10.14,7.11,8.51,8.6Z" transform="translate(-1.78 -1.89)"/><path class="cls-3" d="M12.12,8.65a1.63,1.63,0,0,1-1.83,2.43c1.64,1.59,3.73-1.3,1.83-2.43" transform="translate(-1.78 -1.89)"/><path class="cls-4" d="M12.12,8.65a1.63,1.63,0,0,1-1.83,2.43C11.93,12.67,14,9.78,12.12,8.65Z" transform="translate(-1.78 -1.89)"/><path class="cls-3" d="M13.19,12a1.63,1.63,0,0,1-2.91-.89c-.92,2.09,2.51,3.06,2.91.89" transform="translate(-1.78 -1.89)"/><path class="cls-4" d="M13.19,12a1.63,1.63,0,0,1-2.91-.89C9.36,13.17,12.79,14.14,13.19,12Z" transform="translate(-1.78 -1.89)"/><path class="cls-3" d="M10.26,14.12a1.63,1.63,0,0,1,0-3c-2.27-.29-2.21,3.28,0,3" transform="translate(-1.78 -1.89)"/><path class="cls-4" d="M10.26,14.12a1.63,1.63,0,0,1,0-3C8,10.79,8.07,14.36,10.26,14.12Z" transform="translate(-1.78 -1.89)"/></svg>',
+  },
+  {
+    key: "local_lore",
+    match: "მხარეთმცოდნეობის",
+    label: "მხარეთმცოდნეობის მუზეუმი",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.14 16.6"><defs><style>.cls-1{fill:#fdcc97;}.cls-2,.cls-3{fill:none;stroke:#231f20;stroke-width:0.5px;}.cls-3{stroke-miterlimit:10;}</style></defs><rect class="cls-1" x="0.25" y="0.25" width="16.64" height="16.1"/><rect class="cls-2" x="0.25" y="0.25" width="16.64" height="16.1"/><rect class="cls-2" x="2.15" y="6.16" width="2.08" height="6.69"/><rect class="cls-2" x="12.88" y="6.16" width="2.08" height="6.69"/><rect class="cls-2" x="1.24" y="13.67" width="14.68" height="1.1"/><polygon class="cls-2" points="8.6 1.41 16.2 5.33 1.01 5.33 8.6 1.41"/><polygon class="cls-3" points="5.86 12.31 5.86 6.89 6.89 6.89 8.57 9.85 10.3 6.89 11.28 6.89 11.28 12.31 10.22 12.31 10.22 9.26 8.68 12.06 8.53 12.06 6.91 9.26 6.91 12.31 5.86 12.31"/></svg>',
+  },
+  {
+    key: "multi",
+    match: "მრავალპროფილური",
+    label: "მრავალპროფილური მუზეუმი",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.52 19.52"><defs><style>.cls-1{fill:#fdcc97;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.5px;}.cls-3{fill:#231f20;}</style></defs><path class="cls-1" d="M19.76,10.23A9.51,9.51,0,1,1,10.25.72a9.51,9.51,0,0,1,9.51,9.51" transform="translate(-0.49 -0.47)"/><path class="cls-2" d="M19.76,10.23A9.51,9.51,0,1,1,10.25.72,9.51,9.51,0,0,1,19.76,10.23Z" transform="translate(-0.49 -0.47)"/><polygon class="cls-3" points="7 12.73 7 7.06 8.06 7.06 9.79 10.16 11.57 7.06 12.57 7.06 12.57 12.73 11.49 12.73 11.49 9.54 9.9 12.47 9.74 12.47 8.08 9.54 8.08 12.73 7 12.73"/><rect class="cls-3" x="3.45" y="6.45" width="2.05" height="6.72"/><rect class="cls-3" x="14.07" y="6.45" width="2.05" height="6.72"/><rect class="cls-3" x="2.55" y="13.76" width="14.51" height="1.1"/><polygon class="cls-3" points="9.82 1.89 17.33 5.83 2.32 5.83 9.82 1.89"/></svg>',
+  },
+  {
+    key: "exhibition",
+    match: "საგამოფენო",
+    label: "საგამოფენო დარბაზი",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.14 16.6"><defs><style>.cls-1{fill:#fdcc97;}.cls-2,.cls-4{fill:none;stroke:#231f20;}.cls-2{stroke-width:0.5px;}.cls-3{fill:#231f20;}.cls-4{stroke-width:0.8px;}</style></defs><rect class="cls-1" x="0.25" y="0.25" width="16.64" height="16.1"/><rect class="cls-2" x="0.25" y="0.25" width="16.64" height="16.1"/><rect class="cls-1" x="3.38" y="4.66" width="10.38" height="9.6"/><rect class="cls-2" x="3.38" y="4.66" width="10.38" height="9.6"/><rect class="cls-3" x="5.6" y="8.78" width="0.96" height="3.07"/><rect class="cls-3" x="8.09" y="8.78" width="0.96" height="3.07"/><rect class="cls-3" x="10.53" y="8.78" width="0.96" height="3.07"/><polygon class="cls-3" points="8.57 6.15 12.41 8.13 4.72 8.13 8.57 6.15"/><line class="cls-2" x1="1.2" y1="1.99" x2="15.94" y2="1.99"/><line class="cls-2" x1="12.51" y1="2.04" x2="12.51" y2="4.63"/><line class="cls-2" x1="4.61" y1="2.04" x2="4.61" y2="4.63"/><line class="cls-4" x1="4.93" y1="12.72" x2="12.21" y2="12.72"/></svg>',
+  },
+  {
+    key: "biography",
+    match: "ბიოგრაფიული",
+    label: "ბიოგრაფიული მუზეუმი",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.02 16.75"><defs><style>.cls-1{fill:#fdcc97;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.5px;}.cls-3{fill:#231f20;}</style></defs><rect class="cls-1" x="0.25" y="0.25" width="12.52" height="16.25"/><rect class="cls-2" x="0.25" y="0.25" width="12.52" height="16.25"/><path class="cls-3" d="M10.07,8a1.94,1.94,0,0,1-2-1.9,2,2,0,0,1,4,0,1.94,1.94,0,0,1-2,1.9" transform="translate(-3.74 -1.85)"/><path class="cls-3" d="M13.56,16.22V12a3,3,0,0,0-3-3H9.92a3,3,0,0,0-3,3v4.2Z" transform="translate(-3.74 -1.85)"/></svg>',
+  },
+  {
+    key: "historic",
+    match: "ისტორიული",
+    label: "ისტორიული მუზეუმი",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.93 16.67"><defs><style>.cls-1{fill:#fdcc97;}.cls-2,.cls-3{fill:none;stroke:#231f20;}.cls-2{stroke-width:0.5px;}.cls-3{stroke-width:0.7px;}.cls-4{fill:#231f20;}</style></defs><rect class="cls-1" x="0.25" y="0.25" width="16.43" height="16.17"/><rect class="cls-2" x="0.25" y="0.25" width="16.43" height="16.17"/><polygon class="cls-3" points="5.64 12.29 5.64 6.62 6.7 6.62 8.43 9.72 10.21 6.62 11.21 6.62 11.21 12.29 10.13 12.29 10.13 9.1 8.54 12.03 8.38 12.03 6.72 9.1 6.72 12.29 5.64 12.29"/><rect class="cls-4" x="2.09" y="6" width="2.05" height="6.72"/><rect class="cls-4" x="12.71" y="6" width="2.05" height="6.72"/><rect class="cls-4" x="1.19" y="13.32" width="14.51" height="1.1"/><polygon class="cls-4" points="8.46 1.45 15.97 5.38 0.96 5.38 8.46 1.45"/></svg>',
+  },
+];
+
+// თეატრის აღმნიშვნელი მცირე ბეჯი (თანდართული ობიექტი — ისტორიული მუზეუმი, საგამოფენო დარბაზი)
+var TOURISM_THEATER_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.35 16.34"><defs><style>.cls-1{fill:#fdcc97;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.5px;}.cls-3{fill:#010101;}</style></defs><rect class="cls-1" x="0.25" y="0.25" width="16.85" height="15.85"/><rect class="cls-2" x="0.25" y="0.25" width="16.85" height="15.84"/><path class="cls-3" d="M10.25,16.91a4.86,4.86,0,0,1-2.53-.72,6.72,6.72,0,0,1-2-1.92,9.39,9.39,0,0,1-1.35-2.81A11.81,11.81,0,0,1,3.83,8a11.65,11.65,0,0,1,.81-4.32.23.23,0,0,1,.15-.14.2.2,0,0,1,.2,0A10.85,10.85,0,0,0,10.25,4.9a10.85,10.85,0,0,0,5.26-1.31.2.2,0,0,1,.2,0,.23.23,0,0,1,.15.14A11.65,11.65,0,0,1,16.67,8a11.81,11.81,0,0,1-.5,3.43,9.63,9.63,0,0,1-1.35,2.81,6.72,6.72,0,0,1-2,1.92,4.86,4.86,0,0,1-2.53.72M5,4.16A11.24,11.24,0,0,0,4.33,8c0,4.62,2.65,8.38,5.92,8.38S16.17,12.65,16.17,8a11.24,11.24,0,0,0-.67-3.87A10.44,10.44,0,0,1,13.21,5a12.06,12.06,0,0,1-3,.37,12.06,12.06,0,0,1-3-.37A10.44,10.44,0,0,1,5,4.16" transform="translate(-1.58 -2.06)"/><path class="cls-3" d="M9,8.85l-.1,0a2.9,2.9,0,0,0-1.54-.39,2.94,2.94,0,0,0-1.55.39.22.22,0,0,1-.18,0,.18.18,0,0,1-.1-.16.34.34,0,0,1,0-.1A1.47,1.47,0,0,1,6,7.46,2,2,0,0,1,7.33,7a2,2,0,0,1,1.28.44,1.43,1.43,0,0,1,.55,1.12v.1a.21.21,0,0,1-.11.16H9M7.33,8.06a3.61,3.61,0,0,1,1.43.28,1.41,1.41,0,0,0-1.43-1,1.43,1.43,0,0,0-1.44,1,3.62,3.62,0,0,1,1.44-.28" transform="translate(-1.58 -2.06)"/><path class="cls-3" d="M14.82,8.85a.17.17,0,0,1-.1,0,3,3,0,0,0-1.55-.38,3,3,0,0,0-1.54.38.19.19,0,0,1-.19,0,.19.19,0,0,1-.1-.15v-.1a1.43,1.43,0,0,1,.55-1.12A2,2,0,0,1,13.17,7a2,2,0,0,1,1.29.45A1.47,1.47,0,0,1,15,8.58a.34.34,0,0,1,0,.1.15.15,0,0,1-.1.15.12.12,0,0,1-.08,0M13.17,7.39a1.41,1.41,0,0,0-1.43,1,3.58,3.58,0,0,1,1.43-.28,3.62,3.62,0,0,1,1.44.28,1.43,1.43,0,0,0-1.44-1" transform="translate(-1.58 -2.06)"/><path class="cls-3" d="M10.25,14.93a2.82,2.82,0,0,1-2.14-1,3.58,3.58,0,0,1-.88-2.4c0-.07,0-.15,0-.22a.18.18,0,0,1,.11-.16.18.18,0,0,1,.2,0,4.13,4.13,0,0,0,2.7.93,4.15,4.15,0,0,0,2.7-.93.17.17,0,0,1,.19,0,.19.19,0,0,1,.12.16v.22a3.63,3.63,0,0,1-.87,2.4,2.82,2.82,0,0,1-2.14,1M7.61,11.7a2.84,2.84,0,0,0,2.64,2.86,2.84,2.84,0,0,0,2.64-2.86,4.67,4.67,0,0,1-2.64.78,4.67,4.67,0,0,1-2.64-.78" transform="translate(-1.58 -2.06)"/></svg>';
+
+function getTourismType(museumsGe) {
+  var s = museumsGe || "";
+  for (var i = 0; i < TOURISM_TYPES.length; i++) {
+    if (s.indexOf(TOURISM_TYPES[i].match) !== -1) return TOURISM_TYPES[i];
+  }
+  return TOURISM_TYPES[TOURISM_TYPES.length - 1];
+}
+
+function loadTourism() {
+  if (tourismData) {
+    buildTourismLayer(tourismData);
+    loadNatureMuniCenters();
+    return;
+  }
+  fetch("data/museums_theaters.geojson")
+    .then(function (r) {
+      return r.json();
+    })
+    .then(function (d) {
+      tourismData = d;
+      buildTourismLayer(d);
+      loadNatureMuniCenters();
+    });
+}
+
+function buildTourismLayer(data) {
+  if (tourismLayer) {
+    map.removeLayer(tourismLayer);
+    tourismLayer = null;
+  }
+
+  tourismLayer = L.geoJSON(data, {
+    pointToLayer: function (feat, latlng) {
+      var p = feat.properties;
+      var t = getTourismType(p.Museums_Ge);
+      var hasTheater = p.Theaters_G === "დიახ";
+      var size = 30; // მუზეუმის სიმბოლოს ზომა
+      var gap = 3;
+      var totalW = hasTheater ? size * 2 + gap : size;
+
+      var html =
+        '<div style="position:relative;width:' + totalW + "px;height:" + size + 'px;">' +
+        '<div style="position:absolute;left:0;top:0;width:' + size + "px;height:" + size + 'px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));">' +
+        t.svg +
+        "</div>";
+      if (hasTheater) {
+        html +=
+          '<div style="position:absolute;left:' + (size + gap) + "px;top:0;width:" + size + "px;height:" + size + 'px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));">' +
+          TOURISM_THEATER_SVG +
+          "</div>";
+      }
+      html += "</div>";
+
+      // anchor მუზეუმის სიმბოლოს ცენტრში (რეალური კოორდინატი)
+      var icon = L.divIcon({
+        html: html,
+        iconSize: [totalW, size],
+        iconAnchor: [size / 2, size / 2],
+        className: "",
+      });
+      var marker = L.marker(latlng, { icon: icon });
+      marker.bindTooltip(
+        p.Name_Geo + " — " + t.label + (hasTheater ? " + თეატრი" : ""),
+        {
+          direction: "top",
+          className: "village-label",
+          offset: [0, -size / 2 - 2],
+        }
+      );
+      marker.on("click", function () {
+        showInfoTourism(p, t, hasTheater);
+      });
+      return marker;
+    },
+  }).addTo(map);
+
+  updateTourismLegend();
+}
+
+function showInfoTourism(p, t, hasTheater) {
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+    p.Museums_Ge +
+    "</div>" +
+    '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
+    '<span style="display:inline-block;width:26px;height:26px;">' + t.svg + "</span>" +
+    '<span class="info-type-badge" style="background:#DF692622;color:#DF6926;border:1px solid #DF6926;">' +
+    t.label +
+    "</span></div>" +
+    (hasTheater
+      ? '<div style="margin:4px 0;"><span class="info-type-badge" style="background:#23232322;color:#232323;border:1px solid #232323;">თეატრი ფუნქციონირებს</span></div>'
+      : "") +
+    '<div style="margin-top:6px;font-size:11px;color:#444;line-height:1.9;">' +
+    "<b>დასახლება:</b> " +
+    p.Name_Geo +
+    "<br>" +
+    "<b>მუნიციპალიტეტი:</b> " +
+    p.Municipal_ +
+    "</div>";
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+function updateTourismLegend() {
+  var el = document.getElementById("legendContent");
+  if (!el) return;
+  var html =
+    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">მუზეუმები</div>';
+  TOURISM_TYPES.forEach(function (t) {
+    html +=
+      '<div style="display:flex;align-items:center;margin-bottom:6px;">' +
+      '<span style="display:inline-flex;width:22px;height:22px;justify-content:center;flex-shrink:0;">' +
+      t.svg +
+      "</span>" +
+      '<span style="font-size:10px;margin-left:6px;">' +
+      t.label +
+      "</span></div>";
+  });
+  html +=
+    '<div style="margin-top:8px;padding-top:8px;border-top:1px solid #ddd;">' +
+    '<div style="display:flex;align-items:center;gap:6px;">' +
+    '<span style="display:inline-flex;width:13px;height:13px;">' + TOURISM_THEATER_SVG + "</span>" +
+    '<span style="font-size:10px;">თეატრი (თანდართული ბეჯი)</span></div></div>' +
+    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">სიმბოლოზე დაჭერით — დეტალები</div>';
+  el.innerHTML = html;
+  setInfoBtn("museums_theaters");
+}
+
+// ============================================================
+// სახელოვნებო დარგების მიმართულებები
+// ============================================================
+var artData = null;
+var artMuniLayer = null;
+var artSettlementLayer = null;
+var artExpandedMarker = null;
+
+var ART_CATEGORIES = [
+  {
+    key: "Music",
+    label: "სამუსიკო (ვოკალური, ინსტრუმენტული, საესტრადო)",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.98 13.96"><defs><style>.cls-1{fill:#70594c;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.15px;}</style></defs><path class="cls-1" d="M5.61.49a.37.37,0,0,0,.07.74A.37.37,0,1,0,5.61.49m-.55.9A.37.37,0,0,0,4.51.9c-.35.36.23.87.55.49m1.22,0A.37.37,0,1,0,6.83.9a.37.37,0,0,0-.55.49M8.51,2.71a1,1,0,0,0,.61.38,1.13,1.13,0,0,0,1-1.95c-.76-.66-1.65-.1-2,.7-.64,1.53.41,2.9.88,4.28.65,1.91.56,4.48-1.81,5A7.2,7.2,0,0,1,3.56,11C1.88,10.22,1.8,8.12,2.21,6.59S3.81,3.64,3.29,2A1.41,1.41,0,0,0,1.71.89,1.13,1.13,0,0,0,1.52,3a1.15,1.15,0,0,0,1.33-.29A6.16,6.16,0,0,1,1.81,5a5.91,5.91,0,0,0-.63,5.46c.94,2,2.93,2.37,5,2.28,1.67-.07,3.13-.56,3.93-2.13a5.62,5.62,0,0,0-.34-5.22A9.13,9.13,0,0,1,8.49,2.79s0-.08,0-.08M3.86,1.18A.37.37,0,1,0,4,1.89a.37.37,0,0,0-.17-.71m3.56,0a.36.36,0,1,0,.21.69.36.36,0,0,0-.21-.69m-1.65.11a.34.34,0,0,1-.2,0v1h.2Zm-.9.3a.5.5,0,0,1-.21,0v.68h.21Zm1.8,0a.67.67,0,0,1-.2,0v.68h.2ZM4,2a.37.37,0,0,1-.21,0v.3H4ZM7.58,2a.37.37,0,0,1-.21,0v.3h.21Zm.31.39H3.45a2.46,2.46,0,0,1,0,.54H7.84ZM4,3H3.83s0,0,0,0c0,.29,0,.72,0,1V9.88c0,.31,0,.65,0,1,0,0,0,.11,0,.12L4,11Zm.85,0H4.66v8.14a.38.38,0,0,0,.21,0Zm.9,0h-.2v8.2h.2Zm.9,0h-.2v8.17l.21,0Zm.91,0H7.37v8L7.58,11Zm1,9.66h0a6.81,6.81,0,0,1-3.4.54l-.55,0a5.26,5.26,0,0,1-1.78-.5.77.77,0,0,0,.14,1,4.57,4.57,0,0,0,2.46.61,5.94,5.94,0,0,0,2.88-.54.85.85,0,0,0,.37-.94.89.89,0,0,0-.08-.17" transform="translate(-0.68 -0.42)"/><path class="cls-2" d="M5.61.49a.37.37,0,0,0,.07.74A.37.37,0,1,0,5.61.49Zm-.55.9A.37.37,0,0,0,4.51.9C4.16,1.26,4.74,1.77,5.06,1.39Zm1.22,0A.37.37,0,1,0,6.83.9.37.37,0,0,0,6.28,1.39ZM8.51,2.71a1,1,0,0,0,.61.38,1.13,1.13,0,0,0,1-1.95c-.76-.66-1.65-.1-2,.7-.64,1.53.41,2.9.88,4.28.65,1.91.56,4.48-1.81,5A7.2,7.2,0,0,1,3.56,11C1.88,10.22,1.8,8.12,2.21,6.59S3.81,3.64,3.29,2A1.41,1.41,0,0,0,1.71.89,1.13,1.13,0,0,0,1.52,3a1.15,1.15,0,0,0,1.33-.29A6.16,6.16,0,0,1,1.81,5a5.91,5.91,0,0,0-.63,5.46c.94,2,2.93,2.37,5,2.28,1.67-.07,3.13-.56,3.93-2.13a5.62,5.62,0,0,0-.34-5.22A9.13,9.13,0,0,1,8.49,2.79S8.48,2.71,8.51,2.71ZM3.86,1.18A.37.37,0,1,0,4,1.89.37.37,0,0,0,3.86,1.18Zm3.56,0a.36.36,0,1,0,.21.69A.36.36,0,0,0,7.42,1.18Zm-1.65.11a.34.34,0,0,1-.2,0v1h.2Zm-.9.3a.5.5,0,0,1-.21,0v.68h.21Zm1.8,0a.67.67,0,0,1-.2,0v.68h.2ZM4,2a.37.37,0,0,1-.21,0v.3H4ZM7.58,2a.37.37,0,0,1-.21,0v.3h.21Zm.31.39H3.45a2.46,2.46,0,0,1,0,.54H7.84ZM4,3H3.83s0,0,0,0c0,.29,0,.72,0,1V9.88c0,.31,0,.65,0,1,0,0,0,.11,0,.12L4,11Zm.85,0H4.66v8.14a.38.38,0,0,0,.21,0Zm.9,0h-.2v8.2h.2Zm.9,0h-.2v8.17l.21,0Zm.91,0H7.37v8L7.58,11Zm1,9.66h0a6.81,6.81,0,0,1-3.4.54l-.55,0a5.26,5.26,0,0,1-1.78-.5.77.77,0,0,0,.14,1,4.57,4.57,0,0,0,2.46.61,5.94,5.94,0,0,0,2.88-.54.85.85,0,0,0,.37-.94A.89.89,0,0,0,8.57,12.65Z" transform="translate(-0.68 -0.42)"/></svg>',
+  },
+  {
+    key: "Choreograp",
+    label: "ქორეოგრაფია",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.13 14.7"><defs><style>.cls-1{fill:#89471f;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.15px;}</style></defs><path class="cls-1" d="M4.36.92a1.24,1.24,0,0,0,.28,2.47A1.24,1.24,0,1,0,4.36.92m5.87.67a1.11,1.11,0,1,0,.2,2.22,1.11,1.11,0,0,0-.2-2.22M11.29,11a3.78,3.78,0,0,0,1.24-.32c.12-.06.34-.14.27-.3-.64-.84-1.31-1.66-1.94-2.5-.11-.13-.22-.28-.32-.41s-.19-.28-.11-.59.17-.49.25-.73c.19-.53.58-1.1.16-1.64S10,4.28,9.55,4.13a1.38,1.38,0,0,1-.93-1.44c0-.33.25-.6-.12-.88s-.67,0-.94.27A8.3,8.3,0,0,1,6.23,3.4c-.34.21-.71.37-1.06.57.2.27.31.62.49.9,0,0,.08.15.15.14l1.33-.84c.23-.18.41-.5.62-.68,0,0,0,0,0,0A2.18,2.18,0,0,0,8.9,4.83S8.74,5,8.71,5a1.36,1.36,0,0,0-.36.61.87.87,0,1,1,0,1.74c-.47,1.08-1,2.14-1.42,3.23,0,.25.18.26.37.29a17.73,17.73,0,0,0,2.05.18c.2,0,.4,0,.59,0l.64,1,2.46,2.44a.5.5,0,0,0,.83-.45c0-.19-.28-.43-.41-.58a23.53,23.53,0,0,1-2.13-2.35s-.07-.08-.05-.1m1.6-6.25a0,0,0,0,0,0-.06c-.43-.42-.3-.47-.43-1A1,1,0,0,0,11.67,3c-.06.4-.35.64-.23,1.08a1.25,1.25,0,0,0,1.45.73m-8.61.62c.43.33.77.81,1.18,1.15a.93.93,0,0,0,.6.23c.77.1,1.55.13,2.32.25A.53.53,0,0,0,8.42,6c-.62-.11-1.32-.12-2-.2a.77.77,0,0,1-.26-.07c-.57-.48-1-1.13-1.6-1.61A.81.81,0,0,0,4,3.85,1,1,0,0,0,2.89,5c0,.87.23,1.78.28,2.65l.12,1.76c0,.35-.09.69-.15,1a4.29,4.29,0,0,1-.34,1.4c-.55.85-1.25,1.64-1.81,2.48a.65.65,0,0,0,1.09.7l2.16-2.78c.24-.64.32-1.36.52-2,0,0,0,0,0,0l1,1.72c0,.82,0,1.64,0,2.46,0,.13,0,.25,0,.39a.67.67,0,0,0,1.34.1c.08-.79-.08-1.69,0-2.49,0-.15,0-1-.08-1.1a.4.4,0,0,1-.42-.47c0-.06.07-.1,0-.16L5.56,8.54V7.12a1.49,1.49,0,0,1-.64-.55,11.82,11.82,0,0,1-.64-1.16m4.64,6-1.11-.08a4,4,0,0,0-.08,1.46c.12.77.38,1.56.5,2.34a.49.49,0,0,0,1-.15c-.13-.94-.36-1.88-.43-2.83Z" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M4.36.92a1.24,1.24,0,0,0,.28,2.47A1.24,1.24,0,1,0,4.36.92Zm5.87.67a1.11,1.11,0,1,0,.2,2.22A1.11,1.11,0,0,0,10.23,1.59ZM11.29,11a3.78,3.78,0,0,0,1.24-.32c.12-.06.34-.14.27-.3-.64-.84-1.31-1.66-1.94-2.5-.11-.13-.22-.28-.32-.41s-.19-.28-.11-.59.17-.49.25-.73c.19-.53.58-1.1.16-1.64S10,4.28,9.55,4.13a1.38,1.38,0,0,1-.93-1.44c0-.33.25-.6-.12-.88s-.67,0-.94.27A8.3,8.3,0,0,1,6.23,3.4c-.34.21-.71.37-1.06.57.2.27.31.62.49.9,0,0,.08.15.15.14l1.33-.84c.23-.18.41-.5.62-.68,0,0,0,0,0,0A2.18,2.18,0,0,0,8.9,4.83S8.74,5,8.71,5a1.36,1.36,0,0,0-.36.61.87.87,0,1,1,0,1.74c-.47,1.08-1,2.14-1.42,3.23,0,.25.18.26.37.29a17.73,17.73,0,0,0,2.05.18c.2,0,.4,0,.59,0l.64,1,2.46,2.44a.5.5,0,0,0,.83-.45c0-.19-.28-.43-.41-.58a23.53,23.53,0,0,1-2.13-2.35S11.27,11.06,11.29,11Zm1.6-6.25a0,0,0,0,0,0-.06c-.43-.42-.3-.47-.43-1A1,1,0,0,0,11.67,3c-.06.4-.35.64-.23,1.08A1.25,1.25,0,0,0,12.89,4.79Zm-8.61.62c.43.33.77.81,1.18,1.15a.93.93,0,0,0,.6.23c.77.1,1.55.13,2.32.25A.53.53,0,0,0,8.42,6c-.62-.11-1.32-.12-2-.2a.77.77,0,0,1-.26-.07c-.57-.48-1-1.13-1.6-1.61A.81.81,0,0,0,4,3.85,1,1,0,0,0,2.89,5c0,.87.23,1.78.28,2.65l.12,1.76c0,.35-.09.69-.15,1a4.29,4.29,0,0,1-.34,1.4c-.55.85-1.25,1.64-1.81,2.48a.65.65,0,0,0,1.09.7l2.16-2.78c.24-.64.32-1.36.52-2,0,0,0,0,0,0l1,1.72c0,.82,0,1.64,0,2.46,0,.13,0,.25,0,.39a.67.67,0,0,0,1.34.1c.08-.79-.08-1.69,0-2.49,0-.15,0-1-.08-1.1a.4.4,0,0,1-.42-.47c0-.06.07-.1,0-.16L5.56,8.54V7.12a1.49,1.49,0,0,1-.64-.55A11.82,11.82,0,0,1,4.28,5.41Zm4.64,6-1.11-.08a4,4,0,0,0-.08,1.46c.12.77.38,1.56.5,2.34a.49.49,0,0,0,1-.15c-.13-.94-.36-1.88-.43-2.83Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M4.28,5.41a11.82,11.82,0,0,0,.64,1.16,1.49,1.49,0,0,0,.64.55V8.54L6.7,10.62c0,.06,0,.1,0,.16a.4.4,0,0,0,.42.47c.1.05.07.95.08,1.1-.1.8.06,1.7,0,2.49a.67.67,0,0,1-1.34-.1c0-.14,0-.26,0-.39,0-.82,0-1.64,0-2.46l-1-1.72s0,0,0,0c-.2.65-.28,1.37-.52,2L2.08,15A.65.65,0,0,1,1,14.3c.56-.84,1.26-1.63,1.81-2.48a4.29,4.29,0,0,0,.34-1.4c.06-.34.11-.68.15-1L3.17,7.63c0-.87-.24-1.78-.28-2.65A1,1,0,0,1,4,3.85a.81.81,0,0,1,.63.25c.56.48,1,1.13,1.6,1.61a.77.77,0,0,0,.26.07c.64.08,1.34.09,2,.2A.53.53,0,0,1,8.38,7c-.77-.12-1.55-.15-2.32-.25a.93.93,0,0,1-.6-.23c-.41-.34-.75-.82-1.18-1.15" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M4.28,5.41a11.82,11.82,0,0,0,.64,1.16,1.49,1.49,0,0,0,.64.55V8.54L6.7,10.62c0,.06,0,.1,0,.16a.4.4,0,0,0,.42.47c.1.05.07.95.08,1.1-.1.8.06,1.7,0,2.49a.67.67,0,0,1-1.34-.1c0-.14,0-.26,0-.39,0-.82,0-1.64,0-2.46l-1-1.72s0,0,0,0c-.2.65-.28,1.37-.52,2L2.08,15A.65.65,0,0,1,1,14.3c.56-.84,1.26-1.63,1.81-2.48a4.29,4.29,0,0,0,.34-1.4c.06-.34.11-.68.15-1L3.17,7.63c0-.87-.24-1.78-.28-2.65A1,1,0,0,1,4,3.85a.81.81,0,0,1,.63.25c.56.48,1,1.13,1.6,1.61a.77.77,0,0,0,.26.07c.64.08,1.34.09,2,.2A.53.53,0,0,1,8.38,7c-.77-.12-1.55-.15-2.32-.25a.93.93,0,0,1-.6-.23C5.05,6.22,4.71,5.74,4.28,5.41Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M11.29,11s0,.08.05.1a23.53,23.53,0,0,0,2.13,2.35c.13.15.38.39.41.58a.5.5,0,0,1-.83.45l-2.46-2.44-.64-1c-.19,0-.39,0-.6,0a17.75,17.75,0,0,1-2-.18c-.19,0-.37,0-.37-.29.42-1.09.95-2.15,1.42-3.23a.87.87,0,1,0,0-1.74A1.36,1.36,0,0,1,8.71,5s.22-.16.19-.2A2.18,2.18,0,0,1,7.81,3.47s0,0,0,0c-.21.18-.39.5-.62.68L5.81,5c-.07,0-.11-.09-.15-.14-.18-.28-.29-.63-.49-.9.35-.2.72-.36,1.06-.57A8.3,8.3,0,0,0,7.56,2.08c.26-.27.56-.57.94-.27s.15.55.12.88a1.38,1.38,0,0,0,.93,1.44c.47.15.95,0,1.29.42s0,1.11-.16,1.64c-.08.24-.18.49-.25.73s-.06.33.11.59.21.28.32.41c.63.84,1.3,1.66,1.94,2.5.07.16-.15.24-.27.3a3.78,3.78,0,0,1-1.24.32" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M11.29,11s0,.08.05.1a23.53,23.53,0,0,0,2.13,2.35c.13.15.38.39.41.58a.5.5,0,0,1-.83.45l-2.46-2.44-.64-1c-.19,0-.39,0-.6,0a17.75,17.75,0,0,1-2-.18c-.19,0-.37,0-.37-.29.42-1.09.95-2.15,1.42-3.23a.87.87,0,1,0,0-1.74A1.36,1.36,0,0,1,8.71,5s.22-.16.19-.2A2.18,2.18,0,0,1,7.81,3.47s0,0,0,0c-.21.18-.39.5-.62.68L5.81,5c-.07,0-.11-.09-.15-.14-.18-.28-.29-.63-.49-.9.35-.2.72-.36,1.06-.57A8.3,8.3,0,0,0,7.56,2.08c.26-.27.56-.57.94-.27s.15.55.12.88a1.38,1.38,0,0,0,.93,1.44c.47.15.95,0,1.29.42s0,1.11-.16,1.64c-.08.24-.18.49-.25.73s-.06.33.11.59.21.28.32.41c.63.84,1.3,1.66,1.94,2.5.07.16-.15.24-.27.3A3.78,3.78,0,0,1,11.29,11Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M4.36.92a1.24,1.24,0,1,1,.28,2.47A1.24,1.24,0,0,1,4.36.92" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M4.36.92a1.24,1.24,0,1,1,.28,2.47A1.24,1.24,0,0,1,4.36.92Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M8.92,11.39l-.16.74c.07.95.3,1.89.43,2.83a.49.49,0,0,1-1,.15c-.12-.78-.38-1.57-.5-2.34a4,4,0,0,1,.08-1.46Z" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M8.92,11.39l-.16.74c.07.95.3,1.89.43,2.83a.49.49,0,0,1-1,.15c-.12-.78-.38-1.57-.5-2.34a4,4,0,0,1,.08-1.46Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M10.23,1.59a1.12,1.12,0,0,1,.2,2.22,1.12,1.12,0,1,1-.2-2.22" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M10.23,1.59a1.12,1.12,0,0,1,.2,2.22A1.12,1.12,0,1,1,10.23,1.59Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M12.89,4.79a1.25,1.25,0,0,1-1.45-.73c-.12-.44.17-.68.23-1.08a1,1,0,0,1,.76.75c.13.53,0,.58.43,1a0,0,0,0,1,0,.06" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M12.89,4.79a1.25,1.25,0,0,1-1.45-.73c-.12-.44.17-.68.23-1.08a1,1,0,0,1,.76.75c.13.53,0,.58.43,1A0,0,0,0,1,12.89,4.79Z" transform="translate(-0.83 -0.84)"/></svg>',
+  },
+  {
+    key: "Theatrical",
+    label: "თეატრალური დასი (თოჯინების თეატრი, სამოყვარულო დასი)",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.14 12.81"><defs><style>.cls-1{fill:#a2def9;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.15px;}.cls-3{fill:#43b3e2;}.cls-4{fill:#31bced;}.cls-5{fill:#0274ab;}</style></defs><path class="cls-1" d="M7.4,14.52C4.35,14.52,1.9,9.29,1.9,5a3.12,3.12,0,0,1,1-2.66c1-.78,2.51-.36,3.59,0a4.26,4.26,0,0,0,.91.21,4.54,4.54,0,0,0,.91-.21c1.07-.31,2.55-.73,3.59,0a3.15,3.15,0,0,1,1,2.66c0,4.33-2.45,9.56-5.49,9.56" transform="translate(-1.83 -1.78)"/><path class="cls-2" d="M7.4,14.52C4.35,14.52,1.9,9.29,1.9,5a3.12,3.12,0,0,1,1-2.66c1-.78,2.51-.36,3.59,0a4.26,4.26,0,0,0,.91.21,4.54,4.54,0,0,0,.91-.21c1.07-.31,2.55-.73,3.59,0a3.15,3.15,0,0,1,1,2.66C12.89,9.29,10.44,14.52,7.4,14.52Z" transform="translate(-1.83 -1.78)"/><path class="cls-3" d="M6,7.06a.57.57,0,0,1-.4-.16A.46.46,0,0,0,5,6.9a.57.57,0,0,1-.81,0,.56.56,0,0,1,0-.8,1.61,1.61,0,0,1,2.28,0,.57.57,0,0,1,0,.8A.54.54,0,0,1,6,7.06" transform="translate(-1.83 -1.78)"/><path class="cls-4" d="M11.9,2.3c-1-.78-2.52-.36-3.59,0a4.54,4.54,0,0,1-.91.21V14.52c3,0,5.49-5.23,5.49-9.56a3.12,3.12,0,0,0-1-2.66" transform="translate(-1.83 -1.78)"/><path class="cls-2" d="M11.9,2.3c-1-.78-2.52-.36-3.59,0a4.54,4.54,0,0,1-.91.21V14.52c3,0,5.49-5.23,5.49-9.56A3.12,3.12,0,0,0,11.9,2.3Z" transform="translate(-1.83 -1.78)"/><path class="cls-5" d="M9.91,7.06A.57.57,0,0,1,9.5,6.9a.46.46,0,0,0-.67,0,.56.56,0,0,1-.8,0,.55.55,0,0,1,0-.8,1.61,1.61,0,0,1,2.28,0,.57.57,0,0,1,0,.8.54.54,0,0,1-.4.17" transform="translate(-1.83 -1.78)"/><path class="cls-3" d="M7.4,11.76a2.56,2.56,0,0,1-2.5-2A.57.57,0,1,1,6,9.5a1.41,1.41,0,0,0,2.75,0,.57.57,0,0,1,1.12.22,2.56,2.56,0,0,1-2.49,2" transform="translate(-1.83 -1.78)"/><path class="cls-5" d="M9.44,9.05a.57.57,0,0,0-.67.45A1.4,1.4,0,0,1,7.4,10.62v1.14a2.56,2.56,0,0,0,2.49-2,.58.58,0,0,0-.45-.67" transform="translate(-1.83 -1.78)"/></svg>',
+  },
+  {
+    key: "Fine_Arts",
+    label: "სახვითი ხელოვნება (ფერწერა, ხეზე და ქვაზე კვეთა, გრაფიკა, ძერწვა)",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.85 13.66"><defs><style>.cls-1{fill:#fff;}.cls-2,.cls-4,.cls-6{fill:none;stroke:#231f20;}.cls-2{stroke-miterlimit:10;}.cls-3{fill:#e2aa60;}.cls-4{stroke-linejoin:round;}.cls-4,.cls-6{stroke-width:0.2px;}.cls-5{fill:#975fa0;}.cls-7{fill:#60bcea;}.cls-8{fill:#66bc46;}.cls-9{fill:#fdee3e;}.cls-10{fill:#ed2024;}.cls-11{fill:#ca8d51;}.cls-12{fill:#2d160d;}</style></defs><path class="cls-1" d="M4.93,6.39c1-.1,1.15.91.36,1.37C4.91,8,4.25,8,4,7.59s.41-1.14.92-1.2" transform="translate(-0.97 -1.36)"/><path class="cls-2" d="M4.93,6.39c1-.1,1.15.91.36,1.37C4.91,8,4.25,8,4,7.59S4.42,6.45,4.93,6.39Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M10,11.52a.63.63,0,1,1,.14,1.26A.63.63,0,0,1,10,11.52" transform="translate(-0.97 -1.36)"/><path class="cls-2" d="M10,11.52a.63.63,0,1,1,.14,1.26A.63.63,0,0,1,10,11.52Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M8,12.22a.63.63,0,0,1,.14,1.26A.63.63,0,0,1,8,12.22" transform="translate(-0.97 -1.36)"/><path class="cls-2" d="M8,12.22a.63.63,0,0,1,.14,1.26A.63.63,0,0,1,8,12.22Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M4.22,11.54a.47.47,0,1,1,.09.94.47.47,0,0,1-.09-.94" transform="translate(-0.97 -1.36)"/><path class="cls-2" d="M4.22,11.54a.47.47,0,1,1,.09.94A.47.47,0,0,1,4.22,11.54Z" transform="translate(-0.97 -1.36)"/><path class="cls-3" d="M2,13a4.36,4.36,0,0,0,2.7,1.45c3.83.28,6.74-2.92,7.14-3.47a2.63,2.63,0,0,0,.55-1.92A9.54,9.54,0,0,0,12,7.76a1.51,1.51,0,0,1,.12-1.36A3.33,3.33,0,0,1,12.48,6,3.21,3.21,0,0,0,13,2.55c-.6-1-2.08-1.11-3.11-1.09A9.46,9.46,0,0,0,3.8,4.21C-.7,8.86,1.63,12.58,2,13" transform="translate(-0.97 -1.36)"/><path class="cls-4" d="M2,13a4.36,4.36,0,0,0,2.7,1.45c3.83.28,6.74-2.92,7.14-3.47a2.63,2.63,0,0,0,.55-1.92A9.54,9.54,0,0,0,12,7.76a1.51,1.51,0,0,1,.12-1.36A3.33,3.33,0,0,1,12.48,6,3.21,3.21,0,0,0,13,2.55c-.6-1-2.08-1.11-3.11-1.09A9.46,9.46,0,0,0,3.8,4.21C-.7,8.86,1.63,12.58,2,13Z" transform="translate(-0.97 -1.36)"/><path class="cls-5" d="M8.51,4.22A1.08,1.08,0,0,0,10,2.67,1.08,1.08,0,1,0,8.51,4.22" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M8.51,4.22A1.08,1.08,0,0,0,10,2.67,1.08,1.08,0,1,0,8.51,4.22Z" transform="translate(-0.97 -1.36)"/><path class="cls-7" d="M5.56,5.87a1.08,1.08,0,0,0,1.5-1.55,1.08,1.08,0,1,0-1.5,1.55" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M5.56,5.87a1.08,1.08,0,0,0,1.5-1.55A1.08,1.08,0,1,0,5.56,5.87Z" transform="translate(-0.97 -1.36)"/><path class="cls-8" d="M3.14,8.39a1.08,1.08,0,0,0,1.5-1.56,1.08,1.08,0,1,0-1.5,1.56" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M3.14,8.39a1.08,1.08,0,0,0,1.5-1.56A1.08,1.08,0,1,0,3.14,8.39Z" transform="translate(-0.97 -1.36)"/><path class="cls-9" d="M2.7,11.63a1.08,1.08,0,0,0,1.51-1.55A1.08,1.08,0,1,0,2.7,11.63" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M2.7,11.63a1.08,1.08,0,0,0,1.51-1.55A1.08,1.08,0,1,0,2.7,11.63Z" transform="translate(-0.97 -1.36)"/><path class="cls-10" d="M6.09,13.13A1.08,1.08,0,0,0,7.6,11.58a1.08,1.08,0,1,0-1.51,1.55" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M6.09,13.13A1.08,1.08,0,0,0,7.6,11.58,1.08,1.08,0,1,0,6.09,13.13Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M10.87,7.44c-.34-.51-1.24-.5-2,0s-1.1,1.35-.75,1.86,1.24.5,2,0,1.1-1.35.75-1.86" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M10.87,7.44c-.34-.51-1.24-.5-2,0s-1.1,1.35-.75,1.86,1.24.5,2,0S11.22,8,10.87,7.44Z" transform="translate(-0.97 -1.36)"/><path class="cls-11" d="M13.71,14.89c-.14.07-.34,0-.48-.08a10.49,10.49,0,0,1-2.43-1.64L7.34,9.76a.27.27,0,0,0,.22-.24c1.14.88,2.31,1.65,3.44,2.54a22.09,22.09,0,0,1,1.82,1.67c.22.24.47.49.67.74a1.38,1.38,0,0,1,.23.36Z" transform="translate(-0.97 -1.36)"/><path class="cls-4" d="M13.71,14.89c-.14.07-.34,0-.48-.08a10.49,10.49,0,0,1-2.43-1.64L7.34,9.76a.27.27,0,0,0,.22-.24c1.14.88,2.31,1.65,3.44,2.54a22.09,22.09,0,0,1,1.82,1.67c.22.24.47.49.67.74a1.38,1.38,0,0,1,.23.36Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M9,11.39l0,0L7.34,9.75a.26.26,0,0,0,.22-.23c.58.45,1.18.87,1.77,1.29l0,0" transform="translate(-0.97 -1.36)"/><path class="cls-4" d="M9,11.39l0,0L7.34,9.75a.26.26,0,0,0,.22-.23c.58.45,1.18.87,1.77,1.29l0,0" transform="translate(-0.97 -1.36)"/><path class="cls-12" d="M6.22,8.14c.08.08.13.18.21.26a2.68,2.68,0,0,0,.63.49c.37.21.66.61.57.8s-.57.1-.94-.2a1.15,1.15,0,0,1-.47-1.35" transform="translate(-0.97 -1.36)"/></svg>',
+  },
+  {
+    key: "Applied_Ar",
+    label: "გამოყენებითი ხელოვნება (თექა, ხალიჩების და გობელინების ქსოვა)",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.06 12.17"><defs><style>.cls-1,.cls-3{fill:none;}.cls-1{stroke:#85451d;stroke-width:0.25px;}.cls-2{fill:#85451d;}.cls-3{stroke:#231f20;stroke-width:0.1px;}</style></defs><rect class="cls-1" x="0.13" y="0.13" width="11.81" height="11.91"/><rect class="cls-2" x="2.63" y="2.65" width="6.8" height="6.86"/><rect class="cls-3" x="2.63" y="2.65" width="6.8" height="6.86"/><line class="cls-1" x1="0.13" y1="0.2" x2="2.33" y2="2.28"/><line class="cls-1" x1="11.77" y1="0.2" x2="9.58" y2="2.28"/><line class="cls-1" x1="6.05" x2="6.05" y2="2.28"/><line class="cls-1" x1="6.05" y1="9.89" x2="6.05" y2="12.17"/><line class="cls-1" x1="0.07" y1="5.9" x2="2.23" y2="5.9"/><line class="cls-1" x1="9.84" y1="5.9" x2="12.01" y2="5.9"/><line class="cls-1" x1="0.13" y1="11.92" x2="2.33" y2="9.84"/><line class="cls-1" x1="11.77" y1="11.92" x2="9.58" y2="9.84"/></svg>',
+  },
+  {
+    key: "Oral_Folkl",
+    label: "ზეპირსიტყვიერება (მხატვრული კითხვა, ქართული ენის შემსწავლელი კლუბი)",
+    svg:
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.81 14.71"><defs><style>.cls-1{fill:#87d6f8;}.cls-2,.cls-4,.cls-6{fill:none;stroke:#231f20;}.cls-2{stroke-miterlimit:10;stroke-width:0.15px;}.cls-3{fill:#85451d;}.cls-4{stroke-width:0.1px;}.cls-5{fill:#e2aa60;}.cls-6{stroke-linejoin:round;stroke-width:0.2px;}.cls-7{fill:#231f20;}</style></defs><polygon class="cls-1" points="0.08 0.09 0.08 14.52 2.6 11.63 13.74 11.63 13.74 0.09 0.08 0.09"/><polygon class="cls-2" points="13.74 0.07 13.74 11.62 2.6 11.62 0.07 14.51 0.07 0.07 13.74 0.07"/><path class="cls-3" d="M10.77,1.84a1.29,1.29,0,0,0-.25,0h.07L10.32,2a.85.85,0,0,0-.3.6v.84h.75a.76.76,0,0,0,.69-.81.76.76,0,0,0-.69-.81" transform="translate(-0.49 -0.89)"/><path class="cls-4" d="M10.77,1.84a1.29,1.29,0,0,0-.25,0h.07L10.32,2a.85.85,0,0,0-.3.6v.84h.75a.76.76,0,0,0,.69-.81A.76.76,0,0,0,10.77,1.84Z" transform="translate(-0.49 -0.89)"/><path class="cls-5" d="M10.59,1.88,10.32,2a.85.85,0,0,0-.3.6V11a.76.76,0,0,1-1.31.49c-.2-.26-.12-.45-.19-.74s-.33-.52-.55-.52H4.18V2.54c0-.27.34-.66.56-.66Z" transform="translate(-0.49 -0.89)"/><path class="cls-6" d="M10.59,1.88,10.32,2a.85.85,0,0,0-.3.6V11a.76.76,0,0,1-1.31.49c-.2-.26-.12-.45-.19-.74s-.33-.52-.55-.52H4.18V2.54c0-.27.34-.66.56-.66Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M7.08,4c-.4,0-.4.28,0,.3.6,0,1.34,0,2,0,.4,0,.42-.26,0-.3Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M5.15,4c-.41,0-.43.28,0,.3a5.11,5.11,0,0,0,.79,0c.29,0,.23-.26-.09-.28h-.7" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M5.15,5.52c-.43,0-.41.3,0,.31H9c.41,0,.46-.26.06-.31Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M8.39,7c-.41,0-.42.28,0,.3a7.06,7.06,0,0,0,.8,0c.28-.06.22-.26-.09-.29H8.39" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M5.13,7.05c-.4,0-.39.28,0,.3.6,0,1.34,0,2,0,.4,0,.42-.26,0-.3Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M5.15,8.56c-.43,0-.41.29,0,.3H9c.41,0,.46-.26.06-.3Z" transform="translate(-0.49 -0.89)"/><path class="cls-3" d="M9.22,11.87H4a.82.82,0,0,1,0-1.62H7.87a.76.76,0,0,1,.69.81c0,.44.1.61.66.81" transform="translate(-0.49 -0.89)"/><path class="cls-4" d="M9.22,11.87H4a.82.82,0,0,1,0-1.62H7.87a.76.76,0,0,1,.69.81C8.56,11.5,8.66,11.67,9.22,11.87Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M12.54,1.7v.09a1,1,0,0,0-.28.21.38.38,0,0,0-.08.24s0,.09,0,.11a.05.05,0,0,0,.05,0l.07,0,.09,0a.26.26,0,0,1,.16.07.26.26,0,0,1,.07.17.23.23,0,0,1-.09.18.27.27,0,0,1-.2.07.35.35,0,0,1-.26-.12A.45.45,0,0,1,12,2.39.7.7,0,0,1,12.11,2a.83.83,0,0,1,.43-.28m1.05,0v.08a1,1,0,0,0-.3.23.48.48,0,0,0-.07.24.12.12,0,0,0,0,.09.05.05,0,0,0,.05,0l.07,0,.1,0a.21.21,0,0,1,.15.07.2.2,0,0,1,.07.16.29.29,0,0,1-.08.19.31.31,0,0,1-.21.07.34.34,0,0,1-.26-.12A.43.43,0,0,1,13,2.4.64.64,0,0,1,13.17,2a.77.77,0,0,1,.42-.27" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M1.21,11.94v-.09a1,1,0,0,0,.29-.23.48.48,0,0,0,.07-.24.2.2,0,0,0,0-.09l-.06,0-.07,0H1.33a.22.22,0,0,1-.23-.22.26.26,0,0,1,.09-.19.28.28,0,0,1,.2-.08.35.35,0,0,1,.26.13.44.44,0,0,1,.12.32.68.68,0,0,1-.15.42.74.74,0,0,1-.41.27m1,0v-.09a1.05,1.05,0,0,0,.27-.21.4.4,0,0,0,.09-.24.14.14,0,0,0,0-.11.05.05,0,0,0,0,0l-.08,0H2.38a.25.25,0,0,1-.16-.06.25.25,0,0,1-.06-.17.22.22,0,0,1,.08-.18.28.28,0,0,1,.2-.08.39.39,0,0,1,.27.13.45.45,0,0,1,.11.32.64.64,0,0,1-.14.41.85.85,0,0,1-.42.28" transform="translate(-0.49 -0.89)"/></svg>',
+  },
+];
+
+function artActiveCategories(p) {
+  return ART_CATEGORIES.filter(function (c) {
+    var v = p[c.key];
+    return v && v !== "არა";
+  });
+}
+
+// კომპაქტური (ჩვეულებრივი) და გაშლილი (დაწკაპებისას) კლასტერის აწყობა
+function buildArtClusterIcon(cats, expanded) {
+  var cell = expanded ? 24 : 22;
+  var gap = expanded ? 4 : 2;
+  var cols = cats.length > 4 ? 3 : cats.length > 1 ? 2 : 1;
+
+  if (!expanded) {
+    var rows = Math.ceil(cats.length / cols);
+    var boxW = cols * cell + (cols - 1) * gap;
+    var boxH = rows * cell + (rows - 1) * gap;
+    var html =
+      '<div style="display:flex;flex-wrap:wrap;gap:' + gap + "px;width:" + boxW + 'px;">';
+    cats.forEach(function (c) {
+      html +=
+        '<div style="width:' + cell + "px;height:" + cell + 'px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5));">' +
+        c.svg +
+        "</div>";
+    });
+    html += "</div>";
+    var icon = L.divIcon({
+      html: html,
+      iconSize: [boxW, boxH],
+      iconAnchor: [boxW / 2, boxH / 2],
+      className: "",
+    });
+    return { icon: icon, boxW: boxW, boxH: boxH };
+  }
+
+  // გაშლილი — ვერტიკალური სია, თითოეული სიმბოლო + სახელი, თეთრ ბარათზე
+  var rowH = 28;
+  var boxW = 190;
+  var boxH = cats.length * rowH + 10;
+  var html =
+    '<div style="width:' + boxW + "px;padding:5px 8px;background:#fff;border:1px solid #C4A878;" +
+    'border-radius:6px;box-shadow:0 3px 10px rgba(0,0,0,.35);">';
+  cats.forEach(function (c) {
+    html +=
+      '<div style="display:flex;align-items:center;gap:7px;padding:3px 0;">' +
+      '<span style="display:inline-flex;width:' + cell + "px;height:" + cell + 'px;flex-shrink:0;">' +
+      c.svg +
+      "</span>" +
+      '<span style="font-size:10px;line-height:1.3;color:#1A1A18;">' +
+      c.label.split(" (")[0] +
+      "</span></div>";
+  });
+  html += "</div>";
+  var icon2 = L.divIcon({
+    html: html,
+    iconSize: [boxW, boxH],
+    iconAnchor: [boxW / 2, boxH + 12],
+    className: "",
+  });
+  return { icon: icon2, boxW: boxW, boxH: boxH };
+}
+
+// ღია სიმბოლოთა კლასტერის დახურვა (გარდა გადაცემული marker-ისა, თუ მითითებულია)
+function collapseArtExpanded(exceptMarker) {
+  if (artExpandedMarker && artExpandedMarker !== exceptMarker) {
+    artExpandedMarker.setIcon(artExpandedMarker._artCompact.icon);
+    artExpandedMarker.setZIndexOffset(0);
+    artExpandedMarker._artIsExpanded = false;
+    artExpandedMarker = null;
+  }
+}
+
+function loadArtDisciplines() {
+  if (artData) {
+    buildArtDisciplinesLayers(artData);
+    return;
+  }
+  fetch("data/art_disciplines.geojson")
+    .then(function (r) {
+      return r.json();
+    })
+    .then(function (d) {
+      artData = d;
+      buildArtDisciplinesLayers(d);
+    });
+}
+
+function buildArtDisciplinesLayers(data) {
+  if (artMuniLayer) {
+    map.removeLayer(artMuniLayer);
+    artMuniLayer = null;
+  }
+  if (artSettlementLayer) {
+    map.removeLayer(artSettlementLayer);
+    artSettlementLayer = null;
+  }
+
+  var munis = {
+    type: "FeatureCollection",
+    features: data.features.filter(function (f) {
+      return f.properties.ftype === "municipality";
+    }),
+  };
+  var settlements = {
+    type: "FeatureCollection",
+    features: data.features.filter(function (f) {
+      return f.properties.ftype === "settlement";
+    }),
+  };
+
+  // მუნიციპალიტეტების მსუბუქი ფონი
+  artMuniLayer = L.geoJSON(munis, {
+    style: function () {
+      return {
+        fillColor: "#F5F0E6",
+        fillOpacity: 0.35,
+        color: "#C4A878",
+        weight: 1,
+        opacity: 0.6,
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      var p = feature.properties;
+      layer.bindTooltip(p.Name_Geo, {
+        direction: "center",
+        className: "village-label",
+        sticky: true,
+      });
+      layer.on("click", function () {
+        showInfoArtMuni(p);
+      });
+    },
+  }).addTo(map);
+
+  // დასახლებები — მიმართულებების სიმბოლოთა კლასტერი
+  artSettlementLayer = L.geoJSON(settlements, {
+    filter: function (feat) {
+      return artActiveCategories(feat.properties).length > 0;
+    },
+    pointToLayer: function (feat, latlng) {
+      var p = feat.properties;
+      var cats = artActiveCategories(p);
+
+      var compactIcon = buildArtClusterIcon(cats, false);
+      var expandedIcon = buildArtClusterIcon(cats, true);
+
+      var marker = L.marker(latlng, { icon: compactIcon.icon });
+      marker._artCompact = compactIcon;
+      marker._artExpandedData = expandedIcon;
+      marker._artIsExpanded = false;
+
+      marker.bindTooltip(
+        p.Name_Geo +
+          " — " +
+          cats
+            .map(function (c) {
+              return c.label.split(" (")[0];
+            })
+            .join(", "),
+        {
+          direction: "top",
+          className: "village-label",
+          offset: [0, -compactIcon.boxH / 2 - 2],
+        }
+      );
+
+      marker.on("click", function (e) {
+        L.DomEvent.stopPropagation(e);
+        collapseArtExpanded(marker);
+        if (marker._artIsExpanded) {
+          marker.setIcon(marker._artCompact.icon);
+          marker.setZIndexOffset(0);
+          marker._artIsExpanded = false;
+          artExpandedMarker = null;
+        } else {
+          marker.setIcon(marker._artExpandedData.icon);
+          marker.setZIndexOffset(2000);
+          marker._artIsExpanded = true;
+          artExpandedMarker = marker;
+        }
+        showInfoArtSettlement(p, cats);
+      });
+      return marker;
+    },
+  }).addTo(map);
+
+  updateArtLegend();
+
+  map.off("click", artMapClickCollapse);
+  map.on("click", artMapClickCollapse);
+}
+
+function artMapClickCollapse() {
+  collapseArtExpanded(null);
+}
+
+function showInfoArtMuni(p) {
+  var cats = artActiveCategories(p);
+  var rows = cats
+    .map(function (c) {
+      return (
+        '<div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:5px;">' +
+        '<span style="display:inline-block;width:20px;height:20px;flex-shrink:0;">' +
+        c.svg +
+        "</span>" +
+        '<span style="font-size:10px;line-height:1.4;">' +
+        p[c.key] +
+        "</span></div>"
+      );
+    })
+    .join("");
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+    p.Name_Geo +
+    " (მუნიციპალიტეტი)</div>" +
+    '<div style="margin-top:8px;">' +
+    (rows || '<span style="font-size:10px;color:var(--text-muted);">მონაცემი არ არის</span>') +
+    "</div>";
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+function showInfoArtSettlement(p, cats) {
+  var rows = cats
+    .map(function (c) {
+      return (
+        '<div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:5px;">' +
+        '<span style="display:inline-block;width:20px;height:20px;flex-shrink:0;">' +
+        c.svg +
+        "</span>" +
+        '<span style="font-size:10px;line-height:1.4;"><b>' +
+        c.label.split(" (")[0] +
+        ":</b> " +
+        p[c.key] +
+        "</span></div>"
+      );
+    })
+    .join("");
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+    p.Name_Geo +
+    "</div>" +
+    '<span class="info-type-badge" style="background:#89471f22;color:#89471f;border:1px solid #89471f;">' +
+    p.Municipal_ +
+    "</span>" +
+    '<div style="margin-top:8px;">' +
+    rows +
+    "</div>";
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+function updateArtLegend() {
+  var el = document.getElementById("legendContent");
+  if (!el) return;
+  var html =
+    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">სახელოვნებო დარგები</div>';
+  ART_CATEGORIES.forEach(function (c) {
+    html +=
+      '<div style="display:flex;align-items:flex-start;margin-bottom:7px;">' +
+      '<span style="display:inline-flex;width:22px;height:22px;justify-content:center;flex-shrink:0;">' +
+      c.svg +
+      "</span>" +
+      '<span style="font-size:10px;margin-left:6px;line-height:1.35;">' +
+      c.label +
+      "</span></div>";
+  });
+  html +=
+    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">დასახლებაზე დაჭერით — მიმართულებების დეტალები. მუნიციპალიტეტზე დაჭერით — მთლიანი სურათი.</div>';
+  el.innerHTML = html;
+  setInfoBtn("art_disciplines");
+}
+
+// ============================================================
+// გარემოს საკურორტო-ტურისტული შეფასება (თვის მიხედვით)
+// ============================================================
+var tcData = null;
+var tcMuniLayer = null;
+var tcPointLayer = null;
+var activeTcMonth = "July";
+
+var TC_MONTHS = [
+  ["January", "იანვარი"],
+  ["February", "თებერვალი"],
+  ["March", "მარტი"],
+  ["April", "აპრილი"],
+  ["May", "მაისი"],
+  ["June", "ივნისი"],
+  ["July", "ივლისი"],
+  ["August", "აგვისტო"],
+  ["September", "სექტემბერი"],
+  ["October", "ოქტომბერი"],
+  ["November", "ნოემბერი"],
+  ["December", "დეკემბერი"],
+];
+
+// დასვენების კლიმატური ინდექსის (დკი) 5 კატეგორია, დაბლიდან მაღლისკენ
+var TC_CATEGORIES = [
+  { key: "სასიამოვნო", color: "#B9E5FB" },
+  { key: "კარგი", color: "#FFF450" },
+  { key: "ძალიან კარგი", color: "#FBB416" },
+  { key: "შესანიშნავი", color: "#C759A1" },
+  { key: "იდეალური", color: "#ED1651" },
+];
+
+function getTcColor(val) {
+  for (var i = 0; i < TC_CATEGORIES.length; i++) {
+    if (TC_CATEGORIES[i].key === val) return TC_CATEGORIES[i].color;
+  }
+  return "#e0e0e0";
+}
+
+function loadTourismClimate() {
+  if (tcData) {
+    buildTourismClimateLayers(tcData);
+    loadNatureMuniCenters();
+    return;
+  }
+  fetch("data/tourism_climate.geojson")
+    .then(function (r) {
+      return r.json();
+    })
+    .then(function (d) {
+      tcData = d;
+      buildTourismClimateLayers(d);
+      loadNatureMuniCenters();
+    });
+}
+
+function buildTourismClimateLayers(data) {
+  if (tcMuniLayer) {
+    map.removeLayer(tcMuniLayer);
+    tcMuniLayer = null;
+  }
+  if (tcPointLayer) {
+    map.removeLayer(tcPointLayer);
+    tcPointLayer = null;
+  }
+
+  var munis = data.features.filter(function (f) {
+    return f.properties.ftype === "municipality";
+  });
+  var points = data.features.filter(function (f) {
+    return f.properties.ftype === "point";
+  });
+
+  tcMuniLayer = L.geoJSON(
+    { type: "FeatureCollection", features: munis },
+    {
+      style: function (feature) {
+        return {
+          fillColor: getTcColor(feature.properties[activeTcMonth]),
+          fillOpacity: 0.75,
+          color: "#5a5a5a",
+          weight: 1,
+          opacity: 0.7,
+        };
+      },
+      onEachFeature: function (feature, layer) {
+        var p = feature.properties;
+        layer.bindTooltip(p.Name_Geo + " — " + (p[activeTcMonth] || "მონაცემი არ არის"), {
+          direction: "center",
+          className: "village-label",
+          sticky: true,
+        });
+        layer.on("click", function () {
+          showInfoTc(p, false);
+          showBottomChartTc(p);
+        });
+      },
+    }
+  ).addTo(map);
+
+  tcPointLayer = L.geoJSON(
+    { type: "FeatureCollection", features: points },
+    {
+      pointToLayer: function (feat, latlng) {
+        var p = feat.properties;
+        var marker = L.circleMarker(latlng, {
+          radius: 8,
+          fillColor: getTcColor(p[activeTcMonth]),
+          fillOpacity: 1,
+          color: "#232323",
+          weight: 1.5,
+        });
+        marker.bindTooltip(p.Name_Geo, {
+          permanent: true,
+          direction: "top",
+          className: "village-label",
+          offset: [0, -8],
+        });
+        marker.on("click", function () {
+          showInfoTc(p, true);
+          showBottomChartTc(p);
+        });
+        return marker;
+      },
+    }
+  ).addTo(map);
+
+  tcMuniLayer.bringToBack();
+  updateTcLegend();
+}
+
+function showInfoTc(p, isPoint) {
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+    p.Name_Geo +
+    (isPoint ? "" : " (მუნიციპალიტეტი)") +
+    "</div>" +
+    '<div style="margin:6px 0;">' +
+    '<span class="info-type-badge" style="background:' +
+    getTcColor(p[activeTcMonth]) +
+    "33;color:#232323;border:1px solid " +
+    getTcColor(p[activeTcMonth]) +
+    ';">' +
+    TC_MONTHS.find(function (m) {
+      return m[0] === activeTcMonth;
+    })[1] +
+    ": " +
+    (p[activeTcMonth] || "მონაცემი არ არის") +
+    "</span></div>" +
+    '<div style="font-size:9px;color:var(--text-muted);margin-top:8px;">სტატისტიკის ველში ნახეთ წლის განმავლობაში ცვლილება</div>';
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+// მუნიციპალიტეტის/წერტილის 12-თვიანი დკი-სტატისტიკა — ქვედა chart პანელი
+function showBottomChartTc(p) {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  var ctx = canvas.getContext("2d");
+  if (bottomChart) bottomChart.destroy();
+
+  function rank(val) {
+    for (var i = 0; i < TC_CATEGORIES.length; i++) {
+      if (TC_CATEGORIES[i].key === val) return i + 1;
+    }
+    return 0;
+  }
+
+  var values = TC_MONTHS.map(function (m) {
+    return rank(p[m[0]]);
+  });
+  var colors = TC_MONTHS.map(function (m) {
+    return getTcColor(p[m[0]]);
+  });
+
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: TC_MONTHS.map(function (m) {
+        return m[1].slice(0, 3);
+      }),
+      datasets: [
+        {
+          label: "დკი კატეგორია",
+          data: values,
+          backgroundColor: colors,
+          borderColor: "#232323",
+          borderWidth: 1,
+          borderRadius: 3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: p.Name_Geo + " — დკი წლის განმავლობაში",
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 6 },
+        },
+        tooltip: {
+          callbacks: {
+            label: function (ctx2) {
+              var m = TC_MONTHS[ctx2.dataIndex];
+              return p[m[0]] || "მონაცემი არ არის";
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: 5,
+          ticks: {
+            stepSize: 1,
+            font: { family: "Fira Sans", size: 9 },
+            callback: function (value) {
+              return value >= 1 && value <= 5
+                ? TC_CATEGORIES[value - 1].key
+                : "";
+            },
+          },
+          grid: { display: false },
+        },
+        x: {
+          ticks: { font: { family: "Fira Sans", size: 9 } },
+          grid: { display: false },
+        },
+      },
+    },
+  });
+}
+
+function updateTcLegend() {
+  var el = document.getElementById("legendContent");
+  if (!el) return;
+  var html =
+    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">დასვენების კლიმატური ინდექსი (დკი)</div>';
+
+  // ფერადი კატეგორიების ლეგენდა (მაღლიდან დაბლისკენ, ბეჭდური ატლასის მსგავსად)
+  for (var i = TC_CATEGORIES.length - 1; i >= 0; i--) {
+    html +=
+      '<div style="display:flex;align-items:center;margin-bottom:5px;">' +
+      '<span style="display:inline-block;width:16px;height:16px;background:' +
+      TC_CATEGORIES[i].color +
+      ';border:1px solid #999;flex-shrink:0;"></span>' +
+      '<span style="font-size:10px;margin-left:7px;">' +
+      TC_CATEGORIES[i].key +
+      "</span></div>";
+  }
+
+  // თვის გადამრთველი
+  html +=
+    '<div style="margin-top:10px;"><div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">თვე</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;">';
+  TC_MONTHS.forEach(function (m) {
+    var active = activeTcMonth === m[0] ? "active" : "";
+    html +=
+      '<button class="year-btn tc-month-btn ' +
+      active +
+      '" data-tcmonth="' +
+      m[0] +
+      '" style="font-size:9px;padding:3px 2px;">' +
+      m[1].slice(0, 3) +
+      "</button>";
+  });
+  html += "</div></div>";
+
+  html +=
+    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">წერტილი — 8 საკურორტო ლოკაცია; ფონი — მუნიციპალიტეტის საშუალო</div>';
+
+  el.innerHTML = html;
+
+  el.querySelectorAll(".tc-month-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      activeTcMonth = this.dataset.tcmonth;
+      if (tcData) buildTourismClimateLayers(tcData);
+    });
+  });
+
+  setInfoBtn("tourism_climate");
+}
+
+// ============================================================
+// ტურიზმის სახეობები
+// ============================================================
+var ttData = null;
+var ttLayer = null;
+
+var TT_TYPES = [
+  { key: "Cultural_E", label: "კულტურულ-შემეცნებითი", color: "#F6851F", chartLabel: ["კულტურულ-", "შემეცნებითი"] },
+  { key: "Gastronomi", label: "გასტრონომიული", color: "#A71E22", chartLabel: ["გასტრო-", "ნომიული"] },
+  { key: "Ecological", label: "ეკოლოგიური", color: "#78BC43", chartLabel: ["ეკოლოგიური"] },
+  { key: "Recreation", label: "გამაჯანსაღებელი", color: "#42C7F1", chartLabel: ["გამაჯან-", "საღებელი"] },
+  { key: "Adventure", label: "სათავგადასავლო", color: "#DF358D", chartLabel: ["სათავგადა-", "სავლო"] },
+  { key: "Ethnograph", label: "ეთნოგრაფიული", color: "#D9C826", chartLabel: ["ეთნო-", "გრაფიული"] },
+  { key: "Scientific", label: "სამეცნიერო", color: "#084CA1", chartLabel: ["სამეცნიერო"] },
+  { key: "Business", label: "საქმიანი", color: "#FFF200", chartLabel: ["საქმიანი"] },
+];
+
+function ttActiveTypes(p) {
+  return TT_TYPES.filter(function (t) {
+    var v = p[t.key];
+    return v && v !== "არა";
+  });
+}
+
+// წერტილის სიმბოლო — ფერადი წრეები აქტიური სახეობების მიხედვით
+function buildTtClusterIcon(types) {
+  var dot = 13;
+  var gap = 2;
+  var cols = types.length > 4 ? 3 : types.length > 1 ? 2 : 1;
+  var rows = Math.ceil(types.length / cols);
+  var boxW = cols * dot + (cols - 1) * gap;
+  var boxH = rows * dot + (rows - 1) * gap;
+  var html =
+    '<div style="display:flex;flex-wrap:wrap;gap:' + gap + "px;width:" + boxW + 'px;">';
+  types.forEach(function (t) {
+    html +=
+      '<div style="width:' + dot + "px;height:" + dot + "px;border-radius:50%;background:" +
+      t.color +
+      ';border:1.5px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.45);"></div>';
+  });
+  html += "</div>";
+  var icon = L.divIcon({
+    html: html,
+    iconSize: [boxW, boxH],
+    iconAnchor: [boxW / 2, boxH / 2],
+    className: "",
+  });
+  return { icon: icon, boxW: boxW, boxH: boxH };
+}
+
+// წარწერები ჩანს მხოლოდ საკმარის zoom-ზე, რომ ერთმანეთს არ გადაფარონ
+var TT_LABEL_ZOOM = 11;
+
+function updateTtLabels() {
+  if (!ttLayer) return;
+  var showLabels = map.getZoom() >= TT_LABEL_ZOOM;
+  ttLayer.eachLayer(function (marker) {
+    if (!marker._ttName) return;
+    if (marker.getTooltip()) marker.unbindTooltip();
+    marker.bindTooltip(marker._ttName, {
+      permanent: showLabels,
+      direction: "top",
+      className: "village-label",
+      offset: [0, -marker._ttBoxH / 2 - 2],
+    });
+  });
+}
+
+function loadTourismTypes() {
+  if (ttData) {
+    buildTourismTypesLayer(ttData);
+    loadNatureMuniCenters();
+    return;
+  }
+  fetch("data/tourism_types.geojson")
+    .then(function (r) {
+      return r.json();
+    })
+    .then(function (d) {
+      ttData = d;
+      buildTourismTypesLayer(d);
+      loadNatureMuniCenters();
+    });
+}
+
+function buildTourismTypesLayer(data) {
+  if (ttLayer) {
+    map.removeLayer(ttLayer);
+    ttLayer = null;
+  }
+
+  ttLayer = L.geoJSON(data, {
+    filter: function (feat) {
+      return ttActiveTypes(feat.properties).length > 0;
+    },
+    pointToLayer: function (feat, latlng) {
+      var p = feat.properties;
+      var types = ttActiveTypes(p);
+      var compact = buildTtClusterIcon(types);
+
+      var marker = L.marker(latlng, { icon: compact.icon });
+      marker._ttName = p.Name_Geo;
+      marker._ttBoxH = compact.boxH;
+
+      marker.on("click", function () {
+        showInfoTt(p, types);
+        showBottomChartTt(p, types);
+      });
+      return marker;
+    },
+  }).addTo(map);
+
+  updateTtLabels();
+  map.off("zoomend", updateTtLabels);
+  map.on("zoomend", updateTtLabels);
+
+  updateTtLegend();
+}
+
+function showInfoTt(p, types) {
+  var rows = types
+    .map(function (t) {
+      return (
+        '<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;">' +
+        '<span style="width:12px;height:12px;border-radius:50%;background:' +
+        t.color +
+        ';border:1px solid #999;flex-shrink:0;"></span>' +
+        '<span style="font-size:10px;line-height:1.4;">' +
+        t.label +
+        "</span></div>"
+      );
+    })
+    .join("");
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+    p.Name_Geo +
+    "</div>" +
+    '<span class="info-type-badge" style="background:#F6851F22;color:#B85C10;border:1px solid #F6851F;">' +
+    p.Municipal_ +
+    "</span>" +
+    '<div style="margin-top:8px;font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;">ტურიზმის სახეობები</div>' +
+    rows;
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+// ტურიზმის სახეობების სტატისტიკა — ქვედა chart პანელი
+function showBottomChartTt(p, types) {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  var ctx = canvas.getContext("2d");
+  if (bottomChart) bottomChart.destroy();
+
+  var activeKeys = types.map(function (t) {
+    return t.key;
+  });
+
+  function isActive(key) {
+    return activeKeys.indexOf(key) !== -1;
+  }
+
+  // ყველა სახეობა თანაბარი სვეტით — მხოლოდ ფერი განასხვავებს აქტიურს არააქტიურისგან
+  var values = TT_TYPES.map(function () {
+    return 1;
+  });
+  var bg = TT_TYPES.map(function (t) {
+    return isActive(t.key) ? t.color : t.color + "26";
+  });
+
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: TT_TYPES.map(function (t) {
+        return t.chartLabel;
+      }),
+      datasets: [
+        {
+          label: "ტურიზმის სახეობა",
+          data: values,
+          backgroundColor: bg,
+          borderWidth: 0,
+          borderRadius: 3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text:
+            p.Name_Geo +
+            " — " +
+            types
+              .map(function (t) {
+                return t.label;
+              })
+              .join(", "),
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 6 },
+        },
+        tooltip: {
+          callbacks: {
+            title: function (c) {
+              return TT_TYPES[c[0].dataIndex].label;
+            },
+            label: function (c) {
+              return isActive(TT_TYPES[c.dataIndex].key)
+                ? "წარმოდგენილია"
+                : "არ არის წარმოდგენილი";
+            },          },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 1,
+          display: false,
+          grid: { display: false },
+        },
+        x: {
+          ticks: {
+            font: { family: "Fira Sans", size: 11, weight: "500" },
+            autoSkip: false,
+            maxRotation: 0,
+            minRotation: 0,
+            padding: 4,
+            color: function (c) {
+              return isActive(TT_TYPES[c.index].key) ? "#1A1A18" : "#b0b0b0";
+            },
+          },
+          grid: { display: false },
+        },
+      },
+    },
+  });
+}
+
+function updateTtLegend() {
+  var el = document.getElementById("legendContent");
+  if (!el) return;
+  var html =
+    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ტურიზმის სახეობები</div>';
+  TT_TYPES.forEach(function (t) {
+    html +=
+      '<div style="display:flex;align-items:center;margin-bottom:6px;">' +
+      '<span style="width:14px;height:14px;border-radius:50%;background:' +
+      t.color +
+      ';border:1px solid #999;flex-shrink:0;"></span>' +
+      '<span style="font-size:10px;margin-left:7px;">' +
+      t.label +
+      "</span></div>";
+  });
+  html +=
+    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">დესტინაციაზე დაჭერით — სტატისტიკა ქვედა ველში. წარწერები ჩანს zoom ≥ 11-ზე.</div>';
+  el.innerHTML = html;
+  setInfoBtn("tourism_types");
 }
 
 // ============================================================
@@ -13221,6 +14430,7 @@ document.getElementById("chkHealth").addEventListener("change", function (e) {
     document.getElementById("historyView").style.display = "none";
     document.getElementById("economyView").style.display = "none";
     document.getElementById("educationView").style.display = "none";
+    document.getElementById("tourismView").style.display = "none";
     document.getElementById("healthView").style.display = "";
     showChartPanel();
     resetChartPanel();
@@ -13233,11 +14443,13 @@ document.getElementById("chkHealth").addEventListener("change", function (e) {
     document.getElementById("chkHistory").checked = false;
     document.getElementById("chkEconomy").checked = false;
     document.getElementById("chkEducation").checked = false;
+    document.getElementById("chkTourism").checked = false;
     removeAllThematic();
     removeAllNatureLayers();
     removeAllHistoryLayers();
     removeAllEconomyLayers();
     removeAllEducationLayers();
+    removeAllTourismLayers();
     removeAllHealthLayers();
     removeNeutralLayers();
     // პირველი sublayer ავტომატურად ჩაიტვირთება, როცა რუკა დაემატება
@@ -14109,6 +15321,7 @@ function showMainView() {
   document.getElementById("historyView").style.display = "none";
   document.getElementById("economyView").style.display = "none";
   document.getElementById("educationView").style.display = "none";
+  document.getElementById("tourismView").style.display = "none";
   document.getElementById("healthView").style.display = "none";
   document.getElementById("filterSection").style.display = "none";
   document.getElementById("chkPopulation").checked = false;
@@ -14116,12 +15329,14 @@ function showMainView() {
   document.getElementById("chkHistory").checked = false;
   document.getElementById("chkEconomy").checked = false;
   document.getElementById("chkEducation").checked = false;
+  document.getElementById("chkTourism").checked = false;
   document.getElementById("chkHealth").checked = false;
   removeAllThematic();
   removeAllNatureLayers();
   removeAllHistoryLayers();
   removeAllEconomyLayers();
   removeAllEducationLayers();
+  removeAllTourismLayers();
   removeAllHealthLayers();
   removeAllSocialLayers();
   removeAllZooLayers();
@@ -14225,6 +15440,7 @@ document.getElementById("btnCensus").title = "ჯერ რუკაზე პ�
 document.getElementById("historyView").style.display = "none";
 document.getElementById("economyView").style.display = "none";
 document.getElementById("educationView").style.display = "none";
+document.getElementById("tourismView").style.display = "none";
 document.getElementById("healthView").style.display = "none";
 loadNeutralLayers();
 
