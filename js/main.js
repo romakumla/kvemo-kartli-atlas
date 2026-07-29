@@ -4215,7 +4215,7 @@ function renderEarthquakeLayers() {
         weight: 0.6,
         fillOpacity: 0.7,
       });
-      marker.bindTooltip(`Mw ${p.Mw} | ${p.Year}`, {
+      marker.bindTooltip(`მაგნიტუდა ${p.Mw} | ${p.Year}`, {
         direction: "top",
         className: "village-label",
       });
@@ -4242,7 +4242,7 @@ function renderEarthquakeLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(`Mw ${p.Mw} | ${p.Year} (ისტ.)`, {
+      marker.bindTooltip(`მაგნიტუდა ${p.Mw} | ${p.Year} (ისტ.)`, {
         direction: "top",
         className: "village-label",
         offset: [0, -size / 2],
@@ -4296,7 +4296,7 @@ function darken(hex) {
 function updateEQLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">მაგნიტუდა (Mw)</div>
+  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">მაგნიტუდა</div>
   <div class="ethnics-legend">`;
   MAG_CLASSES.forEach(function (mc) {
     html += `<div class="eth-legend-item">
@@ -4326,7 +4326,7 @@ function showInfoEQ(p, period) {
       ? "ინსტრუმენტული (1900+)"
       : "ისტორიული (1900-მდე)";
   document.getElementById("infoCardContent").innerHTML = `
-    <div class="info-name">Mw ${p.Mw}</div>
+    <div class="info-name">მაგნიტუდა ${p.Mw}</div>
     <span class="info-type-badge badge-city" style="background:${p.Color}33;color:${darken(p.Color)};border:1px solid ${p.Color}88;">${p.MagClass}</span>
     <div class="info-row"><span class="info-key">წელი</span><span class="info-val">${p.Year}</span></div>
     <div class="info-row"><span class="info-key">პერიოდი</span><span class="info-val" style="font-size:10px;">${periodLabel}</span></div>`;
