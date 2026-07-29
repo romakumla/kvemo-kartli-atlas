@@ -111,6 +111,98 @@ var ATLAS_DATA_LAYERS = 72; // fallback, თუ წაკითხვა ვე�
     });
 })();
 
+
+// ===== გვერდითი პანელების სიგანის რეგულირება =====
+// კიდეზე გადასაწევი სახელური; არჩევანი ინახება ბრაუზერში.
+(function initPanelResizers() {
+  var MIN = 150,
+    MAX = 420;
+
+  function apply(varName, px) {
+    var root = document.documentElement;
+    root.style.setProperty(varName, px + "px");
+    // ტექსტიც იზრდება სიგანესთან ერთად (170px → 10px … 420px → 14px)
+    var wide = Math.max(
+      parseInt(getComputedStyle(root).getPropertyValue("--side-w-left")) || 170,
+      parseInt(getComputedStyle(root).getPropertyValue("--side-w-right")) || 170
+    );
+    var f = Math.max(10, Math.min(14, 10 + (wide - 170) / 62));
+    root.style.setProperty("--panel-font", f.toFixed(1) + "px");
+    root.style.setProperty("--panel-label-font", (f + 1).toFixed(1) + "px");
+  }
+
+  function restore(key, varName) {
+    var v = parseInt(localStorage.getItem(key) || "", 10);
+    if (v && v >= MIN && v <= MAX) apply(varName, v);
+  }
+  try {
+    restore("atlasPanelLeft", "--side-w-left");
+    restore("atlasPanelRight", "--side-w-right");
+  } catch (e) {}
+
+  function setup(panelId, side, varName, storeKey) {
+    var panel = document.getElementById(panelId);
+    if (!panel) return;
+    var h = document.createElement("div");
+    h.className = "panel-resizer " + side + "-resizer";
+    h.title = "გადაათრიეთ სიგანის შესაცვლელად (ორმაგი დაწკაპება — საწყისი)";
+    // სახელური პანელის *გვერდით* ჩნდება, არა შიგნით —
+    // თორემ სქროლვად შიგთავსს ემატებოდა და ჰორიზონტალურ სქროლს იწვევდა
+    var parent = panel.parentNode;
+    if (!parent || !parent.insertBefore) return;
+    if (side === "left") parent.insertBefore(h, panel.nextSibling);
+    else parent.insertBefore(h, panel);
+
+    var startX = 0,
+      startW = 0,
+      dragging = false;
+
+    function onMove(e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX;
+      var w = side === "left" ? startW + dx : startW - dx;
+      w = Math.max(MIN, Math.min(MAX, Math.round(w)));
+      apply(varName, w);
+      if (typeof map !== "undefined" && map.invalidateSize) map.invalidateSize();
+    }
+    function onUp() {
+      if (!dragging) return;
+      dragging = false;
+      h.classList.remove("dragging");
+      document.body.classList.remove("resizing-panel");
+      try {
+        localStorage.setItem(storeKey, parseInt(panel.offsetWidth, 10));
+      } catch (e) {}
+      if (typeof map !== "undefined" && map.invalidateSize) map.invalidateSize();
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    }
+
+    h.addEventListener("mousedown", function (e) {
+      e.preventDefault();
+      dragging = true;
+      startX = e.clientX;
+      startW = panel.offsetWidth;
+      h.classList.add("dragging");
+      document.body.classList.add("resizing-panel");
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("mouseup", onUp);
+    });
+
+    // ორმაგი დაწკაპებით — საწყისი სიგანე
+    h.addEventListener("dblclick", function () {
+      apply(varName, 170);
+      try {
+        localStorage.setItem(storeKey, 170);
+      } catch (e) {}
+      if (typeof map !== "undefined" && map.invalidateSize) map.invalidateSize();
+    });
+  }
+
+  setup("layerPanel", "left", "--side-w-left", "atlasPanelLeft");
+  setup("basemapPanel", "right", "--side-w-right", "atlasPanelRight");
+})();
+
 // ===== Georgia border (always visible) =====
 fetch("data/georgia_border.geojson")
   .then((r) => r.json())
@@ -1060,7 +1152,7 @@ function showInfoRel(p) {
   var bars = ["Orthodox", "Muslim", "Armenian_A", "Other_Reli"]
     .map(function (key) {
       var pct = p[key] || 0;
-      return `<div class="eth-bar-row"><span class="eth-bar-label" style="width:64px;">${REL_LABELS[key]}</span>
+      return `<div class="eth-bar-row"><span class="eth-bar-label" style="width:104px;" title="${REL_LABELS[key]}">${REL_LABELS[key]}</span>
       <div class="eth-bar-track"><div class="eth-bar-fill" style="width:${pct}%;background:${REL_COLORS[key]};"></div></div>
       <span class="eth-bar-pct">${pct}%</span></div>`;
     })

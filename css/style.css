@@ -13,6 +13,10 @@
   --header-h: 54px;
   --chart-h: 160px;
   --side-w: 170px;
+  --side-w-left: 170px;
+  --side-w-right: 170px;
+  --panel-font: 10px;
+  --panel-label-font: 11px;
   --font-geo: "Fira Sans", "Sylfaen", sans-serif;
 }
 
@@ -155,6 +159,8 @@ body {
 aside {
   width: var(--side-w);
   min-width: var(--side-w);
+  position: relative;
+  overflow-x: hidden;
   background: var(--panel-bg);
   border-color: var(--border);
   padding: 14px 10px;
@@ -165,11 +171,15 @@ aside {
 }
 
 #layerPanel {
+  width: var(--side-w-left);
+  min-width: var(--side-w-left);
   border-right: 1px solid var(--border);
   box-shadow: 2px 0 6px rgba(0, 0, 0, 0.04);
 }
 
 #basemapPanel {
+  width: var(--side-w-right);
+  min-width: var(--side-w-right);
   border-left: 1px solid var(--border);
   box-shadow: -2px 0 6px rgba(0, 0, 0, 0.04);
 }
@@ -179,7 +189,7 @@ aside {
 }
 
 .panel-label {
-  font-size: 11px;
+  font-size: var(--panel-label-font);
   font-weight: 800;
   letter-spacing: 0.10em;
   text-transform: uppercase;
@@ -410,7 +420,7 @@ aside {
   position: absolute;
   bottom: 16px;
   left: 16px;
-  width: 240px;
+  width: 275px;
   background: white;
   border-radius: 14px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -694,7 +704,7 @@ aside {
   width: 100%;
   padding: 6px 8px;
   font-family: var(--font-geo);
-  font-size: 10px;
+  font-size: var(--panel-font);
   font-weight: 500;
   border: 1.5px solid var(--border);
   border-radius: 8px;
@@ -757,6 +767,9 @@ aside {
   width: 52px;
   color: var(--text-muted);
   flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .eth-bar-track {
   flex: 1;
@@ -1884,3 +1897,50 @@ aside {
   .census-scope-row { flex-wrap: wrap; gap: 4px; }
   .scope-btn { font-size: 10px; padding: 4px 8px; }
 }
+
+
+/* ===== პანელის სიგანის რეგულირება (drag handle) ===== */
+.panel-resizer {
+  flex: 0 0 6px;
+  align-self: stretch;
+  position: relative;
+  cursor: col-resize;
+  z-index: 30;
+  background: transparent;
+  transition: background 0.15s;
+}
+.panel-resizer:hover,
+.panel-resizer.dragging {
+  background: rgba(200, 16, 46, 0.22);
+}
+.panel-resizer::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 3px;
+  height: 34px;
+  border-radius: 2px;
+  background: var(--border);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.panel-resizer:hover::after,
+.panel-resizer.dragging::after {
+  opacity: 1;
+  background: var(--red);
+}
+body.resizing-panel {
+  cursor: col-resize;
+  user-select: none;
+}
+@media (max-width: 900px) {
+  .panel-resizer { display: none; }
+}
+
+
+/* პანელის ტექსტი იზრდება სიგანესთან ერთად */
+#layerPanel, #basemapPanel { font-size: var(--panel-font); }
+#legendContent { font-size: var(--panel-font); }
+.layer-item span { font-size: var(--panel-font); }
