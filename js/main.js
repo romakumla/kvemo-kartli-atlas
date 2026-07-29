@@ -911,6 +911,10 @@ function switchSublayer(sub) {
     document.getElementById("filterSection").style.display = "none";
     loadIDP();
   }
+  // მუნიც. ცენტრები ქოროპლეტურ რუკებზე (პუნსონებიან/დიაგრამიანზე — არა)
+  var _muniSubs = ["density", "birth_rate", "death_rate", "religion", "ethnics"];
+  if (_muniSubs.indexOf(sub) !== -1) loadNatureMuniCenters();
+  else hideMuniCenters();
   setInfoBtn(_popInfoMap[sub] || null);
   // შედარება მხოლოდ მოსახლ. ქვეფენებზე
   var _cb = document.getElementById("btnCompare");
@@ -2464,6 +2468,9 @@ function loadNatureMuniCenters() {
         },
       }).addTo(map);
       addMuniBorderOverlay();
+      // წერტილები გვიან ჩამოდის — რიგითობა მაშინვე უნდა გასწორდეს,
+      // თორემ თემატურ წერტილოვან ფენას ეფარება (მაგ. ტურიზმის რუკა)
+      finalizeLayerOrder();
     });
 }
 
@@ -9933,6 +9940,7 @@ function getPowerRadius(mw) {
 }
 
 function loadEnergetika() {
+  loadNatureMuniCenters();
   if (energetikaData) {
     buildEnergetikaLayer(energetikaData);
     return;
@@ -9948,7 +9956,6 @@ function loadEnergetika() {
 }
 
 function buildEnergetikaLayer(data) {
-  hideMuniCenters();
   if (energetikaLayer) map.removeLayer(energetikaLayer);
 
   // დიდი → პატარა დალაგება, რომ პატარები ზემოდან იყოს
@@ -10202,6 +10209,7 @@ var CROP_ZONES = [
 ];
 
 function loadCropZones() {
+  loadNatureMuniCenters();
   if (cropZonesData) {
     buildCropZonesLayer(cropZonesData);
     return;
@@ -10217,7 +10225,6 @@ function loadCropZones() {
 }
 
 function buildCropZonesLayer(data) {
-  hideMuniCenters();
   if (cropZonesLayer) map.removeLayer(cropZonesLayer);
   cropZonesLayer = L.geoJSON(data, {
     style: function (feat) {
@@ -10437,6 +10444,7 @@ function getLandColor(val, stops) {
 }
 
 function loadLand() {
+  loadNatureMuniCenters();
   if (landData) {
     buildLandLayer(landData);
     return;
@@ -10452,7 +10460,6 @@ function loadLand() {
 }
 
 function buildLandLayer(data) {
-  hideMuniCenters();
   if (landLayer) map.removeLayer(landLayer);
   var theme = LAND_THEMES[activeLandTheme];
   landLayer = L.geoJSON(data, {
@@ -10752,6 +10759,7 @@ var SUN_POWER_RADIUS = {
 };
 
 function loadSun() {
+  loadNatureMuniCenters();
   if (sunData) {
     buildSunLayers(sunData);
     return;
@@ -10767,7 +10775,6 @@ function loadSun() {
 }
 
 function buildSunLayers(data) {
-  hideMuniCenters();
   if (sunZoneLayer) {
     map.removeLayer(sunZoneLayer);
     sunZoneLayer = null;
@@ -11100,6 +11107,7 @@ var AGRI_PROGRAMS = [
 ];
 
 function loadAgri() {
+  loadNatureMuniCenters();
   if (agriData) {
     buildAgriLayer(agriData);
     return;
@@ -11221,7 +11229,6 @@ function makeAgriPieSVG(p, size) {
 }
 
 function buildAgriLayer(data) {
-  hideMuniCenters();
   if (agriLayer) {
     map.removeLayer(agriLayer);
     agriLayer = null;
@@ -11458,6 +11465,7 @@ var AGRI_SPEC_TYPES = [
 ];
 
 function loadAgriSpec() {
+  loadNatureMuniCenters();
   if (agriSpecData) {
     buildAgriSpecLayer(agriSpecData);
     return;
@@ -11473,7 +11481,6 @@ function loadAgriSpec() {
 }
 
 function buildAgriSpecLayer(data) {
-  hideMuniCenters();
   if (agriSpecLayer) map.removeLayer(agriSpecLayer);
   agriSpecLayer = L.geoJSON(data, {
     style: function (feat) {
@@ -11901,7 +11908,7 @@ function buildEducationLayers(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(p.Name_Geo + " — " + p.Schools, {
+      marker.bindTooltip(p.Name_Geo, {
         direction: "top",
         className: "village-label",
         offset: [0, -sz / 2 - 2],
@@ -12112,6 +12119,7 @@ function getKgColor(n) {
 }
 
 function loadKindergarten() {
+  loadNatureMuniCenters();
   if (kgData) {
     buildKgLayer(kgData);
     return;
@@ -12233,7 +12241,6 @@ function makeKgPieSVG(pupil, edu, size) {
 }
 
 function buildKgLayer(data) {
-  hideMuniCenters();
   if (kgLayer) {
     map.removeLayer(kgLayer);
     kgLayer = null;
@@ -12998,6 +13005,7 @@ function getLibColor(booksStr) {
 }
 
 function loadLibraries() {
+  loadNatureMuniCenters();
   if (libData) {
     buildLibLayer(libData);
     return;
@@ -13012,8 +13020,33 @@ function loadLibraries() {
     });
 }
 
+
+// ბიბლიოთეკის სიმბოლო — წიგნების თარო (ზომა ბიბლიოთეკების რაოდენობის პროპორციულია)
+function libraryShelfSVG(size) {
+  var vb = 24;
+  return (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size +
+    '" viewBox="0 0 ' + vb + ' ' + vb + '">' +
+    '<rect x="0.8" y="0.8" width="22.4" height="22.4" rx="2.5" fill="#F3EEF8" stroke="#5A3E8A" stroke-width="1.6"/>' +
+    // ზედა თარო — წიგნები
+    '<rect x="4"   y="4.2" width="2.6" height="7.2" fill="#5A3E8A"/>' +
+    '<rect x="7.2" y="5.4" width="2.6" height="6"   fill="#8B6BB1"/>' +
+    '<rect x="10.4" y="4.2" width="2.6" height="7.2" fill="#5A3E8A"/>' +
+    '<rect x="13.6" y="5.8" width="2.6" height="5.6" fill="#8B6BB1"/>' +
+    '<path d="M17.2 11.4 V6.2 l2.8 -1 v5.2 z" fill="#5A3E8A"/>' +
+    '<rect x="3.4" y="11.4" width="17.2" height="1.3" fill="#5A3E8A"/>' +
+    // ქვედა თარო — წიგნები
+    '<rect x="4"   y="13.6" width="2.6" height="5.6" fill="#8B6BB1"/>' +
+    '<rect x="7.2" y="12.9" width="2.6" height="6.3" fill="#5A3E8A"/>' +
+    '<rect x="10.4" y="14.2" width="2.6" height="5"   fill="#8B6BB1"/>' +
+    '<rect x="13.6" y="12.9" width="2.6" height="6.3" fill="#5A3E8A"/>' +
+    '<rect x="16.8" y="14.2" width="2.6" height="5"   fill="#8B6BB1"/>' +
+    '<rect x="3.4" y="19.2" width="17.2" height="1.3" fill="#5A3E8A"/>' +
+    "</svg>"
+  );
+}
+
 function buildLibLayer(data) {
-  hideMuniCenters();
   if (libPolyLayer) {
     map.removeLayer(libPolyLayer);
     libPolyLayer = null;
@@ -13061,9 +13094,8 @@ function buildLibLayer(data) {
     var lngs = coords.map(function (c) { return c[0]; });
     var lat = (Math.min.apply(null, lats) + Math.max.apply(null, lats)) / 2;
     var lng = (Math.min.apply(null, lngs) + Math.max.apply(null, lngs)) / 2;
-    var size = Math.round(8 + cnt * 1.5);
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '">' +
-      '<rect width="' + size + '" height="' + size + '" fill="#5A3E8A" opacity="0.85" stroke="#fff" stroke-width="1.5"/></svg>';
+    var size = Math.round(14 + cnt * 1.6);
+    var svg = libraryShelfSVG(size);
     var icon = L.divIcon({ html: svg, iconSize: [size, size], iconAnchor: [size/2, size/2], className: "" });
     var marker = L.marker([lat, lng], { icon: icon });
     marker.bindTooltip(p.Name_Geo + ": " + cnt + " ბიბლ.", { direction: "top", className: "village-label" });
@@ -13174,8 +13206,8 @@ function updateLibLegend() {
     '<div style="margin-top:10px;padding-top:8px;border-top:1px solid #ddd;">' +
     '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:5px;">ბიბლიოთეკების რაოდ.</div>' +
     '<div style="display:flex;align-items:center;gap:6px;">' +
-    '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><rect width="14" height="14" fill="#5A3E8A" opacity="0.85" stroke="#fff" stroke-width="1.5"/></svg>' +
-    '<span style="font-size:10px;">პროპ. კვადრატი (1 = 1 ბიბლ.)</span></div></div>' +
+    libraryShelfSVG(20) +
+    '<span style="font-size:10px;margin-left:6px;">სიმბოლოს ზომა — ბიბლიოთეკების რაოდენობა</span></div></div>' +
     '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">მუნ-ზე დაჭ. — სრული სტატ.</div>';
   el.innerHTML = html;
   setInfoBtn("libraries");
@@ -13191,6 +13223,8 @@ var tourismLayer = null;
 var TOURISM_TYPES = [
   {
     key: "historic_arch",
+    color: "#E8621A",
+    chartLabel: ["ისტორიულ-", "არქიტექტ."],
     match: "ისტორიულ-არქიტექტურული",
     label: "ისტორიულ-არქიტექტურული მუზეუმი",
     svg:
@@ -13198,6 +13232,8 @@ var TOURISM_TYPES = [
   },
   {
     key: "historic_ethno",
+    color: "#B5651D",
+    chartLabel: ["ისტორიულ-", "ეთნოგრაფ."],
     match: "ისტორიულ-ეთნოგრაფიული",
     label: "ისტორიულ-ეთნოგრაფიული მუზეუმი",
     svg:
@@ -13205,6 +13241,8 @@ var TOURISM_TYPES = [
   },
   {
     key: "local_lore",
+    color: "#F0A04B",
+    chartLabel: ["მხარეთმცო-", "დნეობის"],
     match: "მხარეთმცოდნეობის",
     label: "მხარეთმცოდნეობის მუზეუმი",
     svg:
@@ -13212,6 +13250,8 @@ var TOURISM_TYPES = [
   },
   {
     key: "multi",
+    color: "#8B4513",
+    chartLabel: ["მრავალპრო-", "ფილური"],
     match: "მრავალპროფილური",
     label: "მრავალპროფილური მუზეუმი",
     svg:
@@ -13219,6 +13259,8 @@ var TOURISM_TYPES = [
   },
   {
     key: "exhibition",
+    color: "#D9A441",
+    chartLabel: ["საგამოფენო", "დარბაზი"],
     match: "საგამოფენო",
     label: "საგამოფენო დარბაზი",
     svg:
@@ -13226,6 +13268,8 @@ var TOURISM_TYPES = [
   },
   {
     key: "biography",
+    color: "#C0553B",
+    chartLabel: ["ბიოგრა-", "ფიული"],
     match: "ბიოგრაფიული",
     label: "ბიოგრაფიული მუზეუმი",
     svg:
@@ -13233,6 +13277,8 @@ var TOURISM_TYPES = [
   },
   {
     key: "historic",
+    color: "#7A4E2D",
+    chartLabel: ["ისტორიული"],
     match: "ისტორიული",
     label: "ისტორიული მუზეუმი",
     svg:
@@ -13305,16 +13351,14 @@ function buildTourismLayer(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(
-        p.Name_Geo + " — " + t.label + (hasTheater ? " + თეატრი" : ""),
-        {
-          direction: "top",
-          className: "village-label",
-          offset: [0, -size / 2 - 2],
-        }
-      );
+      marker.bindTooltip(p.Name_Geo, {
+        direction: "top",
+        className: "village-label",
+        offset: [0, -size / 2 - 2],
+      });
       marker.on("click", function () {
         showInfoTourism(p, t, hasTheater);
+        showBottomChartMuseum(p, t);
       });
       return marker;
     },
@@ -13382,36 +13426,48 @@ var artExpandedMarker = null;
 var ART_CATEGORIES = [
   {
     key: "Music",
+    color: "#70594C",
+    chartLabel: ["სამუსიკო"],
     label: "სამუსიკო (ვოკალური, ინსტრუმენტული, საესტრადო)",
     svg:
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.98 13.96"><defs><style>.cls-1{fill:#70594c;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.15px;}</style></defs><path class="cls-1" d="M5.61.49a.37.37,0,0,0,.07.74A.37.37,0,1,0,5.61.49m-.55.9A.37.37,0,0,0,4.51.9c-.35.36.23.87.55.49m1.22,0A.37.37,0,1,0,6.83.9a.37.37,0,0,0-.55.49M8.51,2.71a1,1,0,0,0,.61.38,1.13,1.13,0,0,0,1-1.95c-.76-.66-1.65-.1-2,.7-.64,1.53.41,2.9.88,4.28.65,1.91.56,4.48-1.81,5A7.2,7.2,0,0,1,3.56,11C1.88,10.22,1.8,8.12,2.21,6.59S3.81,3.64,3.29,2A1.41,1.41,0,0,0,1.71.89,1.13,1.13,0,0,0,1.52,3a1.15,1.15,0,0,0,1.33-.29A6.16,6.16,0,0,1,1.81,5a5.91,5.91,0,0,0-.63,5.46c.94,2,2.93,2.37,5,2.28,1.67-.07,3.13-.56,3.93-2.13a5.62,5.62,0,0,0-.34-5.22A9.13,9.13,0,0,1,8.49,2.79s0-.08,0-.08M3.86,1.18A.37.37,0,1,0,4,1.89a.37.37,0,0,0-.17-.71m3.56,0a.36.36,0,1,0,.21.69.36.36,0,0,0-.21-.69m-1.65.11a.34.34,0,0,1-.2,0v1h.2Zm-.9.3a.5.5,0,0,1-.21,0v.68h.21Zm1.8,0a.67.67,0,0,1-.2,0v.68h.2ZM4,2a.37.37,0,0,1-.21,0v.3H4ZM7.58,2a.37.37,0,0,1-.21,0v.3h.21Zm.31.39H3.45a2.46,2.46,0,0,1,0,.54H7.84ZM4,3H3.83s0,0,0,0c0,.29,0,.72,0,1V9.88c0,.31,0,.65,0,1,0,0,0,.11,0,.12L4,11Zm.85,0H4.66v8.14a.38.38,0,0,0,.21,0Zm.9,0h-.2v8.2h.2Zm.9,0h-.2v8.17l.21,0Zm.91,0H7.37v8L7.58,11Zm1,9.66h0a6.81,6.81,0,0,1-3.4.54l-.55,0a5.26,5.26,0,0,1-1.78-.5.77.77,0,0,0,.14,1,4.57,4.57,0,0,0,2.46.61,5.94,5.94,0,0,0,2.88-.54.85.85,0,0,0,.37-.94.89.89,0,0,0-.08-.17" transform="translate(-0.68 -0.42)"/><path class="cls-2" d="M5.61.49a.37.37,0,0,0,.07.74A.37.37,0,1,0,5.61.49Zm-.55.9A.37.37,0,0,0,4.51.9C4.16,1.26,4.74,1.77,5.06,1.39Zm1.22,0A.37.37,0,1,0,6.83.9.37.37,0,0,0,6.28,1.39ZM8.51,2.71a1,1,0,0,0,.61.38,1.13,1.13,0,0,0,1-1.95c-.76-.66-1.65-.1-2,.7-.64,1.53.41,2.9.88,4.28.65,1.91.56,4.48-1.81,5A7.2,7.2,0,0,1,3.56,11C1.88,10.22,1.8,8.12,2.21,6.59S3.81,3.64,3.29,2A1.41,1.41,0,0,0,1.71.89,1.13,1.13,0,0,0,1.52,3a1.15,1.15,0,0,0,1.33-.29A6.16,6.16,0,0,1,1.81,5a5.91,5.91,0,0,0-.63,5.46c.94,2,2.93,2.37,5,2.28,1.67-.07,3.13-.56,3.93-2.13a5.62,5.62,0,0,0-.34-5.22A9.13,9.13,0,0,1,8.49,2.79S8.48,2.71,8.51,2.71ZM3.86,1.18A.37.37,0,1,0,4,1.89.37.37,0,0,0,3.86,1.18Zm3.56,0a.36.36,0,1,0,.21.69A.36.36,0,0,0,7.42,1.18Zm-1.65.11a.34.34,0,0,1-.2,0v1h.2Zm-.9.3a.5.5,0,0,1-.21,0v.68h.21Zm1.8,0a.67.67,0,0,1-.2,0v.68h.2ZM4,2a.37.37,0,0,1-.21,0v.3H4ZM7.58,2a.37.37,0,0,1-.21,0v.3h.21Zm.31.39H3.45a2.46,2.46,0,0,1,0,.54H7.84ZM4,3H3.83s0,0,0,0c0,.29,0,.72,0,1V9.88c0,.31,0,.65,0,1,0,0,0,.11,0,.12L4,11Zm.85,0H4.66v8.14a.38.38,0,0,0,.21,0Zm.9,0h-.2v8.2h.2Zm.9,0h-.2v8.17l.21,0Zm.91,0H7.37v8L7.58,11Zm1,9.66h0a6.81,6.81,0,0,1-3.4.54l-.55,0a5.26,5.26,0,0,1-1.78-.5.77.77,0,0,0,.14,1,4.57,4.57,0,0,0,2.46.61,5.94,5.94,0,0,0,2.88-.54.85.85,0,0,0,.37-.94A.89.89,0,0,0,8.57,12.65Z" transform="translate(-0.68 -0.42)"/></svg>',
   },
   {
     key: "Choreograp",
+    color: "#C1662F",
+    chartLabel: ["ქორეო-", "გრაფია"],
     label: "ქორეოგრაფია",
     svg:
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.13 14.7"><defs><style>.cls-1{fill:#89471f;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.15px;}</style></defs><path class="cls-1" d="M4.36.92a1.24,1.24,0,0,0,.28,2.47A1.24,1.24,0,1,0,4.36.92m5.87.67a1.11,1.11,0,1,0,.2,2.22,1.11,1.11,0,0,0-.2-2.22M11.29,11a3.78,3.78,0,0,0,1.24-.32c.12-.06.34-.14.27-.3-.64-.84-1.31-1.66-1.94-2.5-.11-.13-.22-.28-.32-.41s-.19-.28-.11-.59.17-.49.25-.73c.19-.53.58-1.1.16-1.64S10,4.28,9.55,4.13a1.38,1.38,0,0,1-.93-1.44c0-.33.25-.6-.12-.88s-.67,0-.94.27A8.3,8.3,0,0,1,6.23,3.4c-.34.21-.71.37-1.06.57.2.27.31.62.49.9,0,0,.08.15.15.14l1.33-.84c.23-.18.41-.5.62-.68,0,0,0,0,0,0A2.18,2.18,0,0,0,8.9,4.83S8.74,5,8.71,5a1.36,1.36,0,0,0-.36.61.87.87,0,1,1,0,1.74c-.47,1.08-1,2.14-1.42,3.23,0,.25.18.26.37.29a17.73,17.73,0,0,0,2.05.18c.2,0,.4,0,.59,0l.64,1,2.46,2.44a.5.5,0,0,0,.83-.45c0-.19-.28-.43-.41-.58a23.53,23.53,0,0,1-2.13-2.35s-.07-.08-.05-.1m1.6-6.25a0,0,0,0,0,0-.06c-.43-.42-.3-.47-.43-1A1,1,0,0,0,11.67,3c-.06.4-.35.64-.23,1.08a1.25,1.25,0,0,0,1.45.73m-8.61.62c.43.33.77.81,1.18,1.15a.93.93,0,0,0,.6.23c.77.1,1.55.13,2.32.25A.53.53,0,0,0,8.42,6c-.62-.11-1.32-.12-2-.2a.77.77,0,0,1-.26-.07c-.57-.48-1-1.13-1.6-1.61A.81.81,0,0,0,4,3.85,1,1,0,0,0,2.89,5c0,.87.23,1.78.28,2.65l.12,1.76c0,.35-.09.69-.15,1a4.29,4.29,0,0,1-.34,1.4c-.55.85-1.25,1.64-1.81,2.48a.65.65,0,0,0,1.09.7l2.16-2.78c.24-.64.32-1.36.52-2,0,0,0,0,0,0l1,1.72c0,.82,0,1.64,0,2.46,0,.13,0,.25,0,.39a.67.67,0,0,0,1.34.1c.08-.79-.08-1.69,0-2.49,0-.15,0-1-.08-1.1a.4.4,0,0,1-.42-.47c0-.06.07-.1,0-.16L5.56,8.54V7.12a1.49,1.49,0,0,1-.64-.55,11.82,11.82,0,0,1-.64-1.16m4.64,6-1.11-.08a4,4,0,0,0-.08,1.46c.12.77.38,1.56.5,2.34a.49.49,0,0,0,1-.15c-.13-.94-.36-1.88-.43-2.83Z" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M4.36.92a1.24,1.24,0,0,0,.28,2.47A1.24,1.24,0,1,0,4.36.92Zm5.87.67a1.11,1.11,0,1,0,.2,2.22A1.11,1.11,0,0,0,10.23,1.59ZM11.29,11a3.78,3.78,0,0,0,1.24-.32c.12-.06.34-.14.27-.3-.64-.84-1.31-1.66-1.94-2.5-.11-.13-.22-.28-.32-.41s-.19-.28-.11-.59.17-.49.25-.73c.19-.53.58-1.1.16-1.64S10,4.28,9.55,4.13a1.38,1.38,0,0,1-.93-1.44c0-.33.25-.6-.12-.88s-.67,0-.94.27A8.3,8.3,0,0,1,6.23,3.4c-.34.21-.71.37-1.06.57.2.27.31.62.49.9,0,0,.08.15.15.14l1.33-.84c.23-.18.41-.5.62-.68,0,0,0,0,0,0A2.18,2.18,0,0,0,8.9,4.83S8.74,5,8.71,5a1.36,1.36,0,0,0-.36.61.87.87,0,1,1,0,1.74c-.47,1.08-1,2.14-1.42,3.23,0,.25.18.26.37.29a17.73,17.73,0,0,0,2.05.18c.2,0,.4,0,.59,0l.64,1,2.46,2.44a.5.5,0,0,0,.83-.45c0-.19-.28-.43-.41-.58a23.53,23.53,0,0,1-2.13-2.35S11.27,11.06,11.29,11Zm1.6-6.25a0,0,0,0,0,0-.06c-.43-.42-.3-.47-.43-1A1,1,0,0,0,11.67,3c-.06.4-.35.64-.23,1.08A1.25,1.25,0,0,0,12.89,4.79Zm-8.61.62c.43.33.77.81,1.18,1.15a.93.93,0,0,0,.6.23c.77.1,1.55.13,2.32.25A.53.53,0,0,0,8.42,6c-.62-.11-1.32-.12-2-.2a.77.77,0,0,1-.26-.07c-.57-.48-1-1.13-1.6-1.61A.81.81,0,0,0,4,3.85,1,1,0,0,0,2.89,5c0,.87.23,1.78.28,2.65l.12,1.76c0,.35-.09.69-.15,1a4.29,4.29,0,0,1-.34,1.4c-.55.85-1.25,1.64-1.81,2.48a.65.65,0,0,0,1.09.7l2.16-2.78c.24-.64.32-1.36.52-2,0,0,0,0,0,0l1,1.72c0,.82,0,1.64,0,2.46,0,.13,0,.25,0,.39a.67.67,0,0,0,1.34.1c.08-.79-.08-1.69,0-2.49,0-.15,0-1-.08-1.1a.4.4,0,0,1-.42-.47c0-.06.07-.1,0-.16L5.56,8.54V7.12a1.49,1.49,0,0,1-.64-.55A11.82,11.82,0,0,1,4.28,5.41Zm4.64,6-1.11-.08a4,4,0,0,0-.08,1.46c.12.77.38,1.56.5,2.34a.49.49,0,0,0,1-.15c-.13-.94-.36-1.88-.43-2.83Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M4.28,5.41a11.82,11.82,0,0,0,.64,1.16,1.49,1.49,0,0,0,.64.55V8.54L6.7,10.62c0,.06,0,.1,0,.16a.4.4,0,0,0,.42.47c.1.05.07.95.08,1.1-.1.8.06,1.7,0,2.49a.67.67,0,0,1-1.34-.1c0-.14,0-.26,0-.39,0-.82,0-1.64,0-2.46l-1-1.72s0,0,0,0c-.2.65-.28,1.37-.52,2L2.08,15A.65.65,0,0,1,1,14.3c.56-.84,1.26-1.63,1.81-2.48a4.29,4.29,0,0,0,.34-1.4c.06-.34.11-.68.15-1L3.17,7.63c0-.87-.24-1.78-.28-2.65A1,1,0,0,1,4,3.85a.81.81,0,0,1,.63.25c.56.48,1,1.13,1.6,1.61a.77.77,0,0,0,.26.07c.64.08,1.34.09,2,.2A.53.53,0,0,1,8.38,7c-.77-.12-1.55-.15-2.32-.25a.93.93,0,0,1-.6-.23c-.41-.34-.75-.82-1.18-1.15" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M4.28,5.41a11.82,11.82,0,0,0,.64,1.16,1.49,1.49,0,0,0,.64.55V8.54L6.7,10.62c0,.06,0,.1,0,.16a.4.4,0,0,0,.42.47c.1.05.07.95.08,1.1-.1.8.06,1.7,0,2.49a.67.67,0,0,1-1.34-.1c0-.14,0-.26,0-.39,0-.82,0-1.64,0-2.46l-1-1.72s0,0,0,0c-.2.65-.28,1.37-.52,2L2.08,15A.65.65,0,0,1,1,14.3c.56-.84,1.26-1.63,1.81-2.48a4.29,4.29,0,0,0,.34-1.4c.06-.34.11-.68.15-1L3.17,7.63c0-.87-.24-1.78-.28-2.65A1,1,0,0,1,4,3.85a.81.81,0,0,1,.63.25c.56.48,1,1.13,1.6,1.61a.77.77,0,0,0,.26.07c.64.08,1.34.09,2,.2A.53.53,0,0,1,8.38,7c-.77-.12-1.55-.15-2.32-.25a.93.93,0,0,1-.6-.23C5.05,6.22,4.71,5.74,4.28,5.41Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M11.29,11s0,.08.05.1a23.53,23.53,0,0,0,2.13,2.35c.13.15.38.39.41.58a.5.5,0,0,1-.83.45l-2.46-2.44-.64-1c-.19,0-.39,0-.6,0a17.75,17.75,0,0,1-2-.18c-.19,0-.37,0-.37-.29.42-1.09.95-2.15,1.42-3.23a.87.87,0,1,0,0-1.74A1.36,1.36,0,0,1,8.71,5s.22-.16.19-.2A2.18,2.18,0,0,1,7.81,3.47s0,0,0,0c-.21.18-.39.5-.62.68L5.81,5c-.07,0-.11-.09-.15-.14-.18-.28-.29-.63-.49-.9.35-.2.72-.36,1.06-.57A8.3,8.3,0,0,0,7.56,2.08c.26-.27.56-.57.94-.27s.15.55.12.88a1.38,1.38,0,0,0,.93,1.44c.47.15.95,0,1.29.42s0,1.11-.16,1.64c-.08.24-.18.49-.25.73s-.06.33.11.59.21.28.32.41c.63.84,1.3,1.66,1.94,2.5.07.16-.15.24-.27.3a3.78,3.78,0,0,1-1.24.32" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M11.29,11s0,.08.05.1a23.53,23.53,0,0,0,2.13,2.35c.13.15.38.39.41.58a.5.5,0,0,1-.83.45l-2.46-2.44-.64-1c-.19,0-.39,0-.6,0a17.75,17.75,0,0,1-2-.18c-.19,0-.37,0-.37-.29.42-1.09.95-2.15,1.42-3.23a.87.87,0,1,0,0-1.74A1.36,1.36,0,0,1,8.71,5s.22-.16.19-.2A2.18,2.18,0,0,1,7.81,3.47s0,0,0,0c-.21.18-.39.5-.62.68L5.81,5c-.07,0-.11-.09-.15-.14-.18-.28-.29-.63-.49-.9.35-.2.72-.36,1.06-.57A8.3,8.3,0,0,0,7.56,2.08c.26-.27.56-.57.94-.27s.15.55.12.88a1.38,1.38,0,0,0,.93,1.44c.47.15.95,0,1.29.42s0,1.11-.16,1.64c-.08.24-.18.49-.25.73s-.06.33.11.59.21.28.32.41c.63.84,1.3,1.66,1.94,2.5.07.16-.15.24-.27.3A3.78,3.78,0,0,1,11.29,11Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M4.36.92a1.24,1.24,0,1,1,.28,2.47A1.24,1.24,0,0,1,4.36.92" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M4.36.92a1.24,1.24,0,1,1,.28,2.47A1.24,1.24,0,0,1,4.36.92Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M8.92,11.39l-.16.74c.07.95.3,1.89.43,2.83a.49.49,0,0,1-1,.15c-.12-.78-.38-1.57-.5-2.34a4,4,0,0,1,.08-1.46Z" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M8.92,11.39l-.16.74c.07.95.3,1.89.43,2.83a.49.49,0,0,1-1,.15c-.12-.78-.38-1.57-.5-2.34a4,4,0,0,1,.08-1.46Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M10.23,1.59a1.12,1.12,0,0,1,.2,2.22,1.12,1.12,0,1,1-.2-2.22" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M10.23,1.59a1.12,1.12,0,0,1,.2,2.22A1.12,1.12,0,1,1,10.23,1.59Z" transform="translate(-0.83 -0.84)"/><path class="cls-1" d="M12.89,4.79a1.25,1.25,0,0,1-1.45-.73c-.12-.44.17-.68.23-1.08a1,1,0,0,1,.76.75c.13.53,0,.58.43,1a0,0,0,0,1,0,.06" transform="translate(-0.83 -0.84)"/><path class="cls-2" d="M12.89,4.79a1.25,1.25,0,0,1-1.45-.73c-.12-.44.17-.68.23-1.08a1,1,0,0,1,.76.75c.13.53,0,.58.43,1A0,0,0,0,1,12.89,4.79Z" transform="translate(-0.83 -0.84)"/></svg>',
   },
   {
     key: "Theatrical",
+    color: "#43B3E2",
+    chartLabel: ["თეატრა-", "ლური დასი"],
     label: "თეატრალური დასი (თოჯინების თეატრი, სამოყვარულო დასი)",
     svg:
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.14 12.81"><defs><style>.cls-1{fill:#a2def9;}.cls-2{fill:none;stroke:#231f20;stroke-width:0.15px;}.cls-3{fill:#43b3e2;}.cls-4{fill:#31bced;}.cls-5{fill:#0274ab;}</style></defs><path class="cls-1" d="M7.4,14.52C4.35,14.52,1.9,9.29,1.9,5a3.12,3.12,0,0,1,1-2.66c1-.78,2.51-.36,3.59,0a4.26,4.26,0,0,0,.91.21,4.54,4.54,0,0,0,.91-.21c1.07-.31,2.55-.73,3.59,0a3.15,3.15,0,0,1,1,2.66c0,4.33-2.45,9.56-5.49,9.56" transform="translate(-1.83 -1.78)"/><path class="cls-2" d="M7.4,14.52C4.35,14.52,1.9,9.29,1.9,5a3.12,3.12,0,0,1,1-2.66c1-.78,2.51-.36,3.59,0a4.26,4.26,0,0,0,.91.21,4.54,4.54,0,0,0,.91-.21c1.07-.31,2.55-.73,3.59,0a3.15,3.15,0,0,1,1,2.66C12.89,9.29,10.44,14.52,7.4,14.52Z" transform="translate(-1.83 -1.78)"/><path class="cls-3" d="M6,7.06a.57.57,0,0,1-.4-.16A.46.46,0,0,0,5,6.9a.57.57,0,0,1-.81,0,.56.56,0,0,1,0-.8,1.61,1.61,0,0,1,2.28,0,.57.57,0,0,1,0,.8A.54.54,0,0,1,6,7.06" transform="translate(-1.83 -1.78)"/><path class="cls-4" d="M11.9,2.3c-1-.78-2.52-.36-3.59,0a4.54,4.54,0,0,1-.91.21V14.52c3,0,5.49-5.23,5.49-9.56a3.12,3.12,0,0,0-1-2.66" transform="translate(-1.83 -1.78)"/><path class="cls-2" d="M11.9,2.3c-1-.78-2.52-.36-3.59,0a4.54,4.54,0,0,1-.91.21V14.52c3,0,5.49-5.23,5.49-9.56A3.12,3.12,0,0,0,11.9,2.3Z" transform="translate(-1.83 -1.78)"/><path class="cls-5" d="M9.91,7.06A.57.57,0,0,1,9.5,6.9a.46.46,0,0,0-.67,0,.56.56,0,0,1-.8,0,.55.55,0,0,1,0-.8,1.61,1.61,0,0,1,2.28,0,.57.57,0,0,1,0,.8.54.54,0,0,1-.4.17" transform="translate(-1.83 -1.78)"/><path class="cls-3" d="M7.4,11.76a2.56,2.56,0,0,1-2.5-2A.57.57,0,1,1,6,9.5a1.41,1.41,0,0,0,2.75,0,.57.57,0,0,1,1.12.22,2.56,2.56,0,0,1-2.49,2" transform="translate(-1.83 -1.78)"/><path class="cls-5" d="M9.44,9.05a.57.57,0,0,0-.67.45A1.4,1.4,0,0,1,7.4,10.62v1.14a2.56,2.56,0,0,0,2.49-2,.58.58,0,0,0-.45-.67" transform="translate(-1.83 -1.78)"/></svg>',
   },
   {
     key: "Fine_Arts",
+    color: "#E2AA60",
+    chartLabel: ["სახვითი", "ხელოვნება"],
     label: "სახვითი ხელოვნება (ფერწერა, ხეზე და ქვაზე კვეთა, გრაფიკა, ძერწვა)",
     svg:
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.85 13.66"><defs><style>.cls-1{fill:#fff;}.cls-2,.cls-4,.cls-6{fill:none;stroke:#231f20;}.cls-2{stroke-miterlimit:10;}.cls-3{fill:#e2aa60;}.cls-4{stroke-linejoin:round;}.cls-4,.cls-6{stroke-width:0.2px;}.cls-5{fill:#975fa0;}.cls-7{fill:#60bcea;}.cls-8{fill:#66bc46;}.cls-9{fill:#fdee3e;}.cls-10{fill:#ed2024;}.cls-11{fill:#ca8d51;}.cls-12{fill:#2d160d;}</style></defs><path class="cls-1" d="M4.93,6.39c1-.1,1.15.91.36,1.37C4.91,8,4.25,8,4,7.59s.41-1.14.92-1.2" transform="translate(-0.97 -1.36)"/><path class="cls-2" d="M4.93,6.39c1-.1,1.15.91.36,1.37C4.91,8,4.25,8,4,7.59S4.42,6.45,4.93,6.39Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M10,11.52a.63.63,0,1,1,.14,1.26A.63.63,0,0,1,10,11.52" transform="translate(-0.97 -1.36)"/><path class="cls-2" d="M10,11.52a.63.63,0,1,1,.14,1.26A.63.63,0,0,1,10,11.52Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M8,12.22a.63.63,0,0,1,.14,1.26A.63.63,0,0,1,8,12.22" transform="translate(-0.97 -1.36)"/><path class="cls-2" d="M8,12.22a.63.63,0,0,1,.14,1.26A.63.63,0,0,1,8,12.22Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M4.22,11.54a.47.47,0,1,1,.09.94.47.47,0,0,1-.09-.94" transform="translate(-0.97 -1.36)"/><path class="cls-2" d="M4.22,11.54a.47.47,0,1,1,.09.94A.47.47,0,0,1,4.22,11.54Z" transform="translate(-0.97 -1.36)"/><path class="cls-3" d="M2,13a4.36,4.36,0,0,0,2.7,1.45c3.83.28,6.74-2.92,7.14-3.47a2.63,2.63,0,0,0,.55-1.92A9.54,9.54,0,0,0,12,7.76a1.51,1.51,0,0,1,.12-1.36A3.33,3.33,0,0,1,12.48,6,3.21,3.21,0,0,0,13,2.55c-.6-1-2.08-1.11-3.11-1.09A9.46,9.46,0,0,0,3.8,4.21C-.7,8.86,1.63,12.58,2,13" transform="translate(-0.97 -1.36)"/><path class="cls-4" d="M2,13a4.36,4.36,0,0,0,2.7,1.45c3.83.28,6.74-2.92,7.14-3.47a2.63,2.63,0,0,0,.55-1.92A9.54,9.54,0,0,0,12,7.76a1.51,1.51,0,0,1,.12-1.36A3.33,3.33,0,0,1,12.48,6,3.21,3.21,0,0,0,13,2.55c-.6-1-2.08-1.11-3.11-1.09A9.46,9.46,0,0,0,3.8,4.21C-.7,8.86,1.63,12.58,2,13Z" transform="translate(-0.97 -1.36)"/><path class="cls-5" d="M8.51,4.22A1.08,1.08,0,0,0,10,2.67,1.08,1.08,0,1,0,8.51,4.22" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M8.51,4.22A1.08,1.08,0,0,0,10,2.67,1.08,1.08,0,1,0,8.51,4.22Z" transform="translate(-0.97 -1.36)"/><path class="cls-7" d="M5.56,5.87a1.08,1.08,0,0,0,1.5-1.55,1.08,1.08,0,1,0-1.5,1.55" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M5.56,5.87a1.08,1.08,0,0,0,1.5-1.55A1.08,1.08,0,1,0,5.56,5.87Z" transform="translate(-0.97 -1.36)"/><path class="cls-8" d="M3.14,8.39a1.08,1.08,0,0,0,1.5-1.56,1.08,1.08,0,1,0-1.5,1.56" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M3.14,8.39a1.08,1.08,0,0,0,1.5-1.56A1.08,1.08,0,1,0,3.14,8.39Z" transform="translate(-0.97 -1.36)"/><path class="cls-9" d="M2.7,11.63a1.08,1.08,0,0,0,1.51-1.55A1.08,1.08,0,1,0,2.7,11.63" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M2.7,11.63a1.08,1.08,0,0,0,1.51-1.55A1.08,1.08,0,1,0,2.7,11.63Z" transform="translate(-0.97 -1.36)"/><path class="cls-10" d="M6.09,13.13A1.08,1.08,0,0,0,7.6,11.58a1.08,1.08,0,1,0-1.51,1.55" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M6.09,13.13A1.08,1.08,0,0,0,7.6,11.58,1.08,1.08,0,1,0,6.09,13.13Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M10.87,7.44c-.34-.51-1.24-.5-2,0s-1.1,1.35-.75,1.86,1.24.5,2,0,1.1-1.35.75-1.86" transform="translate(-0.97 -1.36)"/><path class="cls-6" d="M10.87,7.44c-.34-.51-1.24-.5-2,0s-1.1,1.35-.75,1.86,1.24.5,2,0S11.22,8,10.87,7.44Z" transform="translate(-0.97 -1.36)"/><path class="cls-11" d="M13.71,14.89c-.14.07-.34,0-.48-.08a10.49,10.49,0,0,1-2.43-1.64L7.34,9.76a.27.27,0,0,0,.22-.24c1.14.88,2.31,1.65,3.44,2.54a22.09,22.09,0,0,1,1.82,1.67c.22.24.47.49.67.74a1.38,1.38,0,0,1,.23.36Z" transform="translate(-0.97 -1.36)"/><path class="cls-4" d="M13.71,14.89c-.14.07-.34,0-.48-.08a10.49,10.49,0,0,1-2.43-1.64L7.34,9.76a.27.27,0,0,0,.22-.24c1.14.88,2.31,1.65,3.44,2.54a22.09,22.09,0,0,1,1.82,1.67c.22.24.47.49.67.74a1.38,1.38,0,0,1,.23.36Z" transform="translate(-0.97 -1.36)"/><path class="cls-1" d="M9,11.39l0,0L7.34,9.75a.26.26,0,0,0,.22-.23c.58.45,1.18.87,1.77,1.29l0,0" transform="translate(-0.97 -1.36)"/><path class="cls-4" d="M9,11.39l0,0L7.34,9.75a.26.26,0,0,0,.22-.23c.58.45,1.18.87,1.77,1.29l0,0" transform="translate(-0.97 -1.36)"/><path class="cls-12" d="M6.22,8.14c.08.08.13.18.21.26a2.68,2.68,0,0,0,.63.49c.37.21.66.61.57.8s-.57.1-.94-.2a1.15,1.15,0,0,1-.47-1.35" transform="translate(-0.97 -1.36)"/></svg>',
   },
   {
     key: "Applied_Ar",
+    color: "#85451D",
+    chartLabel: ["გამოყენე-", "ბითი ხელ."],
     label: "გამოყენებითი ხელოვნება (თექა, ხალიჩების და გობელინების ქსოვა)",
     svg:
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.06 12.17"><defs><style>.cls-1,.cls-3{fill:none;}.cls-1{stroke:#85451d;stroke-width:0.25px;}.cls-2{fill:#85451d;}.cls-3{stroke:#231f20;stroke-width:0.1px;}</style></defs><rect class="cls-1" x="0.13" y="0.13" width="11.81" height="11.91"/><rect class="cls-2" x="2.63" y="2.65" width="6.8" height="6.86"/><rect class="cls-3" x="2.63" y="2.65" width="6.8" height="6.86"/><line class="cls-1" x1="0.13" y1="0.2" x2="2.33" y2="2.28"/><line class="cls-1" x1="11.77" y1="0.2" x2="9.58" y2="2.28"/><line class="cls-1" x1="6.05" x2="6.05" y2="2.28"/><line class="cls-1" x1="6.05" y1="9.89" x2="6.05" y2="12.17"/><line class="cls-1" x1="0.07" y1="5.9" x2="2.23" y2="5.9"/><line class="cls-1" x1="9.84" y1="5.9" x2="12.01" y2="5.9"/><line class="cls-1" x1="0.13" y1="11.92" x2="2.33" y2="9.84"/><line class="cls-1" x1="11.77" y1="11.92" x2="9.58" y2="9.84"/></svg>',
   },
   {
     key: "Oral_Folkl",
+    color: "#87D6F8",
+    chartLabel: ["ზეპირსიტყ-", "ვიერება"],
     label: "ზეპირსიტყვიერება (მხატვრული კითხვა, ქართული ენის შემსწავლელი კლუბი)",
     svg:
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.81 14.71"><defs><style>.cls-1{fill:#87d6f8;}.cls-2,.cls-4,.cls-6{fill:none;stroke:#231f20;}.cls-2{stroke-miterlimit:10;stroke-width:0.15px;}.cls-3{fill:#85451d;}.cls-4{stroke-width:0.1px;}.cls-5{fill:#e2aa60;}.cls-6{stroke-linejoin:round;stroke-width:0.2px;}.cls-7{fill:#231f20;}</style></defs><polygon class="cls-1" points="0.08 0.09 0.08 14.52 2.6 11.63 13.74 11.63 13.74 0.09 0.08 0.09"/><polygon class="cls-2" points="13.74 0.07 13.74 11.62 2.6 11.62 0.07 14.51 0.07 0.07 13.74 0.07"/><path class="cls-3" d="M10.77,1.84a1.29,1.29,0,0,0-.25,0h.07L10.32,2a.85.85,0,0,0-.3.6v.84h.75a.76.76,0,0,0,.69-.81.76.76,0,0,0-.69-.81" transform="translate(-0.49 -0.89)"/><path class="cls-4" d="M10.77,1.84a1.29,1.29,0,0,0-.25,0h.07L10.32,2a.85.85,0,0,0-.3.6v.84h.75a.76.76,0,0,0,.69-.81A.76.76,0,0,0,10.77,1.84Z" transform="translate(-0.49 -0.89)"/><path class="cls-5" d="M10.59,1.88,10.32,2a.85.85,0,0,0-.3.6V11a.76.76,0,0,1-1.31.49c-.2-.26-.12-.45-.19-.74s-.33-.52-.55-.52H4.18V2.54c0-.27.34-.66.56-.66Z" transform="translate(-0.49 -0.89)"/><path class="cls-6" d="M10.59,1.88,10.32,2a.85.85,0,0,0-.3.6V11a.76.76,0,0,1-1.31.49c-.2-.26-.12-.45-.19-.74s-.33-.52-.55-.52H4.18V2.54c0-.27.34-.66.56-.66Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M7.08,4c-.4,0-.4.28,0,.3.6,0,1.34,0,2,0,.4,0,.42-.26,0-.3Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M5.15,4c-.41,0-.43.28,0,.3a5.11,5.11,0,0,0,.79,0c.29,0,.23-.26-.09-.28h-.7" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M5.15,5.52c-.43,0-.41.3,0,.31H9c.41,0,.46-.26.06-.31Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M8.39,7c-.41,0-.42.28,0,.3a7.06,7.06,0,0,0,.8,0c.28-.06.22-.26-.09-.29H8.39" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M5.13,7.05c-.4,0-.39.28,0,.3.6,0,1.34,0,2,0,.4,0,.42-.26,0-.3Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M5.15,8.56c-.43,0-.41.29,0,.3H9c.41,0,.46-.26.06-.3Z" transform="translate(-0.49 -0.89)"/><path class="cls-3" d="M9.22,11.87H4a.82.82,0,0,1,0-1.62H7.87a.76.76,0,0,1,.69.81c0,.44.1.61.66.81" transform="translate(-0.49 -0.89)"/><path class="cls-4" d="M9.22,11.87H4a.82.82,0,0,1,0-1.62H7.87a.76.76,0,0,1,.69.81C8.56,11.5,8.66,11.67,9.22,11.87Z" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M12.54,1.7v.09a1,1,0,0,0-.28.21.38.38,0,0,0-.08.24s0,.09,0,.11a.05.05,0,0,0,.05,0l.07,0,.09,0a.26.26,0,0,1,.16.07.26.26,0,0,1,.07.17.23.23,0,0,1-.09.18.27.27,0,0,1-.2.07.35.35,0,0,1-.26-.12A.45.45,0,0,1,12,2.39.7.7,0,0,1,12.11,2a.83.83,0,0,1,.43-.28m1.05,0v.08a1,1,0,0,0-.3.23.48.48,0,0,0-.07.24.12.12,0,0,0,0,.09.05.05,0,0,0,.05,0l.07,0,.1,0a.21.21,0,0,1,.15.07.2.2,0,0,1,.07.16.29.29,0,0,1-.08.19.31.31,0,0,1-.21.07.34.34,0,0,1-.26-.12A.43.43,0,0,1,13,2.4.64.64,0,0,1,13.17,2a.77.77,0,0,1,.42-.27" transform="translate(-0.49 -0.89)"/><path class="cls-7" d="M1.21,11.94v-.09a1,1,0,0,0,.29-.23.48.48,0,0,0,.07-.24.2.2,0,0,0,0-.09l-.06,0-.07,0H1.33a.22.22,0,0,1-.23-.22.26.26,0,0,1,.09-.19.28.28,0,0,1,.2-.08.35.35,0,0,1,.26.13.44.44,0,0,1,.12.32.68.68,0,0,1-.15.42.74.74,0,0,1-.41.27m1,0v-.09a1.05,1.05,0,0,0,.27-.21.4.4,0,0,0,.09-.24.14.14,0,0,0,0-.11.05.05,0,0,0,0,0l-.08,0H2.38a.25.25,0,0,1-.16-.06.25.25,0,0,1-.06-.17.22.22,0,0,1,.08-.18.28.28,0,0,1,.2-.08.39.39,0,0,1,.27.13.45.45,0,0,1,.11.32.64.64,0,0,1-.14.41.85.85,0,0,1-.42.28" transform="translate(-0.49 -0.89)"/></svg>',
@@ -13548,6 +13604,7 @@ function buildArtDisciplinesLayers(data) {
       });
       layer.on("click", function () {
         showInfoArtMuni(p);
+        showBottomChartArt(p, artActiveCategories(p));
       });
     },
   }).addTo(map);
@@ -13560,58 +13617,125 @@ function buildArtDisciplinesLayers(data) {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
       var cats = artActiveCategories(p);
-
       var compactIcon = buildArtClusterIcon(cats, false);
-      var expandedIcon = buildArtClusterIcon(cats, true);
 
       var marker = L.marker(latlng, { icon: compactIcon.icon });
-      marker._artCompact = compactIcon;
-      marker._artExpandedData = expandedIcon;
-      marker._artIsExpanded = false;
+      // hover — მხოლოდ დასახლების სახელი; დეტალები სტატისტიკის ველშია
+      marker.bindTooltip(p.Name_Geo, {
+        direction: "top",
+        className: "village-label",
+        offset: [0, -compactIcon.boxH / 2 - 2],
+      });
 
-      marker.bindTooltip(
-        p.Name_Geo +
-          " — " +
-          cats
-            .map(function (c) {
-              return c.label.split(" (")[0];
-            })
-            .join(", "),
-        {
-          direction: "top",
-          className: "village-label",
-          offset: [0, -compactIcon.boxH / 2 - 2],
-        }
-      );
-
-      marker.on("click", function (e) {
-        L.DomEvent.stopPropagation(e);
-        collapseArtExpanded(marker);
-        if (marker._artIsExpanded) {
-          marker.setIcon(marker._artCompact.icon);
-          marker.setZIndexOffset(0);
-          marker._artIsExpanded = false;
-          artExpandedMarker = null;
-        } else {
-          marker.setIcon(marker._artExpandedData.icon);
-          marker.setZIndexOffset(2000);
-          marker._artIsExpanded = true;
-          artExpandedMarker = marker;
-        }
+      marker.on("click", function () {
         showInfoArtSettlement(p, cats);
+        showBottomChartArt(p, cats);
       });
       return marker;
     },
   }).addTo(map);
 
   updateArtLegend();
-
-  map.off("click", artMapClickCollapse);
-  map.on("click", artMapClickCollapse);
 }
 
 function artMapClickCollapse() {
   collapseArtExpanded(null);
+}
+
+
+// ერთიანი "აქვს / არ აქვს" დიაგრამა სტატისტიკის ველისთვის
+// (ტურიზმის სახეობების იმავე პრინციპით)
+function drawPresenceChart(title, cats, activeKeys) {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  var ctx = canvas.getContext("2d");
+  if (bottomChart) bottomChart.destroy();
+
+  function on(k) {
+    return activeKeys.indexOf(k) !== -1;
+  }
+
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: cats.map(function (c) {
+        return c.chartLabel || [c.label];
+      }),
+      datasets: [
+        {
+          data: cats.map(function () {
+            return 1;
+          }),
+          backgroundColor: cats.map(function (c) {
+            return on(c.key) ? c.color : c.color + "26";
+          }),
+          borderWidth: 0,
+          borderRadius: 3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: title,
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 6 },
+        },
+        tooltip: {
+          callbacks: {
+            title: function (c) {
+              return cats[c[0].dataIndex].label;
+            },
+            label: function (c) {
+              return on(cats[c.dataIndex].key)
+                ? "წარმოდგენილია"
+                : "არ არის წარმოდგენილი";
+            },
+          },
+        },
+      },
+      scales: {
+        y: { beginAtZero: true, max: 1, display: false, grid: { display: false } },
+        x: {
+          ticks: {
+            font: { family: "Fira Sans", size: 11, weight: "500" },
+            autoSkip: false,
+            maxRotation: 0,
+            minRotation: 0,
+            padding: 4,
+            color: function (c) {
+              return on(cats[c.index].key) ? "#1A1A18" : "#b0b0b0";
+            },
+          },
+          grid: { display: false },
+        },
+      },
+    },
+  });
+}
+
+function showBottomChartArt(p, cats) {
+  drawPresenceChart(
+    p.Name_Geo + " — სახელოვნებო დარგები",
+    ART_CATEGORIES,
+    cats.map(function (c) {
+      return c.key;
+    })
+  );
+}
+
+function showBottomChartMuseum(p, t) {
+  drawPresenceChart(
+    p.Name_Geo + " — " + t.label,
+    TOURISM_TYPES,
+    [t.key]
+  );
 }
 
 function showInfoArtMuni(p) {
