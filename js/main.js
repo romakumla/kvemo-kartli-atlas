@@ -66,6 +66,51 @@ var MUNI_BORDER_WEIGHT = 0.8;
 var MUNI_BORDER_DASH = "3,3";
 var MUNI_BORDER_OPACITY = 0.5;
 
+
+// ===== მთავარი ფანჯრის სტატისტიკა — სრულად ავტომატური =====
+// რუკები: ქვე-ფენის ღილაკების დათვლა.
+// მონაცემთა ფენები: სკრიპტი კითხულობს საკუთარ კოდს (ქეშიდან, დამატებითი
+// ჩამოტვირთვის გარეშე) და ითვლის რამდენ უნიკალურ data/*.geojson-ს იყენებს.
+var ATLAS_DATA_LAYERS = 72; // fallback, თუ წაკითხვა ვერ მოხერხდა
+
+(function updateAtlasStats() {
+  var m = document.getElementById("statMaps");
+  if (m) {
+    var maps = document.querySelectorAll(
+      "[data-sublayer],[data-naturesub],[data-histsub],[data-econsub]," +
+        "[data-edusub],[data-toursub],[data-healthsub]"
+    ).length;
+    if (maps > 0) m.textContent = maps;
+  }
+
+  var l = document.getElementById("statLayers");
+  if (!l) return;
+  l.textContent = ATLAS_DATA_LAYERS;
+
+  var tag =
+    document.currentScript || document.querySelector('script[src*="main.js"]');
+  if (!tag || !tag.src) return;
+
+  fetch(tag.src)
+    .then(function (r) {
+      return r.ok ? r.text() : null;
+    })
+    .then(function (txt) {
+      if (!txt) return;
+      var hits = txt.match(/['"]data\/[A-Za-z0-9_.\-]+\.geojson['"]/g);
+      if (!hits) return;
+      var uniq = {};
+      hits.forEach(function (h) {
+        uniq[h.slice(1, -1)] = 1;
+      });
+      var n = Object.keys(uniq).length;
+      if (n > 0) l.textContent = n;
+    })
+    .catch(function () {
+      /* ხელმისაწვდომი არაა — fallback რჩება */
+    });
+})();
+
 // ===== Georgia border (always visible) =====
 fetch("data/georgia_border.geojson")
   .then((r) => r.json())

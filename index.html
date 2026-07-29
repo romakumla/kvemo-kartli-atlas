@@ -13,7 +13,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=BPG+Nino+Mtavruli&family=Fira+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20260801" />
+  <link rel="stylesheet" href="css/style.css?v=20260804" />
   <style>
     .clickable {
       cursor: pointer;
@@ -153,9 +153,9 @@
         <div class="atlas-modal-stats">
           <div class="modal-stat"><span class="modal-stat-num">7</span><span
               class="modal-stat-label">მუნიციპალიტეტი</span></div>
-          <div class="modal-stat"><span class="modal-stat-num">30+</span><span class="modal-stat-label">თემატური
+          <div class="modal-stat"><span class="modal-stat-num" id="statMaps">56</span><span class="modal-stat-label">თემატური
               რუკა</span></div>
-          <div class="modal-stat"><span class="modal-stat-num">50+</span><span class="modal-stat-label">მონაცემთა
+          <div class="modal-stat"><span class="modal-stat-num" id="statLayers">72</span><span class="modal-stat-label">მონაცემთა
               ფენა</span></div>
         </div>
       </div>
@@ -212,6 +212,13 @@
       <div class="atlas-modal-body">
         <div class="atlas-team-grid">
           <div class="team-card">
+            <div class="team-avatar"><img src="files/team/bolashvili.jpg" alt="ნანა ბოლაშვილი"
+                class="team-photo"></div>
+            <div class="team-name">ნანა ბოლაშვილი</div>
+            <div class="team-role">გეოგრაფი, გეოგ. აკად. დოქტორი</div>
+            <div class="team-subrole">ვახუშტი ბაგრატიონის გეოგრაფიის ინსტიტუტის დირექტორი</div>
+          </div>
+          <div class="team-card">
             <div class="team-avatar"><img src="files/team/liparteliani.jpg" alt="გულიკო ლიპარტელიანი"
                 class="team-photo"></div>
             <div class="team-name">გულიკო ლიპარტელიანი</div>
@@ -219,13 +226,15 @@
             <div class="team-subrole">განყოფ. ხელმძღვანელი · პროექტის ხელმძღვანელი</div>
           </div>
           <div class="team-card">
-            <div class="team-avatar">🗺️</div>
+            <div class="team-avatar"><img src="files/team/kumladze.jpg" alt="რომან კუმლაძე"
+                class="team-photo"></div>
             <div class="team-name">რომან კუმლაძე</div>
             <div class="team-role">კარტოგრაფი</div>
             <div class="team-subrole">მეცნიერ-თანამშრომელი · პროექტის კოორდინატორი</div>
           </div>
           <div class="team-card">
-            <div class="team-avatar">🗺️</div>
+            <div class="team-avatar"><img src="files/team/kurtubadze.jpg" alt="მანანა ქურთუბაძე"
+                class="team-photo"></div>
             <div class="team-name">მანანა ქურთუბაძე</div>
             <div class="team-role">დამოუკიდებელი კარტოგრაფი</div>
 
@@ -1211,7 +1220,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=20260801"></script>
+  <script src="js/main.js?v=20260804"></script>
 
   <script>
     function openModal(id) {
