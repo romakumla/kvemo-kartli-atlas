@@ -53,17 +53,30 @@ var basemaps = {
 var currentBasemap = basemaps.light;
 currentBasemap.addTo(map);
 
+// ===== ერთიანი საზღვრის სტილი =====
+// რეგიონის საზღვარი — უფრო მკვეთრი
+var BORDER_COLOR = "#8B7355";
+var BORDER_WEIGHT = 2;
+var BORDER_DASH = "4,3";
+var BORDER_OPACITY = 0.9;
+
+// მუნიციპალიტეტების საზღვრები — უფრო წვრილი და ბაცი
+var MUNI_BORDER_COLOR = "#A89985";
+var MUNI_BORDER_WEIGHT = 0.8;
+var MUNI_BORDER_DASH = "3,3";
+var MUNI_BORDER_OPACITY = 0.5;
+
 // ===== Georgia border (always visible) =====
 fetch("data/georgia_border.geojson")
   .then((r) => r.json())
   .then((data) => {
     var bl = L.geoJSON(data, {
       style: {
-        color: "#8B0000",
-        weight: 2,
+        color: BORDER_COLOR,
+        weight: BORDER_WEIGHT,
         fill: false,
-        dashArray: "4,2",
-        opacity: 0.7,
+        dashArray: BORDER_DASH,
+        opacity: BORDER_OPACITY,
       },
     }).addTo(map);
     borderBounds = bl.getBounds();
@@ -84,9 +97,10 @@ function loadNeutralLayers() {
         style: {
           fillColor: "#E8E4DC",
           fillOpacity: 0.35,
-          color: "#9B8E7A",
-          weight: 1.5,
-          dashArray: "3,3",
+          color: MUNI_BORDER_COLOR,
+          weight: MUNI_BORDER_WEIGHT,
+          opacity: MUNI_BORDER_OPACITY,
+          dashArray: MUNI_BORDER_DASH,
         },
       }).addTo(map);
     });
@@ -242,9 +256,10 @@ function buildEthnicsLayer(data) {
       return {
         fillColor: x.base,
         fillOpacity: x.alpha,
-        color: x.base,
-        weight: 2,
-        opacity: 0.8,
+        color: MUNI_BORDER_COLOR,
+        weight: MUNI_BORDER_WEIGHT,
+        opacity: MUNI_BORDER_OPACITY,
+        dashArray: MUNI_BORDER_DASH,
       };
     },
     onEachFeature: function (feature, layer) {
@@ -308,9 +323,10 @@ function buildReligionLayer(data) {
       return {
         fillColor: x.base,
         fillOpacity: x.alpha,
-        color: x.base,
-        weight: 2,
-        opacity: 0.8,
+        color: MUNI_BORDER_COLOR,
+        weight: MUNI_BORDER_WEIGHT,
+        opacity: MUNI_BORDER_OPACITY,
+        dashArray: MUNI_BORDER_DASH,
       };
     },
     onEachFeature: function (feature, layer) {
@@ -848,7 +864,6 @@ function switchSublayer(sub) {
     density: "density",
     idp: "idp",
   };
-  setInfoBtn(_popInfoMap[sub] || null);
   if (
     sub === "population" ||
     sub === "ethnics" ||
@@ -896,6 +911,7 @@ function switchSublayer(sub) {
     document.getElementById("filterSection").style.display = "none";
     loadIDP();
   }
+  setInfoBtn(_popInfoMap[sub] || null);
   // შედარება მხოლოდ მოსახლ. ქვეფენებზე
   var _cb = document.getElementById("btnCompare");
   if (_cb)
@@ -1244,6 +1260,7 @@ function makePieSVG(values, size) {
 }
 
 function buildMaritalLayer(data, gender) {
+  hideMuniCenters();
   var yr = maritalYear;
   var layer = L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
@@ -2342,10 +2359,10 @@ function addMuniBorderOverlay() {
         interactive: false,
         style: {
           fill: false,
-          color: "#9B8E7A",
-          weight: 2,
-          opacity: 0.9,
-          dashArray: "4,3",
+          color: MUNI_BORDER_COLOR,
+          weight: MUNI_BORDER_WEIGHT,
+          opacity: MUNI_BORDER_OPACITY,
+          dashArray: MUNI_BORDER_DASH,
         },
       }).addTo(map);
       muniBorderOverlay.bringToFront();
@@ -2358,6 +2375,69 @@ function removeMuniBorderOverlay() {
     muniBorderOverlay = null;
   }
 }
+
+// ===== ფენების რიგითობა: პოლიგონები ქვემოთ → საზღვრები → წერტილები ზემოთ =====
+function finalizeLayerOrder() {
+  try {
+  // თემატურ რუკებზე მუნიც. საზღვრები ყოველთვის ერთნაირად ჩანს
+  if (!neutralBoundaryLayer && !muniBorderOverlay) {
+    addMuniBorderOverlay();
+  }
+  var pointLayers = [];
+  map.eachLayer(function (l) {
+    if (l === muniBorderOverlay || l === natureMuniLayer) return;
+    if (l instanceof L.CircleMarker) {
+      pointLayers.push(l);
+    } else if (l instanceof L.GeoJSON) {
+      var hasPoints = false;
+      l.eachLayer(function (c) {
+        if (c instanceof L.CircleMarker) hasPoints = true;
+      });
+      if (hasPoints) pointLayers.push(l);
+    }
+  });
+  if (muniBorderOverlay && muniBorderOverlay.bringToFront) {
+    muniBorderOverlay.bringToFront();
+  }
+  // მუნიც. წერტილები საზღვრებზე მაღლა, მაგრამ თემატურ სიმბოლოებზე დაბლა —
+  // რომ დიაგრამებმა და პუნსონებმა დაფარონ ისინი
+  if (natureMuniLayer && natureMuniLayer.bringToFront) {
+    natureMuniLayer.bringToFront();
+  }
+  pointLayers.forEach(function (l) {
+    if (l.bringToFront) l.bringToFront();
+  });
+  } catch (e) {
+    console.warn("layer order:", e);
+  }
+  restoreInfoBtn();
+}
+
+// ინფო-ღილაკი ზოგჯერ ასინქრონული ჩატვირთვის გამო იკარგებოდა — აქ ბრუნდება
+function restoreInfoBtn() {
+  if (!currentMapInfoKey || !MAP_INFO[currentMapInfoKey]) return;
+  var btn = document.getElementById("mapInfoBtn");
+  if (!btn) return;
+  if (btn.style.display !== "flex" || btn.classList.contains("hidden")) {
+    var key = currentMapInfoKey;
+    btn.classList.remove("hidden");
+    btn.style.display = "flex";
+    btn.style.visibility = "visible";
+    btn.onclick = function () {
+      if (mapInfoVisible) {
+        hideMapInfo();
+      } else {
+        showMapInfo(key);
+      }
+    };
+  }
+}
+
+var _layerOrderTimer = null;
+map.on("layeradd", function () {
+  clearTimeout(_layerOrderTimer);
+  _layerOrderTimer = setTimeout(finalizeLayerOrder, 140);
+});
 
 function loadNatureMuniCenters() {
   if (natureMuniLayer) return;
@@ -2393,6 +2473,14 @@ function removeNatureMuniCenters() {
     natureMuniLayer = null;
   }
   removeMuniBorderOverlay();
+}
+
+// დიაგრამიან რუკებზე მუნიც. წერტილები ზედმეტია — საზღვრები რჩება
+function hideMuniCenters() {
+  if (natureMuniLayer) {
+    map.removeLayer(natureMuniLayer);
+    natureMuniLayer = null;
+  }
 }
 
 function buildAgrovlimatLayer(data) {
@@ -2580,6 +2668,30 @@ var MAP_INFO = {
       "გარემოს ეროვნული სააგენტო, 2016–2017; წიაღის ეროვნული სააგენტო, 2024",
     year: "2024",
   },
+  madflow: {
+    title: "ღვარცოფული და ეროზიული პროცესები",
+    text:
+      "",
+    author: "",
+    cartographer: "",
+    source: "გარემოს ეროვნული სააგენტო, გეოლოგიის დეპარტამენტი, საინფორმაციო გეოლოგიური ბიულეტენი, 2025",
+    },
+  meteo: {
+    title: "მეტეოროლოგიური სადგურები",
+    text:
+      "უკანასკნელი 50 წლის მანძილზე, საქართველოში გააქტიურდა უარყოფითი მეტეოროლოგიური მოვლენები (გახშირებული გვალვები, ძლიერი ქარები, უხვი ნალექები და სხვ.), რამაც სენსიტიურ გლობალურ პირობებთან ერთად, ეკოლოგიური საფრთხეების არნახული მასშტაბით განვითარება გამოიწვია. ბუნებრივი სტიქიური მოვლენებისგან მოსახლეობის დაცვისა და საინჟინრო ობიექტების უსაფრთხო ფუნქციონირებისთვის საჭიროა სტიქიური ეკოლოგიური პროცესების შესწავლა-პროგნოზირება და მართვის სცენარების შემუშავება, რისთვისაც აუცილებელია კარგად ორგანიზებული ჰიდრომეტეოროლოგიური დაკვირვების ქსელი. ბოლო წლებში ძლიერ შემცირებულმა ჰიდრომეტეო სადგურების/საგუშაგოების რაოდენობამ, მნიშვნელოვნად გაართულა კლიმატის ცვლილების და მისგან გამოწვეული სტიქიური ეკოლოგიური პროცესების შესწავლა-პროგნოზირება. მსოფლიო მეტეოროლოგიური ორგანიზაციის სტანდარტებით მიმდინარეობს დაკვირვებები: მეტეოროლოგიურ სადგურებზე ყოველ სამ საათში ერთხელ (UTC: 18:00-21:00-00:00-03:00-06:00-09:00-12:00-15:00), ჰაერის მაქსიმალურ და მინიმალურ ტემპერატურაზე, ატმოსფერულ ნალექებზე, თოვლის საფარზე, ჰაერის ტენიანობაზე, ქარის სიჩქარესა და მიმართულებაზე, ღრუბლიანობაზე, ატმოსფერულ წნევაზე, ნიადაგის ტემპერატურაზე, მზის რადიაციაზე, ატმოსფერულ მოვლენებზე (ნისლი, ელჭექი, სეტყვა, ქარბუქი და ა.შ.). მეტეოროლოგიურ საგუშაგოებზე ყოველ 12 საათში ერთხელ (UTC: 03:00-15:00): ჰაერის მაქსიმალურ და მინიმალურ ტემპერატურაზე, ატმოსფერულ ნალექებზე, თოვლის საფარზე, ატმოსფერულ მოვლენებზე. ნალექმზომ საგუშაგოებზე ყოველ 12 საათში ერთხელ (UTC: 03:00-15:00): ატმოსფერულ ნალექებზე, თოვლის საფარზე.",
+    author: "",
+    cartographer: "",
+    source: "გარემოს ეროვნული სააგენტო, 2024",
+    },
+  hydro: {
+    title: "ჰიდროლოგიური სადგურები",
+    text:
+      "უკანასკნელი 50 წლის მანძილზე, საქართველოში გააქტიურდა უარყოფითი მეტეოროლოგიური მოვლენები (გახშირებული გვალვები, ძლიერი ქარები, უხვი ნალექები და სხვ.), რამაც სენსიტიურ გლობალურ პირობებთან ერთად, ეკოლოგიური საფრთხეების არნახული მასშტაბით განვითარება გამოიწვია. ბუნებრივი სტიქიური მოვლენებისგან მოსახლეობის დაცვისა და საინჟინრო ობიექტების უსაფრთხო ფუნქციონირებისთვის საჭიროა სტიქიური ეკოლოგიური პროცესების შესწავლა-პროგნოზირება და მართვის სცენარების შემუშავება, რისთვისაც აუცილებელია კარგად ორგანიზებული ჰიდრომეტეოროლოგიური დაკვირვების ქსელი. ბოლო წლებში ძლიერ შემცირებულმა ჰიდრომეტეო სადგურების/საგუშაგოების რაოდენობამ, მნიშვნელოვნად გაართულა კლიმატის ცვლილების და მისგან გამოწვეული სტიქიური ეკოლოგიური პროცესების შესწავლა-პროგნოზირება. მსოფლიო მეტეოროლოგიური ორგანიზაციის სტანდარტებით მიმდინარეობს დაკვირვებები: მეტეოროლოგიურ სადგურებზე ყოველ სამ საათში ერთხელ (UTC: 18:00-21:00-00:00-03:00-06:00-09:00-12:00-15:00), ჰაერის მაქსიმალურ და მინიმალურ ტემპერატურაზე, ატმოსფერულ ნალექებზე, თოვლის საფარზე, ჰაერის ტენიანობაზე, ქარის სიჩქარესა და მიმართულებაზე, ღრუბლიანობაზე, ატმოსფერულ წნევაზე, ნიადაგის ტემპერატურაზე, მზის რადიაციაზე, ატმოსფერულ მოვლენებზე (ნისლი, ელჭექი, სეტყვა, ქარბუქი და ა.შ.). მეტეოროლოგიურ საგუშაგოებზე ყოველ 12 საათში ერთხელ (UTC: 03:00-15:00): ჰაერის მაქსიმალურ და მინიმალურ ტემპერატურაზე, ატმოსფერულ ნალექებზე, თოვლის საფარზე, ატმოსფერულ მოვლენებზე. ნალექმზომ საგუშაგოებზე ყოველ 12 საათში ერთხელ (UTC: 03:00-15:00): ატმოსფერულ ნალექებზე, თოვლის საფარზე.",
+    author: "",
+    cartographer: "",
+    source: "გარემოს ეროვნული სააგენტო, 2024",
+    },
   landscape: {
     title: "ლანდშაფტები",
     text: "ქვემო ქართლის ბუნებრივი ლანდშაფტები ვაკეების ველის მცენარეულობიდან მაღალი მთის სუბალპურ და ალპურ მდელოებამდე ვრცელდება.",
@@ -2667,36 +2779,36 @@ var MAP_INFO = {
   },
   hot_days: {
     title: "ცხელი დღეები",
-    text: "",
-    author: "ნანა ბოლაშვილი",
-    cartographer: "ნიკოლოზ სუქნიძე",
+    text:
+      "კლიმატის ცვლილების პროცესი ქვემო ქართლში მნიშვნელოვნადაა გააქტიურებული. რეგიონის მთელ ტერიტორიაზე ჰაერის საშუალო წლიური ტემპერატურა საშუალოდ 0.7°C-ით არის მომატებული. ნალექების წლიური რაოდენობა ქვემო ქართლის ზოგ მუნიციპალიტეტში გაზრდილი, ხოლო ზოგან პირიქით, შემცირებულია. შეინიშნება სტიქიური ჰიდრომეტეოროლოგიური მოვლენების სიხშირისა და ინტენსივობის ზრდის ტენდენცია. გლობალური დათბობა და მასთან დაკავშირებული სითბური ტალღები ადამიანის ჯანმრთელობაზეც მნიშვნელოვან უარყოფით გავლენას ახდენს. პროგნოზების მიხედვით, საქართველოში იმატებს როგორც მზიანი დღეების, ასევე ცხელი დღეების (დღის ტემპერატურა 30°C-ს აღემატება) და ტროპიკული ღამეების (ღამის ტემპერატურა 20°C-ს აღემატება) რაოდენობაც. ადამიანისთვის სიგრილის მინიმალური ტემპერატურა 18°C, ხოლო სიცხის — 23°C-ია. რამდენიმე დღის მანძილზე გაგრძელებული ექსტრემალურად მაღალი ტემპერატურა ხელს უწყობს ინფექციური პათოლოგიების გახშირებას და ამწვავებს ქრონიკულ დაავადებებს (გულსისხლძარღვთა, სასუნთქი სისტემის და სხვ.). განსაკუთრებით მოწყვლადი ჯგუფები არიან: ბავშვები, ხანდაზმულები და ქრონიკული დაავადებების მქონე პირები. კლიმატის ცვლილების შეჩერება შეუძლებელია, თუმცა სწორი პოლიტიკის შემთხვევაში შესაძლებელია კლიმატური რისკების შემცირება, მზადყოფნა და შერბილება.",
+    author: "",
+    cartographer: "",
     source: "E-OBS data access months (copernicus.eu)",
-    year: "2023",
-  },
+    },
   trop_nights: {
     title: "ტროპიკული ღამეები",
-    text: "",
-    author: "ნანა ბოლაშვილი",
-    cartographer: "ნიკოლოზ სუქნიძე",
+    text:
+      "კლიმატის ცვლილების პროცესი ქვემო ქართლში მნიშვნელოვნადაა გააქტიურებული. რეგიონის მთელ ტერიტორიაზე ჰაერის საშუალო წლიური ტემპერატურა საშუალოდ 0.7°C-ით არის მომატებული. ნალექების წლიური რაოდენობა ქვემო ქართლის ზოგ მუნიციპალიტეტში გაზრდილი, ხოლო ზოგან პირიქით, შემცირებულია. შეინიშნება სტიქიური ჰიდრომეტეოროლოგიური მოვლენების სიხშირისა და ინტენსივობის ზრდის ტენდენცია. გლობალური დათბობა და მასთან დაკავშირებული სითბური ტალღები ადამიანის ჯანმრთელობაზეც მნიშვნელოვან უარყოფით გავლენას ახდენს. პროგნოზების მიხედვით, საქართველოში იმატებს როგორც მზიანი დღეების, ასევე ცხელი დღეების (დღის ტემპერატურა 30°C-ს აღემატება) და ტროპიკული ღამეების (ღამის ტემპერატურა 20°C-ს აღემატება) რაოდენობაც. ადამიანისთვის სიგრილის მინიმალური ტემპერატურა 18°C, ხოლო სიცხის — 23°C-ია. რამდენიმე დღის მანძილზე გაგრძელებული ექსტრემალურად მაღალი ტემპერატურა ხელს უწყობს ინფექციური პათოლოგიების გახშირებას და ამწვავებს ქრონიკულ დაავადებებს (გულსისხლძარღვთა, სასუნთქი სისტემის და სხვ.). განსაკუთრებით მოწყვლადი ჯგუფები არიან: ბავშვები, ხანდაზმულები და ქრონიკული დაავადებების მქონე პირები. კლიმატის ცვლილების შეჩერება შეუძლებელია, თუმცა სწორი პოლიტიკის შემთხვევაში შესაძლებელია კლიმატური რისკების შემცირება, მზადყოფნა და შერბილება.",
+    author: "",
+    cartographer: "",
     source: "E-OBS data access months (copernicus.eu)",
-    year: "2023",
-  },
+    },
   frost_days: {
     title: "ყინვიანი დღეები",
-    text: "",
-    author: "ნანა ბოლაშვილი",
-    cartographer: "ნიკოლოზ სუქნიძე",
+    text:
+      "კლიმატის ცვლილების პროცესი ქვემო ქართლში მნიშვნელოვნადაა გააქტიურებული. რეგიონის მთელ ტერიტორიაზე ჰაერის საშუალო წლიური ტემპერატურა საშუალოდ 0.7°C-ით არის მომატებული. ნალექების წლიური რაოდენობა ქვემო ქართლის ზოგ მუნიციპალიტეტში გაზრდილი, ხოლო ზოგან პირიქით, შემცირებულია. შეინიშნება სტიქიური ჰიდრომეტეოროლოგიური მოვლენების სიხშირისა და ინტენსივობის ზრდის ტენდენცია. გლობალური დათბობა და მასთან დაკავშირებული სითბური ტალღები ადამიანის ჯანმრთელობაზეც მნიშვნელოვან უარყოფით გავლენას ახდენს. პროგნოზების მიხედვით, საქართველოში იმატებს როგორც მზიანი დღეების, ასევე ცხელი დღეების (დღის ტემპერატურა 30°C-ს აღემატება) და ტროპიკული ღამეების (ღამის ტემპერატურა 20°C-ს აღემატება) რაოდენობაც. ადამიანისთვის სიგრილის მინიმალური ტემპერატურა 18°C, ხოლო სიცხის — 23°C-ია. რამდენიმე დღის მანძილზე გაგრძელებული ექსტრემალურად მაღალი ტემპერატურა ხელს უწყობს ინფექციური პათოლოგიების გახშირებას და ამწვავებს ქრონიკულ დაავადებებს (გულსისხლძარღვთა, სასუნთქი სისტემის და სხვ.). განსაკუთრებით მოწყვლადი ჯგუფები არიან: ბავშვები, ხანდაზმულები და ქრონიკული დაავადებების მქონე პირები. კლიმატის ცვლილების შეჩერება შეუძლებელია, თუმცა სწორი პოლიტიკის შემთხვევაში შესაძლებელია კლიმატური რისკების შემცირება, მზადყოფნა და შერბილება.",
+    author: "",
+    cartographer: "",
     source: "E-OBS data access months (copernicus.eu)",
-    year: "2023",
-  },
+    },
   heat_waves: {
     title: "სითბური ტალღები",
-    text: "",
-    author: "ნანა ბოლაშვილი",
-    cartographer: "ნიკოლოზ სუქნიძე",
+    text:
+      "სითბური ტალღები ხანგრძლივად მომატებული ტემპერატურის პერიოდია, როცა ჰაერის ტემპერატურა რამდენიმე დღე ზედიზედ მნიშვნელოვნად აღემატება კონკრეტული ადგილის კლიმატურ ნორმას. სითბური ტალღების ტენდენციის რუკა ასახავს სითბური ტალღების ინტენსივობის ტენდენციას კონკრეტულ ტერიტორიაზე მრავალწლიან პერიოდში. ტენდენციის ანალიზი საშუალებას იძლევა გამოვლინდეს ის რეგიონები, სადაც სითბური ტალღები განსაკუთრებით სწრაფად მატულობს, რაც მიუთითებს კლიმატის ცვლილების ზეგავლენის გაძლიერებაზე, გამოყოფს ტერიტორიებს, სადაც თერმული სტრესი ზრდის ჯანმრთელობის, სოფლის მეურნეობისა და ეკოსისტემების რისკებს. ასეთი რუკები მნიშვნელოვანია ადაპტაციის ღონისძიებების დაგეგმვის, რისკების შეფასებისა და კლიმატის მდგრადი პოლიტიკის ჩამოყალიბებისთვის.",
+    author: "",
+    cartographer: "",
     source: "E-OBS data access months (copernicus.eu)",
-    year: "2023",
-  },
+    },
   drought: {
     title: "გვალვის ინდექსი",
     text: "",
@@ -2904,7 +3016,11 @@ function showMapInfo(key) {
     "</span>" +
     '<button class="map-info-close" onclick="hideMapInfo()">&#x2715;</button></div>' +
     '<div class="map-info-body">' +
-    (info.text ? '<p class="map-info-text">' + info.text + "</p>" : "") +
+    (info.text
+      ? '<p class="map-info-text">' + info.text + "</p>"
+      : rows
+        ? ""
+        : '<p class="map-info-text" style="color:var(--text-muted);font-style:italic;">აღწერა ჯერ არ არის დამატებული.</p>') +
     (rows ? '<div class="map-info-meta">' + rows + "</div>" : "") +
     "</div>";
   mapInfoEl.classList.remove("hidden");
@@ -2918,12 +3034,25 @@ function hideMapInfo() {
   }
   mapInfoVisible = false;
 }
+var currentMapInfoKey = null;
+var _infoBtnTimers = [];
 function setInfoBtn(key) {
   hideMapInfo();
+  currentMapInfoKey = key && MAP_INFO[key] ? key : null;
+  _infoBtnTimers.forEach(clearTimeout);
+  _infoBtnTimers = [];
+  // ასინქრონული ჩატვირთვები ზოგჯერ ღილაკს აქრობდნენ — რამდენჯერმე ვამოწმებთ
+  if (currentMapInfoKey) {
+    _infoBtnTimers.push(setTimeout(restoreInfoBtn, 350));
+    _infoBtnTimers.push(setTimeout(restoreInfoBtn, 1000));
+    _infoBtnTimers.push(setTimeout(restoreInfoBtn, 2200));
+  }
   var btn = document.getElementById("mapInfoBtn");
   if (!btn) return;
   if (key && MAP_INFO[key]) {
+    btn.classList.remove("hidden");
     btn.style.display = "flex";
+    btn.style.visibility = "visible";
     btn.onclick = function () {
       if (mapInfoVisible) {
         hideMapInfo();
@@ -2932,6 +3061,7 @@ function setInfoBtn(key) {
       }
     };
   } else {
+    btn.classList.add("hidden");
     btn.style.display = "none";
   }
 }
@@ -3125,6 +3255,7 @@ var landscapeAntropLayerRef = {
 };
 
 function loadLandscape() {
+  setInfoBtn("landscape");
   if (landscapeData) {
     buildLandscapeLayer(landscapeData, landscapeLayerRef);
     loadNatureMuniCenters();
@@ -3140,6 +3271,7 @@ function loadLandscape() {
 }
 
 function loadLandscapeAntrop() {
+  setInfoBtn("landscape");
   if (landscapeAntropData) {
     buildLandscapeLayer(landscapeAntropData, landscapeAntropLayerRef);
     loadNatureMuniCenters();
@@ -4199,8 +4331,7 @@ document.getElementById("btnNatureBack").addEventListener("click", function () {
   document.getElementById("natureView").style.display = "none";
   document.getElementById("mainLayerView").style.display = "";
   removeAllNatureLayers();
-  document.getElementById("chartEmpty").style.display = "flex";
-  document.getElementById("chartCanvas").classList.add("hidden");
+  hideChartPanel();
   document.getElementById("infoCard").classList.add("hidden");
   resetPopLegend();
   loadNeutralLayers();
@@ -4439,6 +4570,7 @@ function buildHydroLayer(data) {
 }
 
 function loadMeteo() {
+  setInfoBtn("meteo");
   if (meteoData) {
     buildMeteoLayer(meteoData);
     loadNatureMuniCenters();
@@ -4454,6 +4586,7 @@ function loadMeteo() {
 }
 
 function loadHydro() {
+  setInfoBtn("hydro");
   if (hydroData) {
     buildHydroLayer(hydroData);
     loadNatureMuniCenters();
@@ -4585,8 +4718,36 @@ function showBottomChartStations(type) {
 }
 
 // nature sublayer buttons
+// ქვე-ფენა → MAP_INFO გასაღები (ღილაკი დამოუკიდებლად ეყრდნობა ამას)
+var NATURE_SUB_INFO = {
+  agrovlimat: "agrovlimat",
+  meteo: "meteo",
+  hydro: "hydro",
+  landscape: "landscape",
+  landscape_antrop: "landscape",
+  hazard: "hazard",
+  groundwater: "groundwater",
+  earthquake: "earthquakes",
+  madflow: "madflow",
+  geology: "geology",
+  forest: "forest",
+  vegetation: "vegetation",
+  avg_temp: "avg_temp",
+  max_temp: "max_temp",
+  precip: "precip",
+  hot_days: "hot_days",
+  trop_nights: "trop_nights",
+  frost_days: "frost_days",
+  heat_waves: "heat_waves",
+  drought: "drought",
+  hail_total: "hail",
+  soils: "soils",
+  soils_born: "soils_born",
+};
+
 document.querySelectorAll("[data-naturesub]").forEach(function (btn) {
   btn.addEventListener("click", function () {
+    if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
     document
       .querySelectorAll("[data-naturesub]")
       .forEach((b) => b.classList.remove("active"));
@@ -4620,6 +4781,8 @@ document.querySelectorAll("[data-naturesub]").forEach(function (btn) {
     else if (sub === "hail_total") loadHailTotal();
     else if (sub === "soils") loadSoils();
     else if (sub === "soils_born") loadSoilsBorn();
+    // ღილაკი ბოლოს ვდგამთ — ჩატვირთვის შტოზე დამოკიდებული აღარაა
+    setInfoBtn(NATURE_SUB_INFO[sub] || null);
   });
 });
 
@@ -5021,6 +5184,7 @@ function loadHotDays() {
       _buildClimateLayer(d, _hotRef, _showInfoHotDays);
       updateClimateLegend("hot");
       loadNatureMuniCenters();
+      setInfoBtn("hot_days");
     });
 }
 
@@ -5039,6 +5203,7 @@ function loadTropNights() {
       _buildClimateLayer(d, _tropRef, _showInfoTropNights);
       updateClimateLegend("trop");
       loadNatureMuniCenters();
+      setInfoBtn("trop_nights");
     });
 }
 
@@ -5057,6 +5222,7 @@ function loadFrostDays() {
       _buildClimateLayer(d, _frostRef, _showInfoFrostDays);
       updateClimateLegend("frost");
       loadNatureMuniCenters();
+      setInfoBtn("frost_days");
     });
 }
 
@@ -5625,6 +5791,7 @@ var MADFLOW_ZONE_COLORS = {
 };
 
 function loadMadflow() {
+  setInfoBtn("madflow");
   if (madflowData) {
     renderMadflowLayers(madflowData);
     return;
@@ -7065,6 +7232,41 @@ function buildSoilsBornLayer(data) {
   updateSoilsBornLegend();
   setInfoBtn("soils_born");
 }
+
+
+// ===== ნიადაგების ლეგენდები =====
+var SOIL_LEGEND = [
+  ["#AC8979", "შავმიწა"],
+  ["#CDCD64", "შავი კარბონატული"],
+  ["#8EAF78", "რუხი ყავისფერი მუქი"],
+  ["#A7722A", "ყავისფერი"],
+  ["#E48332", "ყომრალი არამაძღარი"],
+  ["#D88D49", "ყავისფერი კარბონატული"],
+  ["#B5D69E", "კორდიან კარბონატული"],
+  ["#D8D89E", "მთა-მდელოს"],
+  ["#A0D4A8", "მთა-მდელოს პრიმიტიული"],
+  ["#E48F24", "ყავისფერი გამოტუტული"],
+  ["#FFF3CA", "ძლიერ ჩამორეცხილი ნიადაგები და ქანების გაშიშვლებები"],
+  ["#4ABA7F", "მდელოს ყავისფერი"],
+  ["#F287B7", "ბიცობი"],
+  ["#CECCCA", "ანდოსოლები"],
+  ["#F9F9D8", "მთა-მდელოს შავმიწისებრი"],
+  ["#AA3D2B", "მდელოს შავი"],
+  ["#D7B09E", "მლაშობი"],
+  ["#B0D236", "ალუვიური კარბონატული"],
+  ["#C4BF89", "შავმიწა გამოტუტული"],
+  ["#F3EF91", "ყომრალ შავი"],
+  ["#9ACC67", "მდელოს რუხი-ყავისფერი"],
+];
+
+var BORN_LEGEND = [
+  ["3", "#DE9797", "ვულკანოგენები (ანდეზიტები, ანდეზიტ-ბაზალტები) და დანალექი ქანები (ქვიშაქვები, თიხა-ფიქლები და ს"],
+  ["4", "#E2B588", "ლიოსები, ლიოსისებრი თიხნარები, თიხა-ფიქლები და სხვა"],
+  ["6", "#E0EFD8", "ალევროლითური, კოლუვიური ნალექები (ვიშაქვები, ქვარგვალები, თიხები)"],
+  ["2", "#ECCE96", "კარბონატული ქანები (კირქვები, მერგელები) ვულკანოგენებით"],
+  ["1", "#F1BCCB", "მჟავე ქანები-გრანიტები, გრანოდიორიტები, ვულკანოგენები კვარციტები და სხვა"],
+  ["5", "#A3BA97", "ახალგაზრდა ლავები (ანდეზიტები, ბაზალტები, დოლერიტები)"],
+];
 
 function updateSoilsLegend() {
   var el = document.getElementById("legendContent");
@@ -9479,14 +9681,36 @@ document
     document.getElementById("historyView").style.display = "none";
     document.getElementById("mainLayerView").style.display = "";
     removeAllHistoryLayers();
-    resetChartPanel();
+    hideChartPanel();
     document.getElementById("infoCard").classList.add("hidden");
     resetPopLegend();
     loadNeutralLayers();
   });
 
+
+// ქვე-ფენა → MAP_INFO გასაღები (ღილაკი ჩატვირთვის შტოზე დამოკიდებული აღარაა)
+var HIST_SUB_INFO = {
+  archaeology: "archaeology", battles: "battles", germans: "germans",
+  forts: "fortifications", eparchies: "eparchies",
+  petroglyphs: "petroglyphs", megaliths: "megaliths",
+};
+var ECON_SUB_INFO = {
+  botanica: "botanica", energetika: "energetika", crop_zones: "crop_zones",
+  land: "land", sun: "sun", agri: "agri", agrispec: "agri_spec",
+};
+var EDU_SUB_INFO = {
+  schools: "education", kindergarten: "kindergarten", oikonymy: "oikonymy",
+  libraries: "libraries", tourism: "museums_theaters",
+  art_disciplines: "art_disciplines",
+};
+var TOUR_SUB_INFO = {
+  tourism_climate: "tourism_climate", tourism_types: "tourism_types",
+};
+var HEALTH_SUB_INFO = { health: "health_infra", social: "social" };
+
 document.querySelectorAll("[data-histsub]").forEach(function (btn) {
   btn.addEventListener("click", function () {
+    if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
     document.querySelectorAll("[data-histsub]").forEach(function (b) {
       b.classList.remove("active");
     });
@@ -9503,6 +9727,7 @@ document.querySelectorAll("[data-histsub]").forEach(function (btn) {
     else if (sub === "eparchies") loadEparchies();
     else if (sub === "petroglyphs") loadPetroglyphs();
     else if (sub === "megaliths") loadMegaliths();
+    setInfoBtn(HIST_SUB_INFO[sub] || null);
   });
 });
 
@@ -9710,7 +9935,6 @@ function getPowerRadius(mw) {
 function loadEnergetika() {
   if (energetikaData) {
     buildEnergetikaLayer(energetikaData);
-    loadNatureMuniCenters();
     return;
   }
   fetch("data/energetika.geojson")
@@ -9720,11 +9944,11 @@ function loadEnergetika() {
     .then(function (d) {
       energetikaData = d;
       buildEnergetikaLayer(d);
-      loadNatureMuniCenters();
     });
 }
 
 function buildEnergetikaLayer(data) {
+  hideMuniCenters();
   if (energetikaLayer) map.removeLayer(energetikaLayer);
 
   // დიდი → პატარა დალაგება, რომ პატარები ზემოდან იყოს
@@ -9980,7 +10204,6 @@ var CROP_ZONES = [
 function loadCropZones() {
   if (cropZonesData) {
     buildCropZonesLayer(cropZonesData);
-    loadNatureMuniCenters();
     return;
   }
   fetch("data/crop_zones.geojson")
@@ -9990,11 +10213,11 @@ function loadCropZones() {
     .then(function (d) {
       cropZonesData = d;
       buildCropZonesLayer(d);
-      loadNatureMuniCenters();
     });
 }
 
 function buildCropZonesLayer(data) {
+  hideMuniCenters();
   if (cropZonesLayer) map.removeLayer(cropZonesLayer);
   cropZonesLayer = L.geoJSON(data, {
     style: function (feat) {
@@ -10216,7 +10439,6 @@ function getLandColor(val, stops) {
 function loadLand() {
   if (landData) {
     buildLandLayer(landData);
-    loadNatureMuniCenters();
     return;
   }
   fetch("data/land.geojson")
@@ -10226,11 +10448,11 @@ function loadLand() {
     .then(function (d) {
       landData = d;
       buildLandLayer(d);
-      loadNatureMuniCenters();
     });
 }
 
 function buildLandLayer(data) {
+  hideMuniCenters();
   if (landLayer) map.removeLayer(landLayer);
   var theme = LAND_THEMES[activeLandTheme];
   landLayer = L.geoJSON(data, {
@@ -10532,7 +10754,6 @@ var SUN_POWER_RADIUS = {
 function loadSun() {
   if (sunData) {
     buildSunLayers(sunData);
-    loadNatureMuniCenters();
     return;
   }
   fetch("data/sun.geojson")
@@ -10542,11 +10763,11 @@ function loadSun() {
     .then(function (d) {
       sunData = d;
       buildSunLayers(d);
-      loadNatureMuniCenters();
     });
 }
 
 function buildSunLayers(data) {
+  hideMuniCenters();
   if (sunZoneLayer) {
     map.removeLayer(sunZoneLayer);
     sunZoneLayer = null;
@@ -10881,7 +11102,6 @@ var AGRI_PROGRAMS = [
 function loadAgri() {
   if (agriData) {
     buildAgriLayer(agriData);
-    loadNatureMuniCenters();
     return;
   }
   fetch("data/agri_beneficiaries.geojson")
@@ -10891,7 +11111,6 @@ function loadAgri() {
     .then(function (d) {
       agriData = d;
       buildAgriLayer(d);
-      loadNatureMuniCenters();
     });
 }
 
@@ -11002,6 +11221,7 @@ function makeAgriPieSVG(p, size) {
 }
 
 function buildAgriLayer(data) {
+  hideMuniCenters();
   if (agriLayer) {
     map.removeLayer(agriLayer);
     agriLayer = null;
@@ -11240,7 +11460,6 @@ var AGRI_SPEC_TYPES = [
 function loadAgriSpec() {
   if (agriSpecData) {
     buildAgriSpecLayer(agriSpecData);
-    loadNatureMuniCenters();
     return;
   }
   fetch("data/agri_spec.geojson")
@@ -11250,11 +11469,11 @@ function loadAgriSpec() {
     .then(function (d) {
       agriSpecData = d;
       buildAgriSpecLayer(d);
-      loadNatureMuniCenters();
     });
 }
 
 function buildAgriSpecLayer(data) {
+  hideMuniCenters();
   if (agriSpecLayer) map.removeLayer(agriSpecLayer);
   agriSpecLayer = L.geoJSON(data, {
     style: function (feat) {
@@ -11508,7 +11727,7 @@ document
     document.getElementById("economyView").style.display = "none";
     document.getElementById("mainLayerView").style.display = "";
     removeAllEconomyLayers();
-    resetChartPanel();
+    hideChartPanel();
     document.getElementById("infoCard").classList.add("hidden");
     resetPopLegend();
     loadNeutralLayers();
@@ -11516,6 +11735,7 @@ document
 
 document.querySelectorAll("[data-econsub]").forEach(function (btn) {
   btn.addEventListener("click", function () {
+    if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
     document.querySelectorAll("[data-econsub]").forEach(function (b) {
       b.classList.remove("active");
     });
@@ -11532,6 +11752,7 @@ document.querySelectorAll("[data-econsub]").forEach(function (btn) {
     else if (sub === "sun") loadSun();
     else if (sub === "agri") loadAgri();
     else if (sub === "agrispec") loadAgriSpec();
+    setInfoBtn(ECON_SUB_INFO[sub] || null);
   });
 });
 
@@ -11893,7 +12114,6 @@ function getKgColor(n) {
 function loadKindergarten() {
   if (kgData) {
     buildKgLayer(kgData);
-    loadNatureMuniCenters();
     return;
   }
   fetch("data/kindergarten.geojson")
@@ -11903,7 +12123,6 @@ function loadKindergarten() {
     .then(function (d) {
       kgData = d;
       buildKgLayer(d);
-      loadNatureMuniCenters();
     });
 }
 
@@ -12014,6 +12233,7 @@ function makeKgPieSVG(pupil, edu, size) {
 }
 
 function buildKgLayer(data) {
+  hideMuniCenters();
   if (kgLayer) {
     map.removeLayer(kgLayer);
     kgLayer = null;
@@ -12557,6 +12777,15 @@ function removeAllEducationLayers() {
     map.removeLayer(oikLayer);
     oikLayer = null;
   }
+  if (libPolyLayer) {
+    map.removeLayer(libPolyLayer);
+    libPolyLayer = null;
+  }
+  if (libMarkLayer) {
+    if (libMarkLayer.clearLayers) libMarkLayer.clearLayers();
+    map.removeLayer(libMarkLayer);
+    libMarkLayer = null;
+  }
   if (tourismLayer) {
     map.removeLayer(tourismLayer);
     tourismLayer = null;
@@ -12642,7 +12871,7 @@ document
     document.getElementById("educationView").style.display = "none";
     document.getElementById("mainLayerView").style.display = "";
     removeAllEducationLayers();
-    resetChartPanel();
+    hideChartPanel();
     document.getElementById("infoCard").classList.add("hidden");
     resetPopLegend();
     loadNeutralLayers();
@@ -12701,7 +12930,7 @@ document
     document.getElementById("tourismView").style.display = "none";
     document.getElementById("mainLayerView").style.display = "";
     removeAllTourismLayers();
-    resetChartPanel();
+    hideChartPanel();
     document.getElementById("infoCard").classList.add("hidden");
     resetPopLegend();
     loadNeutralLayers();
@@ -12709,6 +12938,7 @@ document
 
 document.querySelectorAll("[data-toursub]").forEach(function (btn) {
   btn.addEventListener("click", function () {
+    if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
     document.querySelectorAll("[data-toursub]").forEach(function (b) {
       b.classList.remove("active");
     });
@@ -12718,11 +12948,13 @@ document.querySelectorAll("[data-toursub]").forEach(function (btn) {
     document.getElementById("infoCard").classList.add("hidden");
     if (this.dataset.toursub === "tourism_climate") loadTourismClimate();
     else if (this.dataset.toursub === "tourism_types") loadTourismTypes();
+    setInfoBtn(TOUR_SUB_INFO[this.dataset.toursub] || null);
   });
 });
 
 document.querySelectorAll("[data-edusub]").forEach(function (btn) {
   btn.addEventListener("click", function () {
+    if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
     document.querySelectorAll("[data-edusub]").forEach(function (b) {
       b.classList.remove("active");
     });
@@ -12737,6 +12969,7 @@ document.querySelectorAll("[data-edusub]").forEach(function (btn) {
     else if (this.dataset.edusub === "libraries") loadLibraries();
     else if (this.dataset.edusub === "tourism") loadTourism();
     else if (this.dataset.edusub === "art_disciplines") loadArtDisciplines();
+    setInfoBtn(EDU_SUB_INFO[this.dataset.edusub] || null);
   });
 });
 
@@ -12767,7 +13000,6 @@ function getLibColor(booksStr) {
 function loadLibraries() {
   if (libData) {
     buildLibLayer(libData);
-    loadNatureMuniCenters();
     return;
   }
   fetch("data/libraries.geojson")
@@ -12777,11 +13009,11 @@ function loadLibraries() {
     .then(function (d) {
       libData = d;
       buildLibLayer(d);
-      loadNatureMuniCenters();
     });
 }
 
 function buildLibLayer(data) {
+  hideMuniCenters();
   if (libPolyLayer) {
     map.removeLayer(libPolyLayer);
     libPolyLayer = null;
@@ -14458,7 +14690,7 @@ document.getElementById("chkHealth").addEventListener("change", function (e) {
       document.querySelectorAll("[data-healthsub]").forEach(function (b) {
         b.classList.remove("active");
       });
-      firstBtn.classList.add("active");
+      firstBtn.classList.remove("active");
       firstBtn.click();
     } else {
       loadHealth();
@@ -14475,6 +14707,7 @@ document.getElementById("chkHealth").addEventListener("change", function (e) {
 // ===== ჯანდაცვა sublayer ღილაკები =====
 document.querySelectorAll("[data-healthsub]").forEach(function (btn) {
   btn.addEventListener("click", function () {
+    if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
     document.querySelectorAll("[data-healthsub]").forEach(function (b) {
       b.classList.remove("active");
     });
@@ -14491,10 +14724,14 @@ document.querySelectorAll("[data-healthsub]").forEach(function (btn) {
         activeZooKey === "anthrax_animals" || activeZooKey === "anthrax_humans"
           ? "zoo_anthrax"
           : "zoo_other";
-      setInfoBtn(_zk);
       loadZoo(activeZooKey);
+      setInfoBtn(_zk);
     } else {
       loadHealth();
+      setInfoBtn(HEALTH_SUB_INFO.health);
+    }
+    if (this.dataset.healthsub === "social") {
+      setInfoBtn(HEALTH_SUB_INFO.social);
     }
   });
 });
@@ -14506,8 +14743,7 @@ document.getElementById("btnHealthBack").addEventListener("click", function () {
   removeAllHealthLayers();
   removeAllSocialLayers();
   removeAllZooLayers();
-  document.getElementById("chartEmpty").style.display = "flex";
-  document.getElementById("chartCanvas").classList.add("hidden");
+  hideChartPanel();
   document.getElementById("infoCard").classList.add("hidden");
   resetPopLegend();
   loadNeutralLayers();
@@ -15355,10 +15591,10 @@ function showSublayerView() {
   // პირველი ქვე-ფენა ავტომატურად
   activeSublayer = "population";
   document
-    .querySelectorAll(".sublayer-btn")
+    .querySelectorAll("[data-sublayer]")
     .forEach((b) => b.classList.remove("active"));
   document
-    .querySelector(".sublayer-btn[data-sublayer='population']")
+    .querySelector("[data-sublayer='population']")
     .classList.add("active");
   showChartPanel();
   resetChartPanel();
@@ -15380,11 +15616,15 @@ document.getElementById("btnBack").addEventListener("click", function () {
   showMainView();
 });
 
-// ===== Sublayer buttons =====
-document.querySelectorAll(".sublayer-btn").forEach(function (btn) {
+// ===== Sublayer buttons (მხოლოდ მოსახლეობის პანელი) =====
+// მნიშვნელოვანი: სელექტორი უნდა იყოს [data-sublayer], და არა ".sublayer-btn",
+// რადგან ".sublayer-btn" კლასი ყველა პანელის ღილაკს აქვს — შედეგად
+// switchSublayer(undefined) ეშვებოდა და ინფო-ღილაკს აქრობდა.
+document.querySelectorAll("[data-sublayer]").forEach(function (btn) {
   btn.addEventListener("click", function () {
+    if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
     document
-      .querySelectorAll(".sublayer-btn")
+      .querySelectorAll("[data-sublayer]")
       .forEach((b) => b.classList.remove("active"));
     this.classList.add("active");
     switchSublayer(this.dataset.sublayer);
