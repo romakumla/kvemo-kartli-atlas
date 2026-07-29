@@ -909,16 +909,7 @@ function switchSublayer(sub) {
     density: "density",
     idp: "idp",
   };
-  if (
-    sub === "population" ||
-    sub === "ethnics" ||
-    sub === "density" ||
-    sub === "death_rate" ||
-    sub === "birth_rate" ||
-    sub === "marital" ||
-    sub === "religion" ||
-    sub === "idp"
-  ) {
+  if (sub === "population") {
     showSettlementLegend();
   } else {
     hideSettlementLegend();
@@ -1381,33 +1372,24 @@ function renderMaritalLayers() {
   }
   maritalMenLayer = buildMaritalLayer(maritalMenData, "men");
   maritalWomenLayer = buildMaritalLayer(maritalWomenData, "women");
-  // gender toggle — ვმალავთ არაქტიურს
-  if (maritalGender === "men") {
-    maritalWomenLayer.eachLayer(function (l) {
-      l.setOpacity(0);
-      if (l.setIcon) l.getElement() && (l.getElement().style.display = "none");
-    });
-  } else {
-    maritalMenLayer.eachLayer(function (l) {
-      l.getElement() && (l.getElement().style.display = "none");
-    });
-  }
+  // gender toggle — ერთ ფუნქციაში, რომ opacity/display ყოველთვის დაემთხვეს
+  setMaritalGenderVisible();
   updateMaritalLegend();
 }
 
 function setMaritalGenderVisible() {
   var showMen = maritalGender === "men";
   var showWomen = maritalGender === "women";
-  if (maritalMenLayer)
-    maritalMenLayer.eachLayer(function (l) {
+  function apply(layer, show) {
+    if (!layer) return;
+    layer.eachLayer(function (l) {
+      if (l.setOpacity) l.setOpacity(show ? 1 : 0); // opacity აუცილებლად უნდა დაბრუნდეს
       var el = l.getElement();
-      if (el) el.style.display = showMen ? "" : "none";
+      if (el) el.style.display = show ? "" : "none";
     });
-  if (maritalWomenLayer)
-    maritalWomenLayer.eachLayer(function (l) {
-      var el = l.getElement();
-      if (el) el.style.display = showWomen ? "" : "none";
-    });
+  }
+  apply(maritalMenLayer, showMen);
+  apply(maritalWomenLayer, showWomen);
 }
 
 function updateMaritalLegend() {
@@ -10175,6 +10157,39 @@ function showBottomChartEnergetika(data) {
   });
 }
 
+
+// ჩალაგებული წრეების ლეგენდა პროპორციული სიმბოლოებისთვის
+function nestedCircleLegend(values, radiusFn, fill, stroke) {
+  var radii = values.map(radiusFn);
+  var rMax = Math.max.apply(null, radii);
+  var cx = rMax + 2;
+  var baseY = rMax * 2 + 4;
+  var w = Math.round(cx + rMax + 52);
+  var h = Math.round(baseY + 6);
+
+  var svg =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h +
+    '" viewBox="0 0 ' + w + " " + h + '" style="overflow:visible;">';
+  radii.forEach(function (r) {
+    var cy = baseY - r;
+    svg +=
+      '<circle cx="' + cx + '" cy="' + cy + '" r="' + r +
+      '" fill="' + fill + '" fill-opacity="0.22" stroke="' + stroke +
+      '" stroke-width="1.1"/>';
+  });
+  radii.forEach(function (r, i) {
+    var top = baseY - r * 2;
+    svg +=
+      '<line x1="' + cx + '" y1="' + top + '" x2="' + (cx + rMax + 8) +
+      '" y2="' + top + '" stroke="' + stroke +
+      '" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.7"/>' +
+      '<text x="' + (cx + rMax + 11) + '" y="' + (top + 3.5) +
+      '" font-size="9" fill="#555" font-family="Fira Sans">' + values[i] + "</text>";
+  });
+  svg += "</svg>";
+  return '<div style="padding:2px 0 4px 2px;">' + svg + "</div>";
+}
+
 function updateEnergetikaLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
@@ -10194,27 +10209,9 @@ function updateEnergetikaLegend() {
   // სიმძლავრის შკალა
   html +=
     '<div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">დადგმული სიმძლავრე (მვტ)</div>';
-  html +=
-    '<div style="display:flex;align-items:flex-end;gap:10px;padding-left:4px;">';
-  [
-    ["300", getPowerRadius(300)],
-    ["100", getPowerRadius(100)],
-    ["14", getPowerRadius(14)],
-    ["1", getPowerRadius(1)],
-  ].forEach(function (pair) {
-    var d = pair[1] * 2;
-    html +=
-      '<div style="display:flex;flex-direction:column;align-items:center;gap:3px;">' +
-      '<span style="display:inline-block;width:' +
-      d +
-      "px;height:" +
-      d +
-      'px;border-radius:50%;background:#5BA3D0;border:1.2px solid #2B6A9A;opacity:0.72;"></span>' +
-      '<span style="font-size:9px;color:#555;">' +
-      pair[0] +
-      "</span></div>";
-  });
-  html += "</div>";
+  // ჩალაგებული (nested) წრეები — კარტოგრაფიული სტანდარტი,
+  // ვიწრო პანელშიც ეტევა და არაფერი იჭრება
+  html += nestedCircleLegend([300, 100, 14, 1], getPowerRadius, "#5BA3D0", "#2B6A9A");
   el.innerHTML = html;
 }
 
@@ -15748,7 +15745,7 @@ function showMainView() {
   resetPopLegend();
   loadNeutralLayers();
   hideChartPanel();
-  showSettlementLegend();
+  hideSettlementLegend();
   setInfoBtn(null);
 }
 
