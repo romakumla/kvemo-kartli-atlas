@@ -225,24 +225,47 @@ fetch("data/georgia_border.geojson")
 var neutralBoundaryLayer = null;
 var neutralLabelLayer = null;
 
+// საწყისი (მთავარი) ხედის მუნიციპალიტეტების ფერები
+var MUNI_COLORS = {
+  წალკა: "#EEC3D2",
+  თეთრიწყარო: "#C5E1E4",
+  დმანისი: "#D0DD98",
+  ბოლნისი: "#F9C5D5",
+  მარნეული: "#F6D8A2",
+  გარდაბანი: "#F4E9B9",
+  რუსთავი: "#D3BED3",
+};
+
 function loadNeutralLayers() {
-  // პოლიგონალური საზღვრები
+  // პოლიგონები — თითოეულ მუნიციპალიტეტს თავისი ფერი
   fetch("data/municipalities.geojson")
     .then((r) => r.json())
     .then((data) => {
       neutralBoundaryLayer = L.geoJSON(data, {
-        style: {
-          fillColor: "#E8E4DC",
-          fillOpacity: 0.35,
-          color: MUNI_BORDER_COLOR,
-          weight: MUNI_BORDER_WEIGHT,
-          opacity: MUNI_BORDER_OPACITY,
-          dashArray: MUNI_BORDER_DASH,
+        style: function (f) {
+          var nm = (f.properties.Name_Geo || "").trim();
+          return {
+            fillColor: MUNI_COLORS[nm] || "#E8E4DC",
+            fillOpacity: 0.75,
+            color: MUNI_BORDER_COLOR,
+            weight: MUNI_BORDER_WEIGHT,
+            opacity: MUNI_BORDER_OPACITY,
+            dashArray: MUNI_BORDER_DASH,
+          };
+        },
+        onEachFeature: function (feature, layer) {
+          var nm = (feature.properties.Name_Geo || "").trim();
+          if (nm)
+            layer.bindTooltip(nm, {
+              direction: "center",
+              className: "village-label",
+              sticky: true,
+            });
         },
       }).addTo(map);
     });
 
-  // ცენტრის წერტილები + წარწერები
+  // ცენტრის წერტილები + წარწერები — იგივე სტილი, რაც სხვა რუკებზე
   fetch("data/municipalities_centroids.geojson")
     .then((r) => r.json())
     .then((data) => {
@@ -251,8 +274,8 @@ function loadNeutralLayers() {
           var name = feature.properties.Name_Geo || "";
           var marker = L.circleMarker(latlng, {
             radius: 5,
-            fillColor: "#7A6E60",
-            color: "#4A4035",
+            fillColor: "#4A4035",
+            color: "#fff",
             weight: 1.5,
             fillOpacity: 0.9,
           });
@@ -2783,7 +2806,7 @@ var MAP_INFO = {
     text: "სასოფლო-სამეურნეო კულტურების პროდუქტიულობას განსაზღვრავს აგროკლიმატური რესურსები — მზის რადიაცია, ჰაერისა და ნიადაგის ტემპერატურები, ატმოსფერული ნალექები, ქარები, წაყინვები.",
     author: "გივი გაგუა",
     source:
-      "საქართველოს ეროვნული ატლასი, 2012; საქართველოს გეოგრაფიული ატლასი, 2018",
+      "გ. გაგუა. საქართველოს აგროკლიმატური დარაიონება, 2018; საქართველოს ეროვნული ატლასი, 2012; საქართველოს გეოგრაფიული ატლასი, 2018",
     year: "2018",
   },
   geology: {
@@ -2844,7 +2867,7 @@ var MAP_INFO = {
   earthquakes: {
     title: "მიწისძვრები",
     text: "სეისმური აქტიურობა გამოწვეულია არაბეთის ფილის ჩრდილოეთით მოძრაობით. დმანისში 3-4 მაგნ. მიწისძვრები პოსტვულკანურ აქტივობებად მიიჩნევა.",
-    author: "ნატო სოლოღაშვილი",
+    author: "",
     cartographer: "ნატო სოლოღაშვილი, ნიკოლოზ სუქნიძე",
     source: "კავკასიის მიწისძვრების კატალოგი, 2022",
     year: "2022",
@@ -2868,6 +2891,7 @@ var MAP_INFO = {
   soils: {
     title: "ნიადაგის ტიპები",
     text: "ნიადაგი ყალიბდება ლითოსფეროს ზედა ფენაში ქანების გამოფიტვის შედეგად.",
+    author: "თ. ურუშაძე",
     cartographer: "თამარ ჭიჭინაძე",
     source: "საქართველოს ნიადაგების რუკა, 1:500 000, 2019",
     year: "2019",
@@ -2880,7 +2904,7 @@ var MAP_INFO = {
     year: "2019",
   },
   avg_temp: {
-    title: "საშუალო ტემპერატურა",
+    title: "ჰაერის საშუალო მრავალწლიური ტემპერატურა 1990-2022",
     text: "",
     author: "ნანა ბოლაშვილი",
     cartographer: "ნიკოლოზ სუქნიძე",
@@ -2888,7 +2912,7 @@ var MAP_INFO = {
     year: "2023",
   },
   max_temp: {
-    title: "მაქსიმალური ტემპერატურა",
+    title: "ჰაერის მაქსიმალური მრავალწლიური ტემპერატურა 1990-2022",
     text: "",
     author: "ნანა ბოლაშვილი",
     cartographer: "ნიკოლოზ სუქნიძე",
@@ -2896,7 +2920,7 @@ var MAP_INFO = {
     year: "2023",
   },
   precip: {
-    title: "ნალექები",
+    title: "ატმოსფერული ნალექების მრავალწლიური ჯამი 1990-2022",
     text: "",
     author: "ნანა ბოლაშვილი",
     cartographer: "ნიკოლოზ სუქნიძე",
@@ -4954,12 +4978,14 @@ function _buildTempLayer(data, refObj, onClickFn) {
   if (refObj.layer) map.removeLayer(refObj.layer);
   var layer = L.geoJSON(data, {
     style: function (feat) {
+      var c = feat.properties.Color;
       return {
-        fillColor: feat.properties.Color,
+        fillColor: c,
         fillOpacity: 0.78,
-        color: feat.properties.Color,
-        weight: 0.2,
-        opacity: 0.4,
+        // კონტური იმავე ფერის მუქ ტონში — ზონები მკაფიოდ გამოიყოფა
+        color: darken(c),
+        weight: 0.6,
+        opacity: 0.8,
       };
     },
     onEachFeature: function (feature, lyr) {
@@ -4972,15 +4998,15 @@ function _buildTempLayer(data, refObj, onClickFn) {
           sticky: true,
         });
       lyr.on("mouseover", function () {
-        lyr.setStyle({ weight: 1.2, fillOpacity: 0.95 });
+        lyr.setStyle({ weight: 1.4, fillOpacity: 0.95 });
       });
       lyr.on("mouseout", function () {
         lyr.setStyle({
           fillColor: p.Color,
           fillOpacity: 0.78,
-          color: p.Color,
-          weight: 0.2,
-          opacity: 0.4,
+          color: darken(p.Color),
+          weight: 0.6,
+          opacity: 0.8,
         });
       });
       lyr.on("click", function () {
@@ -5254,12 +5280,13 @@ function _buildClimateLayer(data, layerRef, onClickFn) {
   if (layerRef.layer) map.removeLayer(layerRef.layer);
   var layer = L.geoJSON(data, {
     style: function (feat) {
+      var c = feat.properties.Color;
       return {
-        fillColor: feat.properties.Color,
+        fillColor: c,
         fillOpacity: 0.75,
-        color: feat.properties.Color,
-        weight: 0.2,
-        opacity: 0.4,
+        color: darken(c),
+        weight: 0.6,
+        opacity: 0.8,
       };
     },
     onEachFeature: function (feature, layer) {
@@ -5272,15 +5299,15 @@ function _buildClimateLayer(data, layerRef, onClickFn) {
           sticky: true,
         });
       layer.on("mouseover", function () {
-        layer.setStyle({ weight: 1.2, fillOpacity: 0.9 });
+        layer.setStyle({ weight: 1.4, fillOpacity: 0.9 });
       });
       layer.on("mouseout", function () {
         layer.setStyle({
           fillColor: p.Color,
           fillOpacity: 0.75,
-          color: p.Color,
-          weight: 0.2,
-          opacity: 0.4,
+          color: darken(p.Color),
+          weight: 0.6,
+          opacity: 0.8,
         });
       });
       layer.on("click", function () {
@@ -5570,12 +5597,13 @@ function buildHeatWavesLayer(data) {
   if (heatWavesLayer) map.removeLayer(heatWavesLayer);
   heatWavesLayer = L.geoJSON(data, {
     style: function (feat) {
+      var c = feat.properties.Color;
       return {
-        fillColor: feat.properties.Color,
+        fillColor: c,
         fillOpacity: 0.75,
-        color: feat.properties.Color,
-        weight: 0.3,
-        opacity: 0.5,
+        color: darken(c),
+        weight: 0.6,
+        opacity: 0.8,
       };
     },
     onEachFeature: function (feature, layer) {
@@ -5623,12 +5651,13 @@ function buildDroughtLayer(data) {
   if (droughtLayer) map.removeLayer(droughtLayer);
   droughtLayer = L.geoJSON(data, {
     style: function (feat) {
+      var c = feat.properties.Color;
       return {
-        fillColor: feat.properties.Color,
+        fillColor: c,
         fillOpacity: 0.75,
-        color: feat.properties.Color,
-        weight: 0.3,
-        opacity: 0.5,
+        color: darken(c),
+        weight: 0.6,
+        opacity: 0.8,
       };
     },
     onEachFeature: function (feature, layer) {
@@ -5998,12 +6027,12 @@ function renderMadflowLayers(data) {
     },
   }).addTo(map);
 
-  // MadFlow points — ლურჯი ნაკადის სიმბოლო
+  // MadFlow points — ყვითელი სიმბოლო
   madflowPointLayer = L.geoJSON(madflowFeats, {
     pointToLayer: function (feature, latlng) {
       var svg =
         '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">' +
-        '<path fill="#1565C0" stroke="#0D47A1" stroke-width="1" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>' +
+        '<path fill="#FFD54F" stroke="#F57F17" stroke-width="1" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>' +
         "</svg>";
       var icon = L.divIcon({
         html: svg,
@@ -6025,14 +6054,13 @@ function renderMadflowLayers(data) {
     },
   }).addTo(map);
 
-  // Erosion points — ნარინჯი ტალღის სიმბოლო
+  // Erosion points — ლურჯი, ირიბი ხაზით
   madflowErosionLayer = L.geoJSON(erosionFeats, {
     pointToLayer: function (feature, latlng) {
       var svg =
         '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">' +
-        '<rect x="1" y="1" width="12" height="12" rx="2" fill="#E65100" stroke="#BF360C" stroke-width="1"/>' +
-        '<line x1="3" y1="7" x2="11" y2="7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>' +
-        '<line x1="7" y1="3" x2="7" y2="11" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>' +
+        '<rect x="1" y="1" width="12" height="12" rx="2" fill="#1565C0" stroke="#0D47A1" stroke-width="1"/>' +
+        '<line x1="3.6" y1="10.4" x2="10.4" y2="3.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>' +
         "</svg>";
       var icon = L.divIcon({
         html: svg,
@@ -6078,7 +6106,8 @@ function showInfoMadflowZone(p) {
 }
 
 function showInfoMadflowPoint(p, type) {
-  var color = type === "madflow" ? "#1565C0" : "#E65100";
+  // ღვარცოფი — ყვითელი (მუქი ტონი წაკითხვადობისთვის), ნაპირგარეცხვა — ლურჯი
+  var color = type === "madflow" ? "#F57F17" : "#1565C0";
   var label = type === "madflow" ? "ღვარცოფი" : "მდინარის ნაპირგარეცხვა";
   document.getElementById("infoCardContent").innerHTML =
     '<div class="info-name">' +
@@ -6232,12 +6261,12 @@ function updateMadflowLegend(data) {
   html +=
     '<div class="ethnics-legend">' +
     '<div class="eth-legend-item">' +
-    '<svg width="16" height="16" viewBox="0 0 24 24" style="flex-shrink:0;"><path fill="#1565C0" stroke="#0D47A1" stroke-width="1" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>' +
+    '<svg width="16" height="16" viewBox="0 0 24 24" style="flex-shrink:0;"><path fill="#FFD54F" stroke="#F57F17" stroke-width="1" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>' +
     '<span style="font-size:10px;">ღვარცოფი (' +
     madflowCount +
     ")</span></div>" +
     '<div class="eth-legend-item">' +
-    '<svg width="14" height="14" viewBox="0 0 14 14" style="flex-shrink:0;"><rect x="1" y="1" width="12" height="12" rx="2" fill="#E65100" stroke="#BF360C" stroke-width="1"/><line x1="3" y1="7" x2="11" y2="7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><line x1="7" y1="3" x2="7" y2="11" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>' +
+    '<svg width="14" height="14" viewBox="0 0 14 14" style="flex-shrink:0;"><rect x="1" y="1" width="12" height="12" rx="2" fill="#1565C0" stroke="#0D47A1" stroke-width="1"/><line x1="3.6" y1="10.4" x2="10.4" y2="3.6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>' +
     '<span style="font-size:10px;">ნაპირგარეცხვა (' +
     erosionCount +
     ")</span></div>" +
@@ -6968,21 +6997,25 @@ var hailTotalData = null;
 var hail100Data = null;
 var hailActiveType = "total"; // 'total' | '100'
 
+// სეტყვა — ერთი ფერი თითო ფენაზე; სიდიდეს მხოლოდ წრის ზომა გამოხატავს
+var HAIL_TOTAL_COLOR = "#0277BD"; // ლურჯი — სულ
+var HAIL_100_COLOR = "#C62828"; // წითელი — 100 წელიწადში
+
 var HAIL_TOTAL_CLASSES = [
-  { cls: "≤ 1", r: 7, color: "#4FC3F7" },
-  { cls: "1–2", r: 10, color: "#0288D1" },
-  { cls: "2–3", r: 13, color: "#01579B" },
-  { cls: "3–4", r: 16, color: "#1A237E" },
-  { cls: "4–5", r: 19, color: "#311B92" },
-  { cls: "5–7", r: 22, color: "#4A148C" },
-  { cls: "> 7", r: 26, color: "#880E4F" },
+  { cls: "≤ 1", r: 7, color: HAIL_TOTAL_COLOR },
+  { cls: "1–2", r: 10, color: HAIL_TOTAL_COLOR },
+  { cls: "2–3", r: 13, color: HAIL_TOTAL_COLOR },
+  { cls: "3–4", r: 16, color: HAIL_TOTAL_COLOR },
+  { cls: "4–5", r: 19, color: HAIL_TOTAL_COLOR },
+  { cls: "5–7", r: 22, color: HAIL_TOTAL_COLOR },
+  { cls: "> 7", r: 26, color: HAIL_TOTAL_COLOR },
 ];
 var HAIL_100_CLASSES = [
-  { cls: "≤ 1", r: 7, color: "#EF9A9A" },
-  { cls: "1–2", r: 10, color: "#E53935" },
-  { cls: "2–3", r: 13, color: "#B71C1C" },
-  { cls: "3–4", r: 16, color: "#7B1FA2" },
-  { cls: "> 4", r: 20, color: "#4A148C" },
+  { cls: "≤ 1", r: 7, color: HAIL_100_COLOR },
+  { cls: "1–2", r: 10, color: HAIL_100_COLOR },
+  { cls: "2–3", r: 13, color: HAIL_100_COLOR },
+  { cls: "3–4", r: 16, color: HAIL_100_COLOR },
+  { cls: "> 4", r: 20, color: HAIL_100_COLOR },
 ];
 
 // კლასის განსაზღვრა
