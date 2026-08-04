@@ -3091,6 +3091,14 @@ var MAP_INFO = {
     source:
       "ქვემო ქართლის რეგიონული განვითარების სააგენტო; Amiranashvili et al. 2020; Scott et al. 2016; Amiranashvili, Kartvelishvili, Matzarakis 2020",
   },
+  viticulture: {
+    title: "მევენახეობის ზონები და გავრცელებული ყურძნის ჯიშები",
+    text:
+      "საქართველოს მეღვინეობის უძველეს კერად აღიარება ქვემო ქართლის მდიდარი არქეოლოგიური მასალით დასტურდება. მარნეულის მუნიციპალიტეტში, შულავრის მახლობლად, ხრამის დიდ გორაზე აღმოჩენილი ქვევრის მაგვარი თიხის საღვინე ჭურჭელი (ძვ.წ. VI-V ათასწლ.) და შულავრის ჯგუფის სამარხებში ნაპოვნი კულტურული ვაზის (Vitis vinifera) ყურძნის წიპწები ვაზის კულტურის 8000 წლოვან უწყვეტ ისტორიაზე მიუთითებს. ქვემო ქართლი ისტორიულად ცნობილია მაღალი ხარისხის საღვინე და სასუფრე ვაზის ჯიშებით. ამჟამად აქ კარგად ხარობს როგორც ტრადიციული ქართლური, ასევე კახური ვაზის ჯიშები: რქაწითელი, ბუერა, თავკვერი, საფერავი. ვენახები გაშენებულია მდ. ქციის (ხრამის) აუზის შუა და ქვემო წელში, მაშავრის და ალგეთის ნაპირებზე.",
+    author: "",
+    cartographer: "რუსუდან ღვინაძე",
+    source: "საქართველოს გეოგრაფიული ატლასი, 2018; ღვინის ეროვნული სააგენტო",
+  },
   tourism_types: {
     title: "ტურიზმის სახეობები",
     text:
@@ -9864,6 +9872,7 @@ var EDU_SUB_INFO = {
 };
 var TOUR_SUB_INFO = {
   tourism_climate: "tourism_climate", tourism_types: "tourism_types",
+  viticulture: "viticulture",
 };
 var HEALTH_SUB_INFO = { health: "health_infra", social: "social" };
 
@@ -12989,6 +12998,14 @@ function removeAllTourismLayers() {
     map.removeLayer(ttLayer);
     ttLayer = null;
   }
+  if (vitLayer) {
+    map.removeLayer(vitLayer);
+    vitLayer = null;
+  }
+  if (cellarLayer) {
+    map.removeLayer(cellarLayer);
+    cellarLayer = null;
+  }
   map.off("zoomend", updateTtLabels);
 }
 
@@ -13122,6 +13139,7 @@ document.querySelectorAll("[data-toursub]").forEach(function (btn) {
     document.getElementById("infoCard").classList.add("hidden");
     if (this.dataset.toursub === "tourism_climate") loadTourismClimate();
     else if (this.dataset.toursub === "tourism_types") loadTourismTypes();
+    else if (this.dataset.toursub === "viticulture") loadViticulture();
     setInfoBtn(TOUR_SUB_INFO[this.dataset.toursub] || null);
   });
 });
@@ -14527,6 +14545,228 @@ function updateTtLegend() {
     '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">დესტინაციაზე დაჭერით — სტატისტიკა ქვედა ველში. წარწერები ჩანს zoom ≥ 11-ზე.</div>';
   el.innerHTML = html;
   setInfoBtn("tourism_types");
+}
+
+
+// ============================================================
+// მევენახეობის ზონები და ღვინის მარნები
+// ============================================================
+var vitData = null, cellarData = null;
+var vitLayer = null, cellarLayer = null;
+
+var VIT_ZONES = [
+  { key: "მევენახეობის ზონა", color: "#A0CF6B" },
+  { key: "სამრეწველო მევენახეობის ზონა", color: "#48A851" },
+  { key: "ბოლნისის მიკროზონა", color: "#FBB887" },
+  { key: "ასურეთული შალას მიკროზონა", color: "#C59DB6" },
+];
+var CELLAR_COLOR = "#C02026";
+
+function loadViticulture() {
+  function ready() {
+    buildViticultureLayers();
+    loadNatureMuniCenters();
+  }
+  if (vitData && cellarData) return ready();
+  Promise.all([
+    vitData
+      ? Promise.resolve(vitData)
+      : fetch("data/viticulture_zones.geojson").then((r) => r.json()),
+    cellarData
+      ? Promise.resolve(cellarData)
+      : fetch("data/wine_cellars.geojson").then((r) => r.json()),
+  ]).then(function (res) {
+    vitData = res[0];
+    cellarData = res[1];
+    ready();
+  });
+}
+
+// მარნების სიმბოლო — რამდენი მარანიც არის, იმდენი კვადრატი
+function cellarSquaresIcon(n) {
+  var sq = 14, gap = 3;
+  var cols = n > 4 ? 3 : n > 1 ? 2 : 1;
+  var rows = Math.ceil(n / cols);
+  var w = cols * sq + (cols - 1) * gap;
+  var h = rows * sq + (rows - 1) * gap;
+  var html =
+    '<div style="display:flex;flex-wrap:wrap;gap:' + gap + "px;width:" + w + 'px;">';
+  for (var i = 0; i < n; i++) {
+    html +=
+      '<div style="width:' + sq + "px;height:" + sq + "px;background:" +
+      CELLAR_COLOR +
+      ';border:1px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.4);"></div>';
+  }
+  html += "</div>";
+  return {
+    icon: L.divIcon({
+      html: html,
+      iconSize: [w, h],
+      iconAnchor: [w / 2, h / 2],
+      className: "",
+    }),
+    h: h,
+  };
+}
+
+function buildViticultureLayers() {
+  if (vitLayer) { map.removeLayer(vitLayer); vitLayer = null; }
+  if (cellarLayer) { map.removeLayer(cellarLayer); cellarLayer = null; }
+
+  vitLayer = L.geoJSON(vitData, {
+    style: function (f) {
+      var p = f.properties;
+      if (p.isBg) {
+        // მევენახეობის ზონა არაა — მხოლოდ ბაცი ფონი
+        return {
+          fillColor: p.Color,
+          fillOpacity: 0.45,
+          color: MUNI_BORDER_COLOR,
+          weight: 0.4,
+          opacity: 0.35,
+          interactive: false,
+        };
+      }
+      return {
+        fillColor: p.Color,
+        fillOpacity: 0.72,
+        color: darken(p.Color),
+        weight: 0.6,
+        opacity: 0.8,
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      var p = feature.properties;
+      if (p.isBg) return; // ფონი არ რეაგირებს
+      layer.bindTooltip(p.Zone, {
+        direction: "center",
+        className: "village-label",
+        sticky: true,
+      });
+      layer.on("click", function () {
+        showInfoVitZone(p);
+      });
+    },
+  }).addTo(map);
+
+  cellarLayer = L.geoJSON(cellarData, {
+    filter: function (f) {
+      return f.properties.Cellars > 0;
+    },
+    pointToLayer: function (feat, latlng) {
+      var p = feat.properties;
+      var ic = cellarSquaresIcon(p.Cellars);
+      var marker = L.marker(latlng, { icon: ic.icon });
+      marker.bindTooltip(p.Name_Geo, {
+        direction: "top",
+        className: "village-label",
+        offset: [0, -ic.h / 2 - 2],
+      });
+      marker.on("click", function () {
+        showInfoCellar(p);
+        showBottomChartCellars(p);
+      });
+      return marker;
+    },
+  }).addTo(map);
+
+  updateViticultureLegend();
+}
+
+function showInfoVitZone(p) {
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name">' + p.Zone + "</div>" +
+    '<span class="info-type-badge" style="background:' + p.Color +
+    "44;color:#333;border:1px solid " + darken(p.Color) + ';">' +
+    p.Area_km2 + " კმ²</span>";
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+function showInfoCellar(p) {
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name">' + p.Name_Geo + "</div>" +
+    '<span class="info-type-badge" style="background:' + CELLAR_COLOR +
+    '22;color:' + CELLAR_COLOR + ';border:1px solid ' + CELLAR_COLOR + ';">' +
+    p.Cellars + " მარანი</span>" +
+    '<div style="margin-top:6px;font-size:11px;color:#444;">' +
+    "<b>მუნიციპალიტეტი:</b> " + p.Municipal_ + "</div>";
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+function showBottomChartCellars(sel) {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  var ctx = canvas.getContext("2d");
+  if (bottomChart) bottomChart.destroy();
+
+  var pts = cellarData.features
+    .map(function (f) { return f.properties; })
+    .filter(function (p) { return p.Cellars > 0; })
+    .sort(function (a, b) { return b.Cellars - a.Cellars; });
+
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: pts.map(function (p) { return p.Name_Geo; }),
+      datasets: [{
+        data: pts.map(function (p) { return p.Cellars; }),
+        backgroundColor: pts.map(function (p) {
+          return p.Name_Geo === sel.Name_Geo && p.Cellars === sel.Cellars
+            ? CELLAR_COLOR : CELLAR_COLOR + "33";
+        }),
+        borderWidth: 0,
+        borderRadius: 3,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "ღვინის მარნები — სულ " +
+            pts.reduce(function (a, p) { return a + p.Cellars; }, 0),
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 6 },
+        },
+        tooltip: {
+          callbacks: {
+            label: function (c) { return c.parsed.y + " მარანი"; },
+          },
+        },
+      },
+      scales: {
+        y: { beginAtZero: true, ticks: { precision: 0, font: { family: "Fira Sans", size: 9 } }, grid: { color: "#eee" } },
+        x: { ticks: { font: { family: "Fira Sans", size: 9 }, autoSkip: false, maxRotation: 45, minRotation: 45 }, grid: { display: false } },
+      },
+    },
+  });
+}
+
+function updateViticultureLegend() {
+  var el = document.getElementById("legendContent");
+  if (!el) return;
+  var html =
+    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">მევენახეობის ზონები</div>';
+  VIT_ZONES.forEach(function (z) {
+    html +=
+      '<div style="display:flex;align-items:center;margin-bottom:6px;">' +
+      '<span style="width:15px;height:15px;background:' + z.color +
+      ';border:1px solid ' + darken(z.color) + ';flex-shrink:0;"></span>' +
+      '<span style="font-size:10px;margin-left:7px;line-height:1.3;">' + z.key + "</span></div>";
+  });
+  html +=
+    '<div style="margin-top:9px;padding-top:8px;border-top:1px solid #ddd;">' +
+    '<div style="display:flex;align-items:center;">' +
+    '<span style="width:14px;height:14px;background:' + CELLAR_COLOR +
+    ';border:1px solid #fff;box-shadow:0 0 0 1px #999;flex-shrink:0;"></span>' +
+    '<span style="font-size:10px;margin-left:7px;">1 კვადრატი — 1 მარანი</span></div></div>' +
+    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">მარანზე დაჭერით — სტატისტიკა ქვედა ველში</div>';
+  el.innerHTML = html;
+  setInfoBtn("viticulture");
 }
 
 // ============================================================
