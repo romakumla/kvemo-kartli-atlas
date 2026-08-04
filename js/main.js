@@ -14555,10 +14555,14 @@ var vitData = null, cellarData = null;
 var vitLayer = null, cellarLayer = null;
 
 var VIT_ZONES = [
-  { key: "მევენახეობის ზონა", color: "#A0CF6B" },
-  { key: "სამრეწველო მევენახეობის ზონა", color: "#48A851" },
-  { key: "ბოლნისის მიკროზონა", color: "#FBB887" },
-  { key: "ასურეთული შალას მიკროზონა", color: "#C59DB6" },
+  { key: "მევენახეობის ზონა", color: "#A0CF6B",
+    chartLabel: ["მევენახეობის", "ზონა"] },
+  { key: "სამრეწველო მევენახეობის ზონა", color: "#48A851",
+    chartLabel: ["სამრეწველო", "მევენახეობის ზონა"] },
+  { key: "ბოლნისის მიკროზონა", color: "#FBB887",
+    chartLabel: ["ბოლნისის", "მიკროზონა"] },
+  { key: "ასურეთული შალას მიკროზონა", color: "#C59DB6",
+    chartLabel: ["ასურეთული შალას", "მიკროზონა"] },
 ];
 var CELLAR_COLOR = "#C02026";
 
@@ -14645,6 +14649,7 @@ function buildViticultureLayers() {
       });
       layer.on("click", function () {
         showInfoVitZone(p);
+        showBottomChartVitZones(p);
       });
     },
   }).addTo(map);
@@ -14741,6 +14746,128 @@ function showBottomChartCellars(sel) {
       scales: {
         y: { beginAtZero: true, ticks: { precision: 0, font: { family: "Fira Sans", size: 9 } }, grid: { color: "#eee" } },
         x: { ticks: { font: { family: "Fira Sans", size: 9 }, autoSkip: false, maxRotation: 45, minRotation: 45 }, grid: { display: false } },
+      },
+    },
+  });
+}
+
+
+// ზონების ფართობები — ქვედა სტატისტიკის ველი
+
+// სვეტზე ფართობის ციფრი — პატარა ზონებიც იკითხება
+var vitValueLabels = {
+  id: "vitValueLabels",
+  afterDatasetsDraw: function (chart) {
+    var ctx = chart.ctx;
+    var meta = chart.getDatasetMeta(0);
+    ctx.save();
+    ctx.font = "600 10px Fira Sans";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    meta.data.forEach(function (bar, i) {
+      var v = chart.data.datasets[0].data[i];
+      ctx.fillStyle = "#1A1A18";
+      ctx.fillText(v + " კმ²", bar.x, bar.y - 4);
+    });
+    ctx.restore();
+  },
+};
+
+function showBottomChartVitZones(sel) {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  var ctx = canvas.getContext("2d");
+  if (bottomChart) bottomChart.destroy();
+
+  // ერთი ტიპის პოლიგონები ერთად შევკრიბოთ
+  var sums = {};
+  VIT_ZONES.forEach(function (z) {
+    sums[z.key] = 0;
+  });
+  vitData.features.forEach(function (f) {
+    var p = f.properties;
+    if (!p.isBg && sums.hasOwnProperty(p.Zone))
+      sums[p.Zone] += p.Area_km2 || 0;
+  });
+
+  var total = VIT_ZONES.reduce(function (a, z) {
+    return a + sums[z.key];
+  }, 0);
+
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: VIT_ZONES.map(function (z) {
+        return z.chartLabel || z.key;
+      }),
+      datasets: [
+        {
+          data: VIT_ZONES.map(function (z) {
+            return Math.round(sums[z.key] * 10) / 10;
+          }),
+          backgroundColor: VIT_ZONES.map(function (z) {
+            return z.key === sel.Zone ? z.color : z.color + "99";
+          }),
+          borderWidth: 0,
+          borderRadius: 3,
+          minBarLength: 6, // პატარა ზონაც ხილული რჩება
+        },
+      ],
+    },
+    plugins: [vitValueLabels],
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { top: 18 } },
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text:
+            "მევენახეობის ზონები — ფართობი (კმ²), სულ " +
+            Math.round(total) +
+            " კმ²",
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 6 },
+        },
+        tooltip: {
+          callbacks: {
+            title: function (c) {
+              return VIT_ZONES[c[0].dataIndex].key;
+            },
+            label: function (c) {
+              var v = c.parsed.y;
+              return v + " კმ² (" + Math.round((v / total) * 100) + "%)";
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { font: { family: "Fira Sans", size: 9 } },
+          grid: { color: "#eee" },
+          title: {
+            display: true,
+            text: "კმ²",
+            font: { family: "Fira Sans", size: 9 },
+            color: "#777",
+          },
+        },
+        x: {
+          ticks: {
+            font: { family: "Fira Sans", size: 10 },
+            autoSkip: false,
+            maxRotation: 0,
+            minRotation: 0,
+            color: function (c) {
+              return VIT_ZONES[c.index].key === sel.Zone ? "#1A1A18" : "#999";
+            },
+          },
+          grid: { display: false },
+        },
       },
     },
   });
