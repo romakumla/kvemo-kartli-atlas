@@ -3099,6 +3099,14 @@ var MAP_INFO = {
     cartographer: "რუსუდან ღვინაძე",
     source: "საქართველოს გეოგრაფიული ატლასი, 2018; ღვინის ეროვნული სააგენტო",
   },
+  protected_areas: {
+    title: "დაცული ტერიტორიები",
+    text:
+      "ალგეთის ეროვნული პარკი მდებარეობს თეთრიწყაროს და წალკის მუნიციპალიტეტებში, ზ. დ. 1100-2019 მ სიმაღლეზე. უმაღლესი წერტილი მთა კლდეკარი 2019 მ-ია. პარკის ტერიტორია მოიცავს მდ. ალგეთის სათავეებს, თრიალეთის ქედის სამხრეთ-აღმოსავლეთ ფერდობს და 8768 ჰა-ს შეადგენს. 1965 წ. აღმოსავლური ნაძვის და კავკასიური სოჭის უკიდურესი აღმოსავლეთი საზღვრის დაცვის მიზნით, დაარსდა ალგეთის სახელმწიფო ნაკრძალი. 2007 წ. მას ეროვნული პარკის სტატუსი მიენიჭა. პარკის მთაგორიანი რელიეფი დასერილია მდინარეებით და ხევებით. ტერიტორიის დიდი ნაწილი ტყით არის დაფარული, სადაც იზრდება ნაძვი, წიფელი, მუხა, ფიჭვი და სხვ. აქ ბინადრობენ: მურა დათვი, კავკასიური როჭო, ბექობის არწივი და სხვ. პარკი საკურორტო-რეკრეაციული მნიშვნელობისაა, მის ტერიტორიაზე შესაძლებელია სამეცნიერო კვლევების ჩატარება, ფრინველებზე დაკვირვება, ფოტო-ვიდეო გადაღება და სხვ. არის როგორც საფეხმავლო, ისე საცხენოსნო მარშრუტები. ვიზიტორთა ცენტრი მდებარეობს დაბა მანგლისში. შესაძლებელია ახლომდებარე ღირსშესანიშნაობების — ბირთვისის კლდეების, წალკის და სამშვილდის კანიონების, კლდეკარის ციხესიმაგრის მონახულება. პარკის მიმდებარე ტერიტორიაზე აღმოჩენილია არქეოლოგიური ძეგლები, რაც არქეოლოგიური ტურების მოწყობის შესაძლებლობას იძლევა.",
+    author: "",
+    cartographer: "",
+    source: "დაცული ტერიტორიების სააგენტო",
+  },
   tourism_types: {
     title: "ტურიზმის სახეობები",
     text:
@@ -9873,6 +9881,7 @@ var EDU_SUB_INFO = {
 var TOUR_SUB_INFO = {
   tourism_climate: "tourism_climate", tourism_types: "tourism_types",
   viticulture: "viticulture",
+  protected_areas: "protected_areas",
 };
 var HEALTH_SUB_INFO = { health: "health_infra", social: "social" };
 
@@ -13006,6 +13015,10 @@ function removeAllTourismLayers() {
     map.removeLayer(cellarLayer);
     cellarLayer = null;
   }
+  if (paLayer) {
+    map.removeLayer(paLayer);
+    paLayer = null;
+  }
   map.off("zoomend", updateTtLabels);
 }
 
@@ -13140,6 +13153,7 @@ document.querySelectorAll("[data-toursub]").forEach(function (btn) {
     if (this.dataset.toursub === "tourism_climate") loadTourismClimate();
     else if (this.dataset.toursub === "tourism_types") loadTourismTypes();
     else if (this.dataset.toursub === "viticulture") loadViticulture();
+    else if (this.dataset.toursub === "protected_areas") loadProtectedAreas();
     setInfoBtn(TOUR_SUB_INFO[this.dataset.toursub] || null);
   });
 });
@@ -14894,6 +14908,196 @@ function updateViticultureLegend() {
     '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">მარანზე დაჭერით — სტატისტიკა ქვედა ველში</div>';
   el.innerHTML = html;
   setInfoBtn("viticulture");
+}
+
+
+// ============================================================
+// დაცული ტერიტორიები
+// ============================================================
+var paData = null, paLayer = null;
+var PA_FILL = "#A9D7AE";
+var PA_STROKE = "#3E6E55";
+
+function loadProtectedAreas() {
+  if (paData) {
+    buildProtectedAreasLayer();
+    loadNatureMuniCenters();
+    return;
+  }
+  fetch("data/protected_areas.geojson")
+    .then((r) => r.json())
+    .then(function (d) {
+      paData = d;
+      buildProtectedAreasLayer();
+      loadNatureMuniCenters();
+    });
+}
+
+function buildProtectedAreasLayer() {
+  if (paLayer) { map.removeLayer(paLayer); paLayer = null; }
+
+  paLayer = L.geoJSON(paData, {
+    style: function () {
+      return {
+        fillColor: PA_FILL,
+        fillOpacity: 0.55, // ფონური რუკა გამოსჭვივის
+        color: PA_STROKE,
+        weight: 1.6,
+        opacity: 0.95,
+      };
+    },
+    onEachFeature: function (feature, layer) {
+      var p = feature.properties;
+      if (p.isLabel) {
+        layer.bindTooltip(p.Name_Geo, {
+          permanent: true,
+          direction: "center",
+          className: "pa-label",
+        });
+      }
+      layer.on("mouseover", function () {
+        layer.setStyle({ fillOpacity: 0.75, weight: 2.4 });
+      });
+      layer.on("mouseout", function () {
+        layer.setStyle({ fillOpacity: 0.55, weight: 1.6 });
+      });
+      layer.on("click", function () {
+        showInfoProtectedArea(p);
+        showBottomChartProtectedAreas(p);
+      });
+    },
+  }).addTo(map);
+
+  updateProtectedAreasLegend();
+}
+
+function showInfoProtectedArea(p) {
+  document.getElementById("infoCardContent").innerHTML =
+    '<div class="info-name">' + p.Name_Geo + "</div>" +
+    '<span class="info-type-badge" style="background:' + PA_FILL +
+    '66;color:' + PA_STROKE + ';border:1px solid ' + PA_STROKE + ';">' +
+    p.Category + "</span>" +
+    '<div style="margin-top:8px;font-size:11px;color:#444;line-height:1.9;">' +
+    "<b>ფართობი რეგიონში:</b> " + p.Area_km2 + " კმ²" +
+    (p.Total_ha ? "<br><b>საერთო ფართობი:</b> " + p.Total_ha.toLocaleString() + " ჰა" : "") +
+    (p.Name_Eng ? '<br><span style="color:#888;font-size:10px;">' + p.Name_Eng + "</span>" : "") +
+    "</div>";
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+function showBottomChartProtectedAreas(sel) {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  var ctx = canvas.getContext("2d");
+  if (bottomChart) bottomChart.destroy();
+
+  // ერთი დაცული ტერიტორიის ნაწილები ერთად შევკრიბოთ
+  var sums = {};
+  paData.features.forEach(function (f) {
+    var p = f.properties;
+    sums[p.Name_Geo] = (sums[p.Name_Geo] || 0) + (p.Area_km2 || 0);
+  });
+  var names = Object.keys(sums).sort(function (a, b) {
+    return sums[b] - sums[a];
+  });
+  var total = names.reduce(function (a, n) { return a + sums[n]; }, 0);
+
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: names.map(function (n) {
+        return n.replace(" ბუნების ძეგლი", "").split(" ");
+      }),
+      datasets: [{
+        data: names.map(function (n) { return Math.round(sums[n] * 100) / 100; }),
+        backgroundColor: names.map(function (n) {
+          return n === sel.Name_Geo ? PA_STROKE : PA_FILL;
+        }),
+        borderWidth: 0,
+        borderRadius: 3,
+        minBarLength: 6,
+      }],
+    },
+    plugins: [paValueLabels],
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { top: 18 } },
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "დაცული ტერიტორიები — ფართობი (კმ²), სულ " + Math.round(total) + " კმ²",
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 6 },
+        },
+        tooltip: {
+          callbacks: {
+            title: function (c) { return names[c[0].dataIndex]; },
+            label: function (c) {
+              return c.parsed.y + " კმ² (" + Math.round((c.parsed.y / total) * 100) + "%)";
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { font: { family: "Fira Sans", size: 9 } },
+          grid: { color: "#eee" },
+          title: { display: true, text: "კმ²", font: { family: "Fira Sans", size: 9 }, color: "#777" },
+        },
+        x: {
+          ticks: {
+            font: { family: "Fira Sans", size: 9 },
+            autoSkip: false, maxRotation: 0, minRotation: 0,
+            color: function (c) {
+              return names[c.index] === sel.Name_Geo ? "#1A1A18" : "#999";
+            },
+          },
+          grid: { display: false },
+        },
+      },
+    },
+  });
+}
+
+var paValueLabels = {
+  id: "paValueLabels",
+  afterDatasetsDraw: function (chart) {
+    var ctx = chart.ctx;
+    ctx.save();
+    ctx.font = "600 10px Fira Sans";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillStyle = "#1A1A18";
+    chart.getDatasetMeta(0).data.forEach(function (bar, i) {
+      ctx.fillText(chart.data.datasets[0].data[i], bar.x, bar.y - 4);
+    });
+    ctx.restore();
+  },
+};
+
+function updateProtectedAreasLegend() {
+  var el = document.getElementById("legendContent");
+  if (!el) return;
+  var cats = ["ეროვნული პარკი", "ნაკრძალი", "აღკვეთილი", "ბუნების ძეგლი"];
+  var html =
+    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">დაცული ტერიტორიები</div>' +
+    '<div style="display:flex;align-items:center;margin-bottom:8px;">' +
+    '<span style="width:16px;height:16px;background:' + PA_FILL +
+    ';border:1.6px solid ' + PA_STROKE + ';flex-shrink:0;"></span>' +
+    '<span style="font-size:10px;margin-left:7px;">დაცული ტერიტორია</span></div>' +
+    '<div style="font-size:9px;font-weight:700;color:var(--text-muted);margin:8px 0 5px;text-transform:uppercase;letter-spacing:.06em;">კატეგორიები</div>';
+  cats.forEach(function (c) {
+    html += '<div style="font-size:10px;margin-bottom:3px;color:#444;">• ' + c + "</div>";
+  });
+  html +=
+    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">ტერიტორიაზე დაჭერით — ფართობები ქვედა ველში</div>';
+  el.innerHTML = html;
+  setInfoBtn("protected_areas");
 }
 
 // ============================================================
