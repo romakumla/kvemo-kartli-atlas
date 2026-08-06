@@ -1451,8 +1451,8 @@ aside {
   position: fixed;
   bottom: 170px;
   right: 110px;
-  width: 340px;
-  max-height: 320px;
+  width: 400px;
+  max-height: min(72vh, 640px);
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 6px 32px rgba(0, 0, 0, 0.16);
@@ -1497,13 +1497,16 @@ aside {
 .map-info-body {
   padding: 12px 14px;
   overflow-y: auto;
-  max-height: 260px;
+  max-height: min(62vh, 570px);
 }
 .map-info-text {
   font-size: 11px;
   color: #444;
   line-height: 1.7;
   margin: 0 0 10px;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 .map-info-meta {
   display: flex;
