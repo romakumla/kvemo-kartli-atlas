@@ -31,6 +31,29 @@ var homeControl = L.Control.extend({
 });
 map.addControl(new homeControl());
 
+// ===== მასშტაბის ზოლი და ჩრდილოეთის ისარი =====
+// კარტოგრაფიული სისრულისთვის — ორივე ბეჭდურ ატლასშიც სავალდებულოა
+L.control
+  .scale({ position: "bottomleft", metric: true, imperial: false, maxWidth: 130 })
+  .addTo(map);
+
+var northControl = L.Control.extend({
+  options: { position: "bottomleft" },
+  onAdd: function () {
+    var el = L.DomUtil.create("div", "north-arrow");
+    el.innerHTML =
+      '<svg viewBox="0 0 24 34" width="17" height="24" aria-label="ჩრდილოეთი">' +
+      '<polygon points="12,2 18,20 12,16 6,20" fill="#4A4035"/>' +
+      '<polygon points="12,2 12,16 6,20" fill="#8A8078"/>' +
+      '<text x="12" y="32" text-anchor="middle" font-size="10" ' +
+      'font-family="Fira Sans" font-weight="700" fill="#4A4035">ჩ</text>' +
+      "</svg>";
+    L.DomEvent.disableClickPropagation(el);
+    return el;
+  },
+});
+map.addControl(new northControl());
+
 // ===== Basemaps =====
 var basemaps = {
   light: L.tileLayer(
@@ -49,6 +72,23 @@ var basemaps = {
     "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
     { maxZoom: 19, attribution: "© OpenStreetMap © CARTO" },
   ),
+  // რელიეფი — დაჩრდილული რელიეფი წყლის ქსელითა და წარწერებით
+  relief: L.layerGroup([
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 13, attribution: "© Esri" },
+    ),
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+      { maxZoom: 19, attribution: "© OpenStreetMap © CARTO", opacity: 0.9 },
+    ),
+  ]),
+  // ტოპოგრაფიული — ჰორიზონტალებით
+  topo: L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+    maxZoom: 17,
+    subdomains: "abc",
+    attribution: "© OpenTopoMap (CC-BY-SA) © OpenStreetMap",
+  }),
 };
 var currentBasemap = basemaps.light;
 currentBasemap.addTo(map);
@@ -576,13 +616,30 @@ function hideSettlementLegend() {
   if (el) el.style.display = "none";
 }
 // ===== Chart Panel visibility helpers =====
+// ქვედა პანელის გადართვისას რუკის კონტეინერი იცვლება —
+// Leaflet-ს ეს უნდა შევატყობინოთ, თორემ ფილები ძველ ზომაზე რჩება
+// და რუკის ქვედა ნაწილი პანელის ქვეშ ექცევა
+function refreshMapSize() {
+  if (typeof map === "undefined" || !map.invalidateSize) return;
+  requestAnimationFrame(function () {
+    map.invalidateSize({ animate: false });
+  });
+  setTimeout(function () {
+    map.invalidateSize({ animate: false });
+  }, 220);
+}
+
 function showChartPanel() {
   document.getElementById("chartPanel").style.display = "flex";
+  document.body.classList.add("chart-open");
   var ib = document.getElementById("infoBar");
   if (ib) ib.style.display = "none";
+  refreshMapSize();
 }
 function hideChartPanel() {
   document.getElementById("chartPanel").style.display = "none";
+  document.body.classList.remove("chart-open");
+  refreshMapSize();
   if (bottomChart) {
     bottomChart.destroy();
     bottomChart = null;
@@ -3307,7 +3364,13 @@ function showBottomChartAgro(p, data) {
       datasets: [
         {
           label: "ფართობი (კმ²)",
-          data: sorted.map((k) => Math.round(areas[k])),
+          data: sorted.map((function (k) {
+            var v = areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
+          })),
+          minBarLength: 5,
           backgroundColor: sorted.map((k) => colors[k] + "CC"),
           borderColor: sorted.map((k) => colors[k]),
           borderWidth: 2,
@@ -3315,8 +3378,10 @@ function showBottomChartAgro(p, data) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -3528,7 +3593,13 @@ function showBottomChartLandscape(p, data, order) {
       datasets: [
         {
           label: "ფართობი (კმ²)",
-          data: sorted.map((k) => Math.round(areas[k])),
+          data: sorted.map((function (k) {
+            var v = areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
+          })),
+          minBarLength: 5,
           backgroundColor: sorted.map((k) => colors[k] + "CC"),
           borderColor: sorted.map((k) => colors[k]),
           borderWidth: 2,
@@ -3536,8 +3607,10 @@ function showBottomChartLandscape(p, data, order) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -3789,7 +3862,13 @@ function showBottomChartHazard() {
       datasets: [
         {
           label: "ფართობი (კმ²)",
-          data: sorted.map((k) => Math.round(areas[k])),
+          data: sorted.map((function (k) {
+            var v = areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
+          })),
+          minBarLength: 5,
           backgroundColor: sorted.map((k) => colors[k]),
           borderColor: sorted.map((k) =>
             colors[k]
@@ -3807,8 +3886,10 @@ function showBottomChartHazard() {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -4082,7 +4163,13 @@ function showBottomChartGW() {
       datasets: [
         {
           label: "ფართობი (კმ²)",
-          data: sorted.map((k) => Math.round(areas[k])),
+          data: sorted.map((function (k) {
+            var v = areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
+          })),
+          minBarLength: 5,
           backgroundColor: sorted.map((k) => colors[k]),
           borderColor: sorted.map((k) => "#5599AA"),
           borderWidth: 1,
@@ -4090,8 +4177,10 @@ function showBottomChartGW() {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -5158,6 +5247,25 @@ function _showInfoPrecip(p, data) {
   showBottomChartTemp(data, "precip");
 }
 
+
+// სვეტზე მნიშვნელობის ჩაწერა — პატარა სვეტებიც იკითხება
+var areaValueLabels = {
+  id: "areaValueLabels",
+  afterDatasetsDraw: function (chart) {
+    var ctx = chart.ctx;
+    ctx.save();
+    ctx.font = "600 9px Fira Sans";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    ctx.fillStyle = "#1A1A18";
+    chart.getDatasetMeta(0).data.forEach(function (bar, i) {
+      var v = chart.data.datasets[0].data[i];
+      if (v || v === 0) ctx.fillText(v, bar.x, bar.y - 3);
+    });
+    ctx.restore();
+  },
+};
+
 function showBottomChartTemp(data, type) {
   var canvas = document.getElementById("chartCanvas");
   document.getElementById("chartEmpty").style.display = "none";
@@ -5174,15 +5282,8 @@ function showBottomChartTemp(data, type) {
     colors = {};
   data.features.forEach(function (f) {
     var k = f.properties.Label + " " + units[type];
-    var ring = f.geometry.coordinates[0];
-    var a = 0;
-    for (var i = 0; i < ring.length; i++) {
-      var j = (i + 1) % ring.length;
-      a +=
-        ring[i][0] * 83000 * (ring[j][1] * 111000) -
-        ring[j][0] * 83000 * (ring[i][1] * 111000);
-    }
-    areas[k] = (areas[k] || 0) + Math.abs(a) / 2 / 1e6;
+    // ფართობი წინასწარაა გამოთვლილი მონაცემებში (UTM, ნახვრეტების გამოკლებით)
+    areas[k] = (areas[k] || 0) + (f.properties.Area_km2 || 0);
     colors[k] = f.properties.Color;
   });
   var sorted = Object.keys(areas).sort(function (a, b) {
@@ -5196,8 +5297,13 @@ function showBottomChartTemp(data, type) {
         {
           label: "კმ²",
           data: sorted.map(function (k) {
-            return Math.round(areas[k]);
+            var v = areas[k];
+            // ძალიან პატარა ფართობებიც უნდა ჩანდეს, არა 0
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
           }),
+          minBarLength: 5,
           backgroundColor: sorted.map(function (k) {
             return colors[k] + "CC";
           }),
@@ -5209,8 +5315,10 @@ function showBottomChartTemp(data, type) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -5478,15 +5586,8 @@ function showBottomChartClimate(data, type) {
     colors = {};
   data.features.forEach(function (f) {
     var k = f.properties.Label;
-    var ring = f.geometry.coordinates[0];
-    var a = 0;
-    for (var i = 0; i < ring.length; i++) {
-      var j = (i + 1) % ring.length;
-      a +=
-        ring[i][0] * 83000 * (ring[j][1] * 111000) -
-        ring[j][0] * 83000 * (ring[i][1] * 111000);
-    }
-    areas[k] = (areas[k] || 0) + Math.abs(a) / 2 / 1e6;
+    // ფართობი წინასწარაა გამოთვლილი მონაცემებში (UTM, ნახვრეტების გამოკლებით)
+    areas[k] = (areas[k] || 0) + (f.properties.Area_km2 || 0);
     colors[k] = f.properties.Color;
   });
   var sorted = Object.keys(areas).sort(function (a, b) {
@@ -5500,8 +5601,13 @@ function showBottomChartClimate(data, type) {
         {
           label: "კმ²",
           data: sorted.map(function (k) {
-            return Math.round(areas[k]);
+            var v = areas[k];
+            // ძალიან პატარა ფართობებიც უნდა ჩანდეს, არა 0
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
           }),
+          minBarLength: 5,
           backgroundColor: sorted.map(function (k) {
             return colors[k] + "CC";
           }),
@@ -5513,8 +5619,10 @@ function showBottomChartClimate(data, type) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -5749,15 +5857,8 @@ function showBottomChartHeatWaves(data) {
   data.features.forEach(function (f) {
     var k = f.properties.Label;
     if (!areas[k]) areas[k] = 0;
-    var ring = f.geometry.coordinates[0];
-    var a = 0;
-    for (var i = 0; i < ring.length; i++) {
-      var j = (i + 1) % ring.length;
-      a +=
-        ring[i][0] * 83000 * (ring[j][1] * 111000) -
-        ring[j][0] * 83000 * (ring[i][1] * 111000);
-    }
-    areas[k] += Math.abs(a) / 2 / 1e6;
+    // ფართობი წინასწარაა გამოთვლილი მონაცემებში
+    areas[k] += f.properties.Area_km2 || 0;
     colors[k] = f.properties.Color;
   });
   var sorted = Object.keys(areas).sort(function (a, b) {
@@ -5771,8 +5872,13 @@ function showBottomChartHeatWaves(data) {
         {
           label: "ფართობი",
           data: sorted.map(function (k) {
-            return Math.round(areas[k]);
+            var v = areas[k];
+            // ძალიან პატარა ფართობებიც უნდა ჩანდეს, არა 0
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
           }),
+          minBarLength: 5,
           backgroundColor: sorted.map(function (k) {
             return colors[k] + "CC";
           }),
@@ -5784,8 +5890,10 @@ function showBottomChartHeatWaves(data) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -5833,15 +5941,8 @@ function showBottomChartDrought(data) {
   data.features.forEach(function (f) {
     var k = f.properties.Category;
     if (!areas[k]) areas[k] = 0;
-    var ring = f.geometry.coordinates[0];
-    var a = 0;
-    for (var i = 0; i < ring.length; i++) {
-      var j = (i + 1) % ring.length;
-      a +=
-        ring[i][0] * 83000 * (ring[j][1] * 111000) -
-        ring[j][0] * 83000 * (ring[i][1] * 111000);
-    }
-    areas[k] += Math.abs(a) / 2 / 1e6;
+    // ფართობი წინასწარაა გამოთვლილი მონაცემებში
+    areas[k] += f.properties.Area_km2 || 0;
     colors[k] = f.properties.Color;
   });
   var order = [
@@ -5862,7 +5963,10 @@ function showBottomChartDrought(data) {
         {
           label: "ფართობი",
           data: labels.map(function (k) {
-            return Math.round(areas[k]);
+            var v = areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
           }),
           backgroundColor: labels.map(function (k) {
             return colors[k] + "CC";
@@ -5875,8 +5979,10 @@ function showBottomChartDrought(data) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6194,8 +6300,13 @@ function showBottomChartMadflow(data) {
         {
           label: "ფართობი (კმ²)",
           data: sorted.map(function (k) {
-            return Math.round(areas[k]);
+            var v = areas[k];
+            // ძალიან პატარა ფართობებიც უნდა ჩანდეს, არა 0
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
           }),
+          minBarLength: 5,
           backgroundColor: sorted.map(function (k) {
             return colors[k] + "CC";
           }),
@@ -6512,7 +6623,10 @@ function showBottomChartForest(data) {
         {
           label: "ფართობი",
           data: sorted.map(function (k) {
-            return Math.round(d.areas[k]);
+            var v = d.areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
           }),
           backgroundColor: sorted.map(function (k) {
             return d.colors[k] + "CC";
@@ -6525,8 +6639,10 @@ function showBottomChartForest(data) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6605,7 +6721,10 @@ function showBottomChartVegetation(data) {
         {
           label: "ფართობი",
           data: sorted.map(function (k) {
-            return Math.round(d.areas[k]);
+            var v = d.areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
           }),
           backgroundColor: sorted.map(function (k) {
             return d.colors[k] + "CC";
@@ -6618,8 +6737,10 @@ function showBottomChartVegetation(data) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6767,7 +6888,13 @@ function showBottomChartSoils(data) {
       datasets: [
         {
           label: "ფართობი (კმ²)",
-          data: sorted.map((k) => Math.round(areas[k])),
+          data: sorted.map((function (k) {
+            var v = areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
+          })),
+          minBarLength: 5,
           backgroundColor: sorted.map((k) => colors[k] + "CC"),
           borderColor: sorted.map((k) => colors[k]),
           borderWidth: 1.5,
@@ -6775,8 +6902,10 @@ function showBottomChartSoils(data) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6869,7 +6998,13 @@ function showBottomChartSoilsBorn(data) {
       datasets: [
         {
           label: "ფართობი (კმ²)",
-          data: sorted.map((k) => Math.round(areas[k])),
+          data: sorted.map((function (k) {
+            var v = areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
+          })),
+          minBarLength: 5,
           backgroundColor: sorted.map((k) => colors[k] + "CC"),
           borderColor: sorted.map((k) => colors[k]),
           borderWidth: 1.5,
@@ -6877,8 +7012,10 @@ function showBottomChartSoilsBorn(data) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6967,7 +7104,13 @@ function showBottomChartGeology(data) {
       datasets: [
         {
           label: "ფართობი (კმ²)",
-          data: sorted.map((k) => Math.round(areas[k])),
+          data: sorted.map((function (k) {
+            var v = areas[k];
+            if (v < 1) return Math.round(v * 100) / 100;
+            if (v < 10) return Math.round(v * 10) / 10;
+            return Math.round(v);
+          })),
+          minBarLength: 5,
           backgroundColor: sorted.map((k) => colors[k] + "CC"),
           borderColor: sorted.map((k) => colors[k]),
           borderWidth: 1.5,
@@ -6975,8 +7118,10 @@ function showBottomChartGeology(data) {
         },
       ],
     },
+    plugins: [areaValueLabels],
     options: {
       responsive: true,
+      layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -16546,6 +16691,7 @@ document.querySelectorAll(".basemap-item").forEach(function (item) {
     if (religionLayer) religionLayer.bringToFront();
     if (neutralBoundaryLayer) neutralBoundaryLayer.bringToFront();
     if (neutralLabelLayer) neutralLabelLayer.bringToFront();
+    finalizeLayerOrder();
     document
       .querySelectorAll(".basemap-item")
       .forEach((el) => el.classList.remove("active"));
