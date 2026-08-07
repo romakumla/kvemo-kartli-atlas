@@ -34,11 +34,11 @@ map.addControl(new homeControl());
 // ===== მასშტაბის ზოლი და ჩრდილოეთის ისარი =====
 // კარტოგრაფიული სისრულისთვის — ორივე ბეჭდურ ატლასშიც სავალდებულოა
 L.control
-  .scale({ position: "bottomleft", metric: true, imperial: false, maxWidth: 130 })
+  .scale({ position: "bottomright", metric: true, imperial: false, maxWidth: 120 })
   .addTo(map);
 
 var northControl = L.Control.extend({
-  options: { position: "bottomleft" },
+  options: { position: "bottomright" },
   onAdd: function () {
     var el = L.DomUtil.create("div", "north-arrow");
     el.innerHTML =
@@ -1002,11 +1002,11 @@ function showBottomChartIDP() {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "პირები", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -1405,10 +1405,10 @@ function showBottomChartDensity(p) {
         y: {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
-          ticks: { font: { family: "Fira Sans", size: 10 }, color: "#6B6862" },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" }, color: "#6B6862" },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11 }, color: "#1A1A18" },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -1671,6 +1671,7 @@ function showBottomChartMarital(p, gender) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -1696,7 +1697,7 @@ function showBottomChartMarital(p, gender) {
           max: 800,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v + " ‰";
@@ -1705,7 +1706,7 @@ function showBottomChartMarital(p, gender) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 0,
           },
@@ -1713,25 +1714,6 @@ function showBottomChartMarital(p, gender) {
         },
       },
       // რიცხვები ბარების თავზე
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 10px 'Fira Sans', sans-serif";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (dataset, i) {
-            var meta = chart.getDatasetMeta(i);
-            meta.data.forEach(function (bar, index) {
-              var val = dataset.data[index];
-              if (val > 0) {
-                ctx2.fillText(val + " ‰", bar.x, bar.y - 3);
-              }
-            });
-          });
-        },
-      },
     },
   });
 }
@@ -1957,11 +1939,11 @@ function showBottomChartRate(p, f12, f22, type) {
         y: {
           beginAtZero: false,
           grid: { color: "rgba(0,0,0,0.05)" },
-          ticks: { font: { family: "Fira Sans", size: 10 }, color: "#6B6862" },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" }, color: "#6B6862" },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 12, weight: "600" },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
           },
           grid: { display: false },
@@ -2023,13 +2005,13 @@ function showBottomChart(p) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString(),
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11 }, color: "#1A1A18" },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -2225,14 +2207,14 @@ function renderCensusModal() {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString(),
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 12, weight: "600" },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
           },
           grid: { display: false },
@@ -2485,11 +2467,11 @@ function _doCmpChart(nameA, nameB) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: ylabel, font: { size: 9 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 }, maxRotation: 0 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 0 },
           grid: { display: false },
         },
       },
@@ -3378,10 +3360,9 @@ function showBottomChartAgro(p, data) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -3401,7 +3382,7 @@ function showBottomChartAgro(p, data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v.toLocaleString() + " კმ²";
@@ -3410,28 +3391,11 @@ function showBottomChartAgro(p, data) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 20,
           },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -3607,10 +3571,10 @@ function showBottomChartLandscape(p, data, order) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -3630,35 +3594,18 @@ function showBottomChartLandscape(p, data, order) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 25,
           },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -3886,10 +3833,9 @@ function showBottomChartHazard() {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -3909,31 +3855,14 @@ function showBottomChartHazard() {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 }, color: "#1A1A18" },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -4177,10 +4106,9 @@ function showBottomChartGW() {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -4200,35 +4128,18 @@ function showBottomChartGW() {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 8 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 25,
           },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -4517,6 +4428,7 @@ function showBottomChartEQ() {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -4533,27 +4445,11 @@ function showBottomChartEQ() {
         y: {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
-          ticks: { font: { family: "Fira Sans", size: 10 }, color: "#6B6862" },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" }, color: "#6B6862" },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11 }, color: "#1A1A18" },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 10px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0) ctx2.fillText(val, bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -4918,7 +4814,7 @@ function showInfoMeteo(p) {
     <div class="info-row"><span class="info-key">სადგ. ID</span><span class="info-val">${p.Station_ID || "–"}</span></div>
     <div class="info-row"><span class="info-key">ტიპი</span><span class="info-val">${p.Station_Ty || "–"}</span></div>
     <div class="info-row"><span class="info-key">სიმაღლე</span><span class="info-val">${p.Elevation != null ? p.Elevation + " მ" : "–"}</span></div>
-    <div class="info-row"><span class="info-key">რაიონი</span><span class="info-val">${p.District || "–"}</span></div>
+    <div class="info-row"><span class="info-key">მუნიციპალიტეტი</span><span class="info-val">${p.Municipality_Geo || p.District || "–"}</span></div>
     <hr style="margin:8px 0;border-top:1px solid #f0ede8;">
     <div style="font-size:10px;color:var(--text-muted);line-height:1.5;">${p.Type_Geo || "–"}</div>
     <div class="info-row" style="margin-top:6px;"><span class="info-key">დაწყება</span><span class="info-val">${p.Begin_Obs || "–"}</span></div>
@@ -4935,7 +4831,7 @@ function showInfoHydro(p) {
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
     ${badge}
     <div class="info-row"><span class="info-key">მდინარე</span><span class="info-val">${p.River || "–"}</span></div>
-    <div class="info-row"><span class="info-key">River (Eng)</span><span class="info-val">${p.River_Eng || "–"}</span></div>
+    <div class="info-row"><span class="info-key">მუნიციპალიტეტი</span><span class="info-val">${p.Municipality_Geo || "–"}</span></div>
     <hr style="margin:8px 0;border-top:1px solid #f0ede8;">
     <div class="info-row"><span class="info-key">გახსნა</span><span class="info-val">${p.Year_Open || "–"}</span></div>
     ${p.Year_Close ? `<div class="info-row"><span class="info-key">დახურვა</span><span class="info-val">${p.Year_Close}</span></div>` : ""}
@@ -5248,23 +5144,6 @@ function _showInfoPrecip(p, data) {
 }
 
 
-// სვეტზე მნიშვნელობის ჩაწერა — პატარა სვეტებიც იკითხება
-var areaValueLabels = {
-  id: "areaValueLabels",
-  afterDatasetsDraw: function (chart) {
-    var ctx = chart.ctx;
-    ctx.save();
-    ctx.font = "600 9px Fira Sans";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-    ctx.fillStyle = "#1A1A18";
-    chart.getDatasetMeta(0).data.forEach(function (bar, i) {
-      var v = chart.data.datasets[0].data[i];
-      if (v || v === 0) ctx.fillText(v, bar.x, bar.y - 3);
-    });
-    ctx.restore();
-  },
-};
 
 function showBottomChartTemp(data, type) {
   var canvas = document.getElementById("chartCanvas");
@@ -5315,7 +5194,6 @@ function showBottomChartTemp(data, type) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
       layout: { padding: { top: 16 } },
@@ -5341,14 +5219,14 @@ function showBottomChartTemp(data, type) {
         y: {
           beginAtZero: true,
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             callback: function (v) {
               return v.toLocaleString() + " კმ²";
             },
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -5619,7 +5497,6 @@ function showBottomChartClimate(data, type) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
       layout: { padding: { top: 16 } },
@@ -5645,14 +5522,14 @@ function showBottomChartClimate(data, type) {
         y: {
           beginAtZero: true,
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             callback: function (v) {
               return v + " კმ²";
             },
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -5890,7 +5767,6 @@ function showBottomChartHeatWaves(data) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
       layout: { padding: { top: 16 } },
@@ -5915,14 +5791,14 @@ function showBottomChartHeatWaves(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: {
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" },
             callback: function (v) {
               return v + " კმ²";
             },
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -5979,7 +5855,6 @@ function showBottomChartDrought(data) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
       layout: { padding: { top: 16 } },
@@ -6004,14 +5879,14 @@ function showBottomChartDrought(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: {
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" },
             callback: function (v) {
               return v + " კმ²";
             },
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 }, color: "#1A1A18" },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -6320,6 +6195,7 @@ function showBottomChartMadflow(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6343,7 +6219,7 @@ function showBottomChartMadflow(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v.toLocaleString() + " კმ²";
@@ -6351,25 +6227,8 @@ function showBottomChartMadflow(data) {
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 }, color: "#1A1A18" },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -6639,10 +6498,9 @@ function showBottomChartForest(data) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6666,7 +6524,7 @@ function showBottomChartForest(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v + " კმ²";
@@ -6675,28 +6533,11 @@ function showBottomChartForest(data) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 35,
           },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 2);
-            });
-          });
         },
       },
     },
@@ -6737,10 +6578,9 @@ function showBottomChartVegetation(data) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6764,7 +6604,7 @@ function showBottomChartVegetation(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v + " კმ²";
@@ -6773,28 +6613,11 @@ function showBottomChartVegetation(data) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 8 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 40,
           },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 8px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 2);
-            });
-          });
         },
       },
     },
@@ -6902,10 +6725,9 @@ function showBottomChartSoils(data) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -6925,35 +6747,18 @@ function showBottomChartSoils(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 35,
           },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -7012,10 +6817,9 @@ function showBottomChartSoilsBorn(data) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -7035,31 +6839,14 @@ function showBottomChartSoilsBorn(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 }, color: "#1A1A18" },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -7118,10 +6905,9 @@ function showBottomChartGeology(data) {
         },
       ],
     },
-    plugins: [areaValueLabels],
     options: {
       responsive: true,
-      layout: { padding: { top: 16 } },
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -7141,31 +6927,14 @@ function showBottomChartGeology(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 }, color: "#1A1A18" },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0)
-                ctx2.fillText(val.toLocaleString() + " კმ²", bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -7182,8 +6951,8 @@ var hail100Data = null;
 var hailActiveType = "total"; // 'total' | '100'
 
 // სეტყვა — ერთი ფერი თითო ფენაზე; სიდიდეს მხოლოდ წრის ზომა გამოხატავს
-var HAIL_TOTAL_COLOR = "#0277BD"; // ლურჯი — სულ
-var HAIL_100_COLOR = "#C62828"; // წითელი — 100 წელიწადში
+var HAIL_TOTAL_COLOR = "#4FA3D9"; // ღია ლურჯი — სულ
+var HAIL_100_COLOR = "#01579B"; // მუქი ლურჯი — 100 წელიწადში (სეტყვა = ყინული)
 
 var HAIL_TOTAL_CLASSES = [
   { cls: "≤ 1", r: 7, color: HAIL_TOTAL_COLOR },
@@ -7368,6 +7137,7 @@ function showBottomChartHail(data, type) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -7385,34 +7155,18 @@ function showBottomChartHail(data, type) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v + " კმ²",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 8 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 40,
           },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 8px 'Fira Sans',sans-serif";
-          ctx2.fillStyle = "#444";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              var val = ds.data[idx];
-              if (val > 0) ctx2.fillText(val + " კმ²", bar.x, bar.y - 2);
-            });
-          });
         },
       },
     },
@@ -8050,11 +7804,8 @@ function renderGeologyLayers() {
           '<div class="info-row"><span class="info-label">სახეობა:</span><span class="info-value">' +
           (p.Type_Geo || "-") +
           "</span></div>" +
-          '<div class="info-row"><span class="info-label">რაიონი:</span><span class="info-value">' +
+          '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
-          "</span></div>" +
-          '<div class="info-row"><span class="info-label">Type:</span><span class="info-value">' +
-          (p.Type_Eng || "-") +
           "</span></div>";
       });
       return marker;
@@ -8087,7 +7838,7 @@ function renderGeologyLayers() {
           '<div class="info-row"><span class="info-label">გამოყენება:</span><span class="info-value">' +
           (p.Use_Geo || "-") +
           "</span></div>" +
-          '<div class="info-row"><span class="info-label">რაიონი:</span><span class="info-value">' +
+          '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
           "</span></div>";
       });
@@ -8118,7 +7869,7 @@ function renderGeologyLayers() {
           '<div class="info-row"><span class="info-label">სახეობა:</span><span class="info-value">' +
           (p.Type_Geo || "-") +
           "</span></div>" +
-          '<div class="info-row"><span class="info-label">რაიონი:</span><span class="info-value">' +
+          '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
           "</span></div>";
       });
@@ -8427,10 +8178,10 @@ function showBottomChartArch(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10 } },
+          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 8 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -8619,6 +8370,7 @@ function showBottomChartBattles(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -8638,26 +8390,10 @@ function showBottomChartBattles(data) {
         },
       },
       scales: {
-        y: { beginAtZero: true, ticks: { stepSize: 1 } },
+        y: { beginAtZero: true, ticks: { font: { family: "Fira Sans", size: 10, weight: "500" }, stepSize: 1 } },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 12px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx], bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -8905,6 +8641,7 @@ function showBottomChartGermans(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -8926,27 +8663,11 @@ function showBottomChartGermans(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10 } },
+          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 11px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx], bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -9137,6 +8858,7 @@ function showBottomChartForts(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -9158,27 +8880,11 @@ function showBottomChartForts(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 2, font: { family: "Fira Sans", size: 10 } },
+          ticks: { stepSize: 2, font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 8 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 11px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx], bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -9218,13 +8924,13 @@ var churchesVisible = false;
 // PDF სიმბოლოები
 var EP_SVG = {
   monastery_m:
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.84 12.08" width="18" height="18"><polygon fill="#010101" points="6.12,11.45 6.72,11.45 7.12,11.02 7.12,10.39 6.85,9.96 6.85,5 8.74,5 9.14,5.3 9.74,5.3 10.14,4.88 10.14,4.24 9.74,3.82 9.14,3.82 8.74,4.07 6.85,4.07 6.85,2.12 7.12,1.69 7.12,1.06 6.72,0.63 6.12,0.63 5.71,1.06 5.71,1.69 5.99,2.12 5.99,4.07 4.1,4.07 3.7,3.82 3.1,3.82 2.69,4.24 2.69,4.88 3.1,5.3 3.7,5.3 4.1,5 5.99,5 5.99,9.96 5.71,10.39 5.71,11.02"/></svg>',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.84 12.08" width="26" height="26"><polygon fill="#010101" points="6.12,11.45 6.72,11.45 7.12,11.02 7.12,10.39 6.85,9.96 6.85,5 8.74,5 9.14,5.3 9.74,5.3 10.14,4.88 10.14,4.24 9.74,3.82 9.14,3.82 8.74,4.07 6.85,4.07 6.85,2.12 7.12,1.69 7.12,1.06 6.72,0.63 6.12,0.63 5.71,1.06 5.71,1.69 5.99,2.12 5.99,4.07 4.1,4.07 3.7,3.82 3.1,3.82 2.69,4.24 2.69,4.88 3.1,5.3 3.7,5.3 4.1,5 5.99,5 5.99,9.96 5.71,10.39 5.71,11.02"/></svg>',
   monastery_w:
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.84 12.08" width="18" height="18"><polygon fill="none" stroke="#010101" stroke-width="0.8" points="6.12,11.45 6.72,11.45 7.12,11.02 7.12,10.39 6.85,9.96 6.85,5 8.74,5 9.14,5.3 9.74,5.3 10.14,4.88 10.14,4.24 9.74,3.82 9.14,3.82 8.74,4.07 6.85,4.07 6.85,2.12 7.12,1.69 7.12,1.06 6.72,0.63 6.12,0.63 5.71,1.06 5.71,1.69 5.99,2.12 5.99,4.07 4.1,4.07 3.7,3.82 3.1,3.82 2.69,4.24 2.69,4.88 3.1,5.3 3.7,5.3 4.1,5 5.99,5 5.99,9.96 5.71,10.39 5.71,11.02"/></svg>',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.84 12.08" width="26" height="26"><polygon fill="none" stroke="#010101" stroke-width="0.8" points="6.12,11.45 6.72,11.45 7.12,11.02 7.12,10.39 6.85,9.96 6.85,5 8.74,5 9.14,5.3 9.74,5.3 10.14,4.88 10.14,4.24 9.74,3.82 9.14,3.82 8.74,4.07 6.85,4.07 6.85,2.12 7.12,1.69 7.12,1.06 6.72,0.63 6.12,0.63 5.71,1.06 5.71,1.69 5.99,2.12 5.99,4.07 4.1,4.07 3.7,3.82 3.1,3.82 2.69,4.24 2.69,4.88 3.1,5.3 3.7,5.3 4.1,5 5.99,5 5.99,9.96 5.71,10.39 5.71,11.02"/></svg>',
   cathedral:
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.29 11.2" width="19" height="19"><polygon fill="#010101" points="11.01,8.52 10.8,8.18 10.64,7.94 10.11,7.33 9.61,6.91 9.46,6.75 9.08,6.5 8.3,6.06 7.23,5.65 5.57,5.6 5.68,7.22 6.18,8.47 6.33,8.76 6.63,9.21 7.28,9.99 7.45,10.16 8.18,10.76 8.59,10.98 2.44,10.98 2.81,10.76 3.26,10.44 3.5,10.23 4.04,9.66 4.54,8.97 4.9,8.3 5.06,7.94 5.3,7.22 5.43,5.6 3.74,5.65 3.02,6 2.44,6.33 1.53,6.93 1.21,7.24 0.92,7.57 0.52,8.1 0.28,8.47 0.28,2.41 0.64,2.98 1.04,3.47 1.38,3.8 2.43,4.58 2.9,4.87 3.74,5.26 5.43,5.36 5.3,3.74 4.82,2.73 4.32,1.91 4.2,1.74 3.63,1.09 3.1,0.64 2.44,0.23 8.47,0.23 7.9,0.6 7.65,0.8 6.85,1.6 6.66,1.87 6.38,2.33 6.1,2.7 5.69,3.74 5.57,5.36 7.23,5.25 8.51,4.82 9.16,4.42 10.3,3.5 10.8,2.78 11.01,2.44"/></svg>',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.29 11.2" width="26" height="26"><polygon fill="#010101" points="11.01,8.52 10.8,8.18 10.64,7.94 10.11,7.33 9.61,6.91 9.46,6.75 9.08,6.5 8.3,6.06 7.23,5.65 5.57,5.6 5.68,7.22 6.18,8.47 6.33,8.76 6.63,9.21 7.28,9.99 7.45,10.16 8.18,10.76 8.59,10.98 2.44,10.98 2.81,10.76 3.26,10.44 3.5,10.23 4.04,9.66 4.54,8.97 4.9,8.3 5.06,7.94 5.3,7.22 5.43,5.6 3.74,5.65 3.02,6 2.44,6.33 1.53,6.93 1.21,7.24 0.92,7.57 0.52,8.1 0.28,8.47 0.28,2.41 0.64,2.98 1.04,3.47 1.38,3.8 2.43,4.58 2.9,4.87 3.74,5.26 5.43,5.36 5.3,3.74 4.82,2.73 4.32,1.91 4.2,1.74 3.63,1.09 3.1,0.64 2.44,0.23 8.47,0.23 7.9,0.6 7.65,0.8 6.85,1.6 6.66,1.87 6.38,2.33 6.1,2.7 5.69,3.74 5.57,5.36 7.23,5.25 8.51,4.82 9.16,4.42 10.3,3.5 10.8,2.78 11.01,2.44"/></svg>',
   residence:
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.84 12.08" width="18" height="18"><polygon fill="#7B1F1F" points="6.13,0.28 6.13,2.88 3.23,2.88 3.23,3.68 6.13,3.68 6.13,6.08 6.9,6.08 6.9,3.68 9.61,3.68 9.61,2.88 6.9,2.88 6.9,0.28"/><circle cx="6.47" cy="8.88" r="2.92" fill="none" stroke="#010101" stroke-width="0.4"/></svg>',
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.84 12.08" width="26" height="26"><polygon fill="#7B1F1F" points="6.13,0.28 6.13,2.88 3.23,2.88 3.23,3.68 6.13,3.68 6.13,6.08 6.9,6.08 6.9,3.68 9.61,3.68 9.61,2.88 6.9,2.88 6.9,0.28"/><circle cx="6.47" cy="8.88" r="2.92" fill="none" stroke="#010101" stroke-width="0.4"/></svg>',
 };
 
 var EP_TYPES = [
@@ -9298,20 +9004,34 @@ function buildEparchyLayers(data) {
     },
   }).addTo(map);
 
+  // ერთ კოორდინატზე მჯდომი სიმბოლოები გვერდიგვერდ დავალაგოთ
+  var _epAt = {};
+  points.features.forEach(function (f) {
+    var c = f.geometry.coordinates;
+    var key = c[0].toFixed(5) + "," + c[1].toFixed(5);
+    (_epAt[key] = _epAt[key] || []).push(f);
+  });
+
   eparchyPointLayer = L.geoJSON(points, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
+      var SZ = 26;
+      var c = feat.geometry.coordinates;
+      var grp = _epAt[c[0].toFixed(5) + "," + c[1].toFixed(5)] || [feat];
+      var idx = grp.indexOf(feat);
+      // ჰორიზონტალური წანაცვლება — ცენტრის მიმართ სიმეტრიულად
+      var dx = grp.length > 1 ? (idx - (grp.length - 1) / 2) * (SZ - 4) : 0;
       var icon = L.divIcon({
         html: EP_SVG[p.TKey] || EP_SVG.monastery_m,
-        iconSize: [18, 18],
-        iconAnchor: [9, 9],
+        iconSize: [SZ, SZ],
+        iconAnchor: [SZ / 2 - dx, SZ / 2],
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
       marker.bindTooltip(p.Name_Geo, {
         direction: "top",
         className: "village-label",
-        offset: [0, -11],
+        offset: [dx, -SZ / 2 - 2],
       });
       marker.on("click", function () {
         showInfoEparchyPoint(p);
@@ -9375,28 +9095,30 @@ function showBottomChartEparchies(data) {
     })
     .forEach(function (f) {
       var e = f.properties.Eparqia || "";
-      var short = e.replace(" ეპარქია", "").replace("ისა და", " /");
+      var short = e.replace(" ეპარქია", "");
       byEparchy[short] = (byEparchy[short] || 0) + 1;
     });
 
   var labels = Object.keys(byEparchy);
+  // გრძელი ორმაგი სახელები ორ სტრიქონად ("მანგლისისა და" / "თეთრიწყაროს")
+  var labelLines = labels.map(function (t) {
+    var k = t.indexOf("ისა და ");
+    return k === -1 ? [t] : [t.slice(0, k + 6), t.slice(k + 7)];
+  });
   var polyColors = {};
   data.features
     .filter(function (f) {
       return f.geometry.type === "Polygon";
     })
     .forEach(function (f) {
-      var short = f.properties.Name_Geo.replace(" ეპარქია", "").replace(
-        "ისა და",
-        " /",
-      );
+      var short = f.properties.Name_Geo.replace(" ეპარქია", "");
       polyColors[short] = f.properties.Color;
     });
 
   bottomChart = new Chart(ctx, {
     type: "bar",
     data: {
-      labels: labels,
+      labels: labelLines,
       datasets: [
         {
           label: "ობიექტები",
@@ -9416,6 +9138,7 @@ function showBottomChartEparchies(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -9437,27 +9160,18 @@ function showBottomChartEparchies(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 2, font: { family: "Fira Sans", size: 10 } },
+          ticks: { stepSize: 2, font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 8 }, maxRotation: 40 },
+          ticks: {
+            font: { family: "Fira Sans", size: 11, weight: "500" },
+            color: "#1A1A18",
+            autoSkip: false,
+            maxRotation: 0,
+            minRotation: 0,
+            padding: 4,
+          },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 10px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx], bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -9531,7 +9245,7 @@ function updateEparchiesLegend() {
   EP_TYPES.forEach(function (t) {
     html +=
       '<div class="eth-legend-item" style="margin-bottom:6px;align-items:center;">' +
-      '<span style="display:inline-flex;width:22px;justify-content:center;">' +
+      '<span style="display:inline-flex;width:28px;justify-content:center;">' +
       EP_SVG[t.key] +
       "</span>" +
       '<span style="font-size:10px;margin-left:5px;">' +
@@ -9679,6 +9393,7 @@ function showBottomChartPetro(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -9700,27 +9415,11 @@ function showBottomChartPetro(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10 } },
+          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 30 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 30 },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 11px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx], bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -9860,6 +9559,7 @@ function showBottomChartMega(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -9881,27 +9581,11 @@ function showBottomChartMega(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 10, font: { family: "Fira Sans", size: 10 } },
+          ticks: { stepSize: 10, font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 12px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx], bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -10196,6 +9880,7 @@ function showBottomChartBotanica(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -10217,27 +9902,11 @@ function showBottomChartBotanica(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 8 }, maxRotation: 30 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 30 },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 10px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx].toLocaleString(), bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -10420,6 +10089,7 @@ function showBottomChartEnergetika(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -10441,27 +10111,11 @@ function showBottomChartEnergetika(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 12px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx].toLocaleString(), bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -10670,6 +10324,7 @@ function showBottomChartCropZones(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -10691,27 +10346,11 @@ function showBottomChartCropZones(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 7 }, maxRotation: 40 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 40 },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx].toLocaleString(), bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -10928,6 +10567,7 @@ function showBottomChartLand(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -10949,27 +10589,11 @@ function showBottomChartLand(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx].toLocaleString(), bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -11339,6 +10963,7 @@ function showBottomChartSun(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -11360,27 +10985,11 @@ function showBottomChartSun(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10 } },
+          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 8 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 11px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx], bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -11754,10 +11363,10 @@ function showBottomChartAgri(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -11932,6 +11541,7 @@ function showBottomChartAgriSpec(data) {
     },
     options: {
       responsive: true,
+      layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
@@ -11953,27 +11563,11 @@ function showBottomChartAgriSpec(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 8 }, maxRotation: 25 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 25 },
           grid: { display: false },
-        },
-      },
-      animation: {
-        onComplete: function () {
-          var chart = this;
-          var ctx2 = chart.ctx;
-          ctx2.font = "bold 9px 'Fira Sans'";
-          ctx2.fillStyle = "#333";
-          ctx2.textAlign = "center";
-          ctx2.textBaseline = "bottom";
-          chart.data.datasets.forEach(function (ds, i) {
-            chart.getDatasetMeta(i).data.forEach(function (bar, idx) {
-              if (ds.data[idx] > 0)
-                ctx2.fillText(ds.data[idx].toLocaleString(), bar.x, bar.y - 3);
-            });
-          });
         },
       },
     },
@@ -12405,7 +11999,7 @@ function showBottomChartEdu(data) {
           type: "linear",
           position: "left",
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "მოსწავლეები", font: { size: 8 } },
         },
         y1: {
@@ -12413,11 +12007,11 @@ function showBottomChartEdu(data) {
           position: "right",
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "მასწავლებლები", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -12779,7 +12373,7 @@ function showBottomChartKg(data) {
           type: "linear",
           position: "left",
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "აღსაზრდელები", font: { size: 8 } },
         },
         y1: {
@@ -12787,11 +12381,11 @@ function showBottomChartKg(data) {
           position: "right",
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "აღმზრდელები", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -13055,11 +12649,11 @@ function showBottomChartOik(data) {
         y: {
           stacked: true,
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
           stacked: true,
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -13537,10 +13131,10 @@ function showBottomChartLibrary(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -14399,7 +13993,7 @@ function showBottomChartTc(p) {
           max: 5,
           ticks: {
             stepSize: 1,
-            font: { family: "Fira Sans", size: 9 },
+            font: { family: "Fira Sans", size: 10, weight: "500" },
             callback: function (value) {
               return value >= 1 && value <= 5
                 ? TC_CATEGORIES[value - 1].key
@@ -14409,7 +14003,7 @@ function showBottomChartTc(p) {
           grid: { display: false },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
           grid: { display: false },
         },
       },
@@ -14926,8 +14520,8 @@ function showBottomChartCellars(sel) {
         },
       },
       scales: {
-        y: { beginAtZero: true, ticks: { precision: 0, font: { family: "Fira Sans", size: 9 } }, grid: { color: "#eee" } },
-        x: { ticks: { font: { family: "Fira Sans", size: 9 }, autoSkip: false, maxRotation: 45, minRotation: 45 }, grid: { display: false } },
+        y: { beginAtZero: true, ticks: { precision: 0, font: { family: "Fira Sans", size: 10, weight: "500" } }, grid: { color: "#eee" } },
+        x: { ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, autoSkip: false, maxRotation: 45, minRotation: 45 }, grid: { display: false } },
       },
     },
   });
@@ -14936,24 +14530,6 @@ function showBottomChartCellars(sel) {
 
 // ზონების ფართობები — ქვედა სტატისტიკის ველი
 
-// სვეტზე ფართობის ციფრი — პატარა ზონებიც იკითხება
-var vitValueLabels = {
-  id: "vitValueLabels",
-  afterDatasetsDraw: function (chart) {
-    var ctx = chart.ctx;
-    var meta = chart.getDatasetMeta(0);
-    ctx.save();
-    ctx.font = "600 10px Fira Sans";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-    meta.data.forEach(function (bar, i) {
-      var v = chart.data.datasets[0].data[i];
-      ctx.fillStyle = "#1A1A18";
-      ctx.fillText(v + " კმ²", bar.x, bar.y - 4);
-    });
-    ctx.restore();
-  },
-};
 
 function showBottomChartVitZones(sel) {
   var canvas = document.getElementById("chartCanvas");
@@ -14997,7 +14573,6 @@ function showBottomChartVitZones(sel) {
         },
       ],
     },
-    plugins: [vitValueLabels],
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -15029,7 +14604,7 @@ function showBottomChartVitZones(sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           grid: { color: "#eee" },
           title: {
             display: true,
@@ -15040,7 +14615,7 @@ function showBottomChartVitZones(sel) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             autoSkip: false,
             maxRotation: 0,
             minRotation: 0,
@@ -15187,7 +14762,6 @@ function showBottomChartProtectedAreas(sel) {
         minBarLength: 6,
       }],
     },
-    plugins: [paValueLabels],
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -15213,13 +14787,13 @@ function showBottomChartProtectedAreas(sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           grid: { color: "#eee" },
           title: { display: true, text: "კმ²", font: { family: "Fira Sans", size: 9 }, color: "#777" },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { family: "Fira Sans", size: 11, weight: "500" },
             autoSkip: false, maxRotation: 0, minRotation: 0,
             color: function (c) {
               return names[c.index] === sel.Name_Geo ? "#1A1A18" : "#999";
@@ -15232,21 +14806,6 @@ function showBottomChartProtectedAreas(sel) {
   });
 }
 
-var paValueLabels = {
-  id: "paValueLabels",
-  afterDatasetsDraw: function (chart) {
-    var ctx = chart.ctx;
-    ctx.save();
-    ctx.font = "600 10px Fira Sans";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "bottom";
-    ctx.fillStyle = "#1A1A18";
-    chart.getDatasetMeta(0).data.forEach(function (bar, i) {
-      ctx.fillText(chart.data.datasets[0].data[i], bar.x, bar.y - 4);
-    });
-    ctx.restore();
-  },
-};
 
 function updateProtectedAreasLegend() {
   var el = document.getElementById("legendContent");
@@ -15598,7 +15157,7 @@ function showBottomChartHealth() {
           type: "linear",
           position: "left",
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "პერსონალი", font: { size: 8 } },
         },
         y1: {
@@ -15606,11 +15165,11 @@ function showBottomChartHealth() {
           position: "right",
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "ამბ. ვიზ.", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -16006,7 +15565,7 @@ function showBottomChartSocial() {
           type: "linear",
           position: "left",
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "ოჯახები", font: { size: 8 } },
         },
         y1: {
@@ -16014,11 +15573,11 @@ function showBottomChartSocial() {
           position: "right",
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
           title: { display: true, text: "პირები", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -16444,10 +16003,10 @@ function showBottomChartZoo(muniTotals, cfg) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 9 } },
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 9 }, maxRotation: 35 },
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
