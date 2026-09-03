@@ -56,10 +56,21 @@ map.addControl(new northControl());
 
 // ===== Basemaps =====
 var basemaps = {
-  light: L.tileLayer(
-    "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-    { maxZoom: 19, attribution: "© OpenStreetMap © CARTO" },
-  ),
+  // ღია — Esri Light Gray Canvas (API გასაღები არ სჭირდება)
+  light: L.layerGroup([
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxZoom: 19,
+        maxNativeZoom: 16,
+        attribution: "© Esri, © OpenStreetMap",
+      },
+    ),
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 19, maxNativeZoom: 16 },
+    ),
+  ]),
   osm: L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: "© OpenStreetMap",
@@ -68,19 +79,30 @@ var basemaps = {
     "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
     { maxZoom: 19, attribution: "© Esri" },
   ),
-  dark: L.tileLayer(
-    "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-    { maxZoom: 19, attribution: "© OpenStreetMap © CARTO" },
-  ),
+  // მუქი — Esri Dark Gray Canvas (API გასაღები არ სჭირდება)
+  dark: L.layerGroup([
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxZoom: 19,
+        maxNativeZoom: 16,
+        attribution: "© Esri, © OpenStreetMap",
+      },
+    ),
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 19, maxNativeZoom: 16 },
+    ),
+  ]),
   // რელიეფი — დაჩრდილული რელიეფი წყლის ქსელითა და წარწერებით
   relief: L.layerGroup([
     L.tileLayer(
       "https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}",
-      { maxZoom: 13, attribution: "© Esri" },
+      { maxZoom: 19, maxNativeZoom: 13, attribution: "© Esri" },
     ),
     L.tileLayer(
-      "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-      { maxZoom: 19, attribution: "© OpenStreetMap © CARTO", opacity: 0.9 },
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 19, maxNativeZoom: 16, opacity: 0.9 },
     ),
   ]),
   // ტოპოგრაფიული — ჰორიზონტალებით
