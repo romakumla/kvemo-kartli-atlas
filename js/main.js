@@ -9026,7 +9026,7 @@ function buildEparchyLayers(data) {
   var polys = {
     type: "FeatureCollection",
     features: data.features.filter(function (f) {
-      return f.geometry.type === "Polygon";
+      return f.geometry.type === "Polygon" || f.geometry.type === "MultiPolygon";
     }),
   };
   var points = {
@@ -9164,7 +9164,7 @@ function showBottomChartEparchies(data) {
   var polyColors = {};
   data.features
     .filter(function (f) {
-      return f.geometry.type === "Polygon";
+      return f.geometry.type === "Polygon" || f.geometry.type === "MultiPolygon";
     })
     .forEach(function (f) {
       var short = f.properties.Name_Geo.replace(" ეპარქია", "");
