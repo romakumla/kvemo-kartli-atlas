@@ -6,6 +6,40 @@
   document.head.appendChild(st);
 })();
 
+// ===== Municipality-based layers =====
+// Layers drawn on the 7 municipality polygons keep only their attributes in
+// data/muni/<name>.json; the shared boundaries come from
+// data/municipalities.geojson. A feature {"muni": i, "properties": {...}}
+// gets the geometry of feature i of that file; other features (points) are
+// used as they are. Returns a Response-like object, so call sites keep their
+// usual .then((r) => r.json()) chain.
+var _muniGeometryPromise = null;
+function loadMuniData(url) {
+  if (!_muniGeometryPromise) {
+    _muniGeometryPromise = fetch("data/municipalities.geojson")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        return d.features.map(function (f) { return f.geometry; });
+      })
+      .catch(function (e) {
+        _muniGeometryPromise = null;
+        throw e;
+      });
+  }
+  return Promise.all([
+    _muniGeometryPromise,
+    fetch(url).then(function (r) { return r.json(); }),
+  ]).then(function (res) {
+    var geoms = res[0];
+    var data = res[1];
+    data.features = data.features.map(function (f) {
+      if (f.muni === undefined) return f;
+      return { type: "Feature", properties: f.properties, geometry: geoms[f.muni] };
+    });
+    return { ok: true, status: 200, json: function () { return Promise.resolve(data); } };
+  });
+}
+
 // ===== Map =====
 var map = L.map("map", { zoomControl: false }).setView([41.4937, 44.5242], 10);
 L.control.zoom({ position: "topright" }).addTo(map);
@@ -266,7 +300,7 @@ var ATLAS_DATA_LAYERS = 72; // fallback, თუ წაკითხვა ვე�
 })();
 
 // ===== Georgia border (always visible) =====
-fetch("data/georgia_border.geojson")
+loadMuniData("data/muni/georgia_border.json")
   .then((r) => r.json())
   .then((data) => {
     var bl = L.geoJSON(data, {
@@ -603,7 +637,7 @@ function loadEthnics(cb) {
     if (cb) cb();
     return;
   }
-  fetch("data/ethnics.geojson")
+  loadMuniData("data/muni/ethnics.json")
     .then((r) => r.json())
     .then((data) => {
       ethnicsData = data;
@@ -617,7 +651,7 @@ function loadReligion(cb) {
     if (cb) cb();
     return;
   }
-  fetch("data/religion.geojson")
+  loadMuniData("data/muni/religion.json")
     .then((r) => r.json())
     .then((data) => {
       religionData = data;
@@ -793,7 +827,7 @@ function loadIDP() {
     if (loaded >= total) buildIDPLayers();
   }
   if (!idpPolyData) {
-    fetch("data/idp_municipalities.geojson")
+    loadMuniData("data/muni/idp_municipalities.json")
       .then(function (r) {
         return r.json();
       })
@@ -1332,7 +1366,7 @@ function loadDensity() {
     buildDensityLayer(densityData);
     return;
   }
-  fetch("data/density.geojson")
+  loadMuniData("data/muni/density.json")
     .then((r) => r.json())
     .then((data) => {
       densityData = data;
@@ -1816,7 +1850,7 @@ function loadDeathRate() {
     updateRateLegend("death");
     return;
   }
-  fetch("data/death_rate.geojson")
+  loadMuniData("data/muni/death_rate.json")
     .then((r) => r.json())
     .then((data) => {
       deathData = data;
@@ -1843,7 +1877,7 @@ function loadBirthRate() {
     updateRateLegend("birth");
     return;
   }
-  fetch("data/birth_rate.geojson")
+  loadMuniData("data/muni/birth_rate.json")
     .then((r) => r.json())
     .then((data) => {
       birthData = data;
@@ -2332,7 +2366,7 @@ function loadCmpData(cb) {
     if (++done >= need) cb();
   }
   if (!_COMPARE_DENSITY) {
-    fetch("data/density.geojson")
+    loadMuniData("data/muni/density.json")
       .then(function (r) {
         return r.json();
       })
@@ -2351,7 +2385,7 @@ function loadCmpData(cb) {
       });
   }
   if (!_COMPARE_BIRTH) {
-    fetch("data/birth_rate.geojson")
+    loadMuniData("data/muni/birth_rate.json")
       .then(function (r) {
         return r.json();
       })
@@ -2368,7 +2402,7 @@ function loadCmpData(cb) {
       });
   }
   if (!_COMPARE_DEATH) {
-    fetch("data/death_rate.geojson")
+    loadMuniData("data/muni/death_rate.json")
       .then(function (r) {
         return r.json();
       })
@@ -8487,7 +8521,7 @@ function loadGermans() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/germans.geojson")
+  loadMuniData("data/muni/germans.json")
     .then(function (r) {
       return r.json();
     })
@@ -10463,7 +10497,7 @@ function loadLand() {
     buildLandLayer(landData);
     return;
   }
-  fetch("data/land.geojson")
+  loadMuniData("data/muni/land.json")
     .then(function (r) {
       return r.json();
     })
@@ -11096,7 +11130,7 @@ function loadAgri() {
     buildAgriLayer(agriData);
     return;
   }
-  fetch("data/agri_beneficiaries.geojson")
+  loadMuniData("data/muni/agri_beneficiaries.json")
     .then(function (r) {
       return r.json();
     })
@@ -11804,7 +11838,7 @@ function loadEducation() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/education.geojson")
+  loadMuniData("data/muni/education.json")
     .then(function (r) {
       return r.json();
     })
@@ -12093,7 +12127,7 @@ function loadKindergarten() {
     buildKgLayer(kgData);
     return;
   }
-  fetch("data/kindergarten.geojson")
+  loadMuniData("data/muni/kindergarten.json")
     .then(function (r) {
       return r.json();
     })
@@ -12993,7 +13027,7 @@ function loadLibraries() {
     buildLibLayer(libData);
     return;
   }
-  fetch("data/libraries.geojson")
+  loadMuniData("data/muni/libraries.json")
     .then(function (r) {
       return r.json();
     })
@@ -13534,7 +13568,7 @@ function loadArtDisciplines() {
     buildArtDisciplinesLayers(artData);
     return;
   }
-  fetch("data/art_disciplines.geojson")
+  loadMuniData("data/muni/art_disciplines.json")
     .then(function (r) {
       return r.json();
     })
@@ -13841,7 +13875,7 @@ function loadTourismClimate() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/tourism_climate.geojson")
+  loadMuniData("data/muni/tourism_climate.json")
     .then(function (r) {
       return r.json();
     })
@@ -14926,7 +14960,7 @@ function loadHealth() {
     }
   }
   if (!healthServicesData) {
-    fetch("data/health_services.geojson")
+    loadMuniData("data/muni/health_services.json")
       .then(function (r) {
         return r.json();
       })
@@ -15416,7 +15450,7 @@ function loadSocial() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/social.geojson")
+  loadMuniData("data/muni/social.json")
     .then(function (r) {
       return r.json();
     })
