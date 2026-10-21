@@ -28,6 +28,7 @@ js/main.js        ფენების, ლეგენდების, popup-�
 css/style.css     სტილები
 libs/             Leaflet და Chart.js (ლოკალური ასლები)
 data/*.geojson    თემატური ფენები (WGS 84)
+data/muni/*.json  მუნიციპალიტეტების ფენების ატრიბუტები; საზღვრები data/municipalities.geojson-იდან
 files/            ლოგოები, თემების ხატულები, გუნდის ფოტოები
 ```
 
