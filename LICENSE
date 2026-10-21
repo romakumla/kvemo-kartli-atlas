@@ -6,7 +6,7 @@ This repository is dual-licensed:
 
   * Source code (index.html, js/, css/) is licensed under the MIT License
     (see Part 1 below).
-  * Data (data/*.geojson) is licensed under the Creative Commons
+  * Data (everything in data/) is licensed under the Creative Commons
     Attribution 4.0 International License (CC BY 4.0) (see Part 2 below).
 
 Excluded from both licenses:
