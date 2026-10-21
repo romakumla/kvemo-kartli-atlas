@@ -193,7 +193,7 @@ var ATLAS_DATA_LAYERS = 72; // fallback, თუ წაკითხვა ვე�
     })
     .then(function (txt) {
       if (!txt) return;
-      var hits = txt.match(/['"]data\/[A-Za-z0-9_.\-]+\.geojson['"]/g);
+      var hits = txt.match(/['"]data\/(?:muni\/)?[A-Za-z0-9_.\-]+\.(?:geojson|json)['"]/g);
       if (!hits) return;
       var uniq = {};
       hits.forEach(function (h) {
