@@ -7819,7 +7819,7 @@ function renderGeologyLayers() {
       });
       marker.on("click", function () {
         document.getElementById("infoCard").classList.remove("hidden");
-        document.getElementById("infoCard").innerHTML =
+        document.getElementById("infoCardContent").innerHTML =
           '<div class="info-title">' +
           (p.Name_Geo || "") +
           "</div>" +
@@ -7850,7 +7850,7 @@ function renderGeologyLayers() {
       });
       marker.on("click", function () {
         document.getElementById("infoCard").classList.remove("hidden");
-        document.getElementById("infoCard").innerHTML =
+        document.getElementById("infoCardContent").innerHTML =
           '<div class="info-title">' +
           (p.Name_Geo || "") +
           "</div>" +
@@ -7884,7 +7884,7 @@ function renderGeologyLayers() {
       });
       marker.on("click", function () {
         document.getElementById("infoCard").classList.remove("hidden");
-        document.getElementById("infoCard").innerHTML =
+        document.getElementById("infoCardContent").innerHTML =
           '<div class="info-title">' +
           (p.Name_Geo || "") +
           "</div>" +
