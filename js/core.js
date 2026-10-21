@@ -1,0 +1,560 @@
+// ძირითადი: რუკა, კონტროლები, საბაზისო რუკები, საზღვრები, საერთო დამხმარე ფუნქციები
+// Part of the atlas script, split from the former js/main.js. Loaded first by
+// index.html: creates the map and shared helpers. Code that reacts to clicks or
+// loads data is in initCore(), called from app.js once every file is loaded.
+
+// Focus outline fix — შავი ჩარჩოს მოშორება პოლიგონებზე click-ისას
+(function () {
+  var st = document.createElement("style");
+  st.textContent =
+    ".leaflet-container .leaflet-interactive:focus, .leaflet-container path:focus, .leaflet-container svg:focus { outline: none !important; }";
+  document.head.appendChild(st);
+})();
+
+// ===== Municipality-based layers =====
+// Layers drawn on the 7 municipality polygons keep only their attributes in
+// data/muni/<name>.json; the shared boundaries come from
+// data/municipalities.geojson. A feature {"muni": i, "properties": {...}}
+// gets the geometry of feature i of that file; other features (points) are
+// used as they are. Returns a Response-like object, so call sites keep their
+// usual .then((r) => r.json()) chain.
+var _muniGeometryPromise = null;
+
+function loadMuniData(url) {
+  if (!_muniGeometryPromise) {
+    _muniGeometryPromise = fetch("data/municipalities.geojson")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        return d.features.map(function (f) { return f.geometry; });
+      })
+      .catch(function (e) {
+        _muniGeometryPromise = null;
+        throw e;
+      });
+  }
+  return Promise.all([
+    _muniGeometryPromise,
+    fetch(url).then(function (r) { return r.json(); }),
+  ]).then(function (res) {
+    var geoms = res[0];
+    var data = res[1];
+    data.features = data.features.map(function (f) {
+      if (f.muni === undefined) return f;
+      return { type: "Feature", properties: f.properties, geometry: geoms[f.muni] };
+    });
+    return { ok: true, status: 200, json: function () { return Promise.resolve(data); } };
+  });
+}
+
+// ===== Map =====
+var map = L.map("map", { zoomControl: false }).setView([41.4937, 44.5242], 10);
+
+L.control.zoom({ position: "topright" }).addTo(map);
+
+var borderBounds = null;
+
+var homeControl = L.Control.extend({
+  options: { position: "topright" },
+  onAdd: function () {
+    var c = L.DomUtil.create(
+      "div",
+      "leaflet-bar leaflet-control leaflet-control-custom",
+    );
+    c.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#1f1f1f"><path d="M200-200v-240h80v160h160v80H200Zm480-320v-160H520v-80h240v240h-80Z"/></svg>`;
+    c.title = "Zoom to full extent";
+    c.style.cssText =
+      "background:white;width:30px;height:30px;display:flex;justify-content:center;align-items:center;cursor:pointer;";
+    c.onclick = function () {
+      if (borderBounds) map.setView(borderBounds.getCenter(), 10);
+    };
+    return c;
+  },
+});
+
+map.addControl(new homeControl());
+
+// ===== მასშტაბის ზოლი და ჩრდილოეთის ისარი =====
+// კარტოგრაფიული სისრულისთვის — ორივე ბეჭდურ ატლასშიც სავალდებულოა
+L.control
+  .scale({ position: "bottomright", metric: true, imperial: false, maxWidth: 120 })
+  .addTo(map);
+
+var northControl = L.Control.extend({
+  options: { position: "bottomright" },
+  onAdd: function () {
+    var el = L.DomUtil.create("div", "north-arrow");
+    el.innerHTML =
+      '<svg viewBox="0 0 24 34" width="17" height="24" aria-label="ჩრდილოეთი">' +
+      '<polygon points="12,2 18,20 12,16 6,20" fill="#4A4035"/>' +
+      '<polygon points="12,2 12,16 6,20" fill="#8A8078"/>' +
+      '<text x="12" y="32" text-anchor="middle" font-size="10" ' +
+      'font-family="Fira Sans" font-weight="700" fill="#4A4035">ჩ</text>' +
+      "</svg>";
+    L.DomEvent.disableClickPropagation(el);
+    return el;
+  },
+});
+
+map.addControl(new northControl());
+
+// ===== Basemaps =====
+var basemaps = {
+  // ღია — Esri Light Gray Canvas (API გასაღები არ სჭირდება)
+  light: L.layerGroup([
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxZoom: 19,
+        maxNativeZoom: 16,
+        attribution: "© Esri, © OpenStreetMap",
+      },
+    ),
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 19, maxNativeZoom: 16 },
+    ),
+  ]),
+  osm: L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "© OpenStreetMap",
+  }),
+  satellite: L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 19, attribution: "© Esri" },
+  ),
+  // მუქი — Esri Dark Gray Canvas (API გასაღები არ სჭირდება)
+  dark: L.layerGroup([
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxZoom: 19,
+        maxNativeZoom: 16,
+        attribution: "© Esri, © OpenStreetMap",
+      },
+    ),
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 19, maxNativeZoom: 16 },
+    ),
+  ]),
+  // რელიეფი — დაჩრდილული რელიეფი წყლის ქსელითა და წარწერებით
+  relief: L.layerGroup([
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 19, maxNativeZoom: 13, attribution: "© Esri" },
+    ),
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      { maxZoom: 19, maxNativeZoom: 16, opacity: 0.9 },
+    ),
+  ]),
+  // ტოპოგრაფიული — ჰორიზონტალებით
+  topo: L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+    maxZoom: 17,
+    subdomains: "abc",
+    attribution: "© OpenTopoMap (CC-BY-SA) © OpenStreetMap",
+  }),
+};
+
+var currentBasemap = basemaps.light;
+
+currentBasemap.addTo(map);
+
+// ===== ერთიანი საზღვრის სტილი =====
+// რეგიონის საზღვარი — უფრო მკვეთრი
+var BORDER_COLOR = "#8B7355";
+
+var BORDER_WEIGHT = 2;
+
+var BORDER_DASH = "4,3";
+
+var BORDER_OPACITY = 0.9;
+
+// მუნიციპალიტეტების საზღვრები — უფრო წვრილი და ბაცი
+var MUNI_BORDER_COLOR = "#A89985";
+
+var MUNI_BORDER_WEIGHT = 0.8;
+
+var MUNI_BORDER_DASH = "3,3";
+
+var MUNI_BORDER_OPACITY = 0.5;
+
+// ===== მთავარი ფანჯრის სტატისტიკა — სრულად ავტომატური =====
+// რუკები: ქვე-ფენის ღილაკების დათვლა.
+// მონაცემთა ფენები: სკრიპტი კითხულობს საკუთარ კოდს (ქეშიდან, დამატებითი
+// ჩამოტვირთვის გარეშე) და ითვლის რამდენ უნიკალურ data/*.geojson-ს იყენებს.
+var ATLAS_DATA_LAYERS = 72; // fallback, თუ წაკითხვა ვერ მოხერხდა
+
+// ===== Neutral base layers (municipalities + centroids) =====
+var neutralBoundaryLayer = null;
+
+var neutralLabelLayer = null;
+
+// საწყისი (მთავარი) ხედის მუნიციპალიტეტების ფერები
+var MUNI_COLORS = {
+  წალკა: "#EEC3D2",
+  თეთრიწყარო: "#C5E1E4",
+  დმანისი: "#D0DD98",
+  ბოლნისი: "#F9C5D5",
+  მარნეული: "#F6D8A2",
+  გარდაბანი: "#F4E9B9",
+  რუსთავი: "#D3BED3",
+};
+
+function loadNeutralLayers() {
+  // პოლიგონები — თითოეულ მუნიციპალიტეტს თავისი ფერი
+  fetch("data/municipalities.geojson")
+    .then((r) => r.json())
+    .then((data) => {
+      neutralBoundaryLayer = L.geoJSON(data, {
+        style: function (f) {
+          var nm = (f.properties.Name_Geo || "").trim();
+          return {
+            fillColor: MUNI_COLORS[nm] || "#E8E4DC",
+            fillOpacity: 0.75,
+            color: MUNI_BORDER_COLOR,
+            weight: MUNI_BORDER_WEIGHT,
+            opacity: MUNI_BORDER_OPACITY,
+            dashArray: MUNI_BORDER_DASH,
+          };
+        },
+        onEachFeature: function (feature, layer) {
+          var nm = (feature.properties.Name_Geo || "").trim();
+          if (nm)
+            layer.bindTooltip(nm, {
+              direction: "center",
+              className: "village-label",
+              sticky: true,
+            });
+        },
+      }).addTo(map);
+    });
+
+  // ცენტრის წერტილები + წარწერები — იგივე სტილი, რაც სხვა რუკებზე
+  fetch("data/municipalities_centroids.geojson")
+    .then((r) => r.json())
+    .then((data) => {
+      neutralLabelLayer = L.geoJSON(data, {
+        pointToLayer: function (feature, latlng) {
+          var name = feature.properties.Name_Geo || "";
+          var marker = L.circleMarker(latlng, {
+            radius: 5,
+            fillColor: "#4A4035",
+            color: "#fff",
+            weight: 1.5,
+            fillOpacity: 0.9,
+          });
+          marker.bindTooltip(name, {
+            permanent: true,
+            direction: "top",
+            className: "muni-label",
+            offset: [0, -8],
+          });
+          return marker;
+        },
+      }).addTo(map);
+    });
+}
+
+function removeNeutralLayers() {
+  if (neutralBoundaryLayer) {
+    map.removeLayer(neutralBoundaryLayer);
+    neutralBoundaryLayer = null;
+  }
+  if (neutralLabelLayer) {
+    map.removeLayer(neutralLabelLayer);
+    neutralLabelLayer = null;
+  }
+}
+
+// ===== State =====
+var allFeatures = [];
+
+var currentLayer = null;
+
+var ethnicsLayer = null;
+
+var religionLayer = null;
+
+var activeType = "all";
+
+var activeMuni = "all";
+
+var selectedProps = null;
+
+var censusScope = "selected";
+
+var censusChart = null;
+
+var bottomChart = null;
+
+var activeSublayer = null;
+
+var popLayerActive = false;
+
+// ===== Remove all thematic layers =====
+
+// ===== Settlement Legend visibility =====
+function showSettlementLegend() {
+  var el = document.getElementById("settlementLegend");
+  if (el) el.style.display = "";
+}
+
+function hideSettlementLegend() {
+  var el = document.getElementById("settlementLegend");
+  if (el) el.style.display = "none";
+}
+
+// ===== Chart Panel visibility helpers =====
+// ქვედა პანელის გადართვისას რუკის კონტეინერი იცვლება —
+// Leaflet-ს ეს უნდა შევატყობინოთ, თორემ ფილები ძველ ზომაზე რჩება
+// და რუკის ქვედა ნაწილი პანელის ქვეშ ექცევა
+function refreshMapSize() {
+  if (typeof map === "undefined" || !map.invalidateSize) return;
+  requestAnimationFrame(function () {
+    map.invalidateSize({ animate: false });
+  });
+  setTimeout(function () {
+    map.invalidateSize({ animate: false });
+  }, 220);
+}
+
+function showChartPanel() {
+  document.getElementById("chartPanel").style.display = "flex";
+  document.body.classList.add("chart-open");
+  var ib = document.getElementById("infoBar");
+  if (ib) ib.style.display = "none";
+  refreshMapSize();
+}
+
+function hideChartPanel() {
+  document.getElementById("chartPanel").style.display = "none";
+  document.body.classList.remove("chart-open");
+  refreshMapSize();
+  if (bottomChart) {
+    bottomChart.destroy();
+    bottomChart = null;
+  }
+  document.getElementById("chartEmpty").style.display = "flex";
+  document.getElementById("chartCanvas").classList.add("hidden");
+  var ib = document.getElementById("infoBar");
+  if (ib) ib.style.display = "flex";
+}
+
+function resetChartPanel() {
+  document.getElementById("chartEmpty").style.display = "flex";
+  document.getElementById("chartCanvas").classList.add("hidden");
+  if (bottomChart) {
+    bottomChart.destroy();
+    bottomChart = null;
+  }
+}
+
+function removeAllThematic() {
+  if (currentLayer) {
+    map.removeLayer(currentLayer);
+    currentLayer = null;
+  }
+  if (ethnicsLayer) {
+    map.removeLayer(ethnicsLayer);
+    ethnicsLayer = null;
+  }
+  if (religionLayer) {
+    map.removeLayer(religionLayer);
+    religionLayer = null;
+  }
+  if (deathLayerRef.layer) {
+    map.removeLayer(deathLayerRef.layer);
+    deathLayerRef.layer = null;
+  }
+  if (birthLayerRef.layer) {
+    map.removeLayer(birthLayerRef.layer);
+    birthLayerRef.layer = null;
+  }
+  if (densityLayerRef.layer) {
+    map.removeLayer(densityLayerRef.layer);
+    densityLayerRef.layer = null;
+  }
+  if (maritalMenLayer) {
+    map.removeLayer(maritalMenLayer);
+    maritalMenLayer = null;
+  }
+  if (maritalWomenLayer) {
+    map.removeLayer(maritalWomenLayer);
+    maritalWomenLayer = null;
+  }
+  if (idpPolyLayer) {
+    map.removeLayer(idpPolyLayer);
+    idpPolyLayer = null;
+  }
+  if (idpPointLayer) {
+    map.removeLayer(idpPointLayer);
+    idpPointLayer = null;
+  }
+  document.getElementById("infoCard").classList.add("hidden");
+  document.getElementById("chartEmpty").style.display = "flex";
+  document.getElementById("chartCanvas").classList.add("hidden");
+}
+
+// ===== Start-up (called from app.js) =====
+function initCore() {
+  (function updateAtlasStats() {
+    var m = document.getElementById("statMaps");
+    if (m) {
+      var maps = document.querySelectorAll(
+        "[data-sublayer],[data-naturesub],[data-histsub],[data-econsub]," +
+          "[data-edusub],[data-toursub],[data-healthsub]"
+      ).length;
+      if (maps > 0) m.textContent = maps;
+    }
+
+    var l = document.getElementById("statLayers");
+    if (!l) return;
+    l.textContent = ATLAS_DATA_LAYERS;
+
+    // ატლასის სკრიპტი რამდენიმე ფაილადაა (js/*.js) — ვკითხულობთ ყველას
+    var srcs = Array.prototype.map
+      .call(document.querySelectorAll("script[src]"), function (t) {
+        return t.src;
+      })
+      .filter(function (s) {
+        return /\/js\/[^\/]+\.js(\?|$)/.test(s);
+      });
+    if (!srcs.length) return;
+
+    Promise.all(
+      srcs.map(function (s) {
+        return fetch(s).then(function (r) {
+          return r.ok ? r.text() : "";
+        });
+      })
+    )
+      .then(function (texts) {
+        var txt = texts.join("\n");
+        if (!txt) return;
+        var hits = txt.match(/['"]data\/(?:muni\/)?[A-Za-z0-9_.\-]+\.(?:geojson|json)['"]/g);
+        if (!hits) return;
+        var uniq = {};
+        hits.forEach(function (h) {
+          uniq[h.slice(1, -1)] = 1;
+        });
+        var n = Object.keys(uniq).length;
+        if (n > 0) l.textContent = n;
+      })
+      .catch(function () {
+        /* ხელმისაწვდომი არაა — fallback რჩება */
+      });
+  })();
+
+
+
+  // ===== გვერდითი პანელების სიგანის რეგულირება =====
+  // კიდეზე გადასაწევი სახელური; არჩევანი ინახება ბრაუზერში.
+  (function initPanelResizers() {
+    var MIN = 150,
+      MAX = 420;
+
+    function apply(varName, px) {
+      var root = document.documentElement;
+      root.style.setProperty(varName, px + "px");
+      // ტექსტიც იზრდება სიგანესთან ერთად (170px → 10px … 420px → 14px)
+      var wide = Math.max(
+        parseInt(getComputedStyle(root).getPropertyValue("--side-w-left")) || 170,
+        parseInt(getComputedStyle(root).getPropertyValue("--side-w-right")) || 170
+      );
+      var f = Math.max(10, Math.min(14, 10 + (wide - 170) / 62));
+      root.style.setProperty("--panel-font", f.toFixed(1) + "px");
+      root.style.setProperty("--panel-label-font", (f + 1).toFixed(1) + "px");
+    }
+
+    function restore(key, varName) {
+      var v = parseInt(localStorage.getItem(key) || "", 10);
+      if (v && v >= MIN && v <= MAX) apply(varName, v);
+    }
+    try {
+      restore("atlasPanelLeft", "--side-w-left");
+      restore("atlasPanelRight", "--side-w-right");
+    } catch (e) {}
+
+    function setup(panelId, side, varName, storeKey) {
+      var panel = document.getElementById(panelId);
+      if (!panel) return;
+      var h = document.createElement("div");
+      h.className = "panel-resizer " + side + "-resizer";
+      h.title = "გადაათრიეთ სიგანის შესაცვლელად (ორმაგი დაწკაპება — საწყისი)";
+      // სახელური პანელის *გვერდით* ჩნდება, არა შიგნით —
+      // თორემ სქროლვად შიგთავსს ემატებოდა და ჰორიზონტალურ სქროლს იწვევდა
+      var parent = panel.parentNode;
+      if (!parent || !parent.insertBefore) return;
+      if (side === "left") parent.insertBefore(h, panel.nextSibling);
+      else parent.insertBefore(h, panel);
+
+      var startX = 0,
+        startW = 0,
+        dragging = false;
+
+      function onMove(e) {
+        if (!dragging) return;
+        var dx = e.clientX - startX;
+        var w = side === "left" ? startW + dx : startW - dx;
+        w = Math.max(MIN, Math.min(MAX, Math.round(w)));
+        apply(varName, w);
+        if (typeof map !== "undefined" && map.invalidateSize) map.invalidateSize();
+      }
+      function onUp() {
+        if (!dragging) return;
+        dragging = false;
+        h.classList.remove("dragging");
+        document.body.classList.remove("resizing-panel");
+        try {
+          localStorage.setItem(storeKey, parseInt(panel.offsetWidth, 10));
+        } catch (e) {}
+        if (typeof map !== "undefined" && map.invalidateSize) map.invalidateSize();
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("mouseup", onUp);
+      }
+
+      h.addEventListener("mousedown", function (e) {
+        e.preventDefault();
+        dragging = true;
+        startX = e.clientX;
+        startW = panel.offsetWidth;
+        h.classList.add("dragging");
+        document.body.classList.add("resizing-panel");
+        document.addEventListener("mousemove", onMove);
+        document.addEventListener("mouseup", onUp);
+      });
+
+      // ორმაგი დაწკაპებით — საწყისი სიგანე
+      h.addEventListener("dblclick", function () {
+        apply(varName, 170);
+        try {
+          localStorage.setItem(storeKey, 170);
+        } catch (e) {}
+        if (typeof map !== "undefined" && map.invalidateSize) map.invalidateSize();
+      });
+    }
+
+    setup("layerPanel", "left", "--side-w-left", "atlasPanelLeft");
+    setup("basemapPanel", "right", "--side-w-right", "atlasPanelRight");
+  })();
+
+
+  // ===== Georgia border (always visible) =====
+  loadMuniData("data/muni/georgia_border.json")
+    .then((r) => r.json())
+    .then((data) => {
+      var bl = L.geoJSON(data, {
+        style: {
+          color: BORDER_COLOR,
+          weight: BORDER_WEIGHT,
+          fill: false,
+          dashArray: BORDER_DASH,
+          opacity: BORDER_OPACITY,
+        },
+      }).addTo(map);
+      borderBounds = bl.getBounds();
+      map.invalidateSize();
+      map.setView(borderBounds.getCenter(), 10);
+    });
+}

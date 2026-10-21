@@ -24,7 +24,11 @@
 
 ```
 index.html        საიტის გვერდი
-js/main.js        ფენების, ლეგენდების, popup-ებისა და დიაგრამების ლოგიკა
+js/              ფენების, ლეგენდების, popup-ებისა და დიაგრამების ლოგიკა, თემების მიხედვით:
+  core.js         რუკა, საბაზისო რუკები, საზღვრები, საერთო ფუნქციები (იტვირთება პირველი)
+  population.js, map-common.js, nature-*.js, history.js, economy.js,
+  education.js, tourism.js, health.js — თემატური ფენები
+  app.js          პანელები, ღილაკები, ძიება, ბეჭდვა; იტვირთება ბოლოს და უშვებს ყველაფერს
 css/style.css     სტილები
 libs/             Leaflet და Chart.js (ლოკალური ასლები)
 data/*.geojson    თემატური ფენები (WGS 84)
