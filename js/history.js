@@ -168,7 +168,7 @@ function updateArchLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">არქეოლოგიური ძეგლების წელთაღრიცხვა</div>';
+    '<div class="section-title">არქეოლოგიური ძეგლების წელთაღრიცხვა</div>';
   html += '<div class="ethnics-legend">';
   ARCH_TYPES.forEach(function (t) {
     html +=
@@ -368,7 +368,7 @@ function updateBattlesLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ბრძოლები ქვემო ქართლში, XI–XVII სს.</div>';
+    '<div class="section-title">ბრძოლები ქვემო ქართლში, XI–XVII სს.</div>';
   html += '<div class="ethnics-legend">';
   html +=
     '<div class="eth-legend-item" style="margin-bottom:6px;">' +
@@ -627,7 +627,7 @@ function updateGermansLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">დასახლების შექმნის წლები</div>';
+    '<div class="section-title">დასახლების შექმნის წლები</div>';
   html += '<div class="ethnics-legend">';
   GERMAN_YEAR_TYPES.forEach(function (t) {
     html +=
@@ -639,7 +639,7 @@ function updateGermansLegend() {
   });
   html += "</div>";
   html +=
-    '<div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">1941 წ. გადასახლებული ოჯახები</div>';
+    '<div class="section-title" style="margin-top:10px;">1941 წ. გადასახლებული ოჯახები</div>';
   html += '<div class="ethnics-legend">';
   GERMAN_DEPORT_CLASSES.forEach(function (c) {
     html +=
@@ -833,7 +833,7 @@ function updateFortsLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ნაგებობები</div>';
+    '<div class="section-title">ნაგებობები</div>';
   html += '<div class="ethnics-legend">';
   FORT_TYPES.forEach(function (t) {
     html +=
@@ -1168,7 +1168,7 @@ function updateEparchiesLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ეპარქიები</div>';
+    '<div class="section-title">ეპარქიები</div>';
   html += '<div class="ethnics-legend">';
   EP_TYPES.forEach(function (t) {
     html +=
@@ -1347,7 +1347,7 @@ function updatePetroLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">პეტროგლიფები</div>';
+    '<div class="section-title">პეტროგლიფები</div>';
   html += '<div class="ethnics-legend">';
   html +=
     '<div class="eth-legend-item" style="margin-bottom:6px;align-items:center;">' +
@@ -1503,7 +1503,7 @@ function updateMegaLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">მეგალითები</div>';
+    '<div class="section-title">მეგალითები</div>';
   html += '<div class="ethnics-legend">';
   html +=
     '<div class="eth-legend-item" style="margin-bottom:6px;align-items:center;">' +
