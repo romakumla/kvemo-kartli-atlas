@@ -254,11 +254,7 @@ function showInfoHealthClinic(p) {
 
 function showBottomChartHealth() {
   if (!healthServicesData) return;
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var feats = healthServicesData.features.slice().sort(function (a, b) {
     return (b.properties.Doctors || 0) - (a.properties.Doctors || 0);
   });
@@ -558,11 +554,7 @@ function showInfoSocial(p) {
 
 function showBottomChartSocial() {
   if (!socialData) return;
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var feats = socialData.features.slice().sort(function (a, b) {
     return (b.properties.Registered || 0) - (a.properties.Registered || 0);
   });
@@ -1060,11 +1052,7 @@ function showInfoZooMuni(name, total, cfg, muniTotals) {
 }
 
 function showBottomChartZoo(muniTotals, cfg) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var entries = Object.entries(muniTotals).sort(function (a, b) {
     return b[1] - a[1];
   });

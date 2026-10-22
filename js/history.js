@@ -101,11 +101,7 @@ function showInfoArch(p) {
 }
 
 function showBottomChartArch(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var counts = {},
     colors = {};
   ARCH_TYPES.forEach(function (t) {
@@ -313,11 +309,7 @@ function showInfoBattle(p) {
 }
 
 function showBottomChartBattles(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var types = ["გამარჯვება", "დამარცხება", "დაბრუნებული ქალაქ"];
   var colors = {
@@ -588,11 +580,7 @@ function showInfoGermanPoly(p) {
 }
 
 function showBottomChartGermans(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var counts = {};
   GERMAN_YEAR_TYPES.forEach(function (t) {
@@ -800,11 +788,7 @@ function showInfoFort(p) {
 }
 
 function showBottomChartForts(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var colors = {
     megalith: "#92854F",
@@ -1078,11 +1062,7 @@ function showInfoEparchyPoint(p) {
 }
 
 function showBottomChartEparchies(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ეპარქიების მიხედვით ობიექტების რაოდენობა
   var byEparchy = {};
@@ -1342,11 +1322,7 @@ function showInfoPetro(p) {
 }
 
 function showBottomChartPetro(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ადგილმდებარეობის ტიპების მიხედვით
   var groups = {
@@ -1529,11 +1505,7 @@ function showInfoMega(p) {
 }
 
 function showBottomChartMega(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var counts = { megalith: 0, national: 0 };
   data.features.forEach(function (f) {

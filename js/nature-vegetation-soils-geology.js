@@ -186,11 +186,7 @@ function _calcChartAreas(data, keyField) {
 }
 
 function showBottomChartForest(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var d = _calcChartAreas(data, "Name_Geo");
   var sorted = Object.keys(d.areas)
     .filter(function (k) {
@@ -270,11 +266,7 @@ function showBottomChartForest(data) {
 }
 
 function showBottomChartVegetation(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var d = _calcChartAreas(data, "Name_Geo");
   var sorted = Object.keys(d.areas).sort(function (a, b) {
     return d.areas[b] - d.areas[a];
@@ -415,11 +407,7 @@ function showInfoSoils(p) {
 }
 
 function showBottomChartSoils(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var areas = {},
     colors = {};
@@ -505,11 +493,7 @@ function showInfoSoilsBorn(p) {
 }
 
 function showBottomChartSoilsBorn(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var areas = {},
     colors = {},
@@ -595,11 +579,7 @@ function showInfoGeology(p) {
 }
 
 function showBottomChartGeology(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var areas = {},
     colors = {};
@@ -836,11 +816,7 @@ function showInfoHail(p, type) {
 }
 
 function showBottomChartHail(data, type) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var valKey = type === "total" ? "Total_km2" : "P100_km2";
   var getFn = type === "total" ? _hailClassTotal : _hailClass100;

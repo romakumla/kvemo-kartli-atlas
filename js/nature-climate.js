@@ -201,11 +201,7 @@ function _showInfoPrecip(p, data) {
 }
 
 function showBottomChartTemp(data, type) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var titles = {
     avg: "საშ. ტემპერატურა — ფართობის განაწილება",
     max: "მაქს. ტემპერატურა — ფართობის განაწილება",
@@ -514,11 +510,7 @@ function _showInfoFrostDays(p, data) {
 }
 
 function showBottomChartClimate(data, type) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var titles = {
     hot: "ცხელი დღეების განაწილება (კმ²)",
     trop: "ტროპ. ღამეების განაწილება (კმ²)",
@@ -791,11 +783,7 @@ function buildDroughtLayer(data) {
 }
 
 function showBottomChartHeatWaves(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var areas = {},
     colors = {};
   data.features.forEach(function (f) {
@@ -874,11 +862,7 @@ function showBottomChartHeatWaves(data) {
 }
 
 function showBottomChartDrought(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var areas = {},
     colors = {};
   data.features.forEach(function (f) {
@@ -1217,11 +1201,7 @@ function showInfoMadflowPoint(p, type) {
 }
 
 function showBottomChartMadflow(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var areas = {},
     colors = {};

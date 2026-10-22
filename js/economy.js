@@ -83,11 +83,7 @@ function showInfoBotanica(p) {
 }
 
 function showBottomChartBotanica(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ფართობების ჯამი ტიპების მიხედვით
   var areas = {};
@@ -294,11 +290,7 @@ function showInfoEnergetika(p) {
 }
 
 function showBottomChartEnergetika(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ჯამური სიმძლავრე ტიპების მიხედვით
   var hydroSum = 0,
@@ -524,11 +516,7 @@ function showInfoCropZone(p) {
 }
 
 function showBottomChartCropZones(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var areas = {};
   CROP_ZONES.forEach(function (z) {
@@ -776,11 +764,7 @@ function showInfoLand(p) {
 }
 
 function showBottomChartLand(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var theme = LAND_THEMES[activeLandTheme];
   var feats = data.features.slice().sort(function (a, b) {
@@ -1163,11 +1147,7 @@ function showInfoSunStation(p) {
 }
 
 function showBottomChartSun(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // სადგურები ტიპების მიხედვით
   var counts = {};
@@ -1248,11 +1228,7 @@ function showBottomChartSun(data) {
 
 // ზონაზე დაწკაპებისას: ფართობი მზის ნათების კლასების მიხედვით (კმ²)
 function showBottomChartSunZones(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var area = {};
   data.features
@@ -1639,11 +1615,7 @@ function showInfoAgri(p) {
 }
 
 function showBottomChartAgri(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var labels = data.features.map(function (f) {
     return f.properties.Name_Geo;
@@ -1822,11 +1794,7 @@ function showInfoAgriSpec(p) {
 }
 
 function showBottomChartAgriSpec(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var areas = {};
   AGRI_SPEC_TYPES.forEach(function (t) {

@@ -137,11 +137,7 @@ function showInfoLandscape(p) {
 }
 
 function showBottomChartLandscape(p, data, order) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ჯამური ფართობი ლეიბლების მიხედვით
   var areas = {},
@@ -398,11 +394,7 @@ function showInfoHazardPoint(p, type) {
 }
 
 function showBottomChartHazard() {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ზონირება — ფართობი
   var areas = {},
@@ -682,11 +674,7 @@ function showInfoGWPoint(p) {
 }
 
 function showBottomChartGW() {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var areas = {},
     colors = {},
@@ -763,11 +751,7 @@ function showBottomChartGW() {
 }
 
 function showBottomChartGWPoint(p) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var ions = ["HCO3", "SO4", "Cl", "Ca", "Mg", "Na_K"];
   var labels = ["HCO₃", "SO₄", "Cl", "Ca", "Mg", "Na+K"];
@@ -1017,11 +1001,7 @@ function showInfoEQ(p, period) {
 }
 
 function showBottomChartEQ() {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // მაგნიტუდის განაწილება
   var counts = {};
@@ -1411,11 +1391,7 @@ function showInfoHydro(p) {
 
 function showBottomChartStations(type) {
   var data = type === "meteo" ? meteoData : hydroData;
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var active = data.features.filter((f) => f.properties.Active);
   var inactive = data.features.filter((f) => !f.properties.Active);

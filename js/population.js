@@ -489,11 +489,7 @@ function showInfoIDPPoint(p) {
 
 function showBottomChartIDP() {
   if (!idpPolyData) return;
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var feats = idpPolyData.features.slice().sort(function (a, b) {
     return (
       (b.properties.Natural_Di || 0) +
@@ -904,11 +900,7 @@ function showInfoDensity(p) {
 }
 
 function showBottomChartDensity(p) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var vals = [p.De_1989, p.De_2002, p.De_2014, p.De_2024];
   bottomChart = new Chart(ctx, {
     type: "line",
@@ -1187,11 +1179,7 @@ function showInfoMarital(p, gender) {
 }
 
 function showBottomChartMarital(p, gender) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var yr = maritalYear;
   var gLabel = gender === "men" ? "მამაკაცი" : "ქალი";
@@ -1432,11 +1420,7 @@ function showInfoRate(p, f12, f22, colorMap, type) {
 }
 
 function showBottomChartRate(p, f12, f22, type) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var label = type === "death" ? "მოკვდავობა" : "შობადობა";
   var bgCols =
     type === "death"
@@ -1506,11 +1490,7 @@ function showBottomChartRate(p, f12, f22, type) {
 
 // ===== Bottom charts =====
 function showBottomChart(p) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var name = p.Name_Geo || p.Name_Eng || "ობიექტი";
   bottomChart = new Chart(ctx, {
     type: "bar",
@@ -1567,11 +1547,7 @@ function showBottomChart(p) {
 }
 
 function showBottomChartEth(p) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var keys = ["Georgian", "Azerbaijani", "Armenian", "Others"];
   bottomChart = new Chart(ctx, {
     type: "doughnut",
@@ -1612,11 +1588,7 @@ function showBottomChartEth(p) {
 }
 
 function showBottomChartRel(p) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var keys = ["Orthodox", "Muslim", "Armenian_A", "Other_Reli"];
   bottomChart = new Chart(ctx, {
     type: "doughnut",
