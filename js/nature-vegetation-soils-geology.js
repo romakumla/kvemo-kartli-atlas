@@ -115,6 +115,7 @@ function buildForestLayer(data) {
           " კმ²</div>";
         document.getElementById("infoCard").classList.remove("hidden");
         showBottomChartForest(data);
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -167,6 +168,7 @@ function buildVegetationLayer(data) {
           " კმ²</div>";
         document.getElementById("infoCard").classList.remove("hidden");
         showBottomChartVegetation(data);
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -783,6 +785,7 @@ function _drawHailLayer(type) {
       marker.on("click", function () {
         showInfoHail(p, type);
         showBottomChartHail(data, type);
+        highlightBottomBars(p.Name_Geo);
       });
       return marker;
     },
@@ -997,6 +1000,7 @@ function buildSoilsLayer(data) {
       layer.on("click", function () {
         showInfoSoils(p);
         showBottomChartSoils(data);
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -1034,6 +1038,7 @@ function buildSoilsBornLayer(data) {
       layer.on("click", function () {
         showInfoSoilsBorn(p);
         showBottomChartSoilsBorn(data);
+        highlightBottomBars("ტიპი " + p.Soil_Geo);
       });
     },
   }).addTo(map);
@@ -1482,6 +1487,7 @@ function renderGeologyLayers() {
       layer.on("click", function () {
         showInfoGeology(p);
         showBottomChartGeology(geologyData);
+        highlightBottomBars(p.Index);
       });
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 1.5, fillOpacity: 0.85 });

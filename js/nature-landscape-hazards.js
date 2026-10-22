@@ -213,6 +213,10 @@ function showBottomChartLandscape(p, data, order) {
       },
     },
   });
+  if (p)
+    highlightBottomBars(function (l, i) {
+      return sorted[i] === p.LandLabel;
+    });
 }
 
 // ===== Hazard Layers =====
@@ -286,6 +290,7 @@ function renderHazardLayers() {
       layer.on("click", function () {
         showInfoHazardZone(p);
         showBottomChartHazard();
+        highlightBottomBars(p.Name_Geo);
       });
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 1.5, fillOpacity: 0.9 });
@@ -541,6 +546,7 @@ function renderGroundwaterLayers() {
       layer.on("click", function () {
         showInfoGWZone(p);
         showBottomChartGW();
+        highlightBottomBars(p.ShortLabel);
       });
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 2, fillOpacity: 0.85 });
@@ -889,6 +895,7 @@ function renderEarthquakeLayers() {
       marker.on("click", function () {
         showInfoEQ(p, "instrumental");
         showBottomChartEQ();
+        highlightBottomBars(p.MagClass);
       });
       return marker;
     },
@@ -1259,6 +1266,7 @@ function buildMeteoLayer(data) {
       marker.on("click", function () {
         showInfoMeteo(p);
         showBottomChartStations("meteo");
+        highlightBottomBars(p.Active ? "მოქმედი" : "დახურული");
       });
       marker.bindTooltip(p.Name_Geo || "", {
         direction: "top",
@@ -1280,6 +1288,7 @@ function buildHydroLayer(data) {
       marker.on("click", function () {
         showInfoHydro(p);
         showBottomChartStations("hydro");
+        highlightBottomBars(p.Active ? "მოქმედი" : "დახურული");
       });
       marker.bindTooltip(p.Name_Geo || "", {
         direction: "top",
