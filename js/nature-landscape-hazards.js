@@ -85,7 +85,7 @@ function loadLandscape() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/landscape.geojson")
+  fetch(dataUrl("data/landscape.geojson"))
     .then((r) => r.json())
     .then((data) => {
       landscapeData = data;
@@ -101,7 +101,7 @@ function loadLandscapeAntrop() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/landscape_antrop.geojson")
+  fetch(dataUrl("data/landscape_antrop.geojson"))
     .then((r) => r.json())
     .then((data) => {
       landscapeAntropData = data;
@@ -240,7 +240,7 @@ function loadHazard() {
     if (++loaded === 3) renderHazardLayers();
   }
   if (!hazardZoningData)
-    fetch("data/landslide_zoning.geojson")
+    fetch(dataUrl("data/landslide_zoning.geojson"))
       .then((r) => r.json())
       .then((d) => {
         hazardZoningData = d;
@@ -248,7 +248,7 @@ function loadHazard() {
       });
   else tryRender();
   if (!hazardLandslideData)
-    fetch("data/landslide.geojson")
+    fetch(dataUrl("data/landslide.geojson"))
       .then((r) => r.json())
       .then((d) => {
         hazardLandslideData = d;
@@ -256,7 +256,7 @@ function loadHazard() {
       });
   else tryRender();
   if (!hazardRockfallData)
-    fetch("data/rockfall.geojson")
+    fetch(dataUrl("data/rockfall.geojson"))
       .then((r) => r.json())
       .then((d) => {
         hazardRockfallData = d;
@@ -504,7 +504,7 @@ function loadGroundwater() {
     if (++loaded === 2) renderGroundwaterLayers();
   }
   if (!groundwaterZoningData)
-    fetch("data/hydrogeology_zoning.geojson")
+    fetch(dataUrl("data/hydrogeology_zoning.geojson"))
       .then((r) => r.json())
       .then((d) => {
         groundwaterZoningData = d;
@@ -512,7 +512,7 @@ function loadGroundwater() {
       });
   else tryRender();
   if (!groundwaterPointData)
-    fetch("data/groundwater.geojson")
+    fetch(dataUrl("data/groundwater.geojson"))
       .then((r) => r.json())
       .then((d) => {
         groundwaterPointData = d;
@@ -847,7 +847,7 @@ function loadEarthquake() {
     if (++loaded === 3) renderEarthquakeLayers();
   }
   if (!eqNewData)
-    fetch("data/earthquakes_new.geojson")
+    fetch(dataUrl("data/earthquakes_new.geojson"))
       .then((r) => r.json())
       .then((d) => {
         eqNewData = d;
@@ -855,7 +855,7 @@ function loadEarthquake() {
       });
   else tryRender();
   if (!eqOldData)
-    fetch("data/earthquakes_old.geojson")
+    fetch(dataUrl("data/earthquakes_old.geojson"))
       .then((r) => r.json())
       .then((d) => {
         eqOldData = d;
@@ -863,7 +863,7 @@ function loadEarthquake() {
       });
   else tryRender();
   if (!eqStationData)
-    fetch("data/seismic_stations.geojson")
+    fetch(dataUrl("data/seismic_stations.geojson"))
       .then((r) => r.json())
       .then((d) => {
         eqStationData = d;
@@ -1313,7 +1313,7 @@ function loadMeteo() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/meteo_stations.geojson")
+  fetch(dataUrl("data/meteo_stations.geojson"))
     .then((r) => r.json())
     .then((data) => {
       meteoData = data;
@@ -1329,7 +1329,7 @@ function loadHydro() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/hydro_stations.geojson")
+  fetch(dataUrl("data/hydro_stations.geojson"))
     .then((r) => r.json())
     .then((data) => {
       hydroData = data;

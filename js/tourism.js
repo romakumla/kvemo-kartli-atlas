@@ -365,7 +365,7 @@ function loadTourismTypes() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/tourism_types.geojson")
+  fetch(dataUrl("data/tourism_types.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -576,10 +576,10 @@ function loadViticulture() {
   Promise.all([
     vitData
       ? Promise.resolve(vitData)
-      : fetch("data/viticulture_zones.geojson").then((r) => r.json()),
+      : fetch(dataUrl("data/viticulture_zones.geojson")).then((r) => r.json()),
     cellarData
       ? Promise.resolve(cellarData)
-      : fetch("data/wine_cellars.geojson").then((r) => r.json()),
+      : fetch(dataUrl("data/wine_cellars.geojson")).then((r) => r.json()),
   ]).then(function (res) {
     vitData = res[0];
     cellarData = res[1];
@@ -885,7 +885,7 @@ function loadProtectedAreas() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/protected_areas.geojson")
+  fetch(dataUrl("data/protected_areas.geojson"))
     .then((r) => r.json())
     .then(function (d) {
       paData = d;

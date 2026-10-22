@@ -16,7 +16,7 @@ function addMuniBorderOverlay() {
     muniBorderOverlay.bringToFront();
     return;
   }
-  fetch("data/municipalities.geojson")
+  fetch(dataUrl("data/municipalities.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -103,7 +103,7 @@ var _layerOrderTimer = null;
 
 function loadNatureMuniCenters() {
   if (natureMuniLayer) return;
-  fetch("data/municipalities_centroids.geojson")
+  fetch(dataUrl("data/municipalities_centroids.geojson"))
     .then((r) => r.json())
     .then((data) => {
       natureMuniLayer = L.geoJSON(data, {
@@ -191,7 +191,7 @@ function loadAgrovlimat() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/agrovlimat.geojson")
+  fetch(dataUrl("data/agrovlimat.geojson"))
     .then((r) => r.json())
     .then((data) => {
       agrovlimatData = data;

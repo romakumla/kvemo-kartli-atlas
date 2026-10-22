@@ -106,7 +106,7 @@ function loadAvgTemp() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/avg_temp.geojson")
+  fetch(dataUrl("data/avg_temp.geojson"))
     .then((r) => r.json())
     .then(function (d) {
       avgTempData = d;
@@ -125,7 +125,7 @@ function loadMaxTemp() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/max_temp.geojson")
+  fetch(dataUrl("data/max_temp.geojson"))
     .then((r) => r.json())
     .then(function (d) {
       maxTempData = d;
@@ -144,7 +144,7 @@ function loadPrecip() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/precipitation.geojson")
+  fetch(dataUrl("data/precipitation.geojson"))
     .then((r) => r.json())
     .then(function (d) {
       precipData = d;
@@ -419,7 +419,7 @@ function loadHotDays() {
     setInfoBtn("hot_days");
     return;
   }
-  fetch("data/hot_days.geojson")
+  fetch(dataUrl("data/hot_days.geojson"))
     .then((r) => r.json())
     .then(function (d) {
       hotDaysData = d;
@@ -438,7 +438,7 @@ function loadTropNights() {
     setInfoBtn("trop_nights");
     return;
   }
-  fetch("data/tropical_nights.geojson")
+  fetch(dataUrl("data/tropical_nights.geojson"))
     .then((r) => r.json())
     .then(function (d) {
       tropNightsData = d;
@@ -457,7 +457,7 @@ function loadFrostDays() {
     setInfoBtn("frost_days");
     return;
   }
-  fetch("data/frost_days.geojson")
+  fetch(dataUrl("data/frost_days.geojson"))
     .then((r) => r.json())
     .then(function (d) {
       frostDaysData = d;
@@ -660,7 +660,7 @@ function loadHeatWaves() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/heat_waves.geojson")
+  fetch(dataUrl("data/heat_waves.geojson"))
     .then((r) => r.json())
     .then((d) => {
       heatWavesData = d;
@@ -675,7 +675,7 @@ function loadDrought() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/drought_index.geojson")
+  fetch(dataUrl("data/drought_index.geojson"))
     .then((r) => r.json())
     .then((d) => {
       droughtData = d;
@@ -1042,7 +1042,7 @@ function loadMadflow() {
     renderMadflowLayers(madflowData);
     return;
   }
-  fetch("data/madflow.geojson")
+  fetch(dataUrl("data/madflow.geojson"))
     .then((r) => r.json())
     .then(function (d) {
       madflowData = d;

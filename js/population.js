@@ -222,7 +222,7 @@ function loadSettlements(cb) {
     if (cb) cb();
     return;
   }
-  fetch("data/settlements.geojson")
+  fetch(dataUrl("data/settlements.geojson"))
     .then((r) => r.json())
     .then((data) => {
       allSettlements = data.features;
@@ -343,7 +343,7 @@ function loadIDP() {
       });
   }
   if (!idpPointData) {
-    fetch("data/idp_settlements.geojson")
+    fetch(dataUrl("data/idp_settlements.geojson"))
       .then(function (r) {
         return r.json();
       })
@@ -1058,7 +1058,7 @@ function loadMarital() {
     if (--pending === 0) renderMaritalLayers();
   }
   if (!maritalMenData) {
-    fetch("data/marital_men.geojson")
+    fetch(dataUrl("data/marital_men.geojson"))
       .then((r) => r.json())
       .then((data) => {
         maritalMenData = data;
@@ -1066,7 +1066,7 @@ function loadMarital() {
       });
   } else done();
   if (!maritalWomenData) {
-    fetch("data/marital_women.geojson")
+    fetch(dataUrl("data/marital_women.geojson"))
       .then((r) => r.json())
       .then((data) => {
         maritalWomenData = data;

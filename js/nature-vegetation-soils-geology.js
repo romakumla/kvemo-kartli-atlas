@@ -46,7 +46,7 @@ function loadForest() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/forest.geojson")
+  fetch(dataUrl("data/forest.geojson"))
     .then((r) => r.json())
     .then((d) => {
       forestData = d;
@@ -61,7 +61,7 @@ function loadVegetation() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/vegetation.geojson")
+  fetch(dataUrl("data/vegetation.geojson"))
     .then((r) => r.json())
     .then((d) => {
       vegetationData = d;
@@ -735,14 +735,14 @@ function _loadHailBoth(cb) {
     if (++loaded === needed) cb();
   }
   if (!hailTotalData)
-    fetch("data/hail_total.geojson")
+    fetch(dataUrl("data/hail_total.geojson"))
       .then((r) => r.json())
       .then((d) => {
         hailTotalData = d;
         tryDraw();
       });
   if (!hail100Data)
-    fetch("data/hail_100.geojson")
+    fetch(dataUrl("data/hail_100.geojson"))
       .then((r) => r.json())
       .then((d) => {
         hail100Data = d;
@@ -946,7 +946,7 @@ function loadSoils() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/soils.geojson")
+  fetch(dataUrl("data/soils.geojson"))
     .then((r) => r.json())
     .then((d) => {
       soilsData = d;
@@ -961,7 +961,7 @@ function loadSoilsBorn() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/soils_born.geojson")
+  fetch(dataUrl("data/soils_born.geojson"))
     .then((r) => r.json())
     .then((d) => {
       soilsBornData = d;
@@ -1494,7 +1494,7 @@ function loadGeology() {
     if (++loaded === 5) renderGeologyLayers();
   }
   if (!geologyData)
-    fetch("data/geology.geojson")
+    fetch(dataUrl("data/geology.geojson"))
       .then((r) => r.json())
       .then((d) => {
         geologyData = d;
@@ -1502,7 +1502,7 @@ function loadGeology() {
       });
   else tryRender();
   if (!foultsData)
-    fetch("data/foults.geojson")
+    fetch(dataUrl("data/foults.geojson"))
       .then((r) => r.json())
       .then((d) => {
         foultsData = d;
@@ -1510,7 +1510,7 @@ function loadGeology() {
       });
   else tryRender();
   if (!metalOreData)
-    fetch("data/metal_ore.geojson")
+    fetch(dataUrl("data/metal_ore.geojson"))
       .then((r) => r.json())
       .then((d) => {
         metalOreData = d;
@@ -1518,7 +1518,7 @@ function loadGeology() {
       });
   else tryRender();
   if (!nonmetalOreData)
-    fetch("data/nonmetal_ore.geojson")
+    fetch(dataUrl("data/nonmetal_ore.geojson"))
       .then((r) => r.json())
       .then((d) => {
         nonmetalOreData = d;
@@ -1526,7 +1526,7 @@ function loadGeology() {
       });
   else tryRender();
   if (!oilGasData)
-    fetch("data/oil_gas.geojson")
+    fetch(dataUrl("data/oil_gas.geojson"))
       .then((r) => r.json())
       .then((d) => {
         oilGasData = d;

@@ -196,7 +196,7 @@ function loadSearchData(cb) {
     cb(_searchData);
     return;
   }
-  fetch("data/settlements.geojson")
+  fetch(dataUrl("data/settlements.geojson"))
     .then(function (r) {
       return r.json();
     })

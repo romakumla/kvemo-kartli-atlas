@@ -789,7 +789,7 @@ function loadOikonymy() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/oikonymy.geojson")
+  fetch(dataUrl("data/oikonymy.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -1401,7 +1401,7 @@ function loadTourism() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/museums_theaters.geojson")
+  fetch(dataUrl("data/museums_theaters.geojson"))
     .then(function (r) {
       return r.json();
     })
