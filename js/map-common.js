@@ -750,7 +750,7 @@ function updateAgroLegend(data) {
   var html = `<div class="section-title">აგროკლიმატური რაიონები</div><div class="ethnics-legend">`;
   AGRO_ZONE_ORDER.forEach(function (key) {
     if (!seen[key]) return;
-    html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${seen[key]};border:1px solid rgba(0,0,0,0.2);border-radius:3px;"></span><span style="font-size:10px;">${AGRO_LABELS[key]}</span></div>`;
+    html += `<div class="eth-legend-item"><span class="legend-swatch" style="background:${seen[key]};border-color:rgba(0,0,0,0.2);"></span><span style="font-size:10px;">${AGRO_LABELS[key]}</span></div>`;
   });
   html += "</div>";
   el.innerHTML = html;

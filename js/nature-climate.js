@@ -1150,9 +1150,9 @@ function updateMadflowLegend(data) {
     var c = MADFLOW_ZONE_COLORS[label] || "#BDBDBD";
     html +=
       '<div class="eth-legend-item">' +
-      '<span class="eth-dot" style="background:' +
+      '<span class="legend-swatch" style="background:' +
       c +
-      ';border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span>' +
+      ';border-color:rgba(0,0,0,0.15);"></span>' +
       '<span style="font-size:10px;">' +
       label +
       "</span></div>";

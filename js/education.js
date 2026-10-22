@@ -647,9 +647,9 @@ function updateKgLegend() {
           : prev + "–" + stop[0];
     html +=
       '<div class="eth-legend-item" style="margin-bottom:3px;">' +
-      '<span class="eth-dot" style="background:' +
+      '<span class="legend-swatch" style="background:' +
       stop[1] +
-      ';border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span>' +
+      ';border-color:rgba(0,0,0,0.15);"></span>' +
       '<span style="font-size:10px;">' +
       lbl +
       "</span></div>";
@@ -1126,9 +1126,9 @@ function updateLibLegend() {
   classes.forEach(function (c) {
     html +=
       '<div style="display:flex;align-items:center;margin-bottom:5px;">' +
-      '<span style="display:inline-block;width:18px;height:13px;border-radius:2px;background:' +
+      '<span class="legend-swatch" style="background:' +
       c.color +
-      ';margin-right:7px;flex-shrink:0;border:1px solid rgba(0,0,0,.15);"></span>' +
+      ';margin-right:7px;border-color:rgba(0,0,0,.15);"></span>' +
       '<span style="font-size:10px;">' +
       c.label +
       "</span></div>";

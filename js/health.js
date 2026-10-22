@@ -335,9 +335,9 @@ function updateHealthLegend() {
     var to = s[0] >= 9999 ? ">" + prev : prev + "–" + s[0];
     html +=
       '<div style="display:flex;align-items:center;margin-bottom:4px;">' +
-      '<span style="display:inline-block;width:18px;height:13px;border-radius:2px;background:' +
+      '<span class="legend-swatch" style="background:' +
       s[1] +
-      ';margin-right:7px;flex-shrink:0;border:1px solid rgba(0,0,0,.15);"></span>' +
+      ';margin-right:7px;border-color:rgba(0,0,0,.15);"></span>' +
       '<span style="font-size:10px;">' +
       to +
       "</span></div>";
@@ -619,9 +619,9 @@ function updateSocialLegend() {
         ? ">" + prev.toLocaleString()
         : prev.toLocaleString() + "–" + s[0].toLocaleString();
     html +=
-      '<div style="display:flex;align-items:center;margin-bottom:4px;"><span style="display:inline-block;width:18px;height:13px;border-radius:2px;background:' +
+      '<div style="display:flex;align-items:center;margin-bottom:4px;"><span class="legend-swatch" style="background:' +
       s[1] +
-      ';margin-right:7px;flex-shrink:0;border:1px solid rgba(0,0,0,.15);"></span><span style="font-size:10px;">' +
+      ';margin-right:7px;border-color:rgba(0,0,0,.15);"></span><span style="font-size:10px;">' +
       to +
       "</span></div>";
     prev = s[0];

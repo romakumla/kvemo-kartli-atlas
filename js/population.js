@@ -534,9 +534,9 @@ function updateIDPLegend() {
         : prev.toLocaleString() + "–" + s[0].toLocaleString();
     html +=
       '<div style="display:flex;align-items:center;margin-bottom:4px;">' +
-      '<span style="display:inline-block;width:18px;height:13px;border-radius:2px;background:' +
+      '<span class="legend-swatch" style="background:' +
       s[1] +
-      ';margin-right:7px;flex-shrink:0;border:1px solid rgba(0,0,0,.15);"></span>' +
+      ';margin-right:7px;border-color:rgba(0,0,0,.15);"></span>' +
       '<span style="font-size:10px;">' +
       to +
       "</span></div>";
@@ -638,7 +638,7 @@ function updateLegend(type) {
     '<div class="ethnics-legend">' +
     Object.entries(labels)
       .map(function ([k, v]) {
-        return `<div class="eth-legend-item"><span class="eth-dot" style="background:${colors[k]};border-radius:3px;"></span><span>${v} (დომინ.)</span></div>`;
+        return `<div class="eth-legend-item"><span class="legend-swatch" style="background:${colors[k]};"></span><span>${v} (დომინ.)</span></div>`;
       })
       .join("") +
     "</div>";
@@ -781,7 +781,7 @@ function updateDensityLegend() {
   html += '<div class="ethnics-legend">';
   DENSITY_BREAKS.forEach(function (b) {
     html += `<div class="eth-legend-item">
-      <span class="eth-dot" style="background:${b.color};border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span>
+      <span class="legend-swatch" style="background:${b.color};border-color:rgba(0,0,0,0.15);"></span>
       <span>${b.label}</span>
     </div>`;
   });
@@ -1230,7 +1230,7 @@ function updateRateLegend(type) {
   var html = `<div class="section-title">${title}</div>`;
   html += '<div class="ethnics-legend">';
   Object.entries(colorMap).forEach(function ([range, color]) {
-    html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${color};border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span><span>${range}</span></div>`;
+    html += `<div class="eth-legend-item"><span class="legend-swatch" style="background:${color};border-color:rgba(0,0,0,0.15);"></span><span>${range}</span></div>`;
   });
   html += `</div><div style="margin-top:10px;">
     <div class="section-title">წელი</div>

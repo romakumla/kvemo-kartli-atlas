@@ -104,7 +104,7 @@ function updateLandscapeLegend(data, order) {
   var html = `<div class="section-title">ლანდშაფტის ტიპი</div><div class="ethnics-legend">`;
   order.forEach(function (label) {
     if (!seen[label]) return;
-    html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${seen[label]};border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span><span style="font-size:10px;">${label}</span></div>`;
+    html += `<div class="eth-legend-item"><span class="legend-swatch" style="background:${seen[label]};border-color:rgba(0,0,0,0.15);"></span><span style="font-size:10px;">${label}</span></div>`;
   });
   html += "</div>";
   el.innerHTML = html;
@@ -308,7 +308,7 @@ function updateHazardLegend() {
   var html = `<div class="section-title">მეწყ./კლდეზვ. ზონები</div>
   <div class="ethnics-legend">`;
   HAZARD_ZONING_ORDER.forEach(function (label) {
-    html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${zoneColors[label]};border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span><span style="font-size:10px;">${label}</span></div>`;
+    html += `<div class="eth-legend-item"><span class="legend-swatch" style="background:${zoneColors[label]};border-color:rgba(0,0,0,0.15);"></span><span style="font-size:10px;">${label}</span></div>`;
   });
   html += `</div><div class="section-title" style="margin-top:10px;">სახეობა</div>
   <div class="ethnics-legend">
@@ -536,7 +536,7 @@ function updateGWLegend() {
     var p = f.properties;
     if (!seen[p.Code]) {
       seen[p.Code] = 1;
-      html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${p.ZoneColor};border:1px solid #5599AA88;border-radius:3px;"></span><span style="font-size:9px;">${p.ShortLabel}</span></div>`;
+      html += `<div class="eth-legend-item"><span class="legend-swatch" style="background:${p.ZoneColor};border-color:#5599AA88;"></span><span style="font-size:9px;">${p.ShortLabel}</span></div>`;
     }
   });
   html += `</div><div class="section-title" style="margin-top:10px;">წყალპუნქტები</div>
@@ -818,7 +818,7 @@ function renderEarthquakeLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon, zIndexOffset: 1000 });
-      pointTooltip(marker, "სეისმური სადგური — " + p.Name_Geo, -18);
+      pointTooltip(marker, "სეისმური სადგური" + (p.Code ? " " + p.Code + " (" + p.Station_Geo + ")" : "") + " — " + p.Name_Geo, -18);
       marker.on("click", function () {
         showInfoSeismicStation(p, latlng);
         showBottomChartStations("seismic");
@@ -1110,10 +1110,13 @@ function showInfoSeismicStation(p, latlng) {
     ? `<span class="info-type-badge badge-village" style="background:#FDECEA;color:#C62828;border:1px solid #C6282855;">მოქმედი</span>`
     : `<span class="info-type-badge badge-city" style="background:#f3f4f6;color:#999;border:1px solid #ccc;">შეჩერებული</span>`;
   showInfoCard(`
-    <div class="info-name">სეისმური სადგური</div>
+    <div class="info-name">სეისმური სადგური${p.Code ? " " + p.Code : ""}</div>
     ${badge}
+    ${p.Code ? `<div class="info-row"><span class="info-key">სახელი</span><span class="info-val">${p.Station_Geo}</span></div>` : ""}
+    ${p.Near_Geo ? `<div class="info-row"><span class="info-key">უახლოესი დასახლება</span><span class="info-val">${p.Near_Geo} (~${p.Near_m < 1000 ? p.Near_m + " მ" : (p.Near_m / 1000).toFixed(1) + " კმ"})</span></div>` : ""}
     <div class="info-row"><span class="info-key">განედი</span><span class="info-val">${latlng.lat.toFixed(4)}°</span></div>
     <div class="info-row"><span class="info-key">გრძედი</span><span class="info-val">${latlng.lng.toFixed(4)}°</span></div>
+    ${p.Code ? '<div class="section-note">კოდი და სახელი — საქართველოს სეისმური მონიტორინგის ეროვნული ცენტრის სადგურების სიიდან (ies.iliauni.edu.ge)</div>' : ""}
   `);
 }
 
