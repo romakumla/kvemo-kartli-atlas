@@ -94,11 +94,7 @@ function buildTourismClimateLayers(data) {
       },
       onEachFeature: function (feature, layer) {
         var p = feature.properties;
-        layer.bindTooltip(p.Name_Geo + " — " + (p[activeTcMonth] || "მონაცემი არ არის"), {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, p.Name_Geo + " — " + (p[activeTcMonth] || "მონაცემი არ არის"));
         layer.on("click", function () {
           showInfoTc(p, false);
           showBottomChartTc(p);
@@ -139,8 +135,7 @@ function buildTourismClimateLayers(data) {
 }
 
 function showInfoTc(p, isPoint) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     (isPoint ? "" : " (მუნიციპალიტეტი)") +
     "</div>" +
@@ -156,8 +151,7 @@ function showInfoTc(p, isPoint) {
     ": " +
     (p[activeTcMonth] || "მონაცემი არ არის") +
     "</span></div>" +
-    '<div style="font-size:9px;color:var(--text-muted);margin-top:8px;">სტატისტიკის ველში ნახეთ წლის განმავლობაში ცვლილება</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="font-size:9px;color:var(--text-muted);margin-top:8px;">სტატისტიკის ველში ნახეთ წლის განმავლობაში ცვლილება</div>');
 }
 
 // მუნიციპალიტეტის/წერტილის 12-თვიანი დკი-სტატისტიკა — ქვედა chart პანელი
@@ -200,13 +194,7 @@ function showBottomChartTc(p) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: p.Name_Geo + " — დკი წლის განმავლობაში",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(p.Name_Geo + " — დკი წლის განმავლობაში"),
         tooltip: {
           callbacks: {
             label: function (ctx2) {
@@ -424,16 +412,14 @@ function showInfoTt(p, types) {
       );
     })
     .join("");
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:#F6851F22;color:#B85C10;border:1px solid #F6851F;">' +
     p.Municipal_ +
     "</span>" +
     '<div style="margin-top:8px;font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;">ტურიზმის სახეობები</div>' +
-    rows;
-  document.getElementById("infoCard").classList.remove("hidden");
+    rows);
 }
 
 // ტურიზმის სახეობების სტატისტიკა — ქვედა chart პანელი
@@ -473,21 +459,14 @@ function showBottomChartTt(p, types, data) {
       layout: { padding: { top: 18 } },
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text:
-            "დასახლებები ტურიზმის სახეობების მიხედვით — " +
+        title: chartTitle("დასახლებები ტურიზმის სახეობების მიხედვით — " +
             p.Name_Geo +
             ": " +
             types
               .map(function (t) {
                 return t.label;
               })
-              .join(", "),
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+              .join(", ")),
         tooltip: {
           callbacks: {
             title: function (c) {
@@ -643,11 +622,7 @@ function buildViticultureLayers() {
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
       if (p.isBg) return; // ფონი არ რეაგირებს
-      layer.bindTooltip(p.Zone, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Zone);
       layer.on("click", function () {
         showInfoVitZone(p);
         showBottomChartVitZones(p);
@@ -663,11 +638,7 @@ function buildViticultureLayers() {
       var p = feat.properties;
       var ic = cellarSquaresIcon(p.Cellars);
       var marker = L.marker(latlng, { icon: ic.icon });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -ic.h / 2 - 2],
-      });
+      pointTooltip(marker, p.Name_Geo, -ic.h / 2 - 2);
       marker.on("click", function () {
         showInfoCellar(p);
         showBottomChartCellars(p);
@@ -680,23 +651,19 @@ function buildViticultureLayers() {
 }
 
 function showInfoVitZone(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name">' + p.Zone + "</div>" +
+  showInfoCard('<div class="info-name">' + p.Zone + "</div>" +
     '<span class="info-type-badge" style="background:' + p.Color +
     "44;color:#333;border:1px solid " + darken(p.Color) + ';">' +
-    p.Area_km2 + " კმ²</span>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    p.Area_km2 + " კმ²</span>");
 }
 
 function showInfoCellar(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name">' + p.Name_Geo + "</div>" +
+  showInfoCard('<div class="info-name">' + p.Name_Geo + "</div>" +
     '<span class="info-type-badge" style="background:' + CELLAR_COLOR +
     '22;color:' + CELLAR_COLOR + ';border:1px solid ' + CELLAR_COLOR + ';">' +
     p.Cellars + " მარანი</span>" +
     '<div style="margin-top:6px;font-size:11px;color:#444;">' +
-    "<b>მუნიციპალიტეტი:</b> " + p.Municipal_ + "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "<b>მუნიციპალიტეტი:</b> " + p.Municipal_ + "</div>");
 }
 
 function showBottomChartCellars(sel) {
@@ -723,14 +690,8 @@ function showBottomChartCellars(sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ღვინის მარნები — სულ " +
-            pts.reduce(function (a, p) { return a + p.Cellars; }, 0),
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ღვინის მარნები — სულ " +
+            pts.reduce(function (a, p) { return a + p.Cellars; }, 0)),
         tooltip: {
           callbacks: {
             label: function (c) { return c.parsed.y + " მარანი"; },
@@ -795,16 +756,9 @@ function showBottomChartVitZones(sel) {
       layout: { padding: { top: 18 } },
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text:
-            "მევენახეობის ზონები — ფართობი (კმ²), სულ " +
+        title: chartTitle("მევენახეობის ზონები — ფართობი (კმ²), სულ " +
             Math.round(total) +
-            " კმ²",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+            " კმ²"),
         tooltip: {
           callbacks: {
             title: function (c) {
@@ -933,8 +887,7 @@ function buildProtectedAreasLayer() {
 }
 
 function showInfoProtectedArea(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name">' + p.Name_Geo + "</div>" +
+  showInfoCard('<div class="info-name">' + p.Name_Geo + "</div>" +
     '<span class="info-type-badge" style="background:' + PA_FILL +
     '66;color:' + PA_STROKE + ';border:1px solid ' + PA_STROKE + ';">' +
     p.Category + "</span>" +
@@ -942,8 +895,7 @@ function showInfoProtectedArea(p) {
     "<b>ფართობი რეგიონში:</b> " + p.Area_km2 + " კმ²" +
     (p.Total_ha ? "<br><b>საერთო ფართობი:</b> " + p.Total_ha.toLocaleString() + " ჰა" : "") +
     (p.Name_Eng ? '<br><span style="color:#888;font-size:10px;">' + p.Name_Eng + "</span>" : "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartProtectedAreas(sel) {
@@ -980,13 +932,7 @@ function showBottomChartProtectedAreas(sel) {
       layout: { padding: { top: 18 } },
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "დაცული ტერიტორიები — ფართობი (კმ²), სულ " + Math.round(total) + " კმ²",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("დაცული ტერიტორიები — ფართობი (კმ²), სულ " + Math.round(total) + " კმ²"),
         tooltip: {
           callbacks: {
             title: function (c) { return names[c[0].dataIndex]; },

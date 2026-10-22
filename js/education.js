@@ -125,11 +125,7 @@ function buildEducationLayers(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoEduMuni(p);
         showBottomChartEdu(data);
@@ -152,11 +148,7 @@ function buildEducationLayers(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -sz / 2 - 2],
-      });
+      pointTooltip(marker, p.Name_Geo, -sz / 2 - 2);
       marker.on("click", function () {
         showInfoEduSchool(p);
         showBottomChartEdu(data);
@@ -171,8 +163,7 @@ function buildEducationLayers(data) {
 }
 
 function showInfoEduMuni(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     " (მუნიციპალიტეტი)</div>" +
     '<span class="info-type-badge" style="background:#7EB05C33;color:#4a7030;border:1px solid #7EB05C;">ზოგადი განათლება 2023/2024</span>' +
@@ -185,8 +176,7 @@ function showInfoEduMuni(p) {
     "<br>" +
     "<b>მასწავლებლები:</b> " +
     p.Educators.toLocaleString() +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showInfoEduSchool(p) {
@@ -194,8 +184,7 @@ function showInfoEduSchool(p) {
     EDU_SCHOOL_TYPES.find(function (x) {
       return x.key === p.SchoolCat;
     }) || EDU_SCHOOL_TYPES[7];
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -215,8 +204,7 @@ function showInfoEduSchool(p) {
     "<br>" +
     "<b>მუნიციპალიტეტი:</b> " +
     (p.Municipal || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartEdu(data) {
@@ -274,13 +262,7 @@ function showBottomChartEdu(data) {
             padding: 6,
           },
         },
-        title: {
-          display: true,
-          text: "მოსწავლეები და მასწავლებლები მუნიციპალიტეტების მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("მოსწავლეები და მასწავლებლები მუნიციპალიტეტების მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -510,11 +492,7 @@ function buildKgLayer(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoKg(p);
         showBottomChartKg(data);
@@ -553,11 +531,7 @@ function buildKgLayer(data) {
       className: "",
     });
     var m = L.marker([p.cy, p.cx], { icon: icon });
-    m.bindTooltip(p.Name_Geo, {
-      direction: "top",
-      className: "village-label",
-      offset: [0, -size / 2 - 2],
-    });
+    pointTooltip(m, p.Name_Geo, -size / 2 - 2);
     m.on("click", function () {
       showInfoKg(p);
       showBottomChartKg(data);
@@ -576,8 +550,7 @@ function buildKgLayer(data) {
 
 function showInfoKg(p) {
   var yr = activeKgYear;
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     " (მუნიციპალიტეტი)</div>" +
     '<span class="info-type-badge" style="background:#3CA74933;color:#2a6a30;border:1px solid #3CA749;">საჯარო სკოლამდელი აღზრდა ' +
@@ -592,8 +565,7 @@ function showInfoKg(p) {
     "<br>" +
     '<span style="color:#C8394F;">●</span> <b>აღმზრდელები:</b> ' +
     p["Edu_" + yr].toLocaleString() +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartKg(data) {
@@ -649,13 +621,7 @@ function showBottomChartKg(data) {
             padding: 6,
           },
         },
-        title: {
-          display: true,
-          text: "სკოლამდელი აღზრდა — აღსაზრდელები და აღმზრდელები (" + yr + ")",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("სკოლამდელი აღზრდა — აღსაზრდელები და აღმზრდელები (" + yr + ")"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -814,11 +780,7 @@ function buildOikLayer(data) {
         weight: 1.2,
         fillOpacity: 0.9,
       });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -r - 2],
-      });
+      pointTooltip(marker, p.Name_Geo, -r - 2);
       marker.on("click", function () {
         showInfoOik(p);
         showBottomChartOik(data);
@@ -834,8 +796,7 @@ function buildOikLayer(data) {
 
 function showInfoOik(p) {
   var color = OIK_COLORS[p.Oikonymy] || "#888";
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -859,8 +820,7 @@ function showInfoOik(p) {
     "<br>" +
     "<b>მუნიციპალიტეტი:</b> " +
     (p.Municipal || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartOik(data) {
@@ -920,13 +880,7 @@ function showBottomChartOik(data) {
             padding: 6,
           },
         },
-        title: {
-          display: true,
-          text: "ქართული და არაქართული ოიკონიმები მუნიციპალიტეტების მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ქართული და არაქართული ოიკონიმები მუნიციპალიტეტების მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1165,11 +1119,7 @@ function buildLibLayer(data) {
     },
     onEachFeature: function (f, layer) {
       var p = f.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoLibrary(p);
         showBottomChartLibrary(data);
@@ -1194,7 +1144,7 @@ function buildLibLayer(data) {
     var svg = libraryShelfSVG(size);
     var icon = L.divIcon({ html: svg, iconSize: [size, size], iconAnchor: [size/2, size/2], className: "" });
     var marker = L.marker([lat, lng], { icon: icon });
-    marker.bindTooltip(p.Name_Geo + ": " + cnt + " ბიბლ.", { direction: "top", className: "village-label" });
+    pointTooltip(marker, p.Name_Geo + ": " + cnt + " ბიბლ.");
     marker.on("click", function () {
       showInfoLibrary(p);
       showBottomChartLibrary(data);
@@ -1208,8 +1158,7 @@ function buildLibLayer(data) {
 }
 
 function showInfoLibrary(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:#5A3E8A22;color:#5A3E8A;border:1px solid #5A3E8A;">ბიბლიოთეკები</span>' +
@@ -1219,8 +1168,7 @@ function showInfoLibrary(p) {
     "<br>" +
     "<b>წიგნების რაოდ.:</b> " +
     (p.Books_in_L || "—") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartLibrary(data) {
@@ -1255,13 +1203,7 @@ function showBottomChartLibrary(data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ბიბლიოთეკები მუნ. მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ბიბლიოთეკები მუნ. მიხედვით"),
       },
       scales: {
         y: {
@@ -1448,11 +1390,7 @@ function buildTourismLayer(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -size / 2 - 2],
-      });
+      pointTooltip(marker, p.Name_Geo, -size / 2 - 2);
       marker.on("click", function () {
         showInfoTourism(p, t, hasTheater);
         showBottomChartMuseum(p, t);
@@ -1465,8 +1403,7 @@ function buildTourismLayer(data) {
 }
 
 function showInfoTourism(p, t, hasTheater) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Museums_Ge +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -1483,8 +1420,7 @@ function showInfoTourism(p, t, hasTheater) {
     "<br>" +
     "<b>მუნიციპალიტეტი:</b> " +
     p.Municipal_ +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function updateTourismLegend() {
@@ -1697,11 +1633,7 @@ function buildArtDisciplinesLayers(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoArtMuni(p);
         showBottomChartArt(p, artActiveCategories(p));
@@ -1721,11 +1653,7 @@ function buildArtDisciplinesLayers(data) {
 
       var marker = L.marker(latlng, { icon: compactIcon.icon });
       // hover — მხოლოდ დასახლების სახელი; დეტალები სტატისტიკის ველშია
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -compactIcon.boxH / 2 - 2],
-      });
+      pointTooltip(marker, p.Name_Geo, -compactIcon.boxH / 2 - 2);
 
       marker.on("click", function () {
         showInfoArtSettlement(p, cats);
@@ -1772,13 +1700,7 @@ function drawCategoryCountChart(title, cats, counts, unit, activeKeys) {
       layout: { padding: { top: 18 } },
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: title,
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(title),
         tooltip: {
           callbacks: {
             title: function (c) {
@@ -1867,14 +1789,12 @@ function showInfoArtMuni(p) {
       );
     })
     .join("");
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     " (მუნიციპალიტეტი)</div>" +
     '<div style="margin-top:8px;">' +
     (rows || '<span style="font-size:10px;color:var(--text-muted);">მონაცემი არ არის</span>') +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showInfoArtSettlement(p, cats) {
@@ -1893,8 +1813,7 @@ function showInfoArtSettlement(p, cats) {
       );
     })
     .join("");
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:#89471f22;color:#89471f;border:1px solid #89471f;">' +
@@ -1902,8 +1821,7 @@ function showInfoArtSettlement(p, cats) {
     "</span>" +
     '<div style="margin-top:8px;">' +
     rows +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function updateArtLegend() {

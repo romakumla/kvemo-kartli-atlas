@@ -232,11 +232,7 @@ function loadNeutralLayers() {
         onEachFeature: function (feature, layer) {
           var nm = (feature.properties.Name_Geo || "").trim();
           if (nm)
-            layer.bindTooltip(nm, {
-              direction: "center",
-              className: "village-label",
-              sticky: true,
-            });
+            areaTooltip(layer, nm);
         },
       }).addTo(map);
     });
@@ -298,6 +294,41 @@ var censusScope = "selected";
 var censusChart = null;
 
 var bottomChart = null;
+
+// ===== საერთო ელემენტები: info card, tooltip, დიაგრამის სათაური =====
+// info card-ის შევსება და გამოჩენა
+function showInfoCard(html) {
+  var content = document.getElementById("infoCardContent");
+  content.innerHTML = html;
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
+// პოლიგონის tooltip: ცენტრში, მაუსს მიჰყვება
+function areaTooltip(layer, text) {
+  return layer.bindTooltip(text, {
+    direction: "center",
+    className: "village-label",
+    sticky: true,
+  });
+}
+
+// წერტილის tooltip: ნიშნის ზემოთ; dy — ვერტიკალური წანაცვლება (მაგ. -12)
+function pointTooltip(marker, text, dy) {
+  var opts = { direction: "top", className: "village-label" };
+  if (dy !== undefined) opts.offset = [0, dy];
+  return marker.bindTooltip(text, opts);
+}
+
+// ქვედა დიაგრამის სათაური, ერთიანი სტილით (size — შრიფტის ზომა, ნაგულისხმევად 11)
+function chartTitle(text, size) {
+  return {
+    display: true,
+    text: text,
+    font: { family: "Fira Sans", size: size || 11, weight: "600" },
+    color: "#1A1A18",
+    padding: { bottom: 6 },
+  };
+}
 
 // ===== ქვედა დიაგრამა: მომზადება =====
 // ყოველი ქვედა დიაგრამა ასე იწყება: ტილო ჩანს, „ცარიელის“ წარწერა იმალება,

@@ -164,11 +164,7 @@ function buildAgrovlimatLayer(data) {
       var p = feature.properties;
       var _tip = p.ZoneLabel || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoAgro(p);
         showBottomChartAgro(p, data);
@@ -770,11 +766,10 @@ function updateAgroLegend(data) {
 }
 
 function showInfoAgro(p) {
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name" style="font-size:13px;">${p.ZoneLabel}</div>
     <span class="info-type-badge badge-village" style="background:${p.ZoneColor}22;color:${p.ZoneColor};border:1px solid ${p.ZoneColor}55;">${p.Zone_Geo}</span>
-    <div style="margin-top:10px;font-size:10px;color:var(--text-muted);line-height:1.6;">${p.Name_Geo}</div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div style="margin-top:10px;font-size:10px;color:var(--text-muted);line-height:1.6;">${p.Name_Geo}</div>`);
 }
 
 function showBottomChartAgro(p, data) {
@@ -823,13 +818,7 @@ function showBottomChartAgro(p, data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: `აგროკლიმ. ზონები — ${p.ZoneLabel} (ფართობი კმ²)`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`აგროკლიმ. ზონები — ${p.ZoneLabel} (ფართობი კმ²)`, 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
         },

@@ -50,11 +50,7 @@ function buildBotanicaLayer(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Type_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Type_Geo);
       layer.on("click", function () {
         showInfoBotanica(p);
         showBottomChartBotanica(data, p);
@@ -66,8 +62,7 @@ function buildBotanicaLayer(data) {
 }
 
 function showInfoBotanica(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Type_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -78,8 +73,7 @@ function showInfoBotanica(p) {
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
     "<b>ფართობი:</b> " +
     p.Area_km2.toLocaleString() +
-    " კმ²</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    " კმ²</div>");
 }
 
 function showBottomChartBotanica(data, sel) {
@@ -125,13 +119,7 @@ function showBottomChartBotanica(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ბოტანიკურ-აგრონომიული ზონები — ფართობი (კმ²)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ბოტანიკურ-აგრონომიული ზონები — ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -248,11 +236,7 @@ function buildEnergetikaLayer(data) {
             fillOpacity: 0.72,
           });
         }
-        marker.bindTooltip(p.Name_Geo + " (" + p.Power + " მვტ)", {
-          direction: "top",
-          className: "village-label",
-          offset: [0, -getPowerRadius(p.Power) - 2],
-        });
+        pointTooltip(marker, p.Name_Geo + " (" + p.Power + " მვტ)", -getPowerRadius(p.Power) - 2);
         marker.on("click", function () {
           showInfoEnergetika(p);
           showBottomChartEnergetika(data, p);
@@ -271,8 +255,7 @@ function showInfoEnergetika(p) {
     p.TKey === "thermal"
       ? '<span style="display:inline-block;width:14px;height:14px;background:#B57FC4;border:1.5px solid #7A4A8A;"></span>'
       : '<span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#5BA3D0;border:1.5px solid #2B6A9A;"></span>';
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -289,8 +272,7 @@ function showInfoEnergetika(p) {
     '<div style="margin-top:6px;font-size:11px;color:var(--text-muted);line-height:1.7;">' +
     "<b>დადგმული სიმძლავრე:</b> " +
     p.Power +
-    " მვტ</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    " მვტ</div>");
 }
 
 function showBottomChartEnergetika(data, sel) {
@@ -335,13 +317,7 @@ function showBottomChartEnergetika(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ელექტროსადგურების დადგმული სიმძლავრე (მვტ)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ელექტროსადგურების დადგმული სიმძლავრე (მვტ)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -491,11 +467,7 @@ function buildCropZonesLayer(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Type_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Type_Geo);
       layer.on("click", function () {
         showInfoCropZone(p);
         showBottomChartCropZones(data, p);
@@ -507,8 +479,7 @@ function buildCropZonesLayer(data) {
 }
 
 function showInfoCropZone(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:12px;font-weight:700;line-height:1.4;">' +
+  showInfoCard('<div class="info-name" style="font-size:12px;font-weight:700;line-height:1.4;">' +
     p.Type_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -519,8 +490,7 @@ function showInfoCropZone(p) {
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
     "<b>ფართობი:</b> " +
     p.Area_km2.toLocaleString() +
-    " კმ²</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    " კმ²</div>");
 }
 
 function showBottomChartCropZones(data, sel) {
@@ -570,13 +540,7 @@ function showBottomChartCropZones(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "კულტურულ მცენარეთა ზონები — ფართობი (კმ²)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("კულტურულ მცენარეთა ზონები — ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -715,11 +679,7 @@ function buildLandLayer(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoLand(p);
         showBottomChartLand(data, p);
@@ -771,8 +731,7 @@ function showInfoLand(p) {
     "  |  <b>სათბური:</b> " +
     p.Greenhouse +
     "</div>";
-  document.getElementById("infoCardContent").innerHTML = html;
-  document.getElementById("infoCard").classList.remove("hidden");
+  showInfoCard(html);
 }
 
 function showBottomChartLand(data, sel) {
@@ -815,13 +774,7 @@ function showBottomChartLand(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: theme.title,
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(theme.title),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1037,11 +990,7 @@ function buildSunLayers(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Name_Geo + " საათი", {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo + " საათი");
       layer.on("click", function () {
         showInfoSunZone(p);
         showBottomChartSunZones(data);
@@ -1098,14 +1047,7 @@ function buildSunLayers(data) {
           className: "",
         });
         var marker = L.marker(latlng, { icon: icon });
-        marker.bindTooltip(
-          p.Name_Geo + " — " + p.Type_Geo + " (" + p.Power + " ვტ)",
-          {
-            direction: "top",
-            className: "village-label",
-            offset: [0, -totalH + dotR],
-          },
-        );
+        pointTooltip(marker, p.Name_Geo + " — " + p.Type_Geo + " (" + p.Power + " ვტ)", -totalH + dotR);
         marker.on("click", function () {
           showInfoSunStation(p);
           showBottomChartSun(data);
@@ -1121,8 +1063,7 @@ function buildSunLayers(data) {
 }
 
 function showInfoSunZone(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">მზის ნათება: ' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">მზის ნათება: ' +
     p.Name_Geo +
     " საათი/წელ</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -1130,13 +1071,11 @@ function showInfoSunZone(p) {
     "88;color:#7a3a18;border:1px solid " +
     p.Color +
     ';">მზის ნათების ზონა</span>' +
-    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.6;">მზის ნათების წლიური ხანგრძლივობა საათებში</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.6;">მზის ნათების წლიური ხანგრძლივობა საათებში</div>');
 }
 
 function showInfoSunStation(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -1160,8 +1099,7 @@ function showInfoSunStation(p) {
     " ვტ<br>" +
     "<b>მუნიციპალიტეტი:</b> " +
     (p.Municipal || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartSun(data) {
@@ -1215,13 +1153,7 @@ function showBottomChartSun(data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "მზის ელექტროსადგურები ტიპების მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("მზის ელექტროსადგურები ტიპების მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1291,13 +1223,7 @@ function showBottomChartSunZones(data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "მზის ნათების ზონების ფართობი (კმ²), საათი/წელ",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("მზის ნათების ზონების ფართობი (კმ²), საათი/წელ"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1539,11 +1465,7 @@ function buildAgriLayer(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoAgri(p);
         showBottomChartAgri(data, p);
@@ -1584,11 +1506,7 @@ function buildAgriLayer(data) {
       className: "",
     });
     var m = L.marker([p.cy, p.cx], { icon: icon });
-    m.bindTooltip(p.Name_Geo, {
-      direction: "top",
-      className: "village-label",
-      offset: [0, -size / 2 - 2],
-    });
+    pointTooltip(m, p.Name_Geo, -size / 2 - 2);
     m.on("click", function () {
       showInfoAgri(p);
       showBottomChartAgri(data, p);
@@ -1628,8 +1546,7 @@ function showInfoAgri(p) {
     '<div style="margin-top:6px;padding-top:5px;border-top:1px solid #e5e0d8;font-size:11px;"><b>სულ:</b> ' +
     total +
     "</div>";
-  document.getElementById("infoCardContent").innerHTML = html;
-  document.getElementById("infoCard").classList.remove("hidden");
+  showInfoCard(html);
 }
 
 function showBottomChartAgri(data, sel) {
@@ -1667,13 +1584,7 @@ function showBottomChartAgri(data, sel) {
             padding: 6,
           },
         },
-        title: {
-          display: true,
-          text: "სოფლის მეურნეობის პროექტების ბენეფიციარები (2019–2024)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("სოფლის მეურნეობის პროექტების ბენეფიციარები (2019–2024)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1783,11 +1694,7 @@ function buildAgriSpecLayer(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Type_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Type_Geo);
       layer.on("click", function () {
         showInfoAgriSpec(p);
         showBottomChartAgriSpec(data, p);
@@ -1799,8 +1706,7 @@ function buildAgriSpecLayer(data) {
 }
 
 function showInfoAgriSpec(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:12px;font-weight:700;line-height:1.4;">' +
+  showInfoCard('<div class="info-name" style="font-size:12px;font-weight:700;line-height:1.4;">' +
     p.Type_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -1811,8 +1717,7 @@ function showInfoAgriSpec(p) {
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
     "<b>ფართობი:</b> " +
     p.Area_km2.toLocaleString() +
-    " კმ²</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    " კმ²</div>");
 }
 
 function showBottomChartAgriSpec(data, sel) {
@@ -1868,13 +1773,7 @@ function showBottomChartAgriSpec(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "სოფ. მეურნ. სპეციალიზაცია — ფართობი (კმ²)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("სოფ. მეურნ. სპეციალიზაცია — ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
             label: function (c) {
