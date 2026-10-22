@@ -11,6 +11,17 @@
   document.head.appendChild(st);
 })();
 
+// ===== მონაცემების ვერსია =====
+// მონაცემთა ფაილები (data/…) ბრაუზერის ქეშში რჩება და ახალი ვერსიის
+// გამოქვეყნების შემდეგაც შეიძლება ძველი ჩაიტვირთოს. dataUrl() ყოველ
+// მისამართს DATA_VERSION-ს უმატებს (?v=…), ამიტომ მისი შეცვლისას ბრაუზერი
+// ფაილებს ხელახლა ჩამოტვირთავს. data/-ში ნებისმიერი ცვლილებისას ეს
+// თარიღი განაახლეთ.
+var DATA_VERSION = "20261022";
+function dataUrl(path) {
+  return path + (path.indexOf("?") === -1 ? "?" : "&") + "v=" + DATA_VERSION;
+}
+
 // ===== Municipality-based layers =====
 // Layers drawn on the 7 municipality polygons keep only their attributes in
 // data/muni/<name>.json; the shared boundaries come from
@@ -22,7 +33,7 @@ var _muniGeometryPromise = null;
 
 function loadMuniData(url) {
   if (!_muniGeometryPromise) {
-    _muniGeometryPromise = fetch("data/municipalities.geojson")
+    _muniGeometryPromise = fetch(dataUrl("data/municipalities.geojson"))
       .then(function (r) { return r.json(); })
       .then(function (d) {
         return d.features.map(function (f) { return f.geometry; });
@@ -34,7 +45,7 @@ function loadMuniData(url) {
   }
   return Promise.all([
     _muniGeometryPromise,
-    fetch(url).then(function (r) { return r.json(); }),
+    fetch(dataUrl(url)).then(function (r) { return r.json(); }),
   ]).then(function (res) {
     var geoms = res[0];
     var data = res[1];
@@ -203,7 +214,7 @@ var MUNI_COLORS = {
 
 function loadNeutralLayers() {
   // პოლიგონები — თითოეულ მუნიციპალიტეტს თავისი ფერი
-  fetch("data/municipalities.geojson")
+  fetch(dataUrl("data/municipalities.geojson"))
     .then((r) => r.json())
     .then((data) => {
       neutralBoundaryLayer = L.geoJSON(data, {
@@ -231,7 +242,7 @@ function loadNeutralLayers() {
     });
 
   // ცენტრის წერტილები + წარწერები — იგივე სტილი, რაც სხვა რუკებზე
-  fetch("data/municipalities_centroids.geojson")
+  fetch(dataUrl("data/municipalities_centroids.geojson"))
     .then((r) => r.json())
     .then((data) => {
       neutralLabelLayer = L.geoJSON(data, {

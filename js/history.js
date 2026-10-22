@@ -35,7 +35,7 @@ function loadArchaeology() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/archeology.geojson")
+  fetch(dataUrl("data/archeology.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -220,7 +220,7 @@ function loadBattles() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/battles.geojson")
+  fetch(dataUrl("data/battles.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -732,7 +732,7 @@ function loadForts() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/fortifications.geojson")
+  fetch(dataUrl("data/fortifications.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -943,7 +943,7 @@ function loadEparchies() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/eparchies.geojson")
+  fetch(dataUrl("data/eparchies.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -1181,7 +1181,7 @@ function loadChurches() {
     buildChurchesLayer(churchesData);
     return;
   }
-  fetch("data/churches.geojson")
+  fetch(dataUrl("data/churches.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -1287,7 +1287,7 @@ function loadPetroglyphs() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/petroglyphs.geojson")
+  fetch(dataUrl("data/petroglyphs.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -1463,7 +1463,7 @@ function loadMegaliths() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/megaliths.geojson")
+  fetch(dataUrl("data/megaliths.geojson"))
     .then(function (r) {
       return r.json();
     })

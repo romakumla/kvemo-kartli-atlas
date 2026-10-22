@@ -95,7 +95,7 @@ function loadHealth() {
       });
   }
   if (!healthClinicsData) {
-    fetch("data/health_clinics.geojson")
+    fetch(dataUrl("data/health_clinics.geojson"))
       .then(function (r) {
         return r.json();
       })
@@ -823,7 +823,7 @@ function loadZoo(key) {
     return;
   }
   var cfg = getZooCfg(key);
-  fetch("data/" + cfg.file)
+  fetch(dataUrl("data/" + cfg.file))
     .then(function (r) {
       return r.json();
     })
@@ -930,7 +930,7 @@ function buildZooLayer(key, data, id) {
   // ---- 2. Choropleth ----
   (zooMuniGeoms
     ? Promise.resolve(zooMuniGeoms)
-    : fetch("data/municipalities.geojson").then(function (r) {
+    : fetch(dataUrl("data/municipalities.geojson")).then(function (r) {
         return r.json();
       })
   )

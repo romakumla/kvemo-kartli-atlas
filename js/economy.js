@@ -25,7 +25,7 @@ function loadBotanica() {
     loadNatureMuniCenters();
     return;
   }
-  fetch("data/botanica.geojson")
+  fetch(dataUrl("data/botanica.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -198,7 +198,7 @@ function loadEnergetika() {
     buildEnergetikaLayer(energetikaData);
     return;
   }
-  fetch("data/energetika.geojson")
+  fetch(dataUrl("data/energetika.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -467,7 +467,7 @@ function loadCropZones() {
     buildCropZonesLayer(cropZonesData);
     return;
   }
-  fetch("data/crop_zones.geojson")
+  fetch(dataUrl("data/crop_zones.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -991,7 +991,7 @@ function loadSun() {
     buildSunLayers(sunData);
     return;
   }
-  fetch("data/sun.geojson")
+  fetch(dataUrl("data/sun.geojson"))
     .then(function (r) {
       return r.json();
     })
@@ -1759,7 +1759,7 @@ function loadAgriSpec() {
     buildAgriSpecLayer(agriSpecData);
     return;
   }
-  fetch("data/agri_spec.geojson")
+  fetch(dataUrl("data/agri_spec.geojson"))
     .then(function (r) {
       return r.json();
     })
