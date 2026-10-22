@@ -819,12 +819,20 @@ aside {
   font-size: 10px;
 }
 
+/* ===== მარჯვენა პანელის გადამრთველი ღილაკები =====
+   წლები, სქესი, თემა, მაჩვენებელი, დაავადება, თვე და მსგავსი — ერთი სტილი,
+   ზუსტად მარცხენა პანელის რუკების ღილაკების (.sublayer-btn) მსგავსი.
+   მოკლე არჩევანი (წლები, სქესი, ცხოველები/ადამიანები) — ერთ რიგში, თანაბარი
+   სიგანით; გრძელი წარწერები (მაჩვენებელი, თემა) — .panel-btn-col: ერთმანეთის
+   ქვეშ, სრული სიგანით, როგორც მარცხენა პანელში. */
 .year-btn {
-  flex: 1;
-  padding: 5px 0;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 6px 4px;
   font-family: var(--font-geo);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--panel-font);
+  font-weight: 500;
+  line-height: 1.3;
   border: 1.5px solid var(--border);
   border-radius: 8px;
   background: white;
@@ -835,11 +843,36 @@ aside {
 .year-btn:hover {
   border-color: var(--red);
   color: var(--red);
+  background: var(--red-light);
 }
-.year-btn.active {
+.year-btn.active,
+.year-btn.active:hover {
   background: var(--red);
   border-color: var(--red);
   color: white;
+}
+.panel-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 9px;
+}
+.panel-btn-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.panel-btn-col .year-btn {
+  flex: none;
+  width: 100%;
+  padding: 6px 8px;
+  text-align: left;
+}
+.panel-btn-col {
+  margin-bottom: 9px;
+}
+.panel-btn-row.first-full .year-btn:first-child {
+  flex-basis: 100%;
 }
 
 /* ===== Census Button ===== */

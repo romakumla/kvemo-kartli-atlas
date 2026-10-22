@@ -273,7 +273,7 @@ function updateTcLegend() {
       active +
       '" data-tcmonth="' +
       m[0] +
-      '" style="font-size:9px;padding:3px 2px;">' +
+      '" style="padding:6px 2px;">' +
       m[1].slice(0, 3) +
       "</button>";
   });
