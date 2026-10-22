@@ -16,11 +16,13 @@ function addMuniBorderOverlay() {
     muniBorderOverlay.bringToFront();
     return;
   }
+  var generation = navGeneration;
   fetch(dataUrl("data/municipalities.geojson"))
     .then(function (r) {
       return r.json();
     })
     .then(function (data) {
+      if (generation !== navGeneration) return; // ამასობაში სხვა რუკაზე გადავიდნენ
       // სანამ ფაილი ჩამოვიდოდა, შეიძლება მეორე მოთხოვნამ უკვე შექმნა —
       // მეორე ასლი რუკაზე სამუდამოდ დარჩებოდა (საზღვრები თანდათან მუქდებოდა)
       if (muniBorderOverlay) {
@@ -106,9 +108,11 @@ var _layerOrderTimer = null;
 
 function loadNatureMuniCenters() {
   if (natureMuniLayer) return;
+  var generation = navGeneration;
   fetch(dataUrl("data/municipalities_centroids.geojson"))
     .then((r) => r.json())
     .then((data) => {
+      if (generation !== navGeneration) return; // ამასობაში სხვა რუკაზე გადავიდნენ
       if (natureMuniLayer) return; // უკვე შექმნა სხვა მოთხოვნამ
       natureMuniLayer = L.geoJSON(data, {
         pointToLayer: function (feature, latlng) {

@@ -219,10 +219,12 @@ var MUNI_COLORS = {
 };
 
 function loadNeutralLayers() {
+  var generation = navGeneration; // ჩატვირთვისას თემა უკვე გახსნეს? — აღარ ვხატავთ
   // პოლიგონები — თითოეულ მუნიციპალიტეტს თავისი ფერი
   fetch(dataUrl("data/municipalities.geojson"))
     .then((r) => r.json())
     .then((data) => {
+      if (generation !== navGeneration) return;
       neutralBoundaryLayer = L.geoJSON(data, {
         style: function (f) {
           var nm = (f.properties.Name_Geo || "").trim();
@@ -247,6 +249,7 @@ function loadNeutralLayers() {
   fetch(dataUrl("data/municipalities_centroids.geojson"))
     .then((r) => r.json())
     .then((data) => {
+      if (generation !== navGeneration) return;
       neutralLabelLayer = L.geoJSON(data, {
         pointToLayer: function (feature, latlng) {
           var name = feature.properties.Name_Geo || "";
@@ -295,14 +298,25 @@ var censusChart = null;
 
 var bottomChart = null;
 
+// ===== ნავიგაციის რიგითი ნომერი =====
+// თემის გახსნა, ქვეფენის გადართვა და „უკან“ ზრდის ამ ნომერს (newNavigation()).
+// ჩამოტვირთვა, რომელიც წინა ნომრისას დაიწყო, დასრულებისას ფენას აღარ ხატავს —
+// ნელ ინტერნეტზე სწრაფი გადართვისას ძველი ფენა ახალ რუკაზე აღარ ჩნდება.
+var navGeneration = 0;
+function newNavigation() {
+  navGeneration++;
+}
+
 // ===== მონაცემების ჩატვირთვა =====
 // ფაილს ერთხელ ჩამოტვირთავს და ინახავს. თუ უკვე ჩატვირთულია, callback მაშინვე
 // (სინქრონულად) სრულდება; თუ ჩამოტვირთვა ჯერ მიმდინარეობს, callback რიგში დგება
 // და იგივე ფაილი მეორედ აღარ ითხოვება. შეცდომისას შემდეგი გამოძახება თავიდან სცდის.
 // data/muni/*.json ფაილები loadMuniData()-ით იტვირთება (საზღვრებთან ერთად).
 //   loadData(url, function (d) { forestData = d; buildForestLayer(d); });
+// ნავიგაციის შემდეგ ძველი callback აღარ სრულდება (იხ. navGeneration);
+// anyNavigation = true — სრულდება ყოველთვის (მაგ. ძიება, რომელიც რუკის ფენაზე არ არის დამოკიდებული).
 var _dataStore = {};
-function loadData(url, callback) {
+function loadData(url, callback, anyNavigation) {
   var entry = _dataStore[url];
   if (entry && entry.loaded) {
     callback(entry.data);
@@ -321,8 +335,8 @@ function loadData(url, callback) {
           entry.data = d;
           var cbs = entry.callbacks;
           entry.callbacks = [];
-          cbs.forEach(function (cb) {
-            cb(d);
+          cbs.forEach(function (c) {
+            if (c.anyNavigation || c.generation === navGeneration) c.callback(d);
           });
         },
         function (err) {
@@ -331,7 +345,11 @@ function loadData(url, callback) {
         }
       );
   }
-  entry.callbacks.push(callback);
+  entry.callbacks.push({
+    callback: callback,
+    generation: navGeneration,
+    anyNavigation: !!anyNavigation,
+  });
 }
 
 // რამდენიმე ფაილი ერთად: callback იღებს მასივს იმავე რიგით, როცა ყველა ჩაიტვირთება
@@ -360,6 +378,7 @@ function bindSublayerButtons(attr, onSelect) {
         b.classList.remove("active");
       });
       this.classList.add("active");
+      newNavigation();
       onSelect.call(this);
     });
   });
