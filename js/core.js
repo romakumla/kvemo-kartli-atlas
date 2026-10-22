@@ -288,6 +288,17 @@ var censusChart = null;
 
 var bottomChart = null;
 
+// ===== ქვედა დიაგრამა: მომზადება =====
+// ყოველი ქვედა დიაგრამა ასე იწყება: ტილო ჩანს, „ცარიელის“ წარწერა იმალება,
+// წინა დიაგრამა იშლება. აბრუნებს ახალი დიაგრამის ხატვის კონტექსტს (ctx).
+function prepareBottomChart() {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  if (bottomChart) bottomChart.destroy();
+  return canvas.getContext("2d");
+}
+
 // ===== ქვედა დიაგრამა: დაწკაპებული ობიექტის გამოყოფა =====
 // ქვედა დიაგრამები ყველა სვეტით სრული ფერით იხატება. რუკაზე ობიექტის
 // დაწკაპებისას highlightBottomBars() სრულ ფერს მხოლოდ ამ ობიექტის სვეტ(ებ)ს

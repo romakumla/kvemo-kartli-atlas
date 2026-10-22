@@ -220,11 +220,7 @@ function showInfoEduSchool(p) {
 }
 
 function showBottomChartEdu(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var munis = data.features.filter(function (f) {
     return f.properties.ftype === "municipality";
@@ -601,11 +597,7 @@ function showInfoKg(p) {
 }
 
 function showBottomChartKg(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var yr = activeKgYear;
   var feats = data.features.slice().sort(function (a, b) {
@@ -872,11 +864,7 @@ function showInfoOik(p) {
 }
 
 function showBottomChartOik(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // მუნიციპალიტეტების მიხედვით ქართული vs არაქართული
   var byMuni = {};
@@ -1236,11 +1224,7 @@ function showInfoLibrary(p) {
 }
 
 function showBottomChartLibrary(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var feats = data.features.slice().sort(function (a, b) {
     return (
       (parseFloat(b.properties.Libreries) || 0) -
@@ -1763,11 +1747,7 @@ function artMapClickCollapse() {
 // კატეგორიების დიაგრამა რეალური რაოდენობებით (რეგიონი); activeKeys-ის
 // კატეგორიები სრული ფერით, დანარჩენი — ბაცად (highlightBottomBars)
 function drawCategoryCountChart(title, cats, counts, unit, activeKeys) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   bottomChart = new Chart(ctx, {
     type: "bar",

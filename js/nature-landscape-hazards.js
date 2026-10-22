@@ -137,11 +137,7 @@ function showInfoLandscape(p) {
 }
 
 function showBottomChartLandscape(p, data, order) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ჯამური ფართობი ლეიბლების მიხედვით
   var areas = {},
@@ -217,6 +213,10 @@ function showBottomChartLandscape(p, data, order) {
       },
     },
   });
+  if (p)
+    highlightBottomBars(function (l, i) {
+      return sorted[i] === p.LandLabel;
+    });
 }
 
 // ===== Hazard Layers =====
@@ -290,6 +290,7 @@ function renderHazardLayers() {
       layer.on("click", function () {
         showInfoHazardZone(p);
         showBottomChartHazard();
+        highlightBottomBars(p.Name_Geo);
       });
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 1.5, fillOpacity: 0.9 });
@@ -398,11 +399,7 @@ function showInfoHazardPoint(p, type) {
 }
 
 function showBottomChartHazard() {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ზონირება — ფართობი
   var areas = {},
@@ -549,6 +546,7 @@ function renderGroundwaterLayers() {
       layer.on("click", function () {
         showInfoGWZone(p);
         showBottomChartGW();
+        highlightBottomBars(p.ShortLabel);
       });
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 2, fillOpacity: 0.85 });
@@ -682,11 +680,7 @@ function showInfoGWPoint(p) {
 }
 
 function showBottomChartGW() {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var areas = {},
     colors = {},
@@ -763,11 +757,7 @@ function showBottomChartGW() {
 }
 
 function showBottomChartGWPoint(p) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var ions = ["HCO3", "SO4", "Cl", "Ca", "Mg", "Na_K"];
   var labels = ["HCO₃", "SO₄", "Cl", "Ca", "Mg", "Na+K"];
@@ -905,6 +895,7 @@ function renderEarthquakeLayers() {
       marker.on("click", function () {
         showInfoEQ(p, "instrumental");
         showBottomChartEQ();
+        highlightBottomBars(p.MagClass);
       });
       return marker;
     },
@@ -1017,11 +1008,7 @@ function showInfoEQ(p, period) {
 }
 
 function showBottomChartEQ() {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // მაგნიტუდის განაწილება
   var counts = {};
@@ -1279,6 +1266,7 @@ function buildMeteoLayer(data) {
       marker.on("click", function () {
         showInfoMeteo(p);
         showBottomChartStations("meteo");
+        highlightBottomBars(p.Active ? "მოქმედი" : "დახურული");
       });
       marker.bindTooltip(p.Name_Geo || "", {
         direction: "top",
@@ -1300,6 +1288,7 @@ function buildHydroLayer(data) {
       marker.on("click", function () {
         showInfoHydro(p);
         showBottomChartStations("hydro");
+        highlightBottomBars(p.Active ? "მოქმედი" : "დახურული");
       });
       marker.bindTooltip(p.Name_Geo || "", {
         direction: "top",
@@ -1411,11 +1400,7 @@ function showInfoHydro(p) {
 
 function showBottomChartStations(type) {
   var data = type === "meteo" ? meteoData : hydroData;
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var active = data.features.filter((f) => f.properties.Active);
   var inactive = data.features.filter((f) => !f.properties.Active);

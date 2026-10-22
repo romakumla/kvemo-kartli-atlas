@@ -66,7 +66,7 @@ function buildArchLayer(data) {
       });
       marker.on("click", function () {
         showInfoArch(p);
-        showBottomChartArch(data);
+        showBottomChartArch(data, p);
       });
       return marker;
     },
@@ -100,12 +100,8 @@ function showInfoArch(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartArch(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartArch(data, sel) {
+  var ctx = prepareBottomChart();
   var counts = {},
     colors = {};
   ARCH_TYPES.forEach(function (t) {
@@ -174,6 +170,10 @@ function showBottomChartArch(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return ARCH_TYPES[i].num === sel.Type_Num;
+    });
 }
 
 function updateArchLegend() {
@@ -266,7 +266,7 @@ function buildBattlesLayer(data) {
       });
       marker.on("click", function () {
         showInfoBattle(p);
-        showBottomChartBattles(data);
+        showBottomChartBattles(data, p);
       });
       return marker;
     },
@@ -312,12 +312,8 @@ function showInfoBattle(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartBattles(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartBattles(data, sel) {
+  var ctx = prepareBottomChart();
 
   var types = ["გამარჯვება", "დამარცხება", "დაბრუნებული ქალაქ"];
   var colors = {
@@ -386,6 +382,10 @@ function showBottomChartBattles(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return types[i] === sel.Type_Geo;
+    });
 }
 
 function updateBattlesLegend() {
@@ -535,7 +535,7 @@ function buildGermansLayers(data) {
       });
       marker.on("click", function () {
         showInfoGermanPoint(p);
-        showBottomChartGermans(data);
+        showBottomChartGermans(data, p);
       });
       return marker;
     },
@@ -587,12 +587,8 @@ function showInfoGermanPoly(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartGermans(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartGermans(data, sel) {
+  var ctx = prepareBottomChart();
 
   var counts = {};
   GERMAN_YEAR_TYPES.forEach(function (t) {
@@ -663,6 +659,10 @@ function showBottomChartGermans(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return GERMAN_YEAR_TYPES[i].years === sel.Years;
+    });
 }
 
 function updateGermansLegend() {
@@ -766,7 +766,7 @@ function buildFortsLayer(data) {
       });
       marker.on("click", function () {
         showInfoFort(p);
-        showBottomChartForts(data);
+        showBottomChartForts(data, p);
       });
       return marker;
     },
@@ -799,12 +799,8 @@ function showInfoFort(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartForts(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartForts(data, sel) {
+  var ctx = prepareBottomChart();
 
   var colors = {
     megalith: "#92854F",
@@ -881,6 +877,10 @@ function showBottomChartForts(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return keys[i] === sel.FType;
+    });
 }
 
 function updateFortsLegend() {
@@ -996,7 +996,7 @@ function buildEparchyLayers(data) {
       });
       layer.on("click", function () {
         showInfoEparchy(p);
-        showBottomChartEparchies(eparchyData);
+        showBottomChartEparchies(eparchyData, p);
       });
     },
   }).addTo(map);
@@ -1032,7 +1032,7 @@ function buildEparchyLayers(data) {
       });
       marker.on("click", function () {
         showInfoEparchyPoint(p);
-        showBottomChartEparchies(eparchyData);
+        showBottomChartEparchies(eparchyData, p);
       });
       return marker;
     },
@@ -1077,12 +1077,8 @@ function showInfoEparchyPoint(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartEparchies(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartEparchies(data, sel) {
+  var ctx = prepareBottomChart();
 
   // ეპარქიების მიხედვით ობიექტების რაოდენობა
   var byEparchy = {};
@@ -1173,6 +1169,10 @@ function showBottomChartEparchies(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return labels[i] === (sel.Eparqia || sel.Name_Geo || "").replace(" ეპარქია", "");
+    });
 }
 
 // ===== ეკლესიების toggleable ფენა =====
@@ -1317,7 +1317,7 @@ function buildPetroLayer(data) {
       });
       marker.on("click", function () {
         showInfoPetro(p);
-        showBottomChartPetro(data);
+        showBottomChartPetro(data, p);
       });
       return marker;
     },
@@ -1341,12 +1341,20 @@ function showInfoPetro(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartPetro(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+// პეტროგლიფის ადგილმდებარეობის ჯგუფი (დიაგრამის სვეტი)
+function petroGroup(place) {
+  var pl = place || "";
+  if (pl.indexOf("ფასადზე") > -1 && pl.indexOf("საფლავის") === -1)
+    return "ეკლესის ფასადზე";
+  if (pl.indexOf("საფლავის") > -1) return "საფლავის ქვებზე";
+  if (pl.indexOf("მენჰირ") > -1) return "მენჰირზე";
+  if (pl.indexOf("კედლებზე") > -1 || pl.indexOf("ყორღან") > -1)
+    return "კედლებზე / ყორღანებში";
+  return "სხვა";
+}
+
+function showBottomChartPetro(data, sel) {
+  var ctx = prepareBottomChart();
 
   // ადგილმდებარეობის ტიპების მიხედვით
   var groups = {
@@ -1357,14 +1365,7 @@ function showBottomChartPetro(data) {
     სხვა: 0,
   };
   data.features.forEach(function (f) {
-    var pl = f.properties.Place_Geo || "";
-    if (pl.indexOf("ფასადზე") > -1 && pl.indexOf("საფლავის") === -1)
-      groups["ეკლესის ფასადზე"]++;
-    else if (pl.indexOf("საფლავის") > -1) groups["საფლავის ქვებზე"]++;
-    else if (pl.indexOf("მენჰირ") > -1) groups["მენჰირზე"]++;
-    else if (pl.indexOf("კედლებზე") > -1 || pl.indexOf("ყორღან") > -1)
-      groups["კედლებზე / ყორღანებში"]++;
-    else groups["სხვა"]++;
+    groups[petroGroup(f.properties.Place_Geo)]++;
   });
 
   var labels = Object.keys(groups).filter(function (k) {
@@ -1420,6 +1421,10 @@ function showBottomChartPetro(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return labels[i] === petroGroup(sel.Place_Geo);
+    });
 }
 
 function updatePetroLegend() {
@@ -1489,7 +1494,7 @@ function buildMegaLayer(data) {
       });
       marker.on("click", function () {
         showInfoMega(p);
-        showBottomChartMega(data);
+        showBottomChartMega(data, p);
       });
       return marker;
     },
@@ -1528,12 +1533,8 @@ function showInfoMega(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartMega(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartMega(data, sel) {
+  var ctx = prepareBottomChart();
 
   var counts = { megalith: 0, national: 0 };
   data.features.forEach(function (f) {
@@ -1588,6 +1589,10 @@ function showBottomChartMega(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return (sel.TKey === "national" ? 1 : 0) === i;
+    });
 }
 
 function updateMegaLegend() {

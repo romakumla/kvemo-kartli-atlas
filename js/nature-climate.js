@@ -167,7 +167,7 @@ function _showInfoAvgTemp(p, data) {
     " °C</span>" +
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური საშუალო  |  1990–2022</div>';
   document.getElementById("infoCard").classList.remove("hidden");
-  showBottomChartTemp(data, "avg");
+  showBottomChartTemp(data, "avg", p);
 }
 
 function _showInfoMaxTemp(p, data) {
@@ -182,7 +182,7 @@ function _showInfoMaxTemp(p, data) {
     " °C</span>" +
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური მაქსიმუმი  |  1990–2022</div>';
   document.getElementById("infoCard").classList.remove("hidden");
-  showBottomChartTemp(data, "max");
+  showBottomChartTemp(data, "max", p);
 }
 
 function _showInfoPrecip(p, data) {
@@ -197,15 +197,11 @@ function _showInfoPrecip(p, data) {
     " მმ</span>" +
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური ჯამი  |  1990–2022</div>';
   document.getElementById("infoCard").classList.remove("hidden");
-  showBottomChartTemp(data, "precip");
+  showBottomChartTemp(data, "precip", p);
 }
 
-function showBottomChartTemp(data, type) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartTemp(data, type, sel) {
+  var ctx = prepareBottomChart();
   var titles = {
     avg: "საშ. ტემპერატურა — ფართობის განაწილება",
     max: "მაქს. ტემპერატურა — ფართობის განაწილება",
@@ -287,6 +283,10 @@ function showBottomChartTemp(data, type) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return sorted[i] === sel.Label + " " + units[type];
+    });
 }
 
 function updateTempLegend(type) {
@@ -480,7 +480,7 @@ function _showInfoHotDays(p, data) {
     " დღე</span>" +
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">დღის t° > 30°C  |  1990–2022</div>';
   document.getElementById("infoCard").classList.remove("hidden");
-  showBottomChartClimate(data, "hot");
+  showBottomChartClimate(data, "hot", p);
 }
 
 function _showInfoTropNights(p, data) {
@@ -495,7 +495,7 @@ function _showInfoTropNights(p, data) {
     " ღამე</span>" +
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">ღამის t° > 20°C  |  1990–2022</div>';
   document.getElementById("infoCard").classList.remove("hidden");
-  showBottomChartClimate(data, "trop");
+  showBottomChartClimate(data, "trop", p);
 }
 
 function _showInfoFrostDays(p, data) {
@@ -510,15 +510,11 @@ function _showInfoFrostDays(p, data) {
     " დღე</span>" +
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">t° < 0°C  |  1990–2022</div>';
   document.getElementById("infoCard").classList.remove("hidden");
-  showBottomChartClimate(data, "frost");
+  showBottomChartClimate(data, "frost", p);
 }
 
-function showBottomChartClimate(data, type) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartClimate(data, type, sel) {
+  var ctx = prepareBottomChart();
   var titles = {
     hot: "ცხელი დღეების განაწილება (კმ²)",
     trop: "ტროპ. ღამეების განაწილება (კმ²)",
@@ -599,6 +595,10 @@ function showBottomChartClimate(data, type) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return sorted[i] === sel.Label;
+    });
 }
 
 function updateClimateLegend(type) {
@@ -730,7 +730,7 @@ function buildHeatWavesLayer(data) {
           "<br>" +
           "<b>პერიოდი:</b> 1990–2022</div>";
         document.getElementById("infoCard").classList.remove("hidden");
-        showBottomChartHeatWaves(data);
+        showBottomChartHeatWaves(data, p);
       });
     },
   }).addTo(map);
@@ -782,7 +782,7 @@ function buildDroughtLayer(data) {
           "<br>" +
           "<b>პერიოდი:</b> 1990–2022</div>";
         document.getElementById("infoCard").classList.remove("hidden");
-        showBottomChartDrought(data);
+        showBottomChartDrought(data, p);
       });
     },
   }).addTo(map);
@@ -790,12 +790,8 @@ function buildDroughtLayer(data) {
   setInfoBtn("drought");
 }
 
-function showBottomChartHeatWaves(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartHeatWaves(data, sel) {
+  var ctx = prepareBottomChart();
   var areas = {},
     colors = {};
   data.features.forEach(function (f) {
@@ -871,14 +867,14 @@ function showBottomChartHeatWaves(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return sorted[i] === sel.Label;
+    });
 }
 
-function showBottomChartDrought(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartDrought(data, sel) {
+  var ctx = prepareBottomChart();
   var areas = {},
     colors = {};
   data.features.forEach(function (f) {
@@ -959,6 +955,10 @@ function showBottomChartDrought(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return labels[i] === sel.Category;
+    });
 }
 
 function updateHeatWavesLegend() {
@@ -1113,7 +1113,7 @@ function renderMadflowLayers(data) {
         });
       layer.on("click", function () {
         showInfoMadflowZone(p);
-        showBottomChartMadflow(data);
+        showBottomChartMadflow(data, p);
       });
     },
   }).addTo(map);
@@ -1216,12 +1216,8 @@ function showInfoMadflowPoint(p, type) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartMadflow(data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+function showBottomChartMadflow(data, sel) {
+  var ctx = prepareBottomChart();
 
   var areas = {},
     colors = {};
@@ -1304,6 +1300,10 @@ function showBottomChartMadflow(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return sorted[i] === sel.Name_Geo;
+    });
 }
 
 function updateMadflowLegend(data) {

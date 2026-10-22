@@ -162,11 +162,7 @@ function showInfoTc(p, isPoint) {
 
 // მუნიციპალიტეტის/წერტილის 12-თვიანი დკი-სტატისტიკა — ქვედა chart პანელი
 function showBottomChartTc(p) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   function rank(val) {
     for (var i = 0; i < TC_CATEGORIES.length; i++) {
@@ -444,11 +440,7 @@ function showInfoTt(p, types) {
 // დასახლებების რაოდენობა ტურიზმის სახეობების მიხედვით (რეგიონი);
 // დაწკაპებული დასახლების სახეობები სრული ფერით, დანარჩენი — ბაცად
 function showBottomChartTt(p, types, data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var counts = TT_TYPES.map(function (t) {
     return data.features.filter(function (f) {
@@ -708,11 +700,7 @@ function showInfoCellar(p) {
 }
 
 function showBottomChartCellars(sel) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   var pts = cellarData.features
     .map(function (f) { return f.properties; })
@@ -764,11 +752,7 @@ function showBottomChartCellars(sel) {
 // ზონების ფართობები — ქვედა სტატისტიკის ველი
 
 function showBottomChartVitZones(sel) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ერთი ტიპის პოლიგონები ერთად შევკრიბოთ
   var sums = {};
@@ -963,11 +947,7 @@ function showInfoProtectedArea(p) {
 }
 
 function showBottomChartProtectedAreas(sel) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ერთი დაცული ტერიტორიის ნაწილები ერთად შევკრიბოთ
   var sums = {};

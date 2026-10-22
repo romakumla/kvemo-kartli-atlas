@@ -149,6 +149,7 @@ function buildHealthLayers() {
       layer.on("click", function () {
         showInfoHealthPoly(p);
         showBottomChartHealth();
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -180,6 +181,8 @@ function buildHealthLayers() {
         });
         marker.on("click", function () {
           showInfoHealthClinic(p);
+          showBottomChartHealth();
+          highlightBottomBars(muniName(p.Municipal_ || p.Municipal1));
         });
         return marker;
       },
@@ -254,11 +257,7 @@ function showInfoHealthClinic(p) {
 
 function showBottomChartHealth() {
   if (!healthServicesData) return;
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var feats = healthServicesData.features.slice().sort(function (a, b) {
     return (b.properties.Doctors || 0) - (a.properties.Doctors || 0);
   });
@@ -526,6 +525,7 @@ function buildSocialLayer() {
       layer.on("click", function () {
         showInfoSocial(p);
         showBottomChartSocial();
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -558,11 +558,7 @@ function showInfoSocial(p) {
 
 function showBottomChartSocial() {
   if (!socialData) return;
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var feats = socialData.features.slice().sort(function (a, b) {
     return (b.properties.Registered || 0) - (a.properties.Registered || 0);
   });
@@ -965,6 +961,7 @@ function buildZooLayer(key, data, id) {
           layer.on("click", function () {
             showInfoZooMuni(name, total, cfg, muniTotals);
             showBottomChartZoo(muniTotals, cfg);
+            highlightBottomBars(name);
           });
         },
       }).addTo(map);
@@ -1013,6 +1010,7 @@ function buildZooLayer(key, data, id) {
           marker.on("click", function () {
             showInfoZoo(p, cfg);
             showBottomChartZoo(muniTotals, cfg);
+            highlightBottomBars(zooNormMuni(p.Municipal_ || p.Municipal1 || ""));
           });
           return marker;
         },
@@ -1060,11 +1058,7 @@ function showInfoZooMuni(name, total, cfg, muniTotals) {
 }
 
 function showBottomChartZoo(muniTotals, cfg) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
   var entries = Object.entries(muniTotals).sort(function (a, b) {
     return b[1] - a[1];
   });

@@ -778,11 +778,7 @@ function showInfoAgro(p) {
 }
 
 function showBottomChartAgro(p, data) {
-  var canvas = document.getElementById("chartCanvas");
-  document.getElementById("chartEmpty").style.display = "none";
-  canvas.classList.remove("hidden");
-  var ctx = canvas.getContext("2d");
-  if (bottomChart) bottomChart.destroy();
+  var ctx = prepareBottomChart();
 
   // ჯამური ფართობი ზონების მიხედვით
   var areas = {},
@@ -861,6 +857,10 @@ function showBottomChartAgro(p, data) {
       },
     },
   });
+  if (p)
+    highlightBottomBars(function (l, i) {
+      return sorted[i] === p.ZoneKey;
+    });
 }
 
 // ===== Start-up (called from app.js) =====
