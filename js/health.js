@@ -823,10 +823,17 @@ function getZooCfg(key) {
   });
 }
 
+// ფენის ყოველი არჩევა ახალ ნომერს იღებს (zooBuildId). მონაცემები ფონურად
+// იტვირთება, ამიტომ თუ ჩატვირთვამდე სხვა დაავადება აირჩიეს ან პანელი დატოვეს,
+// ძველი მოთხოვნის პასუხი რუკაზე აღარ დაემატება — ფენები ერთმანეთში არ აირევა.
+var zooBuildId = 0;
+var zooMuniGeoms = null; // municipalities.geojson — ერთხელ იტვირთება
+
 function loadZoo(key) {
   activeZooKey = key;
+  var id = ++zooBuildId;
   if (zooCache[key]) {
-    buildZooLayer(key, zooCache[key]);
+    buildZooLayer(key, zooCache[key], id);
     return;
   }
   var cfg = getZooCfg(key);
@@ -836,8 +843,21 @@ function loadZoo(key) {
     })
     .then(function (d) {
       zooCache[key] = d;
-      buildZooLayer(key, d);
+      if (id === zooBuildId) buildZooLayer(key, d, id);
     });
+}
+
+function removeZooMapLayers() {
+  Object.keys(zooLeafLayers).forEach(function (k) {
+    if (zooLeafLayers[k]) {
+      map.removeLayer(zooLeafLayers[k]);
+      delete zooLeafLayers[k];
+    }
+  });
+  if (zooMuniLayer) {
+    map.removeLayer(zooMuniLayer);
+    zooMuniLayer = null;
+  }
 }
 
 // range string "2-3" → საშ. მნიშვნელობა
@@ -889,17 +909,9 @@ function zooNormMuni(raw) {
 
 var zooMuniLayer = null;
 
-function buildZooLayer(key, data) {
-  Object.keys(zooLeafLayers).forEach(function (k) {
-    if (zooLeafLayers[k]) {
-      map.removeLayer(zooLeafLayers[k]);
-      delete zooLeafLayers[k];
-    }
-  });
-  if (zooMuniLayer) {
-    map.removeLayer(zooMuniLayer);
-    zooMuniLayer = null;
-  }
+function buildZooLayer(key, data, id) {
+  if (id === undefined) id = ++zooBuildId;
+  removeZooMapLayers();
   var cfg = getZooCfg(key);
 
   // ---- 1. მუნიციპ. შეჯამება ----
@@ -930,11 +942,16 @@ function buildZooLayer(key, data) {
   var maxV = vals.length ? Math.max.apply(null, vals) : 1;
 
   // ---- 2. Choropleth ----
-  fetch("data/municipalities.geojson")
-    .then(function (r) {
-      return r.json();
-    })
+  (zooMuniGeoms
+    ? Promise.resolve(zooMuniGeoms)
+    : fetch("data/municipalities.geojson").then(function (r) {
+        return r.json();
+      })
+  )
     .then(function (muniData) {
+      zooMuniGeoms = muniData;
+      if (id !== zooBuildId) return; // სხვა ფენა უკვე აირჩიეს
+      removeZooMapLayers();
       zooMuniLayer = L.geoJSON(muniData, {
         style: function (feature) {
           var val = muniTotals[feature.properties.Name_Geo] || 0;
@@ -1005,6 +1022,7 @@ function buildZooLayer(key, data) {
           );
           marker.on("click", function () {
             showInfoZoo(p, cfg);
+            showBottomChartZoo(muniTotals, cfg);
           });
           return marker;
         },
@@ -1226,16 +1244,8 @@ function switchZooLayer(key) {
 }
 
 function removeAllZooLayers() {
-  Object.keys(zooLeafLayers).forEach(function (k) {
-    if (zooLeafLayers[k]) {
-      map.removeLayer(zooLeafLayers[k]);
-      delete zooLeafLayers[k];
-    }
-  });
-  if (zooMuniLayer) {
-    map.removeLayer(zooMuniLayer);
-    zooMuniLayer = null;
-  }
+  zooBuildId++; // ჩატვირთვის პროცესში მყოფი ფენა აღარ დაემატება
+  removeZooMapLayers();
 }
 
 // ===== Start-up (called from app.js) =====
