@@ -817,7 +817,6 @@ function showBottomChartAgro(p, data) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(`აგროკლიმ. ზონები — ${p.ZoneLabel} (ფართობი კმ²)`, 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
@@ -828,7 +827,7 @@ function showBottomChartAgro(p, data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v.toLocaleString() + " კმ²";
@@ -837,7 +836,7 @@ function showBottomChartAgro(p, data) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 20,
           },

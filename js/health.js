@@ -300,7 +300,7 @@ function showBottomChartHealth() {
           display: true,
           position: "top",
           labels: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { size: 9 },
             boxWidth: 12,
             padding: 6,
           },
@@ -319,7 +319,7 @@ function showBottomChartHealth() {
           type: "linear",
           position: "left",
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "პერსონალი", font: { size: 8 } },
         },
         y1: {
@@ -327,11 +327,11 @@ function showBottomChartHealth() {
           position: "right",
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "ამბ. ვიზ.", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -600,7 +600,7 @@ function showBottomChartSocial() {
           display: true,
           position: "top",
           labels: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { size: 9 },
             boxWidth: 12,
             padding: 6,
           },
@@ -619,7 +619,7 @@ function showBottomChartSocial() {
           type: "linear",
           position: "left",
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "ოჯახები", font: { size: 8 } },
         },
         y1: {
@@ -627,11 +627,11 @@ function showBottomChartSocial() {
           position: "right",
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "პირები", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -1042,7 +1042,6 @@ function showBottomChartZoo(muniTotals, cfg) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(cfg.label + " — მუნ. მიხ."),
         tooltip: {
           callbacks: {
@@ -1055,10 +1054,10 @@ function showBottomChartZoo(muniTotals, cfg) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },

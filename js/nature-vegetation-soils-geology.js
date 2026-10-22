@@ -214,7 +214,6 @@ function showBottomChartForest(data) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ტყეები — ფართობის განაწილება სახეობების მიხედვით (კმ²)"),
         tooltip: {
           callbacks: {
@@ -229,7 +228,7 @@ function showBottomChartForest(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v + " კმ²";
@@ -238,7 +237,7 @@ function showBottomChartForest(data) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 35,
           },
@@ -284,7 +283,6 @@ function showBottomChartVegetation(data) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("მცენარეული საფარი — ფართობის განაწილება (კმ²)"),
         tooltip: {
           callbacks: {
@@ -299,7 +297,7 @@ function showBottomChartVegetation(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v + " კმ²";
@@ -308,7 +306,7 @@ function showBottomChartVegetation(data) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 40,
           },
@@ -423,7 +421,6 @@ function showBottomChartSoils(data) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ნიადაგის ტიპები — ფართობის განაწილება (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
@@ -434,14 +431,14 @@ function showBottomChartSoils(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 35,
           },
@@ -504,7 +501,6 @@ function showBottomChartSoilsBorn(data) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ნიადაგ-წარმ. ქანები — ფართობის განაწილება (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
@@ -515,13 +511,13 @@ function showBottomChartSoilsBorn(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
+          ticks: { font: { size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -581,7 +577,6 @@ function showBottomChartGeology(data) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("გეოლოგიური ფენები — ფართობის განაწილება (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
@@ -592,13 +587,13 @@ function showBottomChartGeology(data) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
+          ticks: { font: { size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -804,7 +799,6 @@ function showBottomChartHail(data, type) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(titleTxt),
         tooltip: { callbacks: { label: (c) => ` ${c.parsed.y} კმ²` } },
       },
@@ -813,14 +807,14 @@ function showBottomChartHail(data, type) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v + " კმ²",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 40,
           },
@@ -1375,14 +1369,14 @@ function showBottomChartMinerals() {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
+        legend: { display: true,
           position: "top",
-          labels: { font: { family: "Fira Sans", size: 10 }, boxWidth: 10 },
+          labels: { font: { size: 10 }, boxWidth: 10 },
         },
         title: {
           display: true,
           text: "წიაღისეულის საბადოები მუნიციპალიტეტების მიხედვით — სულ " + total,
-          font: { family: "Fira Sans", size: 11, weight: "600" },
+          font: { size: 11, weight: "600" },
           color: "#1A1A18",
           padding: { bottom: 4 },
         },
@@ -1390,13 +1384,13 @@ function showBottomChartMinerals() {
       scales: {
         x: {
           stacked: true,
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
+          ticks: { font: { size: 11, weight: "500" } },
           grid: { display: false },
         },
         y: {
           stacked: true,
           beginAtZero: true,
-          ticks: { precision: 0, font: { family: "Fira Sans", size: 10 } },
+          ticks: { precision: 0, font: { size: 10 } },
         },
       },
     },

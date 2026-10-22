@@ -193,7 +193,6 @@ function showBottomChartTc(p) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(p.Name_Geo + " — დკი წლის განმავლობაში"),
         tooltip: {
           callbacks: {
@@ -210,7 +209,7 @@ function showBottomChartTc(p) {
           max: 5,
           ticks: {
             stepSize: 1,
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             callback: function (value) {
               return value >= 1 && value <= 5
                 ? TC_CATEGORIES[value - 1].key
@@ -220,7 +219,7 @@ function showBottomChartTc(p) {
           grid: { display: false },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
+          ticks: { font: { size: 11, weight: "500" } },
           grid: { display: false },
         },
       },
@@ -458,7 +457,6 @@ function showBottomChartTt(p, types, data) {
       maintainAspectRatio: false,
       layout: { padding: { top: 18 } },
       plugins: {
-        legend: { display: false },
         title: chartTitle("დასახლებები ტურიზმის სახეობების მიხედვით — " +
             p.Name_Geo +
             ": " +
@@ -481,11 +479,11 @@ function showBottomChartTt(p, types, data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { precision: 0, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { precision: 0, font: { size: 10, weight: "500" } },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             autoSkip: false,
             maxRotation: 0,
             minRotation: 0,
@@ -689,7 +687,6 @@ function showBottomChartCellars(sel) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ღვინის მარნები — სულ " +
             pts.reduce(function (a, p) { return a + p.Cellars; }, 0)),
         tooltip: {
@@ -699,8 +696,8 @@ function showBottomChartCellars(sel) {
         },
       },
       scales: {
-        y: { beginAtZero: true, ticks: { precision: 0, font: { family: "Fira Sans", size: 10, weight: "500" } }, grid: { color: "#eee" } },
-        x: { ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, autoSkip: false, maxRotation: 45, minRotation: 45 }, grid: { display: false } },
+        y: { beginAtZero: true, ticks: { precision: 0, font: { size: 10, weight: "500" } }, grid: { color: "#eee" } },
+        x: { ticks: { font: { size: 11, weight: "500" }, autoSkip: false, maxRotation: 45, minRotation: 45 }, grid: { display: false } },
       },
     },
   });
@@ -755,7 +752,6 @@ function showBottomChartVitZones(sel) {
       maintainAspectRatio: false,
       layout: { padding: { top: 18 } },
       plugins: {
-        legend: { display: false },
         title: chartTitle("მევენახეობის ზონები — ფართობი (კმ²), სულ " +
             Math.round(total) +
             " კმ²"),
@@ -774,18 +770,18 @@ function showBottomChartVitZones(sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           grid: { color: "#eee" },
           title: {
             display: true,
             text: "კმ²",
-            font: { family: "Fira Sans", size: 9 },
+            font: { size: 9 },
             color: "#777",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             autoSkip: false,
             maxRotation: 0,
             minRotation: 0,
@@ -931,7 +927,6 @@ function showBottomChartProtectedAreas(sel) {
       maintainAspectRatio: false,
       layout: { padding: { top: 18 } },
       plugins: {
-        legend: { display: false },
         title: chartTitle("დაცული ტერიტორიები — ფართობი (კმ²), სულ " + Math.round(total) + " კმ²"),
         tooltip: {
           callbacks: {
@@ -945,13 +940,13 @@ function showBottomChartProtectedAreas(sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           grid: { color: "#eee" },
-          title: { display: true, text: "კმ²", font: { family: "Fira Sans", size: 9 }, color: "#777" },
+          title: { display: true, text: "კმ²", font: { size: 9 }, color: "#777" },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             autoSkip: false, maxRotation: 0, minRotation: 0,
           },
           grid: { display: false },

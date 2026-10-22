@@ -118,7 +118,6 @@ function showBottomChartBotanica(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ბოტანიკურ-აგრონომიული ზონები — ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
@@ -131,10 +130,10 @@ function showBottomChartBotanica(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 30 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 30 },
           grid: { display: false },
         },
       },
@@ -316,7 +315,6 @@ function showBottomChartEnergetika(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ელექტროსადგურების დადგმული სიმძლავრე (მვტ)"),
         tooltip: {
           callbacks: {
@@ -329,10 +327,10 @@ function showBottomChartEnergetika(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
+          ticks: { font: { size: 11, weight: "500" } },
           grid: { display: false },
         },
       },
@@ -539,7 +537,6 @@ function showBottomChartCropZones(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("კულტურულ მცენარეთა ზონები — ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
@@ -552,10 +549,10 @@ function showBottomChartCropZones(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 40 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 40 },
           grid: { display: false },
         },
       },
@@ -773,7 +770,6 @@ function showBottomChartLand(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(theme.title),
         tooltip: {
           callbacks: {
@@ -786,10 +782,10 @@ function showBottomChartLand(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -1152,7 +1148,6 @@ function showBottomChartSun(data) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("მზის ელექტროსადგურები ტიპების მიხედვით"),
         tooltip: {
           callbacks: {
@@ -1165,10 +1160,10 @@ function showBottomChartSun(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { stepSize: 1, font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -1222,7 +1217,6 @@ function showBottomChartSunZones(data) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("მზის ნათების ზონების ფართობი (კმ²), საათი/წელ"),
         tooltip: {
           callbacks: {
@@ -1235,10 +1229,10 @@ function showBottomChartSunZones(data) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
+          ticks: { font: { size: 11, weight: "500" } },
           grid: { display: false },
         },
       },
@@ -1579,7 +1573,7 @@ function showBottomChartAgri(data, sel) {
           display: true,
           position: "top",
           labels: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { size: 9 },
             boxWidth: 12,
             padding: 6,
           },
@@ -1596,10 +1590,10 @@ function showBottomChartAgri(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -1772,7 +1766,6 @@ function showBottomChartAgriSpec(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("სოფ. მეურნ. სპეციალიზაცია — ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
@@ -1785,10 +1778,10 @@ function showBottomChartAgriSpec(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 25 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 25 },
           grid: { display: false },
         },
       },

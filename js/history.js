@@ -136,7 +136,6 @@ function showBottomChartArch(data, sel) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("არქეოლოგიური ძეგლები პერიოდების მიხედვით"),
         tooltip: {
           callbacks: {
@@ -149,10 +148,10 @@ function showBottomChartArch(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { stepSize: 1, font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -339,7 +338,6 @@ function showBottomChartBattles(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ბრძოლები ქვემო ქართლის ტერიტორიაზე (XI–XVII სს.)"),
         tooltip: {
           callbacks: {
@@ -350,9 +348,9 @@ function showBottomChartBattles(data, sel) {
         },
       },
       scales: {
-        y: { beginAtZero: true, ticks: { font: { family: "Fira Sans", size: 10, weight: "500" }, stepSize: 1 } },
+        y: { beginAtZero: true, ticks: { font: { size: 10, weight: "500" }, stepSize: 1 } },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
+          ticks: { font: { size: 11, weight: "500" } },
           grid: { display: false },
         },
       },
@@ -595,7 +593,6 @@ function showBottomChartGermans(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("გერმანული დასახლებები შექმნის წლების მიხედვით"),
         tooltip: {
           callbacks: {
@@ -608,10 +605,10 @@ function showBottomChartGermans(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { stepSize: 1, font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
+          ticks: { font: { size: 11, weight: "500" } },
           grid: { display: false },
         },
       },
@@ -801,7 +798,6 @@ function showBottomChartForts(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ისტორიული თავდაცვითი ნაგებობები ტიპების მიხედვით"),
         tooltip: {
           callbacks: {
@@ -814,10 +810,10 @@ function showBottomChartForts(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 2, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { stepSize: 2, font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -1072,7 +1068,6 @@ function showBottomChartEparchies(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("მონასტრები და ტაძრები ეპარქიების მიხედვით"),
         tooltip: {
           callbacks: {
@@ -1085,11 +1080,11 @@ function showBottomChartEparchies(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 2, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { stepSize: 2, font: { size: 10, weight: "500" } },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             autoSkip: false,
             maxRotation: 0,
@@ -1315,7 +1310,6 @@ function showBottomChartPetro(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("პეტროგლიფები ადგილმდებარეობის მიხედვით"),
         tooltip: {
           callbacks: {
@@ -1328,10 +1322,10 @@ function showBottomChartPetro(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 1, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { stepSize: 1, font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 30 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 30 },
           grid: { display: false },
         },
       },
@@ -1471,7 +1465,6 @@ function showBottomChartMega(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("მეგალითური ნაგებობები ქვემო ქართლში"),
         tooltip: {
           callbacks: {
@@ -1484,10 +1477,10 @@ function showBottomChartMega(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { stepSize: 10, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { stepSize: 10, font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
+          ticks: { font: { size: 11, weight: "500" } },
           grid: { display: false },
         },
       },

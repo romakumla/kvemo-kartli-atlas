@@ -257,7 +257,7 @@ function showBottomChartEdu(data) {
           display: true,
           position: "top",
           labels: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { size: 9 },
             boxWidth: 12,
             padding: 6,
           },
@@ -276,7 +276,7 @@ function showBottomChartEdu(data) {
           type: "linear",
           position: "left",
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "მოსწავლეები", font: { size: 8 } },
         },
         y1: {
@@ -284,11 +284,11 @@ function showBottomChartEdu(data) {
           position: "right",
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "მასწავლებლები", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -616,7 +616,7 @@ function showBottomChartKg(data) {
           display: true,
           position: "top",
           labels: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { size: 9 },
             boxWidth: 12,
             padding: 6,
           },
@@ -635,7 +635,7 @@ function showBottomChartKg(data) {
           type: "linear",
           position: "left",
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "აღსაზრდელები", font: { size: 8 } },
         },
         y1: {
@@ -643,11 +643,11 @@ function showBottomChartKg(data) {
           position: "right",
           beginAtZero: true,
           grid: { drawOnChartArea: false },
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "აღმზრდელები", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -875,7 +875,7 @@ function showBottomChartOik(data) {
           display: true,
           position: "top",
           labels: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { size: 9 },
             boxWidth: 12,
             padding: 6,
           },
@@ -893,11 +893,11 @@ function showBottomChartOik(data) {
         y: {
           stacked: true,
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
           stacked: true,
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -1202,16 +1202,15 @@ function showBottomChartLibrary(data) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ბიბლიოთეკები მუნ. მიხედვით"),
       },
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -1699,7 +1698,6 @@ function drawCategoryCountChart(title, cats, counts, unit, activeKeys) {
       maintainAspectRatio: false,
       layout: { padding: { top: 18 } },
       plugins: {
-        legend: { display: false },
         title: chartTitle(title),
         tooltip: {
           callbacks: {
@@ -1715,11 +1713,11 @@ function drawCategoryCountChart(title, cats, counts, unit, activeKeys) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { precision: 0, font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { precision: 0, font: { size: 10, weight: "500" } },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             autoSkip: false,
             maxRotation: 0,
             minRotation: 0,

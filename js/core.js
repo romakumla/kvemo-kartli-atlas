@@ -11,6 +11,12 @@
   document.head.appendChild(st);
 })();
 
+// ===== Chart.js: საერთო პარამეტრები =====
+// ყველა დიაგრამა ერთი შრიფტით; ლეგენდა ნაგულისხმევად დამალულია —
+// დიაგრამა, რომელსაც ლეგენდა სჭირდება, წერს legend: { display: true }.
+Chart.defaults.font.family = "Fira Sans";
+Chart.defaults.plugins.legend.display = false;
+
 // ===== მონაცემების ვერსია =====
 // მონაცემთა ფაილები (data/…) ბრაუზერის ქეშში რჩება და ახალი ვერსიის
 // გამოქვეყნების შემდეგაც შეიძლება ძველი ჩაიტვირთოს. dataUrl() ყოველ
@@ -324,7 +330,7 @@ function chartTitle(text, size) {
   return {
     display: true,
     text: text,
-    font: { family: "Fira Sans", size: size || 11, weight: "600" },
+    font: { size: size || 11, weight: "600" },
     color: "#1A1A18",
     padding: { bottom: 6 },
   };
