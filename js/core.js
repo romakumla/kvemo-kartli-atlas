@@ -295,6 +295,59 @@ var censusChart = null;
 
 var bottomChart = null;
 
+// ===== მონაცემების ჩატვირთვა =====
+// ფაილს ერთხელ ჩამოტვირთავს და ინახავს. თუ უკვე ჩატვირთულია, callback მაშინვე
+// (სინქრონულად) სრულდება; თუ ჩამოტვირთვა ჯერ მიმდინარეობს, callback რიგში დგება
+// და იგივე ფაილი მეორედ აღარ ითხოვება. შეცდომისას შემდეგი გამოძახება თავიდან სცდის.
+// data/muni/*.json ფაილები loadMuniData()-ით იტვირთება (საზღვრებთან ერთად).
+//   loadData(url, function (d) { forestData = d; buildForestLayer(d); });
+var _dataStore = {};
+function loadData(url, callback) {
+  var entry = _dataStore[url];
+  if (entry && entry.loaded) {
+    callback(entry.data);
+    return;
+  }
+  if (!entry) {
+    entry = _dataStore[url] = { loaded: false, data: null, callbacks: [] };
+    // data/muni/*.json-ს საზღვრები data/municipalities.geojson-იდან ემატება
+    (url.indexOf("data/muni/") === 0 ? loadMuniData(url) : fetch(dataUrl(url)))
+      .then(function (r) {
+        return r.json();
+      })
+      .then(
+        function (d) {
+          entry.loaded = true;
+          entry.data = d;
+          var cbs = entry.callbacks;
+          entry.callbacks = [];
+          cbs.forEach(function (cb) {
+            cb(d);
+          });
+        },
+        function (err) {
+          delete _dataStore[url];
+          console.error("ვერ ჩაიტვირთა " + url, err);
+        }
+      );
+  }
+  entry.callbacks.push(callback);
+}
+
+// რამდენიმე ფაილი ერთად: callback იღებს მასივს იმავე რიგით, როცა ყველა ჩაიტვირთება
+//   loadDataAll([url1, url2], function (d) { aData = d[0]; bData = d[1]; });
+// (კომენტარებში ფაილის სახელს ბრჭყალებში ნუ დაწერთ — ATLAS_DATA_LAYERS-ის მთვლელი მას ფენად ჩათვლის)
+function loadDataAll(urls, callback) {
+  var results = new Array(urls.length);
+  var left = urls.length;
+  urls.forEach(function (url, i) {
+    loadData(url, function (d) {
+      results[i] = d;
+      if (--left === 0) callback(results);
+    });
+  });
+}
+
 // ===== ფენის მოხსნა =====
 // თუ ფენა რუკაზეა, მოხსნის; ყოველთვის აბრუნებს null-ს, ამიტომ გამოყენება:
 //   someLayer = clearLayer(someLayer);

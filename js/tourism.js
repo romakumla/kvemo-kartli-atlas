@@ -47,20 +47,11 @@ function getTcColor(val) {
 }
 
 function loadTourismClimate() {
-  if (tcData) {
-    buildTourismClimateLayers(tcData);
+  loadData("data/muni/tourism_climate.json", function (d) {
+    tcData = d;
+    buildTourismClimateLayers(d);
     loadNatureMuniCenters();
-    return;
-  }
-  loadMuniData("data/muni/tourism_climate.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      tcData = d;
-      buildTourismClimateLayers(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildTourismClimateLayers(data) {
@@ -341,20 +332,11 @@ function updateTtLabels() {
 }
 
 function loadTourismTypes() {
-  if (ttData) {
-    buildTourismTypesLayer(ttData);
+  loadData("data/tourism_types.geojson", function (d) {
+    ttData = d;
+    buildTourismTypesLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/tourism_types.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      ttData = d;
-      buildTourismTypesLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildTourismTypesLayer(data) {
@@ -536,23 +518,15 @@ var VIT_ZONES = [
 var CELLAR_COLOR = "#C02026";
 
 function loadViticulture() {
-  function ready() {
-    buildViticultureLayers();
-    loadNatureMuniCenters();
-  }
-  if (vitData && cellarData) return ready();
-  Promise.all([
-    vitData
-      ? Promise.resolve(vitData)
-      : fetch(dataUrl("data/viticulture_zones.geojson")).then((r) => r.json()),
-    cellarData
-      ? Promise.resolve(cellarData)
-      : fetch(dataUrl("data/wine_cellars.geojson")).then((r) => r.json()),
-  ]).then(function (res) {
-    vitData = res[0];
-    cellarData = res[1];
-    ready();
-  });
+  loadDataAll(
+    ["data/viticulture_zones.geojson", "data/wine_cellars.geojson"],
+    function (d) {
+      vitData = d[0];
+      cellarData = d[1];
+      buildViticultureLayers();
+      loadNatureMuniCenters();
+    },
+  );
 }
 
 // მარნების სიმბოლო — რამდენი მარანიც არის, იმდენი კვადრატი
@@ -821,18 +795,11 @@ var PA_FILL = "#A9D7AE";
 var PA_STROKE = "#3E6E55";
 
 function loadProtectedAreas() {
-  if (paData) {
+  loadData("data/protected_areas.geojson", function (d) {
+    paData = d;
     buildProtectedAreasLayer();
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/protected_areas.geojson"))
-    .then((r) => r.json())
-    .then(function (d) {
-      paData = d;
-      buildProtectedAreasLayer();
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildProtectedAreasLayer() {

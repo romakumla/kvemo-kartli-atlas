@@ -95,60 +95,33 @@ var _maxTempRef = { layer: null };
 var _precipRef = { layer: null };
 
 function loadAvgTemp() {
-  if (avgTempData) {
-    _buildTempLayer(avgTempData, _avgTempRef, _showInfoAvgTemp);
+  loadData("data/avg_temp.geojson", function (d) {
+    avgTempData = d;
+    _buildTempLayer(d, _avgTempRef, _showInfoAvgTemp);
     updateTempLegend("avg");
     setInfoBtn("avg_temp");
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/avg_temp.geojson"))
-    .then((r) => r.json())
-    .then(function (d) {
-      avgTempData = d;
-      _buildTempLayer(d, _avgTempRef, _showInfoAvgTemp);
-      updateTempLegend("avg");
-      setInfoBtn("avg_temp");
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function loadMaxTemp() {
-  if (maxTempData) {
-    _buildTempLayer(maxTempData, _maxTempRef, _showInfoMaxTemp);
+  loadData("data/max_temp.geojson", function (d) {
+    maxTempData = d;
+    _buildTempLayer(d, _maxTempRef, _showInfoMaxTemp);
     updateTempLegend("max");
     setInfoBtn("max_temp");
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/max_temp.geojson"))
-    .then((r) => r.json())
-    .then(function (d) {
-      maxTempData = d;
-      _buildTempLayer(d, _maxTempRef, _showInfoMaxTemp);
-      updateTempLegend("max");
-      setInfoBtn("max_temp");
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function loadPrecip() {
-  if (precipData) {
-    _buildTempLayer(precipData, _precipRef, _showInfoPrecip);
+  loadData("data/precipitation.geojson", function (d) {
+    precipData = d;
+    _buildTempLayer(d, _precipRef, _showInfoPrecip);
     updateTempLegend("precip");
     setInfoBtn("precip");
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/precipitation.geojson"))
-    .then((r) => r.json())
-    .then(function (d) {
-      precipData = d;
-      _buildTempLayer(d, _precipRef, _showInfoPrecip);
-      updateTempLegend("precip");
-      setInfoBtn("precip");
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function _showInfoAvgTemp(p, data) {
@@ -391,60 +364,33 @@ var _tropRef = { layer: null };
 var _frostRef = { layer: null };
 
 function loadHotDays() {
-  if (hotDaysData) {
-    _buildClimateLayer(hotDaysData, _hotRef, _showInfoHotDays);
+  loadData("data/hot_days.geojson", function (d) {
+    hotDaysData = d;
+    _buildClimateLayer(d, _hotRef, _showInfoHotDays);
     updateClimateLegend("hot");
     loadNatureMuniCenters();
     setInfoBtn("hot_days");
-    return;
-  }
-  fetch(dataUrl("data/hot_days.geojson"))
-    .then((r) => r.json())
-    .then(function (d) {
-      hotDaysData = d;
-      _buildClimateLayer(d, _hotRef, _showInfoHotDays);
-      updateClimateLegend("hot");
-      loadNatureMuniCenters();
-      setInfoBtn("hot_days");
-    });
+  });
 }
 
 function loadTropNights() {
-  if (tropNightsData) {
-    _buildClimateLayer(tropNightsData, _tropRef, _showInfoTropNights);
+  loadData("data/tropical_nights.geojson", function (d) {
+    tropNightsData = d;
+    _buildClimateLayer(d, _tropRef, _showInfoTropNights);
     updateClimateLegend("trop");
     loadNatureMuniCenters();
     setInfoBtn("trop_nights");
-    return;
-  }
-  fetch(dataUrl("data/tropical_nights.geojson"))
-    .then((r) => r.json())
-    .then(function (d) {
-      tropNightsData = d;
-      _buildClimateLayer(d, _tropRef, _showInfoTropNights);
-      updateClimateLegend("trop");
-      loadNatureMuniCenters();
-      setInfoBtn("trop_nights");
-    });
+  });
 }
 
 function loadFrostDays() {
-  if (frostDaysData) {
-    _buildClimateLayer(frostDaysData, _frostRef, _showInfoFrostDays);
+  loadData("data/frost_days.geojson", function (d) {
+    frostDaysData = d;
+    _buildClimateLayer(d, _frostRef, _showInfoFrostDays);
     updateClimateLegend("frost");
     loadNatureMuniCenters();
     setInfoBtn("frost_days");
-    return;
-  }
-  fetch(dataUrl("data/frost_days.geojson"))
-    .then((r) => r.json())
-    .then(function (d) {
-      frostDaysData = d;
-      _buildClimateLayer(d, _frostRef, _showInfoFrostDays);
-      updateClimateLegend("frost");
-      loadNatureMuniCenters();
-      setInfoBtn("frost_days");
-    });
+  });
 }
 
 function _showInfoHotDays(p, data) {
@@ -621,33 +567,19 @@ var heatWavesData = null;
 var droughtData = null;
 
 function loadHeatWaves() {
-  if (heatWavesData) {
-    buildHeatWavesLayer(heatWavesData);
+  loadData("data/heat_waves.geojson", function (d) {
+    heatWavesData = d;
+    buildHeatWavesLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/heat_waves.geojson"))
-    .then((r) => r.json())
-    .then((d) => {
-      heatWavesData = d;
-      buildHeatWavesLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function loadDrought() {
-  if (droughtData) {
-    buildDroughtLayer(droughtData);
+  loadData("data/drought_index.geojson", function (d) {
+    droughtData = d;
+    buildDroughtLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/drought_index.geojson"))
-    .then((r) => r.json())
-    .then((d) => {
-      droughtData = d;
-      buildDroughtLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildHeatWavesLayer(data) {
@@ -978,16 +910,10 @@ var MADFLOW_ZONE_COLORS = {
 
 function loadMadflow() {
   setInfoBtn("madflow");
-  if (madflowData) {
-    renderMadflowLayers(madflowData);
-    return;
-  }
-  fetch(dataUrl("data/madflow.geojson"))
-    .then((r) => r.json())
-    .then(function (d) {
-      madflowData = d;
-      renderMadflowLayers(d);
-    });
+  loadData("data/madflow.geojson", function (d) {
+    madflowData = d;
+    renderMadflowLayers(d);
+  });
 }
 
 function renderMadflowLayers(data) {

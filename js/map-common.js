@@ -21,6 +21,12 @@ function addMuniBorderOverlay() {
       return r.json();
     })
     .then(function (data) {
+      // სანამ ფაილი ჩამოვიდოდა, შეიძლება მეორე მოთხოვნამ უკვე შექმნა —
+      // მეორე ასლი რუკაზე სამუდამოდ დარჩებოდა (საზღვრები თანდათან მუქდებოდა)
+      if (muniBorderOverlay) {
+        muniBorderOverlay.bringToFront();
+        return;
+      }
       muniBorderOverlay = L.geoJSON(data, {
         interactive: false,
         style: {
@@ -103,6 +109,7 @@ function loadNatureMuniCenters() {
   fetch(dataUrl("data/municipalities_centroids.geojson"))
     .then((r) => r.json())
     .then((data) => {
+      if (natureMuniLayer) return; // უკვე შექმნა სხვა მოთხოვნამ
       natureMuniLayer = L.geoJSON(data, {
         pointToLayer: function (feature, latlng) {
           var name = feature.properties.Name_Geo || "";
@@ -173,18 +180,11 @@ function buildAgrovlimatLayer(data) {
 }
 
 function loadAgrovlimat() {
-  if (agrovlimatData) {
-    buildAgrovlimatLayer(agrovlimatData);
+  loadData("data/agrovlimat.geojson", function (data) {
+    agrovlimatData = data;
+    buildAgrovlimatLayer(data);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/agrovlimat.geojson"))
-    .then((r) => r.json())
-    .then((data) => {
-      agrovlimatData = data;
-      buildAgrovlimatLayer(data);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 // ============================================================

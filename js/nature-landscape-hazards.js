@@ -76,34 +76,20 @@ var landscapeAntropLayerRef = {
 
 function loadLandscape() {
   setInfoBtn("landscape");
-  if (landscapeData) {
-    buildLandscapeLayer(landscapeData, landscapeLayerRef);
+  loadData("data/landscape.geojson", function (data) {
+    landscapeData = data;
+    buildLandscapeLayer(data, landscapeLayerRef);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/landscape.geojson"))
-    .then((r) => r.json())
-    .then((data) => {
-      landscapeData = data;
-      buildLandscapeLayer(data, landscapeLayerRef);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function loadLandscapeAntrop() {
   setInfoBtn("landscape");
-  if (landscapeAntropData) {
-    buildLandscapeLayer(landscapeAntropData, landscapeAntropLayerRef);
+  loadData("data/landscape_antrop.geojson", function (data) {
+    landscapeAntropData = data;
+    buildLandscapeLayer(data, landscapeAntropLayerRef);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/landscape_antrop.geojson"))
-    .then((r) => r.json())
-    .then((data) => {
-      landscapeAntropData = data;
-      buildLandscapeLayer(data, landscapeAntropLayerRef);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function updateLandscapeLegend(data, order) {
@@ -223,34 +209,15 @@ var hazardRockfallData = null;
 var HAZARD_ZONING_ORDER = ["მაღალი", "საშუალო", "დაბალი"];
 
 function loadHazard() {
-  var loaded = 0;
-  function tryRender() {
-    if (++loaded === 3) renderHazardLayers();
-  }
-  if (!hazardZoningData)
-    fetch(dataUrl("data/landslide_zoning.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        hazardZoningData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!hazardLandslideData)
-    fetch(dataUrl("data/landslide.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        hazardLandslideData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!hazardRockfallData)
-    fetch(dataUrl("data/rockfall.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        hazardRockfallData = d;
-        tryRender();
-      });
-  else tryRender();
+  loadDataAll(
+    ["data/landslide_zoning.geojson", "data/landslide.geojson", "data/rockfall.geojson"],
+    function (d) {
+      hazardZoningData = d[0];
+      hazardLandslideData = d[1];
+      hazardRockfallData = d[2];
+      renderHazardLayers();
+    },
+  );
 }
 
 function renderHazardLayers() {
@@ -466,26 +433,14 @@ var HYDROGEO_COLORS = {
 };
 
 function loadGroundwater() {
-  var loaded = 0;
-  function tryRender() {
-    if (++loaded === 2) renderGroundwaterLayers();
-  }
-  if (!groundwaterZoningData)
-    fetch(dataUrl("data/hydrogeology_zoning.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        groundwaterZoningData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!groundwaterPointData)
-    fetch(dataUrl("data/groundwater.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        groundwaterPointData = d;
-        tryRender();
-      });
-  else tryRender();
+  loadDataAll(
+    ["data/hydrogeology_zoning.geojson", "data/groundwater.geojson"],
+    function (d) {
+      groundwaterZoningData = d[0];
+      groundwaterPointData = d[1];
+      renderGroundwaterLayers();
+    },
+  );
 }
 
 function renderGroundwaterLayers() {
@@ -786,34 +741,19 @@ var SEISMIC_SVG_INACTIVE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
 </svg>`;
 
 function loadEarthquake() {
-  var loaded = 0;
-  function tryRender() {
-    if (++loaded === 3) renderEarthquakeLayers();
-  }
-  if (!eqNewData)
-    fetch(dataUrl("data/earthquakes_new.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        eqNewData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!eqOldData)
-    fetch(dataUrl("data/earthquakes_old.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        eqOldData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!eqStationData)
-    fetch(dataUrl("data/seismic_stations.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        eqStationData = d;
-        tryRender();
-      });
-  else tryRender();
+  loadDataAll(
+    [
+      "data/earthquakes_new.geojson",
+      "data/earthquakes_old.geojson",
+      "data/seismic_stations.geojson",
+    ],
+    function (d) {
+      eqNewData = d[0];
+      eqOldData = d[1];
+      eqStationData = d[2];
+      renderEarthquakeLayers();
+    },
+  );
 }
 
 function renderEarthquakeLayers() {
@@ -1120,34 +1060,20 @@ function buildHydroLayer(data) {
 
 function loadMeteo() {
   setInfoBtn("meteo");
-  if (meteoData) {
-    buildMeteoLayer(meteoData);
+  loadData("data/meteo_stations.geojson", function (data) {
+    meteoData = data;
+    buildMeteoLayer(data);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/meteo_stations.geojson"))
-    .then((r) => r.json())
-    .then((data) => {
-      meteoData = data;
-      buildMeteoLayer(data);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function loadHydro() {
   setInfoBtn("hydro");
-  if (hydroData) {
-    buildHydroLayer(hydroData);
+  loadData("data/hydro_stations.geojson", function (data) {
+    hydroData = data;
+    buildHydroLayer(data);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/hydro_stations.geojson"))
-    .then((r) => r.json())
-    .then((data) => {
-      hydroData = data;
-      buildHydroLayer(data);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function updateStationLegend(type, data) {

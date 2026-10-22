@@ -73,20 +73,11 @@ function eduSchoolSVG(cat) {
 }
 
 function loadEducation() {
-  if (eduData) {
-    buildEducationLayers(eduData);
+  loadData("data/muni/education.json", function (d) {
+    eduData = d;
+    buildEducationLayers(d);
     loadNatureMuniCenters();
-    return;
-  }
-  loadMuniData("data/muni/education.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      eduData = d;
-      buildEducationLayers(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildEducationLayers(data) {
@@ -341,18 +332,10 @@ function getKgColor(n) {
 
 function loadKindergarten() {
   loadNatureMuniCenters();
-  if (kgData) {
-    buildKgLayer(kgData);
-    return;
-  }
-  loadMuniData("data/muni/kindergarten.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      kgData = d;
-      buildKgLayer(d);
-    });
+  loadData("data/muni/kindergarten.json", function (d) {
+    kgData = d;
+    buildKgLayer(d);
+  });
 }
 
 // სკოლამდელის წრიული (donut) დიაგრამა — აღსაზრდელები vs აღმზრდელები
@@ -732,20 +715,11 @@ var OIK_COLORS = {
 };
 
 function loadOikonymy() {
-  if (oikData) {
-    buildOikLayer(oikData);
+  loadData("data/oikonymy.geojson", function (d) {
+    oikData = d;
+    buildOikLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/oikonymy.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      oikData = d;
-      buildOikLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildOikLayer(data) {
@@ -987,18 +961,10 @@ function getLibColor(booksStr) {
 
 function loadLibraries() {
   loadNatureMuniCenters();
-  if (libData) {
-    buildLibLayer(libData);
-    return;
-  }
-  loadMuniData("data/muni/libraries.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      libData = d;
-      buildLibLayer(d);
-    });
+  loadData("data/muni/libraries.json", function (d) {
+    libData = d;
+    buildLibLayer(d);
+  });
 }
 
 // ბიბლიოთეკის სიმბოლო — წიგნების თარო (ზომა ბიბლიოთეკების რაოდენობის პროპორციულია)
@@ -1265,20 +1231,11 @@ function getTourismType(museumsGe) {
 }
 
 function loadTourism() {
-  if (tourismData) {
-    buildTourismLayer(tourismData);
+  loadData("data/museums_theaters.geojson", function (d) {
+    tourismData = d;
+    buildTourismLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/museums_theaters.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      tourismData = d;
-      buildTourismLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildTourismLayer(data) {
@@ -1507,18 +1464,10 @@ function collapseArtExpanded(exceptMarker) {
 }
 
 function loadArtDisciplines() {
-  if (artData) {
-    buildArtDisciplinesLayers(artData);
-    return;
-  }
-  loadMuniData("data/muni/art_disciplines.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      artData = d;
-      buildArtDisciplinesLayers(d);
-    });
+  loadData("data/muni/art_disciplines.json", function (d) {
+    artData = d;
+    buildArtDisciplinesLayers(d);
+  });
 }
 
 function buildArtDisciplinesLayers(data) {
