@@ -57,7 +57,7 @@ function buildBotanicaLayer(data) {
       });
       layer.on("click", function () {
         showInfoBotanica(p);
-        showBottomChartBotanica(data);
+        showBottomChartBotanica(data, p);
       });
     },
   }).addTo(map);
@@ -82,7 +82,7 @@ function showInfoBotanica(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartBotanica(data) {
+function showBottomChartBotanica(data, sel) {
   var ctx = prepareBottomChart();
 
   // ფართობების ჯამი ტიპების მიხედვით
@@ -152,6 +152,10 @@ function showBottomChartBotanica(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return BOTANICA_TYPES[i].key === sel.Type_Geo;
+    });
 }
 
 function updateBotanicaLegend() {
@@ -251,7 +255,7 @@ function buildEnergetikaLayer(data) {
         });
         marker.on("click", function () {
           showInfoEnergetika(p);
-          showBottomChartEnergetika(data);
+          showBottomChartEnergetika(data, p);
         });
         return marker;
       },
@@ -289,7 +293,7 @@ function showInfoEnergetika(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartEnergetika(data) {
+function showBottomChartEnergetika(data, sel) {
   var ctx = prepareBottomChart();
 
   // ჯამური სიმძლავრე ტიპების მიხედვით
@@ -358,6 +362,10 @@ function showBottomChartEnergetika(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return (sel.TKey === "thermal" ? 1 : 0) === i;
+    });
 }
 
 // ჩალაგებული წრეების ლეგენდა პროპორციული სიმბოლოებისთვის
@@ -490,7 +498,7 @@ function buildCropZonesLayer(data) {
       });
       layer.on("click", function () {
         showInfoCropZone(p);
-        showBottomChartCropZones(data);
+        showBottomChartCropZones(data, p);
       });
     },
   }).addTo(map);
@@ -515,7 +523,7 @@ function showInfoCropZone(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartCropZones(data) {
+function showBottomChartCropZones(data, sel) {
   var ctx = prepareBottomChart();
 
   var areas = {};
@@ -589,6 +597,10 @@ function showBottomChartCropZones(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return sorted[i].key === sel.Type_Geo;
+    });
 }
 
 function updateCropZonesLegend() {
@@ -710,7 +722,7 @@ function buildLandLayer(data) {
       });
       layer.on("click", function () {
         showInfoLand(p);
-        showBottomChartLand(data);
+        showBottomChartLand(data, p);
       });
     },
   }).addTo(map);
@@ -763,7 +775,7 @@ function showInfoLand(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartLand(data) {
+function showBottomChartLand(data, sel) {
   var ctx = prepareBottomChart();
 
   var theme = LAND_THEMES[activeLandTheme];
@@ -830,6 +842,10 @@ function showBottomChartLand(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return feats[i].properties.Name_Geo === sel.Name_Geo;
+    });
 }
 
 function updateLandLegend() {
@@ -1029,6 +1045,7 @@ function buildSunLayers(data) {
       layer.on("click", function () {
         showInfoSunZone(p);
         showBottomChartSunZones(data);
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -1092,6 +1109,7 @@ function buildSunLayers(data) {
         marker.on("click", function () {
           showInfoSunStation(p);
           showBottomChartSun(data);
+          highlightBottomBars(p.Type_Geo);
         });
         return marker;
       },
@@ -1528,7 +1546,7 @@ function buildAgriLayer(data) {
       });
       layer.on("click", function () {
         showInfoAgri(p);
-        showBottomChartAgri(data);
+        showBottomChartAgri(data, p);
       });
     },
   }).addTo(map);
@@ -1573,7 +1591,7 @@ function buildAgriLayer(data) {
     });
     m.on("click", function () {
       showInfoAgri(p);
-      showBottomChartAgri(data);
+      showBottomChartAgri(data, p);
     });
     markers.push(m);
   });
@@ -1614,7 +1632,7 @@ function showInfoAgri(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartAgri(data) {
+function showBottomChartAgri(data, sel) {
   var ctx = prepareBottomChart();
 
   var labels = data.features.map(function (f) {
@@ -1676,6 +1694,10 @@ function showBottomChartAgri(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return data.features[i].properties.Name_Geo === sel.Name_Geo;
+    });
 }
 
 function updateAgriLegend() {
@@ -1768,7 +1790,7 @@ function buildAgriSpecLayer(data) {
       });
       layer.on("click", function () {
         showInfoAgriSpec(p);
-        showBottomChartAgriSpec(data);
+        showBottomChartAgriSpec(data, p);
       });
     },
   }).addTo(map);
@@ -1793,7 +1815,7 @@ function showInfoAgriSpec(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
-function showBottomChartAgriSpec(data) {
+function showBottomChartAgriSpec(data, sel) {
   var ctx = prepareBottomChart();
 
   var areas = {};
@@ -1873,6 +1895,10 @@ function showBottomChartAgriSpec(data) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return sorted[i].key === sel.TKey;
+    });
 }
 
 function updateAgriSpecLegend() {
