@@ -283,7 +283,7 @@ function updateTempLegend(type) {
   };
   var cfg = configs[type];
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">' +
+    '<div class="section-title">' +
     cfg.title +
     "</div>";
   html += '<div class="ethnics-legend">';
@@ -591,7 +591,7 @@ function updateClimateLegend(type) {
   };
   var cfg = configs[type];
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">' +
+    '<div class="section-title">' +
     cfg.title +
     "</div>";
   html += '<div class="ethnics-legend">';
@@ -921,7 +921,7 @@ function updateHeatWavesLegend() {
     { label: "0.14–0.15", color: "#7B1F1F" },
   ];
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">სიხშირის ტენდენცია (1990–2022)</div><div class="ethnics-legend">';
+    '<div class="section-title">სიხშირის ტენდენცია (1990–2022)</div><div class="ethnics-legend">';
   classes.forEach(function (c) {
     html +=
       '<div class="legend-item" style="margin-bottom:3px;">' +
@@ -946,7 +946,7 @@ function updateDroughtLegend() {
     { label: "საშუალო (-0.5 – 0.0)", color: "#FFFDE7" },
   ];
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">გვალვის კატეგორია (1990–2022)</div><div class="ethnics-legend">';
+    '<div class="section-title">გვალვის კატეგორია (1990–2022)</div><div class="ethnics-legend">';
   classes.forEach(function (c) {
     html +=
       '<div class="legend-item" style="margin-bottom:4px;">' +
@@ -1232,7 +1232,7 @@ function updateMadflowLegend(data) {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">ღვარცოფის საფრთხის ზონები</div>';
+    '<div class="section-title">ღვარცოფის საფრთხის ზონები</div>';
   html += '<div class="ethnics-legend">';
   MADFLOW_ZONING_ORDER.forEach(function (label) {
     var c = MADFLOW_ZONE_COLORS[label] || "#BDBDBD";
@@ -1259,7 +1259,7 @@ function updateMadflowLegend(data) {
     : "";
 
   html +=
-    '<div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">სახეობა</div>';
+    '<div class="section-title" style="margin-top:10px;">სახეობა</div>';
   html +=
     '<div class="ethnics-legend">' +
     '<div class="eth-legend-item">' +

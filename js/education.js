@@ -300,7 +300,7 @@ function updateEducationLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">სკოლა და სწავლების ენა</div>';
+    '<div class="section-title">სკოლა და სწავლების ენა</div>';
   html += '<div class="ethnics-legend">';
   EDU_SCHOOL_TYPES.forEach(function (t) {
     html +=
@@ -314,7 +314,7 @@ function updateEducationLegend() {
   });
   html += "</div>";
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">მუნიციპალიტეტზე დაჭერით — სკოლების, მოსწავლეების და მასწავლებლების რაოდენობა</div>';
+    '<div class="section-note">მუნიციპალიტეტზე დაჭერით — სკოლების, მოსწავლეების და მასწავლებლების რაოდენობა</div>';
   el.innerHTML = html;
 }
 
@@ -659,7 +659,7 @@ function updateKgLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">საჯარო სკოლამდელი აღზრდა (' +
+    '<div class="section-title">საჯარო სკოლამდელი აღზრდა (' +
     activeKgYear +
     ")</div>";
   // choropleth scale
@@ -696,7 +696,7 @@ function updateKgLegend() {
   html += "</div>";
   // year switcher
   html +=
-    '<div style="margin-top:12px;"><div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">სასწავლო წელი</div>';
+    '<div style="margin-top:12px;"><div class="section-title">სასწავლო წელი</div>';
   html += '<div style="display:flex;gap:6px;">';
   [
     ["2018", "2017/2018"],
@@ -916,7 +916,7 @@ function updateOikLegend() {
     : 0;
   var pctKa = total ? Math.round((ka / total) * 100) : 0;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ოიკონიმები (დასახლებათა სახელწოდებები)</div>';
+    '<div class="section-title">ოიკონიმები (დასახლებათა სახელწოდებები)</div>';
   html += '<div class="ethnics-legend">';
   html +=
     '<div class="eth-legend-item" style="margin-bottom:5px;align-items:center;">' +
@@ -932,7 +932,7 @@ function updateOikLegend() {
     "%)</span></div>";
   html += "</div>";
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">სულ ' +
+    '<div class="section-note">სულ ' +
     total +
     " დასახლება. ქვემო ქართლის ოიკონიმების 60%-ზე მეტი ქართულია</div>";
   el.innerHTML = html;
@@ -1223,7 +1223,7 @@ function updateLibLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">წიგნების რაოდ. მუნ-ში</div>';
+    '<div class="section-title">წიგნების რაოდ. მუნ-ში</div>';
   var classes = [
     { label: "200 001 – 800 000", color: "#DF6926" },
     { label: "100 001 – 200 000", color: "#FAAC67" },
@@ -1246,7 +1246,7 @@ function updateLibLegend() {
     '<div style="display:flex;align-items:center;gap:6px;">' +
     libraryShelfSVG(20) +
     '<span style="font-size:10px;margin-left:6px;">სიმბოლოს ზომა — ბიბლიოთეკების რაოდენობა</span></div></div>' +
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">მუნ-ზე დაჭ. — სრული სტატ.</div>';
+    '<div class="section-note">მუნ-ზე დაჭ. — სრული სტატ.</div>';
   el.innerHTML = html;
   setInfoBtn("libraries");
 }
@@ -1427,7 +1427,7 @@ function updateTourismLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">მუზეუმები</div>';
+    '<div class="section-title">მუზეუმები</div>';
   TOURISM_TYPES.forEach(function (t) {
     html +=
       '<div style="display:flex;align-items:center;margin-bottom:6px;">' +
@@ -1443,7 +1443,7 @@ function updateTourismLegend() {
     '<div style="display:flex;align-items:center;gap:6px;">' +
     '<span style="display:inline-flex;width:13px;height:13px;">' + TOURISM_THEATER_SVG + "</span>" +
     '<span style="font-size:10px;">თეატრი (თანდართული ბეჯი)</span></div></div>' +
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">სიმბოლოზე დაჭერით — დეტალები</div>';
+    '<div class="section-note">სიმბოლოზე დაჭერით — დეტალები</div>';
   el.innerHTML = html;
   setInfoBtn("museums_theaters");
 }
@@ -1828,7 +1828,7 @@ function updateArtLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">სახელოვნებო დარგები</div>';
+    '<div class="section-title">სახელოვნებო დარგები</div>';
   ART_CATEGORIES.forEach(function (c) {
     html +=
       '<div style="display:flex;align-items:flex-start;margin-bottom:7px;">' +
@@ -1840,7 +1840,7 @@ function updateArtLegend() {
       "</span></div>";
   });
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">დასახლებაზე დაჭერით — მიმართულებების დეტალები. მუნიციპალიტეტზე დაჭერით — მთლიანი სურათი.</div>';
+    '<div class="section-note">დასახლებაზე დაჭერით — მიმართულებების დეტალები. მუნიციპალიტეტზე დაჭერით — მთლიანი სურათი.</div>';
   el.innerHTML = html;
   setInfoBtn("art_disciplines");
 }

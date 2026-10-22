@@ -232,7 +232,7 @@ function updateTcLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">დასვენების კლიმატური ინდექსი (დკი)</div>';
+    '<div class="section-title">დასვენების კლიმატური ინდექსი (დკი)</div>';
 
   // ფერადი კატეგორიების ლეგენდა (მაღლიდან დაბლისკენ, ბეჭდური ატლასის მსგავსად)
   for (var i = TC_CATEGORIES.length - 1; i >= 0; i--) {
@@ -248,7 +248,7 @@ function updateTcLegend() {
 
   // თვის გადამრთველი
   html +=
-    '<div style="margin-top:10px;"><div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">თვე</div>';
+    '<div style="margin-top:10px;"><div class="section-title">თვე</div>';
   html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;">';
   TC_MONTHS.forEach(function (m) {
     var active = activeTcMonth === m[0] ? "active" : "";
@@ -264,7 +264,7 @@ function updateTcLegend() {
   html += "</div></div>";
 
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">წერტილი — 8 საკურორტო ლოკაცია; ფონი — მუნიციპალიტეტის საშუალო</div>';
+    '<div class="section-note">წერტილი — 8 საკურორტო ლოკაცია; ფონი — მუნიციპალიტეტის საშუალო</div>';
 
   el.innerHTML = html;
 
@@ -418,7 +418,7 @@ function showInfoTt(p, types) {
     '<span class="info-type-badge" style="background:#F6851F22;color:#B85C10;border:1px solid #F6851F;">' +
     p.Municipal_ +
     "</span>" +
-    '<div style="margin-top:8px;font-size:9px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;">ტურიზმის სახეობები</div>' +
+    '<div class="section-title" style="margin-top:8px;">ტურიზმის სახეობები</div>' +
     rows);
 }
 
@@ -509,7 +509,7 @@ function updateTtLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ტურიზმის სახეობები</div>';
+    '<div class="section-title">ტურიზმის სახეობები</div>';
   TT_TYPES.forEach(function (t) {
     html +=
       '<div style="display:flex;align-items:center;margin-bottom:6px;">' +
@@ -521,7 +521,7 @@ function updateTtLegend() {
       "</span></div>";
   });
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">დესტინაციაზე დაჭერით — სტატისტიკა ქვედა ველში. წარწერები ჩანს zoom ≥ 11-ზე.</div>';
+    '<div class="section-note">დესტინაციაზე დაჭერით — სტატისტიკა ქვედა ველში. წარწერები ჩანს zoom ≥ 11-ზე.</div>';
   el.innerHTML = html;
   setInfoBtn("tourism_types");
 }
@@ -805,7 +805,7 @@ function updateViticultureLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">მევენახეობის ზონები</div>';
+    '<div class="section-title">მევენახეობის ზონები</div>';
   VIT_ZONES.forEach(function (z) {
     html +=
       '<div style="display:flex;align-items:center;margin-bottom:6px;">' +
@@ -819,7 +819,7 @@ function updateViticultureLegend() {
     '<span style="width:14px;height:14px;background:' + CELLAR_COLOR +
     ';border:1px solid #fff;box-shadow:0 0 0 1px #999;flex-shrink:0;"></span>' +
     '<span style="font-size:10px;margin-left:7px;">1 კვადრატი — 1 მარანი</span></div></div>' +
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">მარანზე დაჭერით — სტატისტიკა ქვედა ველში</div>';
+    '<div class="section-note">მარანზე დაჭერით — სტატისტიკა ქვედა ველში</div>';
   el.innerHTML = html;
   setInfoBtn("viticulture");
 }
@@ -970,17 +970,17 @@ function updateProtectedAreasLegend() {
   if (!el) return;
   var cats = ["ეროვნული პარკი", "ნაკრძალი", "აღკვეთილი", "ბუნების ძეგლი"];
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">დაცული ტერიტორიები</div>' +
+    '<div class="section-title">დაცული ტერიტორიები</div>' +
     '<div style="display:flex;align-items:center;margin-bottom:8px;">' +
     '<span style="width:16px;height:16px;background:' + PA_FILL +
     ';border:1.6px solid ' + PA_STROKE + ';flex-shrink:0;"></span>' +
     '<span style="font-size:10px;margin-left:7px;">დაცული ტერიტორია</span></div>' +
-    '<div style="font-size:9px;font-weight:700;color:var(--text-muted);margin:8px 0 5px;text-transform:uppercase;letter-spacing:.06em;">კატეგორიები</div>';
+    '<div class="section-title" style="margin-top:8px;">კატეგორიები</div>';
   cats.forEach(function (c) {
     html += '<div style="font-size:10px;margin-bottom:3px;color:#444;">• ' + c + "</div>";
   });
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">ტერიტორიაზე დაჭერით — ფართობები ქვედა ველში</div>';
+    '<div class="section-note">ტერიტორიაზე დაჭერით — ფართობები ქვედა ველში</div>';
   el.innerHTML = html;
   setInfoBtn("protected_areas");
 }

@@ -345,7 +345,7 @@ function updateHealthLegend() {
   var metric = activeHealthMetric;
   var stops = HEALTH_STOPS[metric];
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.06em;">' +
+    '<div class="section-title">' +
     HEALTH_METRIC_LABELS[metric] +
     "</div>";
   html += '<div class="panel-btn-col">';
@@ -379,7 +379,7 @@ function updateHealthLegend() {
     '<div style="display:flex;align-items:center;gap:6px;">' +
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12"><circle cx="12" cy="12" r="10" fill="#C84B31" stroke="#fff" stroke-width="2"/><text x="12" y="16" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">+</text></svg>' +
     '<span style="font-size:10px;">დასახლება ამბ. კლინიკით</span></div></div>' +
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">ფართობზე დაჭ. — სრული სტატისტიკა</div>';
+    '<div class="section-note">ფართობზე დაჭ. — სრული სტატისტიკა</div>';
   el.innerHTML = html;
 }
 
@@ -645,7 +645,7 @@ function updateSocialLegend() {
   var metric = activeSocialMetric,
     stops = SOCIAL_STOPS[metric];
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.06em;">' +
+    '<div class="section-title">' +
     SOCIAL_METRIC_LABELS[metric] +
     "</div>";
   html += '<div class="panel-btn-col">';
@@ -675,7 +675,7 @@ function updateSocialLegend() {
     prev = s[0];
   });
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">მუნ. ფართობზე დაჭ. — სრული სტატ.</div>';
+    '<div class="section-note">მუნ. ფართობზე დაჭ. — სრული სტატ.</div>';
   el.innerHTML = html;
 }
 
@@ -1119,7 +1119,7 @@ function updateZooLegend() {
   ];
 
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ზოონოზური დაავადებები</div>';
+    '<div class="section-title">ზოონოზური დაავადებები</div>';
   groups.forEach(function (g) {
     html +=
       '<div style="font-size:9px;color:var(--text-muted);margin:6px 0 3px;font-weight:700;">' +

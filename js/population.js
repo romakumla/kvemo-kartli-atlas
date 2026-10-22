@@ -556,7 +556,7 @@ function updateIDPLegend() {
     stops = IDP_STOPS[metric];
   var color = metric === "natural" ? "#E8621A" : "#8A63C8";
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.06em;">' +
+    '<div class="section-title">' +
     IDP_LABELS[metric] +
     "</div>";
   html +=
@@ -589,7 +589,7 @@ function updateIDPLegend() {
     prev = s[0];
   });
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);">წერტ. = დასახ. · ზომა ~ რაოდ. · მუნ-ზე დაჭ. — ბარ ჩარტი</div>';
+    '<div class="section-note">წერტ. = დასახ. · ზომა ~ რაოდ. · მუნ-ზე დაჭ. — ბარ ჩარტი</div>';
   el.innerHTML = html;
 }
 
@@ -829,7 +829,7 @@ function updateDensityLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var years = ["1989", "2002", "2014", "2024"];
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">სიმჭიდროვე (კაცი/კმ²)</div>`;
+  var html = `<div class="section-title">სიმჭიდროვე (კაცი/კმ²)</div>`;
   html += '<div class="ethnics-legend">';
   DENSITY_BREAKS.forEach(function (b) {
     html += `<div class="eth-legend-item">
@@ -838,7 +838,7 @@ function updateDensityLegend() {
     </div>`;
   });
   html += `</div><div style="margin-top:10px;">
-    <div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">წელი</div>
+    <div class="section-title">წელი</div>
     <div style="display:flex;gap:4px;flex-wrap:wrap;">
       ${years.map((y) => `<button class="year-btn ${activeDensityYear === y ? "active" : ""}" data-dyear="${y}">${y}</button>`).join("")}
     </div></div>`;
@@ -1088,19 +1088,19 @@ function setMaritalGenderVisible() {
 function updateMaritalLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">ქორწინებითი მდგომარეობა</div>`;
+  var html = `<div class="section-title">ქორწინებითი მდგომარეობა</div>`;
   html += '<div class="ethnics-legend">';
   Object.entries(MARITAL_LABELS).forEach(function ([k, v]) {
     html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${MARITAL_COLORS[k]};border-radius:50%;"></span><span>${v}</span></div>`;
   });
   html += `</div>
   <div style="margin-top:10px;">
-    <div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">სქესი</div>
+    <div class="section-title">სქესი</div>
     <div style="display:flex;gap:6px;margin-bottom:8px;">
       <button class="year-btn ${maritalGender === "men" ? "active" : ""}" data-mgender="men">მამაკაცი</button>
       <button class="year-btn ${maritalGender === "women" ? "active" : ""}" data-mgender="women">ქალი</button>
     </div>
-    <div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">წელი</div>
+    <div class="section-title">წელი</div>
     <div style="display:flex;gap:6px;">
       <button class="year-btn ${maritalYear === "2002" ? "active" : ""}" data-myear="2002">2002</button>
       <button class="year-btn ${maritalYear === "2014" ? "active" : ""}" data-myear="2014">2014</button>
@@ -1332,13 +1332,13 @@ function updateRateLegend(type) {
   if (!el) return;
   var colorMap = type === "death" ? DEATH_COLORS : BIRTH_COLORS;
   var title = type === "death" ? "მოკვდავობა (‰)" : "შობადობა (‰)";
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">${title}</div>`;
+  var html = `<div class="section-title">${title}</div>`;
   html += '<div class="ethnics-legend">';
   Object.entries(colorMap).forEach(function ([range, color]) {
     html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${color};border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span><span>${range}</span></div>`;
   });
   html += `</div><div style="margin-top:10px;">
-    <div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">წელი</div>
+    <div class="section-title">წელი</div>
     <div style="display:flex;gap:6px;">
       <button class="year-btn ${activeRateYear === "2012" ? "active" : ""}" data-year="2012">2012</button>
       <button class="year-btn ${activeRateYear === "2022" ? "active" : ""}" data-year="2022">2022</button>

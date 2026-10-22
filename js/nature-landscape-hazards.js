@@ -115,7 +115,7 @@ function updateLandscapeLegend(data, order) {
     if (!seen[p.LandLabel]) seen[p.LandLabel] = p.LandColor;
   });
 
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">ლანდშაფტის ტიპი</div><div class="ethnics-legend">`;
+  var html = `<div class="section-title">ლანდშაფტის ტიპი</div><div class="ethnics-legend">`;
   order.forEach(function (label) {
     if (!seen[label]) return;
     html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${seen[label]};border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span><span style="font-size:10px;">${label}</span></div>`;
@@ -339,12 +339,12 @@ function updateHazardLegend() {
   if (!el) return;
   // ზონირების ფერები
   var zoneColors = { მაღალი: "#AD9F90", საშუალო: "#CBC3B9", დაბალი: "#E9E3DC" };
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">მეწყ./კლდეზვ. ზონები</div>
+  var html = `<div class="section-title">მეწყ./კლდეზვ. ზონები</div>
   <div class="ethnics-legend">`;
   HAZARD_ZONING_ORDER.forEach(function (label) {
     html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${zoneColors[label]};border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span><span style="font-size:10px;">${label}</span></div>`;
   });
-  html += `</div><div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">სახეობა</div>
+  html += `</div><div class="section-title" style="margin-top:10px;">სახეობა</div>
   <div class="ethnics-legend">
     <div class="eth-legend-item">
       <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#C0392B;border:1.5px solid #7B241C;flex-shrink:0;"></span>
@@ -577,7 +577,7 @@ function renderGroundwaterLayers() {
 function updateGWLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">ჰიდროგეოლ. დარაიონება</div><div class="ethnics-legend">`;
+  var html = `<div class="section-title">ჰიდროგეოლ. დარაიონება</div><div class="ethnics-legend">`;
   var seen = {};
   groundwaterZoningData.features.forEach(function (f) {
     var p = f.properties;
@@ -586,7 +586,7 @@ function updateGWLegend() {
       html += `<div class="eth-legend-item"><span class="eth-dot" style="background:${p.ZoneColor};border:1px solid #5599AA88;border-radius:3px;"></span><span style="font-size:9px;">${p.ShortLabel}</span></div>`;
     }
   });
-  html += `</div><div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">წყალპუნქტები</div>
+  html += `</div><div class="section-title" style="margin-top:10px;">წყალპუნქტები</div>
   <div class="ethnics-legend">
     <div class="eth-legend-item">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.86 12.39" width="22" height="17" style="flex-shrink:0;">
@@ -617,7 +617,7 @@ function showInfoGWZone(p) {
     <div class="info-name" style="font-size:12px;">${p.ShortLabel}</div>
     <span class="info-type-badge badge-village" style="background:${p.ZoneColor};color:#333;border:1px solid #5599AA55;">${p.Code}</span>
     <div class="info-row" style="margin-top:8px;"><span class="info-key">ფართობი</span><span class="info-val">${p.Area_km2} კმ²</span></div>
-    <div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">${p.Name_Geo}</div>`);
+    <div class="section-note">${p.Name_Geo}</div>`);
 }
 
 function showInfoGWPoint(p) {
@@ -911,7 +911,7 @@ function darken(hex) {
 function updateEQLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">მაგნიტუდა</div>
+  var html = `<div class="section-title">მაგნიტუდა</div>
   <div class="ethnics-legend">`;
   MAG_CLASSES.forEach(function (mc) {
     html += `<div class="eth-legend-item">
@@ -923,7 +923,7 @@ function updateEQLegend() {
   <div style="margin-top:8px;font-size:10px;color:var(--text-muted);">
     ⬤ ინსტრუმენტული (1900+)<br>◼ ისტორიული (1900-მდე)
   </div>
-  <div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">სეისმ. სადგურები</div>
+  <div class="section-title" style="margin-top:10px;">სეისმ. სადგურები</div>
   <div class="ethnics-legend">
     <div class="eth-legend-item">
       ${SEISMIC_SVG_ACTIVE}<span style="font-size:10px;">მოქმედი</span>
@@ -1265,7 +1265,7 @@ function updateStationLegend(type, data) {
   var isMeteo = type === "meteo";
   var title = isMeteo ? "მეტეოსადგურები" : "ჰიდრ. სადგურები";
   var actColor = isMeteo ? "#E8540A" : "#1565C0";
-  var html = `<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">${title}</div>
+  var html = `<div class="section-title">${title}</div>
   <div class="ethnics-legend">
     <div class="eth-legend-item">
       <span class="eth-dot" style="background:${actColor};border:1px solid rgba(0,0,0,0.2);border-radius:50%;"></span>

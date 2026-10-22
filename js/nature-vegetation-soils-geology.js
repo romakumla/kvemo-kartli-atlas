@@ -323,7 +323,7 @@ function updateForestLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">ძირითადი მერქნიანი სახეობები</div>';
+    '<div class="section-title">ძირითადი მერქნიანი სახეობები</div>';
   html += '<div class="ethnics-legend">';
   FOREST_LEGEND.forEach(function (c) {
     html +=
@@ -343,7 +343,7 @@ function updateVegetationLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">მცენარეული საფარი</div>';
+    '<div class="section-title">მცენარეული საფარი</div>';
   html += '<div class="ethnics-legend">';
   VEG_LEGEND.forEach(function (c) {
     html +=
@@ -867,7 +867,7 @@ function updateHailLegend(type) {
       .join("")}
   </div>
   <div style="margin-top:10px;">
-    <div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">სეტყვა</div>
+    <div class="section-title">სეტყვა</div>
     <div style="display:flex;gap:6px;">
       <button class="year-btn ${type === "total" ? "active" : ""}" data-hailtype="total" title="საერთო დაზიანებული ფართობი ერთი სეტყვიანობის შემთხვევაზე">საერთო</button>
       <button class="year-btn ${type === "100" ? "active" : ""}" data-hailtype="100" title="100%-ით დაზიანებული ფართობი ერთი სეტყვიანობის შემთხვევაზე">100%</button>
@@ -1020,7 +1020,7 @@ function updateSoilsLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">ნიადაგის ტიპები</div>';
+    '<div class="section-title">ნიადაგის ტიპები</div>';
   html += '<div class="ethnics-legend">';
   SOIL_LEGEND.forEach(function (item) {
     html +=
@@ -1040,7 +1040,7 @@ function updateSoilsBornLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">ნიადაგ-წარმომქმნელი ქანები</div>';
+    '<div class="section-title">ნიადაგ-წარმომქმნელი ქანები</div>';
   html += '<div class="ethnics-legend">';
   BORN_LEGEND.forEach(function (item) {
     html +=
@@ -1657,7 +1657,7 @@ function updateGeologyLegend() {
   };
 
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">ამგები ქანების ასაკი</div>';
+    '<div class="section-title">ამგები ქანების ასაკი</div>';
   html += '<div class="ethnics-legend">';
   Object.keys(geoIndexes)
     .sort()
@@ -1676,7 +1676,7 @@ function updateGeologyLegend() {
   html += "</div>";
 
   html +=
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.06em;">ლითონური წიაღისეული</div>';
+    '<div class="section-title" style="margin-top:8px;">ლითონური წიაღისეული</div>';
   html += '<div class="ethnics-legend">';
   Object.keys(metalSyms)
     .sort()
@@ -1697,7 +1697,7 @@ function updateGeologyLegend() {
   html += "</div>";
 
   html +=
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.06em;">არალითონური</div>';
+    '<div class="section-title" style="margin-top:8px;">არალითონური</div>';
   html += '<div class="ethnics-legend">';
   Object.keys(nonMetSyms)
     .sort()

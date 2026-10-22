@@ -150,7 +150,7 @@ function updateBotanicaLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ბოტანიკურ-აგრონომიული ზონები</div>';
+    '<div class="section-title">ბოტანიკურ-აგრონომიული ზონები</div>';
   html += '<div class="ethnics-legend">';
   BOTANICA_TYPES.forEach(function (t) {
     html +=
@@ -380,7 +380,7 @@ function updateEnergetikaLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">ელექტროენერგეტიკა</div>';
+    '<div class="section-title">ელექტროენერგეტიკა</div>';
   html += '<div class="ethnics-legend">';
   // ტიპები
   html +=
@@ -394,7 +394,7 @@ function updateEnergetikaLegend() {
   html += "</div>";
   // სიმძლავრის შკალა
   html +=
-    '<div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">დადგმული სიმძლავრე (მვტ)</div>';
+    '<div class="section-title" style="margin-top:10px;">დადგმული სიმძლავრე (მვტ)</div>';
   // ჩალაგებული (nested) წრეები — კარტოგრაფიული სტანდარტი,
   // ვიწრო პანელშიც ეტევა და არაფერი იჭრება
   html += nestedCircleLegend([300, 100, 14, 1], getPowerRadius, "#5BA3D0", "#2B6A9A");
@@ -571,7 +571,7 @@ function updateCropZonesLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">კულტურულ მცენარეთა ზონები</div>';
+    '<div class="section-title">კულტურულ მცენარეთა ზონები</div>';
   html += '<div class="ethnics-legend">';
   CROP_ZONES.forEach(function (z) {
     html +=
@@ -698,7 +698,7 @@ function showInfoLand(p) {
     " (მუნიციპალიტეტი)</div>";
   // საკუთრება
   html +=
-    '<div style="margin-top:8px;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;">საკუთრების ფორმა</div>';
+    '<div class="section-title" style="margin-top:8px;">საკუთრების ფორმა</div>';
   html +=
     '<div style="font-size:10px;color:#444;line-height:1.7;">' +
     "<b>კერძო:</b> " +
@@ -708,7 +708,7 @@ function showInfoLand(p) {
     "%</div>";
   // მეურნეობები
   html +=
-    '<div style="margin-top:6px;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;">მეურნეობები</div>';
+    '<div class="section-title" style="margin-top:6px;">მეურნეობები</div>';
   html +=
     '<div style="font-size:10px;color:#444;line-height:1.7;">' +
     "<b>შინამეურნ.:</b> " +
@@ -718,7 +718,7 @@ function showInfoLand(p) {
     "</div>";
   // მიწათსარგებლობა
   html +=
-    '<div style="margin-top:6px;font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;">მიწათსარგებლობა (ჰა)</div>';
+    '<div class="section-title" style="margin-top:6px;">მიწათსარგებლობა (ჰა)</div>';
   html +=
     '<div style="font-size:10px;color:#444;line-height:1.7;">' +
     "<b>სახნავი:</b> " +
@@ -806,7 +806,7 @@ function updateLandLegend() {
   if (!el) return;
   var theme = LAND_THEMES[activeLandTheme];
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">' +
+    '<div class="section-title">' +
     theme.title +
     "</div>";
   // choropleth scale
@@ -830,7 +830,7 @@ function updateLandLegend() {
   html += "</div>";
   // theme switcher (year-btn style)
   html +=
-    '<div style="margin-top:12px;"><div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">თემა</div>';
+    '<div style="margin-top:12px;"><div class="section-title">თემა</div>';
   html += '<div class="panel-btn-col">';
   [
     ["ownership", "საკუთრების ფორმა"],
@@ -1251,7 +1251,7 @@ function updateSunLegend() {
   if (!el) return;
   // ნათების ზონები
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">მზის ნათების წლიური ხანგრძლივობა (საათი)</div>';
+    '<div class="section-title">მზის ნათების წლიური ხანგრძლივობა (საათი)</div>';
   html += '<div class="ethnics-legend">';
   SUN_ZONES.forEach(function (z) {
     html +=
@@ -1266,7 +1266,7 @@ function updateSunLegend() {
   html += "</div>";
   // სადგურების ტიპები
   html +=
-    '<div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;">მომსახურების ობიექტები (ფერადი წრე)</div>';
+    '<div class="section-title" style="margin-top:10px;">მომსახურების ობიექტები (ფერადი წრე)</div>';
   html += '<div class="ethnics-legend">';
   SUN_STATION_TYPES.forEach(function (t) {
     html +=
@@ -1283,7 +1283,7 @@ function updateSunLegend() {
   html += "</div>";
   // სიმძლავრის შკალა — ნამდვილი სიმბოლოებით
   html +=
-    '<div style="margin-top:10px;font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">მზის ელექტროსადგურის სიმძლავრე (ვტ)</div>';
+    '<div class="section-title" style="margin-top:10px;">მზის ელექტროსადგურის სიმძლავრე (ვტ)</div>';
   html +=
     '<div style="display:flex;align-items:flex-end;gap:7px;flex-wrap:wrap;padding-left:4px;">';
   ["0-100", "101-500", "501-1000", "1001-2000", "20000"].forEach(
@@ -1615,7 +1615,7 @@ function updateAgriLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">სოფ. მეურნ. პროექტების ბენეფიციარები (2019–2024)</div>';
+    '<div class="section-title">სოფ. მეურნ. პროექტების ბენეფიციარები (2019–2024)</div>';
   html += '<div class="ethnics-legend">';
   AGRI_PROGRAMS.forEach(function (pr) {
     html +=
@@ -1629,7 +1629,7 @@ function updateAgriLegend() {
   });
   html += "</div>";
   html +=
-    '<div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">წრის ზომა — ბენეფიციართა ჯამის პროპორციული. ცენტრში — სულ რაოდენობა</div>';
+    '<div class="section-note">წრის ზომა — ბენეფიციართა ჯამის პროპორციული. ცენტრში — სულ რაოდენობა</div>';
   el.innerHTML = html;
 }
 
@@ -1804,7 +1804,7 @@ function updateAgriSpecLegend() {
   var el = document.getElementById("legendContent");
   if (!el) return;
   var html =
-    '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em;">სოფლის მეურნეობის სპეციალიზაცია</div>';
+    '<div class="section-title">სოფლის მეურნეობის სპეციალიზაცია</div>';
   html += '<div class="ethnics-legend">';
   AGRI_SPEC_TYPES.forEach(function (t) {
     html +=
