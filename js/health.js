@@ -1116,101 +1116,30 @@ function removeAllZooLayers() {
 
 // ===== Start-up (called from app.js) =====
 function initHealth() {
-  // ===== ჯანდაცვა checkbox =====
-  document.getElementById("chkHealth").addEventListener("change", function (e) {
-    if (e.target.checked) {
-      document.getElementById("mainLayerView").style.display = "none";
-      document.getElementById("sublayerView").style.display = "none";
-      document.getElementById("natureView").style.display = "none";
-      document.getElementById("historyView").style.display = "none";
-      document.getElementById("economyView").style.display = "none";
-      document.getElementById("educationView").style.display = "none";
-      document.getElementById("tourismView").style.display = "none";
-      document.getElementById("healthView").style.display = "";
-      showChartPanel();
-      resetChartPanel();
-      hideSettlementLegend();
-      setInfoBtn(null);
-      document.getElementById("filterSection").style.display = "none";
-      document.getElementById("infoCard").classList.add("hidden");
-      document.getElementById("chkPopulation").checked = false;
-      document.getElementById("chkNature").checked = false;
-      document.getElementById("chkHistory").checked = false;
-      document.getElementById("chkEconomy").checked = false;
-      document.getElementById("chkEducation").checked = false;
-      document.getElementById("chkTourism").checked = false;
-      removeAllThematic();
-      removeAllNatureLayers();
-      removeAllHistoryLayers();
-      removeAllEconomyLayers();
-      removeAllEducationLayers();
-      removeAllTourismLayers();
-      removeAllHealthLayers();
-      removeNeutralLayers();
-      // პირველი sublayer ავტომატურად ჩაიტვირთება, როცა რუკა დაემატება
-      var firstBtn = document.querySelector("[data-healthsub]");
-      if (firstBtn) {
-        document.querySelectorAll("[data-healthsub]").forEach(function (b) {
-          b.classList.remove("active");
-        });
-        firstBtn.classList.remove("active");
-        firstBtn.click();
-      } else {
-        loadHealth();
-      }
+  // ქვეფენების ღილაკები (თემის გახსნა/„უკან“ — app.js, THEMES)
+  bindSublayerButtons("healthsub", function () {
+    document.getElementById("infoCard").classList.add("hidden");
+    resetChartPanel();
+    removeAllHealthLayers();
+    removeAllSocialLayers();
+    removeAllZooLayers();
+    if (this.dataset.healthsub === "social") {
+      loadSocial();
+    } else if (this.dataset.healthsub === "zoo") {
+      var _zk =
+        activeZooKey === "anthrax_animals" || activeZooKey === "anthrax_humans"
+          ? "zoo_anthrax"
+          : "zoo_other";
+      loadZoo(activeZooKey);
+      setInfoBtn(_zk);
     } else {
-      document.getElementById("healthView").style.display = "none";
-      document.getElementById("mainLayerView").style.display = "";
-      removeAllHealthLayers();
-      resetPopLegend();
-      loadNeutralLayers();
+      loadHealth();
+      setInfoBtn(HEALTH_SUB_INFO.health);
+    }
+    if (this.dataset.healthsub === "social") {
+      setInfoBtn(HEALTH_SUB_INFO.social);
     }
   });
 
 
-  // ===== ჯანდაცვა sublayer ღილაკები =====
-  document.querySelectorAll("[data-healthsub]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
-      document.querySelectorAll("[data-healthsub]").forEach(function (b) {
-        b.classList.remove("active");
-      });
-      this.classList.add("active");
-      document.getElementById("infoCard").classList.add("hidden");
-      resetChartPanel();
-      removeAllHealthLayers();
-      removeAllSocialLayers();
-      removeAllZooLayers();
-      if (this.dataset.healthsub === "social") {
-        loadSocial();
-      } else if (this.dataset.healthsub === "zoo") {
-        var _zk =
-          activeZooKey === "anthrax_animals" || activeZooKey === "anthrax_humans"
-            ? "zoo_anthrax"
-            : "zoo_other";
-        loadZoo(activeZooKey);
-        setInfoBtn(_zk);
-      } else {
-        loadHealth();
-        setInfoBtn(HEALTH_SUB_INFO.health);
-      }
-      if (this.dataset.healthsub === "social") {
-        setInfoBtn(HEALTH_SUB_INFO.social);
-      }
-    });
-  });
-
-
-  document.getElementById("btnHealthBack").addEventListener("click", function () {
-    document.getElementById("chkHealth").checked = false;
-    document.getElementById("healthView").style.display = "none";
-    document.getElementById("mainLayerView").style.display = "";
-    removeAllHealthLayers();
-    removeAllSocialLayers();
-    removeAllZooLayers();
-    hideChartPanel();
-    document.getElementById("infoCard").classList.add("hidden");
-    resetPopLegend();
-    loadNeutralLayers();
-  });
 }

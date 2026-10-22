@@ -14,23 +14,34 @@ initEducation();
 initTourism();
 initHealth();
 
-function showMainView() {
-  document.getElementById("mainLayerView").style.display = "";
-  document.getElementById("sublayerView").style.display = "none";
-  document.getElementById("natureView").style.display = "none";
-  document.getElementById("historyView").style.display = "none";
-  document.getElementById("economyView").style.display = "none";
-  document.getElementById("educationView").style.display = "none";
-  document.getElementById("tourismView").style.display = "none";
-  document.getElementById("healthView").style.display = "none";
-  document.getElementById("filterSection").style.display = "none";
-  document.getElementById("chkPopulation").checked = false;
-  document.getElementById("chkNature").checked = false;
-  document.getElementById("chkHistory").checked = false;
-  document.getElementById("chkEconomy").checked = false;
-  document.getElementById("chkEducation").checked = false;
-  document.getElementById("chkTourism").checked = false;
-  document.getElementById("chkHealth").checked = false;
+// მთავარ რუკაზე ინფო-ღილაკი არ ჩანს (თავიდან ცარიელი, უმოქმედო ღილაკი ჩანდა)
+setInfoBtn(null);
+
+// ===== თემების ნავიგაცია =====
+// თითოეული თემა: მონიშვნის ველი მარცხენა პანელში (chk), თემის პანელი (view),
+// „უკან“ ღილაკი (back) და ქვეფენების ღილაკების ატრიბუტი (sub → [data-sub]).
+var THEMES = [
+  { chk: "chkPopulation", view: "sublayerView", back: "btnBack", sub: "sublayer" },
+  { chk: "chkNature", view: "natureView", back: "btnNatureBack", sub: "naturesub" },
+  { chk: "chkHistory", view: "historyView", back: "btnHistoryBack", sub: "histsub" },
+  { chk: "chkEconomy", view: "economyView", back: "btnEconomyBack", sub: "econsub" },
+  { chk: "chkEducation", view: "educationView", back: "btnEducationBack", sub: "edusub" },
+  { chk: "chkTourism", view: "tourismView", back: "btnTourismBack", sub: "toursub" },
+  { chk: "chkHealth", view: "healthView", back: "btnHealthBack", sub: "healthsub" },
+];
+
+// ჩანს მხოლოდ ერთი პანელი (მთავარი ან ერთ-ერთი თემის); მონიშნულია მხოლოდ მისი ველი
+function showOnlyView(viewId) {
+  document.getElementById("mainLayerView").style.display =
+    viewId === "mainLayerView" ? "" : "none";
+  THEMES.forEach(function (t) {
+    document.getElementById(t.view).style.display = t.view === viewId ? "" : "none";
+    document.getElementById(t.chk).checked = t.view === viewId;
+  });
+}
+
+// ყველა თემის ფენა, მათ შორის მუნიციპალიტეტების ცენტრები და საზღვრები
+function removeAllThemeLayers() {
   removeAllThematic();
   removeAllNatureLayers();
   removeAllHistoryLayers();
@@ -40,59 +51,55 @@ function showMainView() {
   removeAllHealthLayers();
   removeAllSocialLayers();
   removeAllZooLayers();
-  resetPopLegend();
-  loadNeutralLayers();
-  hideChartPanel();
+  removeNatureMuniCenters();
+}
+
+// საერთო გასუფთავება: ფენები, ინფო ბარათი, ფილტრები, ლეგენდა, ინფო-ღილაკი
+function resetThemeState() {
+  removeAllThemeLayers();
+  document.getElementById("filterSection").style.display = "none";
+  document.getElementById("infoCard").classList.add("hidden");
   hideSettlementLegend();
   setInfoBtn(null);
 }
 
-function showSublayerView() {
-  document.getElementById("mainLayerView").style.display = "none";
-  document.getElementById("sublayerView").style.display = "";
-  // ნეიტრალური ფენები ვმალავთ
-  removeNeutralLayers();
-  // პირველი ქვე-ფენა ავტომატურად
-  activeSublayer = "population";
-  document
-    .querySelectorAll("[data-sublayer]")
-    .forEach((b) => b.classList.remove("active"));
-  document
-    .querySelector("[data-sublayer='population']")
-    .classList.add("active");
-  showChartPanel();
-  resetChartPanel();
-  switchSublayer("population");
+// მთავარი პანელი: ნეიტრალური რუკა მუნიციპალიტეტებით
+function showMainView() {
+  showOnlyView("mainLayerView");
+  resetThemeState();
+  resetPopLegend();
+  hideChartPanel();
+  loadNeutralLayers();
 }
 
-document
-  .getElementById("chkPopulation")
-  .addEventListener("change", function (e) {
-    if (e.target.checked) {
-      showSublayerView();
-    } else {
-      showMainView();
-    }
+// თემის გახსნა: ჩაირთვება პირველი ქვეფენა — ისე, თითქოს მის ღილაკს დააწკაპეს
+function openTheme(theme) {
+  showOnlyView(theme.view);
+  resetThemeState();
+  removeNeutralLayers();
+  showChartPanel();
+  resetChartPanel();
+  var buttons = document.querySelectorAll("[data-" + theme.sub + "]");
+  buttons.forEach(function (b) {
+    b.classList.remove("active");
   });
+  buttons[0].click();
+}
 
-// უკან ღილაკი
-document.getElementById("btnBack").addEventListener("click", function () {
-  showMainView();
+THEMES.forEach(function (theme) {
+  document.getElementById(theme.chk).addEventListener("change", function (e) {
+    if (e.target.checked) openTheme(theme);
+    else showMainView();
+  });
+  document.getElementById(theme.back).addEventListener("click", showMainView);
 });
 
 // ===== Sublayer buttons (მხოლოდ მოსახლეობის პანელი) =====
 // მნიშვნელოვანი: სელექტორი უნდა იყოს [data-sublayer], და არა ".sublayer-btn",
 // რადგან ".sublayer-btn" კლასი ყველა პანელის ღილაკს აქვს — შედეგად
 // switchSublayer(undefined) ეშვებოდა და ინფო-ღილაკს აქრობდა.
-document.querySelectorAll("[data-sublayer]").forEach(function (btn) {
-  btn.addEventListener("click", function () {
-    if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
-    document
-      .querySelectorAll("[data-sublayer]")
-      .forEach((b) => b.classList.remove("active"));
-    this.classList.add("active");
-    switchSublayer(this.dataset.sublayer);
-  });
+bindSublayerButtons("sublayer", function () {
+  switchSublayer(this.dataset.sublayer);
 });
 
 // ===== Type pills =====

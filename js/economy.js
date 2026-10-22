@@ -1758,82 +1758,20 @@ function removeAllEconomyLayers() {
 
 // ===== Start-up (called from app.js) =====
 function initEconomy() {
-  // ===== ეკონომიკა checkbox =====
-  document.getElementById("chkEconomy").addEventListener("change", function (e) {
-    if (e.target.checked) {
-      document.getElementById("mainLayerView").style.display = "none";
-      document.getElementById("sublayerView").style.display = "none";
-      document.getElementById("natureView").style.display = "none";
-      document.getElementById("historyView").style.display = "none";
-      document.getElementById("economyView").style.display = "";
-      showChartPanel();
-      resetChartPanel();
-      hideSettlementLegend();
-      setInfoBtn(null);
-      document.getElementById("filterSection").style.display = "none";
-      document.getElementById("infoCard").classList.add("hidden");
-      document.getElementById("chkPopulation").checked = false;
-      document.getElementById("chkNature").checked = false;
-      document.getElementById("chkHistory").checked = false;
-      document.getElementById("chkEducation").checked = false;
-      document.getElementById("chkTourism").checked = false;
-      document.getElementById("educationView").style.display = "none";
-      document.getElementById("tourismView").style.display = "none";
-      removeAllThematic();
-      removeAllNatureLayers();
-      removeAllHistoryLayers();
-      removeAllEducationLayers();
-      removeAllTourismLayers();
-      removeNeutralLayers();
-      document.querySelectorAll("[data-econsub]").forEach(function (b) {
-        b.classList.remove("active");
-      });
-      document.querySelector("[data-econsub='botanica']").classList.add("active");
-      loadBotanica();
-    } else {
-      document.getElementById("economyView").style.display = "none";
-      document.getElementById("mainLayerView").style.display = "";
-      removeAllEconomyLayers();
-      resetPopLegend();
-      loadNeutralLayers();
-    }
-  });
-
-
-  document
-    .getElementById("btnEconomyBack")
-    .addEventListener("click", function () {
-      document.getElementById("chkEconomy").checked = false;
-      document.getElementById("economyView").style.display = "none";
-      document.getElementById("mainLayerView").style.display = "";
-      removeAllEconomyLayers();
-      hideChartPanel();
-      document.getElementById("infoCard").classList.add("hidden");
-      resetPopLegend();
-      loadNeutralLayers();
-    });
-
-
-  document.querySelectorAll("[data-econsub]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
-      document.querySelectorAll("[data-econsub]").forEach(function (b) {
-        b.classList.remove("active");
-      });
-      this.classList.add("active");
-      removeAllEconomyLayers();
-      document.getElementById("infoCard").classList.add("hidden");
-      resetChartPanel();
-      resetPopLegend();
-      var sub = this.dataset.econsub;
-      if (sub === "botanica") loadBotanica();
-      else if (sub === "energetika") loadEnergetika();
-      else if (sub === "crop_zones") loadCropZones();
-      else if (sub === "land") loadLand();
-      else if (sub === "sun") loadSun();
-      else if (sub === "agri") loadAgri();
-      else if (sub === "agrispec") loadAgriSpec();
-      setInfoBtn(ECON_SUB_INFO[sub] || null);
-    });
+  // ქვეფენების ღილაკები (თემის გახსნა/„უკან“ — app.js, THEMES)
+  bindSublayerButtons("econsub", function () {
+    removeAllEconomyLayers();
+    document.getElementById("infoCard").classList.add("hidden");
+    resetChartPanel();
+    resetPopLegend();
+    var sub = this.dataset.econsub;
+    if (sub === "botanica") loadBotanica();
+    else if (sub === "energetika") loadEnergetika();
+    else if (sub === "crop_zones") loadCropZones();
+    else if (sub === "land") loadLand();
+    else if (sub === "sun") loadSun();
+    else if (sub === "agri") loadAgri();
+    else if (sub === "agrispec") loadAgriSpec();
+    setInfoBtn(ECON_SUB_INFO[sub] || null);
   });
 }

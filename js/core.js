@@ -348,6 +348,23 @@ function loadDataAll(urls, callback) {
   });
 }
 
+// ===== ქვეფენების ღილაკები =====
+// [data-<attr>] ღილაკები: უკვე არჩეულზე ხელახლა დაწკაპება არაფერს აკეთებს, არჩეული
+// ღილაკი მოინიშნება და შემდეგ სრულდება onSelect (მასში this = დაწკაპებული ღილაკი).
+function bindSublayerButtons(attr, onSelect) {
+  var selector = "[data-" + attr + "]";
+  document.querySelectorAll(selector).forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
+      document.querySelectorAll(selector).forEach(function (b) {
+        b.classList.remove("active");
+      });
+      this.classList.add("active");
+      onSelect.call(this);
+    });
+  });
+}
+
 // ===== ფენის მოხსნა =====
 // თუ ფენა რუკაზეა, მოხსნის; ყოველთვის აბრუნებს null-ს, ამიტომ გამოყენება:
 //   someLayer = clearLayer(someLayer);
