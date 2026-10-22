@@ -520,7 +520,7 @@ function showBottomChartIDP() {
           display: true,
           position: "top",
           labels: {
-            font: { family: "Fira Sans", size: 9 },
+            font: { size: 9 },
             boxWidth: 12,
             padding: 6,
           },
@@ -537,11 +537,11 @@ function showBottomChartIDP() {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: "პირები", font: { size: 8 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -893,7 +893,6 @@ function showBottomChartDensity(p) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(`${p.Name_Geo || ""} — მოსახლეობის სიმჭიდროვე (კაცი/კმ²)`, 12),
         tooltip: { callbacks: { label: (c) => ` ${c.parsed.y} კაცი/კმ²` } },
       },
@@ -901,10 +900,10 @@ function showBottomChartDensity(p) {
         y: {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" }, color: "#6B6862" },
+          ticks: { font: { size: 10, weight: "500" }, color: "#6B6862" },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
+          ticks: { font: { size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -1170,7 +1169,6 @@ function showBottomChartMarital(p, gender) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(`${p.Name_Geo} — ქორწინებითი მდგომარეობა · ${gLabel} · ${yr} (‰)`, 12),
         tooltip: {
           callbacks: {
@@ -1187,7 +1185,7 @@ function showBottomChartMarital(p, gender) {
           max: 800,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v + " ‰";
@@ -1196,7 +1194,7 @@ function showBottomChartMarital(p, gender) {
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 0,
           },
@@ -1406,7 +1404,6 @@ function showBottomChartRate(p, f12, f22, type) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(`${p.Name_Geo || ""} — ${label}ის კოეფ. (‰)`, 12),
         tooltip: {
           callbacks: {
@@ -1419,11 +1416,11 @@ function showBottomChartRate(p, f12, f22, type) {
         y: {
           beginAtZero: false,
           grid: { color: "rgba(0,0,0,0.05)" },
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" }, color: "#6B6862" },
+          ticks: { font: { size: 10, weight: "500" }, color: "#6B6862" },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
           },
           grid: { display: false },
@@ -1460,7 +1457,6 @@ function showBottomChart(p) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(`${name}  —  ${p.Type_Geo || ""}  |  ${p.Municipal_ || ""}`, 12),
         tooltip: {
           callbacks: { label: (c) => " " + c.parsed.y.toLocaleString("ka-GE") },
@@ -1471,13 +1467,13 @@ function showBottomChart(p) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString(),
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
+          ticks: { font: { size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -1505,10 +1501,10 @@ function showBottomChartEth(p) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
+        legend: { display: true,
           position: "right",
           labels: {
-            font: { family: "Fira Sans", size: 11 },
+            font: { size: 11 },
             color: "#1A1A18",
             padding: 10,
           },
@@ -1540,10 +1536,10 @@ function showBottomChartRel(p) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
+        legend: { display: true,
           position: "right",
           labels: {
-            font: { family: "Fira Sans", size: 11 },
+            font: { size: 11 },
             color: "#1A1A18",
             padding: 10,
           },
@@ -1637,11 +1633,10 @@ function renderCensusModal() {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: {
           display: true,
           text: `${data.label}  |  1989→2014: ${chg}%`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
+          font: { size: 12, weight: "600" },
           color: "#1A1A18",
           padding: { bottom: 8 },
         },
@@ -1656,14 +1651,14 @@ function renderCensusModal() {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString(),
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
           },
           grid: { display: false },
@@ -1934,23 +1929,23 @@ function _doCmpChart(nameA, nameB) {
         legend: {
           display: true,
           position: "top",
-          labels: { font: { family: "Fira Sans", size: 10 }, boxWidth: 12 },
+          labels: { font: { size: 10 }, boxWidth: 12 },
         },
         title: {
           display: true,
           text: nameA + " vs " + nameB,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
+          font: { size: 12, weight: "600" },
           color: "#1A1A18",
         },
       },
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+          ticks: { font: { size: 10, weight: "500" } },
           title: { display: true, text: ylabel, font: { size: 9 } },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 0 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 0 },
           grid: { display: false },
         },
       },

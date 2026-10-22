@@ -240,7 +240,6 @@ function showBottomChartTemp(data, type, sel) {
       layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(titles[type]),
         tooltip: {
           callbacks: {
@@ -254,14 +253,14 @@ function showBottomChartTemp(data, type, sel) {
         y: {
           beginAtZero: true,
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             callback: function (v) {
               return v.toLocaleString() + " კმ²";
             },
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -536,7 +535,6 @@ function showBottomChartClimate(data, type, sel) {
       layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(titles[type]),
         tooltip: {
           callbacks: {
@@ -550,14 +548,14 @@ function showBottomChartClimate(data, type, sel) {
         y: {
           beginAtZero: true,
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             callback: function (v) {
               return v + " კმ²";
             },
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -791,7 +789,6 @@ function showBottomChartHeatWaves(data, sel) {
       layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("სითბური ტალღების ტენდენცია — ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
@@ -804,14 +801,14 @@ function showBottomChartHeatWaves(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" },
+          ticks: { font: { size: 10, weight: "500" },
             callback: function (v) {
               return v + " კმ²";
             },
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          ticks: { font: { size: 11, weight: "500" }, maxRotation: 35 },
           grid: { display: false },
         },
       },
@@ -873,7 +870,6 @@ function showBottomChartDrought(data, sel) {
       layout: { padding: { top: 16 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("გვალვის ინდექსი — კატეგორიების ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
@@ -886,14 +882,14 @@ function showBottomChartDrought(data, sel) {
       scales: {
         y: {
           beginAtZero: true,
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" },
+          ticks: { font: { size: 10, weight: "500" },
             callback: function (v) {
               return v + " კმ²";
             },
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
+          ticks: { font: { size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -1193,7 +1189,6 @@ function showBottomChartMadflow(data, sel) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ღვარცოფის საფრთხის ზონირება — ფართობი (კმ²)", 12),
         tooltip: {
           callbacks: {
@@ -1208,7 +1203,7 @@ function showBottomChartMadflow(data, sel) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: function (v) {
               return v.toLocaleString() + " კმ²";
@@ -1216,7 +1211,7 @@ function showBottomChartMadflow(data, sel) {
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
+          ticks: { font: { size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },

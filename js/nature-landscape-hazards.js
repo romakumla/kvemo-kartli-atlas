@@ -175,7 +175,6 @@ function showBottomChartLandscape(p, data, order) {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(`${p.LandLabel} — ლანდშაფტები ფართობის მიხედვით (კმ²)`, 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
@@ -186,14 +185,14 @@ function showBottomChartLandscape(p, data, order) {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 25,
           },
@@ -422,7 +421,6 @@ function showBottomChartHazard() {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("მეწყ./კლდეზვ. ზონირება — ფართობი (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
@@ -433,13 +431,13 @@ function showBottomChartHazard() {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
+          ticks: { font: { size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -680,7 +678,6 @@ function showBottomChartGW() {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle("ჰიდროგეოლ. ზონირება — ფართობი (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
@@ -691,14 +688,14 @@ function showBottomChartGW() {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
           ticks: {
-            font: { family: "Fira Sans", size: 10, weight: "500" },
+            font: { size: 10, weight: "500" },
             color: "#6B6862",
             callback: (v) => v.toLocaleString() + " კმ²",
           },
         },
         x: {
           ticks: {
-            font: { family: "Fira Sans", size: 11, weight: "500" },
+            font: { size: 11, weight: "500" },
             color: "#1A1A18",
             maxRotation: 25,
           },
@@ -741,10 +738,10 @@ function showBottomChartGWPoint(p) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
+        legend: { display: true,
           position: "right",
           labels: {
-            font: { family: "Fira Sans", size: 10 },
+            font: { size: 10 },
             color: "#1A1A18",
             padding: 8,
           },
@@ -979,7 +976,6 @@ function showBottomChartEQ() {
       layout: { padding: { top: 18 } },
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false },
         title: chartTitle(`მიწისძვრები მაგნიტუდის მიხედვით — სულ ${eqNewData.features.length + eqOldData.features.length}`, 12),
         tooltip: { callbacks: { label: (c) => ` ${c.parsed.y} მიწისძვრა` } },
       },
@@ -987,10 +983,10 @@ function showBottomChartEQ() {
         y: {
           beginAtZero: true,
           grid: { color: "rgba(0,0,0,0.05)" },
-          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" }, color: "#6B6862" },
+          ticks: { font: { size: 10, weight: "500" }, color: "#6B6862" },
         },
         x: {
-          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, color: "#1A1A18" },
+          ticks: { font: { size: 11, weight: "500" }, color: "#1A1A18" },
           grid: { display: false },
         },
       },
@@ -1365,10 +1361,10 @@ function showBottomChartStations(type) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
+        legend: { display: true,
           position: "right",
           labels: {
-            font: { family: "Fira Sans", size: 12 },
+            font: { size: 12 },
             color: "#1A1A18",
             padding: 12,
           },
