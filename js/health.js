@@ -898,8 +898,8 @@ function buildZooLayer(key, data, id) {
             className: "",
           });
           var marker = L.marker(latlng, { icon: icon });
-          var name = p.Name_Geo || p.Municipal1 || p.Municipal_ || "";
-          var muni = p.Municipal_ || p.Municipal1 || "";
+          var muni = zooNormMuni(p.Municipal_ || p.Municipal1 || "") || "";
+          var name = p.Name_Geo || (p.Near_Geo ? p.Near_Geo + " · მახლობლად" : "") || muni;
           pointTooltip(marker, name + (muni && muni !== name ? " (" + muni + ")" : ""), -r / 2 - 2);
           marker.on("click", function () {
             showInfoZoo(p, cfg);
@@ -1000,9 +1000,25 @@ function showBottomChartZoo(muniTotals, cfg) {
   });
 }
 
+// დასახლებული პუნქტი: Name_Geo — თუ წერტილი თვითონ დასახლებაა; Near_Geo/Near_m —
+// უახლოესი დასახლება და მანძილი იმ ფენებისთვის, სადაც სახელი მონაცემებში არ არის
+// (ჯილეხი — ყველა, ენცეფალიტი; გამოთვლილია data/settlements.geojson-იდან)
+function zooPlaceRow(p) {
+  if (p.Name_Geo) {
+    return "<b>დასახლებული პუნქტი:</b> " + p.Name_Geo + (p.Type_Geo ? " (" + p.Type_Geo + ")" : "") + "<br>";
+  }
+  if (p.Near_Geo) {
+    var d = p.Near_m < 1000 ? p.Near_m + " მ" : (p.Near_m / 1000).toFixed(1) + " კმ";
+    return "<b>უახლოესი დასახლება:</b> " + p.Near_Geo +
+      (p.Near_Type ? " (" + p.Near_Type + ")" : "") + "<br>" +
+      "<b>მანძილი:</b> ~" + d + "<br>";
+  }
+  return "";
+}
+
 function showInfoZoo(p, cfg) {
-  var name = p.Name_Geo || p.Municipal1 || p.Municipal_ || "—";
-  var muni = p.Municipal_ || p.Municipal1 || "—";
+  var muni = zooNormMuni(p.Municipal_ || p.Municipal1 || "") || "—";
+  var name = p.Name_Geo || (p.Near_Geo ? p.Near_Geo + " · მახლობლად" : "") || muni;
   var cnt = cfg.countCol ? p[cfg.countCol] || "—" : "—";
   var range = p.Brucela__1 || p.Tularemia1 || p.Leptospi_1 || "";
   showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
@@ -1018,10 +1034,10 @@ function showInfoZoo(p, cfg) {
     cfg.label +
     "</span>" +
     '<div style="margin-top:8px;font-size:11px;color:#444;line-height:2;">' +
+    zooPlaceRow(p) +
     "<b>მუნიციპ.:</b> " +
     muni +
     "<br>" +
-    (p.Type_Geo ? "<b>ტიპი:</b> " + p.Type_Geo + "<br>" : "") +
     (cfg.countCol
       ? "<b>შემთხვევები:</b> " +
         cnt +
