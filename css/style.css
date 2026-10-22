@@ -1048,6 +1048,13 @@ aside {
   text-align: left;
   font-weight: 500;
 }
+.census-table-total {
+  background: var(--bg);
+  font-weight: 700;
+}
+.census-table-total span:first-child {
+  font-weight: 700;
+}
 
 .change-pos {
   color: #15803d;
