@@ -1732,6 +1732,12 @@ aside {
   background: #fafaf8;
   outline: none;
 }
+/* შედარების პანელი დამალულია, სანამ „შედარება“ არ აირჩევა
+   (ღილაკები შემდეგ display-ს პირდაპირ აყენებენ) */
+#censusComparePanel.hidden {
+  display: none;
+}
+
 #cmpChartWrap {
   height: 240px;
 }
