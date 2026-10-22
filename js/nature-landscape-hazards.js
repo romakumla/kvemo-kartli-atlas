@@ -941,10 +941,15 @@ function renderEarthquakeLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon, zIndexOffset: 1000 });
-      marker.bindTooltip(p.Name_Geo, {
+      marker.bindTooltip("სეისმური სადგური — " + p.Name_Geo, {
         direction: "top",
         className: "village-label",
         offset: [0, -18],
+      });
+      marker.on("click", function () {
+        showInfoSeismicStation(p, latlng);
+        showBottomChartStations("seismic");
+        highlightBottomBars(p.Active ? "მოქმედი" : "შეჩერებული");
       });
       return marker;
     },
@@ -1362,6 +1367,19 @@ function updateStationLegend(type, data) {
   el.innerHTML = html;
 }
 
+function showInfoSeismicStation(p, latlng) {
+  var badge = p.Active
+    ? `<span class="info-type-badge badge-village" style="background:#FDECEA;color:#C62828;border:1px solid #C6282855;">მოქმედი</span>`
+    : `<span class="info-type-badge badge-city" style="background:#f3f4f6;color:#999;border:1px solid #ccc;">შეჩერებული</span>`;
+  document.getElementById("infoCardContent").innerHTML = `
+    <div class="info-name">სეისმური სადგური</div>
+    ${badge}
+    <div class="info-row"><span class="info-key">განედი</span><span class="info-val">${latlng.lat.toFixed(4)}°</span></div>
+    <div class="info-row"><span class="info-key">გრძედი</span><span class="info-val">${latlng.lng.toFixed(4)}°</span></div>
+  `;
+  document.getElementById("infoCard").classList.remove("hidden");
+}
+
 function showInfoMeteo(p) {
   var badge = p.Active
     ? `<span class="info-type-badge badge-village" style="background:#FEE8DC;color:#E8540A;border:1px solid #E8540A55;">მოქმედი</span>`
@@ -1398,19 +1416,24 @@ function showInfoHydro(p) {
   document.getElementById("infoCard").classList.remove("hidden");
 }
 
+// type: "meteo" | "hydro" | "seismic"
 function showBottomChartStations(type) {
-  var data = type === "meteo" ? meteoData : hydroData;
+  var data = { meteo: meteoData, hydro: hydroData, seismic: eqStationData }[type];
   var ctx = prepareBottomChart();
 
   var active = data.features.filter((f) => f.properties.Active);
   var inactive = data.features.filter((f) => !f.properties.Active);
-  var actColor = type === "meteo" ? "#E8540A" : "#1565C0";
-  var title = type === "meteo" ? "მეტეოსადგურები" : "ჰიდრ. სადგურები";
+  var actColor = { meteo: "#E8540A", hydro: "#1565C0", seismic: "#C62828" }[type];
+  var title = {
+    meteo: "მეტეოსადგურები",
+    hydro: "ჰიდრ. სადგურები",
+    seismic: "სეისმური სადგურები",
+  }[type];
 
   bottomChart = new Chart(ctx, {
     type: "doughnut",
     data: {
-      labels: ["მოქმედი", "დახურული"],
+      labels: ["მოქმედი", type === "seismic" ? "შეჩერებული" : "დახურული"],
       datasets: [
         {
           data: [active.length, inactive.length],
