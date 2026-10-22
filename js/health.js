@@ -111,14 +111,8 @@ function loadHealth() {
 }
 
 function buildHealthLayers() {
-  if (healthPolyLayer) {
-    map.removeLayer(healthPolyLayer);
-    healthPolyLayer = null;
-  }
-  if (healthClinicLayer) {
-    map.removeLayer(healthClinicLayer);
-    healthClinicLayer = null;
-  }
+  healthPolyLayer = clearLayer(healthPolyLayer);
+  healthClinicLayer = clearLayer(healthClinicLayer);
   if (!healthServicesData) return;
   var metric = activeHealthMetric;
 
@@ -389,14 +383,8 @@ function setHealthMetric(metric) {
 }
 
 function removeAllHealthLayers() {
-  if (healthPolyLayer) {
-    map.removeLayer(healthPolyLayer);
-    healthPolyLayer = null;
-  }
-  if (healthClinicLayer) {
-    map.removeLayer(healthClinicLayer);
-    healthClinicLayer = null;
-  }
+  healthPolyLayer = clearLayer(healthPolyLayer);
+  healthClinicLayer = clearLayer(healthClinicLayer);
 }
 
 // ============================================================
@@ -472,10 +460,7 @@ function loadSocial() {
 }
 
 function buildSocialLayer() {
-  if (socialLayer) {
-    map.removeLayer(socialLayer);
-    socialLayer = null;
-  }
+  socialLayer = clearLayer(socialLayer);
   if (!socialData) return;
   var metric = activeSocialMetric;
   socialLayer = L.geoJSON(socialData, {
@@ -685,10 +670,7 @@ function setSocialMetric(metric) {
 }
 
 function removeAllSocialLayers() {
-  if (socialLayer) {
-    map.removeLayer(socialLayer);
-    socialLayer = null;
-  }
+  socialLayer = clearLayer(socialLayer);
 }
 
 // ============================================================
@@ -810,10 +792,7 @@ function removeZooMapLayers() {
       delete zooLeafLayers[k];
     }
   });
-  if (zooMuniLayer) {
-    map.removeLayer(zooMuniLayer);
-    zooMuniLayer = null;
-  }
+  zooMuniLayer = clearLayer(zooMuniLayer);
 }
 
 // range string "2-3" → საშ. მნიშვნელობა

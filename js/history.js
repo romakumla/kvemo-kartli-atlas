@@ -47,7 +47,7 @@ function loadArchaeology() {
 }
 
 function buildArchLayer(data) {
-  if (archLayer) map.removeLayer(archLayer);
+  clearLayer(archLayer);
   archLayer = L.geoJSON(data, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -219,7 +219,7 @@ function loadBattles() {
 }
 
 function buildBattlesLayer(data) {
-  if (battlesLayer) map.removeLayer(battlesLayer);
+  clearLayer(battlesLayer);
   battlesLayer = L.geoJSON(data, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -442,14 +442,8 @@ function loadGermans() {
 }
 
 function buildGermansLayers(data) {
-  if (germansPolyLayer) {
-    map.removeLayer(germansPolyLayer);
-    germansPolyLayer = null;
-  }
-  if (germansPointLayer) {
-    map.removeLayer(germansPointLayer);
-    germansPointLayer = null;
-  }
+  germansPolyLayer = clearLayer(germansPolyLayer);
+  germansPointLayer = clearLayer(germansPointLayer);
 
   var polyFeats = {
     type: "FeatureCollection",
@@ -699,7 +693,7 @@ function loadForts() {
 }
 
 function buildFortsLayer(data) {
-  if (fortsLayer) map.removeLayer(fortsLayer);
+  clearLayer(fortsLayer);
   fortsLayer = L.geoJSON(data, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -897,14 +891,8 @@ function loadEparchies() {
 }
 
 function buildEparchyLayers(data) {
-  if (eparchyPolyLayer) {
-    map.removeLayer(eparchyPolyLayer);
-    eparchyPolyLayer = null;
-  }
-  if (eparchyPointLayer) {
-    map.removeLayer(eparchyPointLayer);
-    eparchyPointLayer = null;
-  }
+  eparchyPolyLayer = clearLayer(eparchyPolyLayer);
+  eparchyPointLayer = clearLayer(eparchyPointLayer);
 
   var polys = {
     type: "FeatureCollection",
@@ -1122,10 +1110,7 @@ function loadChurches() {
 }
 
 function buildChurchesLayer(data) {
-  if (churchesLayer) {
-    map.removeLayer(churchesLayer);
-    churchesLayer = null;
-  }
+  churchesLayer = clearLayer(churchesLayer);
   churchesLayer = L.geoJSON(data, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -1149,10 +1134,7 @@ function toggleChurches() {
     loadChurches();
     if (btn) btn.classList.add("active");
   } else {
-    if (churchesLayer) {
-      map.removeLayer(churchesLayer);
-      churchesLayer = null;
-    }
+    churchesLayer = clearLayer(churchesLayer);
     if (btn) btn.classList.remove("active");
   }
   updateEparchiesLegend();
@@ -1222,7 +1204,7 @@ function loadPetroglyphs() {
 }
 
 function buildPetroLayer(data) {
-  if (petroLayer) map.removeLayer(petroLayer);
+  clearLayer(petroLayer);
   petroLayer = L.geoJSON(data, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -1385,7 +1367,7 @@ function loadMegaliths() {
 }
 
 function buildMegaLayer(data) {
-  if (megaLayer) map.removeLayer(megaLayer);
+  clearLayer(megaLayer);
   megaLayer = L.geoJSON(data, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -1515,46 +1497,16 @@ function updateMegaLegend() {
 }
 
 function removeAllHistoryLayers() {
-  if (archLayer) {
-    map.removeLayer(archLayer);
-    archLayer = null;
-  }
-  if (battlesLayer) {
-    map.removeLayer(battlesLayer);
-    battlesLayer = null;
-  }
-  if (germansPolyLayer) {
-    map.removeLayer(germansPolyLayer);
-    germansPolyLayer = null;
-  }
-  if (germansPointLayer) {
-    map.removeLayer(germansPointLayer);
-    germansPointLayer = null;
-  }
-  if (fortsLayer) {
-    map.removeLayer(fortsLayer);
-    fortsLayer = null;
-  }
-  if (eparchyPolyLayer) {
-    map.removeLayer(eparchyPolyLayer);
-    eparchyPolyLayer = null;
-  }
-  if (eparchyPointLayer) {
-    map.removeLayer(eparchyPointLayer);
-    eparchyPointLayer = null;
-  }
-  if (churchesLayer) {
-    map.removeLayer(churchesLayer);
-    churchesLayer = null;
-  }
-  if (petroLayer) {
-    map.removeLayer(petroLayer);
-    petroLayer = null;
-  }
-  if (megaLayer) {
-    map.removeLayer(megaLayer);
-    megaLayer = null;
-  }
+  archLayer = clearLayer(archLayer);
+  battlesLayer = clearLayer(battlesLayer);
+  germansPolyLayer = clearLayer(germansPolyLayer);
+  germansPointLayer = clearLayer(germansPointLayer);
+  fortsLayer = clearLayer(fortsLayer);
+  eparchyPolyLayer = clearLayer(eparchyPolyLayer);
+  eparchyPointLayer = clearLayer(eparchyPointLayer);
+  churchesLayer = clearLayer(churchesLayer);
+  petroLayer = clearLayer(petroLayer);
+  megaLayer = clearLayer(megaLayer);
   churchesVisible = false;
 }
 

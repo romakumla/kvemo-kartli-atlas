@@ -31,7 +31,7 @@ var ANTROP_ORDER = [
 ];
 
 function buildLandscapeLayer(data, layerRef) {
-  if (layerRef.layer) map.removeLayer(layerRef.layer);
+  clearLayer(layerRef.layer);
   var noBorder = layerRef.noBorder || false;
   layerRef.layer = L.geoJSON(data, {
     style: function (feat) {
@@ -255,7 +255,7 @@ function loadHazard() {
 
 function renderHazardLayers() {
   // ზონირება — polygon ფენა
-  if (hazardZoningLayer) map.removeLayer(hazardZoningLayer);
+  clearLayer(hazardZoningLayer);
   hazardZoningLayer = L.geoJSON(hazardZoningData, {
     style: function (feat) {
       return {
@@ -286,7 +286,7 @@ function renderHazardLayers() {
   }).addTo(map);
 
   // მეწყერი — წითელი წერტილები
-  if (hazardLandslideLayer) map.removeLayer(hazardLandslideLayer);
+  clearLayer(hazardLandslideLayer);
   hazardLandslideLayer = L.geoJSON(hazardLandslideData, {
     pointToLayer: function (feature, latlng) {
       var marker = L.circleMarker(latlng, {
@@ -306,7 +306,7 @@ function renderHazardLayers() {
   }).addTo(map);
 
   // კლდეზვავი — ნარინჯი სამკუთხა სიმბოლო
-  if (hazardRockfallLayer) map.removeLayer(hazardRockfallLayer);
+  clearLayer(hazardRockfallLayer);
   hazardRockfallLayer = L.geoJSON(hazardRockfallData, {
     pointToLayer: function (feature, latlng) {
       var svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14">
@@ -490,7 +490,7 @@ function loadGroundwater() {
 
 function renderGroundwaterLayers() {
   // ზონირება — polygon
-  if (groundwaterZoningLayer) map.removeLayer(groundwaterZoningLayer);
+  clearLayer(groundwaterZoningLayer);
   groundwaterZoningLayer = L.geoJSON(groundwaterZoningData, {
     style: function (feat) {
       return {
@@ -521,7 +521,7 @@ function renderGroundwaterLayers() {
   }).addTo(map);
 
   // წყალპუნქტები — SVG სიმბოლოები
-  if (groundwaterPointLayer) map.removeLayer(groundwaterPointLayer);
+  clearLayer(groundwaterPointLayer);
   groundwaterPointLayer = L.geoJSON(groundwaterPointData, {
     pointToLayer: function (feature, latlng) {
       var p = feature.properties;
@@ -817,9 +817,9 @@ function loadEarthquake() {
 }
 
 function renderEarthquakeLayers() {
-  if (eqNewLayer) map.removeLayer(eqNewLayer);
-  if (eqOldLayer) map.removeLayer(eqOldLayer);
-  if (eqStationLayer) map.removeLayer(eqStationLayer);
+  clearLayer(eqNewLayer);
+  clearLayer(eqOldLayer);
+  clearLayer(eqStationLayer);
 
   // ინსტრუმენტული — წრეები
   eqNewLayer = L.geoJSON(eqNewData, {
@@ -1004,146 +1004,41 @@ var meteoData = null;
 var hydroData = null;
 
 function removeAllNatureLayers() {
-  if (madflowZoningLayer) {
-    map.removeLayer(madflowZoningLayer);
-    madflowZoningLayer = null;
-  }
-  if (madflowPointLayer) {
-    map.removeLayer(madflowPointLayer);
-    madflowPointLayer = null;
-  }
-  if (madflowErosionLayer) {
-    map.removeLayer(madflowErosionLayer);
-    madflowErosionLayer = null;
-  }
-  if (forestLayer) {
-    map.removeLayer(forestLayer);
-    forestLayer = null;
-  }
-  if (vegetationLayer) {
-    map.removeLayer(vegetationLayer);
-    vegetationLayer = null;
-  }
-  if (_avgTempRef.layer) {
-    map.removeLayer(_avgTempRef.layer);
-    _avgTempRef.layer = null;
-  }
-  if (_maxTempRef.layer) {
-    map.removeLayer(_maxTempRef.layer);
-    _maxTempRef.layer = null;
-  }
-  if (_precipRef.layer) {
-    map.removeLayer(_precipRef.layer);
-    _precipRef.layer = null;
-  }
-  if (_hotRef.layer) {
-    map.removeLayer(_hotRef.layer);
-    _hotRef.layer = null;
-  }
-  if (_tropRef.layer) {
-    map.removeLayer(_tropRef.layer);
-    _tropRef.layer = null;
-  }
-  if (_frostRef.layer) {
-    map.removeLayer(_frostRef.layer);
-    _frostRef.layer = null;
-  }
-  if (heatWavesLayer) {
-    map.removeLayer(heatWavesLayer);
-    heatWavesLayer = null;
-  }
-  if (droughtLayer) {
-    map.removeLayer(droughtLayer);
-    droughtLayer = null;
-  }
-  if (hailTotalLayer) {
-    map.removeLayer(hailTotalLayer);
-    hailTotalLayer = null;
-  }
-  if (hail100Layer) {
-    map.removeLayer(hail100Layer);
-    hail100Layer = null;
-  }
-  if (soilsLayer) {
-    map.removeLayer(soilsLayer);
-    soilsLayer = null;
-  }
-  if (soilsBornLayer) {
-    map.removeLayer(soilsBornLayer);
-    soilsBornLayer = null;
-  }
-  if (geologyLayer) {
-    map.removeLayer(geologyLayer);
-    geologyLayer = null;
-  }
-  if (foultsLayer) {
-    map.removeLayer(foultsLayer);
-    foultsLayer = null;
-  }
-  if (metalOreLayer) {
-    map.removeLayer(metalOreLayer);
-    metalOreLayer = null;
-  }
-  if (nonmetalOreLayer) {
-    map.removeLayer(nonmetalOreLayer);
-    nonmetalOreLayer = null;
-  }
-  if (oilGasLayer) {
-    map.removeLayer(oilGasLayer);
-    oilGasLayer = null;
-  }
-  if (agrovlimatLayer) {
-    map.removeLayer(agrovlimatLayer);
-    agrovlimatLayer = null;
-  }
-  if (meteoLayer) {
-    map.removeLayer(meteoLayer);
-    meteoLayer = null;
-  }
-  if (hydroLayer) {
-    map.removeLayer(hydroLayer);
-    hydroLayer = null;
-  }
-  if (landscapeLayerRef.layer) {
-    map.removeLayer(landscapeLayerRef.layer);
-    landscapeLayerRef.layer = null;
-  }
-  if (landscapeAntropLayerRef.layer) {
-    map.removeLayer(landscapeAntropLayerRef.layer);
-    landscapeAntropLayerRef.layer = null;
-  }
-  if (hazardZoningLayer) {
-    map.removeLayer(hazardZoningLayer);
-    hazardZoningLayer = null;
-  }
-  if (hazardLandslideLayer) {
-    map.removeLayer(hazardLandslideLayer);
-    hazardLandslideLayer = null;
-  }
-  if (hazardRockfallLayer) {
-    map.removeLayer(hazardRockfallLayer);
-    hazardRockfallLayer = null;
-  }
-  if (groundwaterZoningLayer) {
-    map.removeLayer(groundwaterZoningLayer);
-    groundwaterZoningLayer = null;
-  }
-  if (groundwaterPointLayer) {
-    map.removeLayer(groundwaterPointLayer);
-    groundwaterPointLayer = null;
-  }
-  if (eqNewLayer) {
-    map.removeLayer(eqNewLayer);
-    eqNewLayer = null;
-  }
-  if (eqOldLayer) {
-    map.removeLayer(eqOldLayer);
-    eqOldLayer = null;
-  }
-  if (eqStationLayer) {
-    map.removeLayer(eqStationLayer);
-    eqStationLayer = null;
-  }
+  madflowZoningLayer = clearLayer(madflowZoningLayer);
+  madflowPointLayer = clearLayer(madflowPointLayer);
+  madflowErosionLayer = clearLayer(madflowErosionLayer);
+  forestLayer = clearLayer(forestLayer);
+  vegetationLayer = clearLayer(vegetationLayer);
+  _avgTempRef.layer = clearLayer(_avgTempRef.layer);
+  _maxTempRef.layer = clearLayer(_maxTempRef.layer);
+  _precipRef.layer = clearLayer(_precipRef.layer);
+  _hotRef.layer = clearLayer(_hotRef.layer);
+  _tropRef.layer = clearLayer(_tropRef.layer);
+  _frostRef.layer = clearLayer(_frostRef.layer);
+  heatWavesLayer = clearLayer(heatWavesLayer);
+  droughtLayer = clearLayer(droughtLayer);
+  hailTotalLayer = clearLayer(hailTotalLayer);
+  hail100Layer = clearLayer(hail100Layer);
+  soilsLayer = clearLayer(soilsLayer);
+  soilsBornLayer = clearLayer(soilsBornLayer);
+  geologyLayer = clearLayer(geologyLayer);
+  foultsLayer = clearLayer(foultsLayer);
+  metalOreLayer = clearLayer(metalOreLayer);
+  nonmetalOreLayer = clearLayer(nonmetalOreLayer);
+  oilGasLayer = clearLayer(oilGasLayer);
+  agrovlimatLayer = clearLayer(agrovlimatLayer);
+  meteoLayer = clearLayer(meteoLayer);
+  hydroLayer = clearLayer(hydroLayer);
+  landscapeLayerRef.layer = clearLayer(landscapeLayerRef.layer);
+  landscapeAntropLayerRef.layer = clearLayer(landscapeAntropLayerRef.layer);
+  hazardZoningLayer = clearLayer(hazardZoningLayer);
+  hazardLandslideLayer = clearLayer(hazardLandslideLayer);
+  hazardRockfallLayer = clearLayer(hazardRockfallLayer);
+  groundwaterZoningLayer = clearLayer(groundwaterZoningLayer);
+  groundwaterPointLayer = clearLayer(groundwaterPointLayer);
+  eqNewLayer = clearLayer(eqNewLayer);
+  eqOldLayer = clearLayer(eqOldLayer);
+  eqStationLayer = clearLayer(eqStationLayer);
   removeNatureMuniCenters();
 }
 
@@ -1188,7 +1083,7 @@ function hydroIcon(active) {
 }
 
 function buildMeteoLayer(data) {
-  if (meteoLayer) map.removeLayer(meteoLayer);
+  clearLayer(meteoLayer);
   meteoLayer = L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
       var p = feature.properties;
@@ -1206,7 +1101,7 @@ function buildMeteoLayer(data) {
 }
 
 function buildHydroLayer(data) {
-  if (hydroLayer) map.removeLayer(hydroLayer);
+  clearLayer(hydroLayer);
   hydroLayer = L.geoJSON(data, {
     pointToLayer: function (feature, latlng) {
       var p = feature.properties;

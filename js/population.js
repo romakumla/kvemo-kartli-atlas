@@ -22,7 +22,7 @@ function getRadius(pop, type) {
 
 // ===== Build population points layer =====
 function buildPopLayer(features) {
-  if (currentLayer) map.removeLayer(currentLayer);
+  clearLayer(currentLayer);
   currentLayer = L.geoJSON(
     { type: "FeatureCollection", features: features },
     {
@@ -100,7 +100,7 @@ function ethFill(p) {
 }
 
 function buildEthnicsLayer(data) {
-  if (ethnicsLayer) map.removeLayer(ethnicsLayer);
+  clearLayer(ethnicsLayer);
   ethnicsLayer = L.geoJSON(data, {
     style: function (f) {
       var x = ethFill(f.properties);
@@ -165,7 +165,7 @@ function relFill(p) {
 }
 
 function buildReligionLayer(data) {
-  if (religionLayer) map.removeLayer(religionLayer);
+  clearLayer(religionLayer);
   religionLayer = L.geoJSON(data, {
     style: function (f) {
       var x = relFill(f.properties);
@@ -348,14 +348,8 @@ function loadIDP() {
 }
 
 function buildIDPLayers() {
-  if (idpPolyLayer) {
-    map.removeLayer(idpPolyLayer);
-    idpPolyLayer = null;
-  }
-  if (idpPointLayer) {
-    map.removeLayer(idpPointLayer);
-    idpPointLayer = null;
-  }
+  idpPolyLayer = clearLayer(idpPolyLayer);
+  idpPointLayer = clearLayer(idpPointLayer);
   var metric = activeIdpMetric;
   var col = metric === "natural" ? "Natural_Di" : "Armed_Conf";
   var color = metric === "natural" ? "#E8621A" : "#8A63C8";
@@ -779,7 +773,7 @@ var densityLayerRef = { layer: null };
 var densityData = null;
 
 function buildDensityLayer(data) {
-  if (densityLayerRef.layer) map.removeLayer(densityLayerRef.layer);
+  clearLayer(densityLayerRef.layer);
   var field = "De_" + activeDensityYear;
   densityLayerRef.layer = L.geoJSON(data, {
     style: function (feat) {
@@ -1053,14 +1047,8 @@ function syncMaritalInfoText() {
 }
 
 function renderMaritalLayers() {
-  if (maritalMenLayer) {
-    map.removeLayer(maritalMenLayer);
-    maritalMenLayer = null;
-  }
-  if (maritalWomenLayer) {
-    map.removeLayer(maritalWomenLayer);
-    maritalWomenLayer = null;
-  }
+  maritalMenLayer = clearLayer(maritalMenLayer);
+  maritalWomenLayer = clearLayer(maritalWomenLayer);
   maritalMenLayer = buildMaritalLayer(maritalMenData, "men");
   maritalWomenLayer = buildMaritalLayer(maritalWomenData, "women");
   // gender toggle — ერთ ფუნქციაში, რომ opacity/display ყოველთვის დაემთხვეს
@@ -1239,7 +1227,7 @@ var deathData = null;
 var birthData = null;
 
 function buildRateLayer(data, f12, f22, colorMap, ref) {
-  if (ref.layer) map.removeLayer(ref.layer);
+  clearLayer(ref.layer);
   var field = activeRateYear === "2012" ? f12 : f22;
   ref.layer = L.geoJSON(data, {
     style: function (feat) {

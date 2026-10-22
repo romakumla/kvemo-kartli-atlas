@@ -90,14 +90,8 @@ function loadEducation() {
 }
 
 function buildEducationLayers(data) {
-  if (eduMuniLayer) {
-    map.removeLayer(eduMuniLayer);
-    eduMuniLayer = null;
-  }
-  if (eduSchoolLayer) {
-    map.removeLayer(eduSchoolLayer);
-    eduSchoolLayer = null;
-  }
+  eduMuniLayer = clearLayer(eduMuniLayer);
+  eduSchoolLayer = clearLayer(eduSchoolLayer);
 
   var munis = {
     type: "FeatureCollection",
@@ -468,14 +462,8 @@ function makeKgPieSVG(pupil, edu, size) {
 }
 
 function buildKgLayer(data) {
-  if (kgLayer) {
-    map.removeLayer(kgLayer);
-    kgLayer = null;
-  }
-  if (kgMarkerLayer) {
-    map.removeLayer(kgMarkerLayer);
-    kgMarkerLayer = null;
-  }
+  kgLayer = clearLayer(kgLayer);
+  kgMarkerLayer = clearLayer(kgMarkerLayer);
 
   var yr = activeKgYear;
   // choropleth — დაწესებულების რაოდენობა
@@ -727,14 +715,8 @@ function updateKgLegend() {
 }
 
 function removeAllKgLayers() {
-  if (kgLayer) {
-    map.removeLayer(kgLayer);
-    kgLayer = null;
-  }
-  if (kgMarkerLayer) {
-    map.removeLayer(kgMarkerLayer);
-    kgMarkerLayer = null;
-  }
+  kgLayer = clearLayer(kgLayer);
+  kgMarkerLayer = clearLayer(kgMarkerLayer);
 }
 
 // ============================================================
@@ -767,7 +749,7 @@ function loadOikonymy() {
 }
 
 function buildOikLayer(data) {
-  if (oikLayer) map.removeLayer(oikLayer);
+  clearLayer(oikLayer);
   oikLayer = L.geoJSON(data, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -939,14 +921,8 @@ function updateOikLegend() {
 }
 
 function removeAllOikLayers() {
-  if (oikLayer) {
-    map.removeLayer(oikLayer);
-    oikLayer = null;
-  }
-  if (libPolyLayer) {
-    map.removeLayer(libPolyLayer);
-    libPolyLayer = null;
-  }
+  oikLayer = clearLayer(oikLayer);
+  libPolyLayer = clearLayer(libPolyLayer);
   if (libMarkLayer) {
     if (libMarkLayer.clearLayers) libMarkLayer.clearLayers();
     map.removeLayer(libMarkLayer);
@@ -955,76 +931,31 @@ function removeAllOikLayers() {
 }
 
 function removeAllEducationLayers() {
-  if (eduMuniLayer) {
-    map.removeLayer(eduMuniLayer);
-    eduMuniLayer = null;
-  }
-  if (eduSchoolLayer) {
-    map.removeLayer(eduSchoolLayer);
-    eduSchoolLayer = null;
-  }
-  if (kgLayer) {
-    map.removeLayer(kgLayer);
-    kgLayer = null;
-  }
-  if (kgMarkerLayer) {
-    map.removeLayer(kgMarkerLayer);
-    kgMarkerLayer = null;
-  }
-  if (oikLayer) {
-    map.removeLayer(oikLayer);
-    oikLayer = null;
-  }
-  if (libPolyLayer) {
-    map.removeLayer(libPolyLayer);
-    libPolyLayer = null;
-  }
+  eduMuniLayer = clearLayer(eduMuniLayer);
+  eduSchoolLayer = clearLayer(eduSchoolLayer);
+  kgLayer = clearLayer(kgLayer);
+  kgMarkerLayer = clearLayer(kgMarkerLayer);
+  oikLayer = clearLayer(oikLayer);
+  libPolyLayer = clearLayer(libPolyLayer);
   if (libMarkLayer) {
     if (libMarkLayer.clearLayers) libMarkLayer.clearLayers();
     map.removeLayer(libMarkLayer);
     libMarkLayer = null;
   }
-  if (tourismLayer) {
-    map.removeLayer(tourismLayer);
-    tourismLayer = null;
-  }
-  if (artMuniLayer) {
-    map.removeLayer(artMuniLayer);
-    artMuniLayer = null;
-  }
-  if (artSettlementLayer) {
-    map.removeLayer(artSettlementLayer);
-    artSettlementLayer = null;
-  }
+  tourismLayer = clearLayer(tourismLayer);
+  artMuniLayer = clearLayer(artMuniLayer);
+  artSettlementLayer = clearLayer(artSettlementLayer);
   artExpandedMarker = null;
   map.off("click", artMapClickCollapse);
 }
 
 function removeAllTourismLayers() {
-  if (tcMuniLayer) {
-    map.removeLayer(tcMuniLayer);
-    tcMuniLayer = null;
-  }
-  if (tcPointLayer) {
-    map.removeLayer(tcPointLayer);
-    tcPointLayer = null;
-  }
-  if (ttLayer) {
-    map.removeLayer(ttLayer);
-    ttLayer = null;
-  }
-  if (vitLayer) {
-    map.removeLayer(vitLayer);
-    vitLayer = null;
-  }
-  if (cellarLayer) {
-    map.removeLayer(cellarLayer);
-    cellarLayer = null;
-  }
-  if (paLayer) {
-    map.removeLayer(paLayer);
-    paLayer = null;
-  }
+  tcMuniLayer = clearLayer(tcMuniLayer);
+  tcPointLayer = clearLayer(tcPointLayer);
+  ttLayer = clearLayer(ttLayer);
+  vitLayer = clearLayer(vitLayer);
+  cellarLayer = clearLayer(cellarLayer);
+  paLayer = clearLayer(paLayer);
   map.off("zoomend", updateTtLabels);
 }
 
@@ -1096,10 +1027,7 @@ function libraryShelfSVG(size) {
 }
 
 function buildLibLayer(data) {
-  if (libPolyLayer) {
-    map.removeLayer(libPolyLayer);
-    libPolyLayer = null;
-  }
+  libPolyLayer = clearLayer(libPolyLayer);
   if (libMarkLayer) {
     if (libMarkLayer.clearLayers) libMarkLayer.clearLayers();
     map.removeLayer(libMarkLayer);
@@ -1354,10 +1282,7 @@ function loadTourism() {
 }
 
 function buildTourismLayer(data) {
-  if (tourismLayer) {
-    map.removeLayer(tourismLayer);
-    tourismLayer = null;
-  }
+  tourismLayer = clearLayer(tourismLayer);
 
   tourismLayer = L.geoJSON(data, {
     pointToLayer: function (feat, latlng) {
@@ -1597,14 +1522,8 @@ function loadArtDisciplines() {
 }
 
 function buildArtDisciplinesLayers(data) {
-  if (artMuniLayer) {
-    map.removeLayer(artMuniLayer);
-    artMuniLayer = null;
-  }
-  if (artSettlementLayer) {
-    map.removeLayer(artSettlementLayer);
-    artSettlementLayer = null;
-  }
+  artMuniLayer = clearLayer(artMuniLayer);
+  artSettlementLayer = clearLayer(artSettlementLayer);
 
   var munis = {
     type: "FeatureCollection",

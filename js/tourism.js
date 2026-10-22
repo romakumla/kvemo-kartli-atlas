@@ -64,14 +64,8 @@ function loadTourismClimate() {
 }
 
 function buildTourismClimateLayers(data) {
-  if (tcMuniLayer) {
-    map.removeLayer(tcMuniLayer);
-    tcMuniLayer = null;
-  }
-  if (tcPointLayer) {
-    map.removeLayer(tcPointLayer);
-    tcPointLayer = null;
-  }
+  tcMuniLayer = clearLayer(tcMuniLayer);
+  tcPointLayer = clearLayer(tcPointLayer);
 
   var munis = data.features.filter(function (f) {
     return f.properties.ftype === "municipality";
@@ -364,10 +358,7 @@ function loadTourismTypes() {
 }
 
 function buildTourismTypesLayer(data) {
-  if (ttLayer) {
-    map.removeLayer(ttLayer);
-    ttLayer = null;
-  }
+  ttLayer = clearLayer(ttLayer);
 
   ttLayer = L.geoJSON(data, {
     filter: function (feat) {
@@ -592,8 +583,8 @@ function cellarSquaresIcon(n) {
 }
 
 function buildViticultureLayers() {
-  if (vitLayer) { map.removeLayer(vitLayer); vitLayer = null; }
-  if (cellarLayer) { map.removeLayer(cellarLayer); cellarLayer = null; }
+  vitLayer = clearLayer(vitLayer);
+  cellarLayer = clearLayer(cellarLayer);
 
   vitLayer = L.geoJSON(vitData, {
     style: function (f) {
@@ -845,7 +836,7 @@ function loadProtectedAreas() {
 }
 
 function buildProtectedAreasLayer() {
-  if (paLayer) { map.removeLayer(paLayer); paLayer = null; }
+  paLayer = clearLayer(paLayer);
 
   paLayer = L.geoJSON(paData, {
     style: function () {
