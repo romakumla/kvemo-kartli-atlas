@@ -126,4 +126,8 @@ python3 -m http.server 8000
 
 ### ციტირება
 
-> ქვემო ქართლის რეგიონის ინტერაქტიული გეოგრაფიული ატლასი. ვახუშტი ბაგრატიონის სახელობის გეოგრაფიის ინსტიტუტი, თსუ; SRNSFG პროექტი FR-22-4153. <https://romakumla.github.io/kvemo-kartli-atlas/>
+> ლიპარტელიანი გ., კუმლაძე რ., ბოლაშვილი ნ., ქურთუბაძე მ., ცხაკაია-გაგუა თ., ჭიჭინაძე თ., სუქნიძე ნ., სოლოღაშვილი ნ., ხორბალაძე ს., წირღვავა გ., ღვინაძე რ., ნიკოლეიშვილი ს., შეროზია ა. (2026). ქვემო ქართლის რეგიონის ინტერაქტიული გეოგრაფიული ატლასი. ვახუშტი ბაგრატიონის სახელობის გეოგრაფიის ინსტიტუტი, თსუ; SRNSFG პროექტი FR-22-4153. <https://romakumla.github.io/kvemo-kartli-atlas/>
+
+> Liparteliani G., Kumladze R., Bolashvili N., Kurtubadze M., Tskhakaia-Gagua T., Chichinadze T., Suknidze N., Sologhashvili N., Khorbaladze S., Tsirghvava G., Ghvinadze R., Nikoleishvili S., Sherozia A. (2026). *Interactive Geographical Atlas of the Kvemo Kartli Region*. Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University. <https://romakumla.github.io/kvemo-kartli-atlas/>
+
+GitHub-ის გვერდზე „Cite this repository“ ღილაკი (ფაილი `CITATION.cff`) მზა ციტირებას იძლევა APA და BibTeX ფორმატებში. ატლასის მეტამონაცემები Zenodo-სთვის — `.zenodo.json`.

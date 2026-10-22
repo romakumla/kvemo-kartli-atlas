@@ -1,0 +1,72 @@
+{
+  "title": "Interactive Geographical Atlas of the Kvemo Kartli Region (ქვემო ქართლის რეგიონის ინტერაქტიული გეოგრაფიული ატლასი)",
+  "upload_type": "dataset",
+  "description": "<p>An interactive thematic web atlas of the Kvemo Kartli region of Georgia — one of the first interactive regional geographical atlases in Georgia. 58 thematic maps in seven blocks (population, nature, history, economy, education and culture, tourism, health and social services), each with a legend, information cards and statistical charts.</p><p>Produced at the Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University, with the financial support of the Shota Rustaveli National Science Foundation of Georgia (SRNSFG), grant FR-22-4153.</p><p>Website: <a href=\"https://romakumla.github.io/kvemo-kartli-atlas/\">https://romakumla.github.io/kvemo-kartli-atlas/</a>. Built with Leaflet and Chart.js as a static site.</p>",
+  "creators": [
+    {
+      "name": "Liparteliani, Guliko",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Kumladze, Roman",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Bolashvili, Nana",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Kurtubadze, Manana",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Tskhakaia-Gagua, Tamar",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Chichinadze, Tamar",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Suknidze, Nikoloz",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Sologhashvili, Nato",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Khorbaladze, Sopio",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Tsirghvava, Gvantsa",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Ghvinadze, Rusudan",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Nikoleishvili, Salome",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    },
+    {
+      "name": "Sherozia, Anna",
+      "affiliation": "Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University"
+    }
+  ],
+  "keywords": [
+    "Kvemo Kartli",
+    "Georgia",
+    "web atlas",
+    "interactive atlas",
+    "thematic cartography",
+    "regional atlas",
+    "GIS",
+    "Leaflet"
+  ],
+  "license": "cc-by-4.0",
+  "language": "kat",
+  "notes": "Funded by the Shota Rustaveli National Science Foundation of Georgia (SRNSFG), grant FR-22-4153. Data (data/) are licensed CC BY 4.0; code (index.html, js/, css/) is licensed MIT; images in files/ are not covered by the licence (see LICENSE)."
+}
