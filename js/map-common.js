@@ -36,10 +36,7 @@ function addMuniBorderOverlay() {
 }
 
 function removeMuniBorderOverlay() {
-  if (muniBorderOverlay) {
-    map.removeLayer(muniBorderOverlay);
-    muniBorderOverlay = null;
-  }
+  muniBorderOverlay = clearLayer(muniBorderOverlay);
 }
 
 // ===== ფენების რიგითობა: პოლიგონები ქვემოთ → საზღვრები → წერტილები ზემოთ =====
@@ -133,23 +130,17 @@ function loadNatureMuniCenters() {
 }
 
 function removeNatureMuniCenters() {
-  if (natureMuniLayer) {
-    map.removeLayer(natureMuniLayer);
-    natureMuniLayer = null;
-  }
+  natureMuniLayer = clearLayer(natureMuniLayer);
   removeMuniBorderOverlay();
 }
 
 // დიაგრამიან რუკებზე მუნიც. წერტილები ზედმეტია — საზღვრები რჩება
 function hideMuniCenters() {
-  if (natureMuniLayer) {
-    map.removeLayer(natureMuniLayer);
-    natureMuniLayer = null;
-  }
+  natureMuniLayer = clearLayer(natureMuniLayer);
 }
 
 function buildAgrovlimatLayer(data) {
-  if (agrovlimatLayer) map.removeLayer(agrovlimatLayer);
+  clearLayer(agrovlimatLayer);
   agrovlimatLayer = L.geoJSON(data, {
     style: function (feat) {
       return {

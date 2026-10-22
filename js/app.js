@@ -264,7 +264,7 @@ function loadSearchData(cb) {
           var lng = parseFloat(el.dataset.lng);
           var name = el.dataset.name;
           map.setView([lat, lng], 14, { animate: true });
-          if (_searchMarker) map.removeLayer(_searchMarker);
+          clearLayer(_searchMarker);
           _searchMarker = L.circleMarker([lat, lng], {
             radius: 8,
             color: "#C8102E",
@@ -287,10 +287,7 @@ function loadSearchData(cb) {
     input.value = "";
     clearBtn.style.display = "none";
     results.style.display = "none";
-    if (_searchMarker) {
-      map.removeLayer(_searchMarker);
-      _searchMarker = null;
-    }
+    _searchMarker = clearLayer(_searchMarker);
   });
 
   document.addEventListener("click", function (e) {

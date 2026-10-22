@@ -71,7 +71,7 @@ function loadVegetation() {
 }
 
 function buildForestLayer(data) {
-  if (forestLayer) map.removeLayer(forestLayer);
+  clearLayer(forestLayer);
   forestLayer = L.geoJSON(data, {
     style: function (feat) {
       return {
@@ -118,7 +118,7 @@ function buildForestLayer(data) {
 }
 
 function buildVegetationLayer(data) {
-  if (vegetationLayer) map.removeLayer(vegetationLayer);
+  clearLayer(vegetationLayer);
   vegetationLayer = L.geoJSON(data, {
     style: function (feat) {
       return {
@@ -702,14 +702,8 @@ function _loadHailBoth(cb) {
 
 function _drawHailLayer(type) {
   // ორივე ფენა გამოვრთოთ
-  if (hailTotalLayer) {
-    map.removeLayer(hailTotalLayer);
-    hailTotalLayer = null;
-  }
-  if (hail100Layer) {
-    map.removeLayer(hail100Layer);
-    hail100Layer = null;
-  }
+  hailTotalLayer = clearLayer(hailTotalLayer);
+  hail100Layer = clearLayer(hail100Layer);
 
   var data = type === "total" ? hailTotalData : hail100Data;
   var valKey = type === "total" ? "Total_km2" : "P100_km2";
@@ -909,7 +903,7 @@ function loadSoilsBorn() {
 }
 
 function buildSoilsLayer(data) {
-  if (soilsLayer) map.removeLayer(soilsLayer);
+  clearLayer(soilsLayer);
   soilsLayer = L.geoJSON(data, {
     style: function (feat) {
       return {
@@ -943,7 +937,7 @@ function buildSoilsLayer(data) {
 }
 
 function buildSoilsBornLayer(data) {
-  if (soilsBornLayer) map.removeLayer(soilsBornLayer);
+  clearLayer(soilsBornLayer);
   soilsBornLayer = L.geoJSON(data, {
     style: function (feat) {
       return {
@@ -1467,7 +1461,7 @@ function loadGeology() {
 
 function renderGeologyLayers() {
   // ---- 1. გეოლოგიური პოლიგონები ----
-  if (geologyLayer) map.removeLayer(geologyLayer);
+  clearLayer(geologyLayer);
   geologyLayer = L.geoJSON(geologyData, {
     style: function (feat) {
       return {
@@ -1499,7 +1493,7 @@ function renderGeologyLayers() {
   }).addTo(map);
 
   // ---- 2. რღვევები (Foults) ----
-  if (foultsLayer) map.removeLayer(foultsLayer);
+  clearLayer(foultsLayer);
   foultsLayer = L.geoJSON(foultsData, {
     style: function () {
       return { color: "#CC0000", weight: 2, opacity: 0.8, dashArray: "6,3" };
@@ -1507,7 +1501,7 @@ function renderGeologyLayers() {
   }).addTo(map);
 
   // ---- 3. ლითონური წიაღისეული ----
-  if (metalOreLayer) map.removeLayer(metalOreLayer);
+  clearLayer(metalOreLayer);
   metalOreLayer = L.geoJSON(metalOreData, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -1534,7 +1528,7 @@ function renderGeologyLayers() {
   }).addTo(map);
 
   // ---- 4. არალითონური წიაღისეული ----
-  if (nonmetalOreLayer) map.removeLayer(nonmetalOreLayer);
+  clearLayer(nonmetalOreLayer);
   nonmetalOreLayer = L.geoJSON(nonmetalOreData, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;
@@ -1564,7 +1558,7 @@ function renderGeologyLayers() {
   }).addTo(map);
 
   // ---- 5. ნავთობი და გაზი ----
-  if (oilGasLayer) map.removeLayer(oilGasLayer);
+  clearLayer(oilGasLayer);
   oilGasLayer = L.geoJSON(oilGasData, {
     pointToLayer: function (feat, latlng) {
       var p = feat.properties;

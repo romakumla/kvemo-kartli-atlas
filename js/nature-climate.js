@@ -50,7 +50,7 @@ var PRECIP_CLASSES = [
 ];
 
 function _buildTempLayer(data, refObj, onClickFn) {
-  if (refObj.layer) map.removeLayer(refObj.layer);
+  clearLayer(refObj.layer);
   var layer = L.geoJSON(data, {
     style: function (feat) {
       var c = feat.properties.Color;
@@ -347,7 +347,7 @@ var FROST_DAYS_CLASSES = [
 ];
 
 function _buildClimateLayer(data, layerRef, onClickFn) {
-  if (layerRef.layer) map.removeLayer(layerRef.layer);
+  clearLayer(layerRef.layer);
   var layer = L.geoJSON(data, {
     style: function (feat) {
       var c = feat.properties.Color;
@@ -651,7 +651,7 @@ function loadDrought() {
 }
 
 function buildHeatWavesLayer(data) {
-  if (heatWavesLayer) map.removeLayer(heatWavesLayer);
+  clearLayer(heatWavesLayer);
   heatWavesLayer = L.geoJSON(data, {
     style: function (feat) {
       var c = feat.properties.Color;
@@ -699,7 +699,7 @@ function buildHeatWavesLayer(data) {
 }
 
 function buildDroughtLayer(data) {
-  if (droughtLayer) map.removeLayer(droughtLayer);
+  clearLayer(droughtLayer);
   droughtLayer = L.geoJSON(data, {
     style: function (feat) {
       var c = feat.properties.Color;
@@ -992,18 +992,9 @@ function loadMadflow() {
 
 function renderMadflowLayers(data) {
   // ---- ზონირება (Polygons) ----
-  if (madflowZoningLayer) {
-    map.removeLayer(madflowZoningLayer);
-    madflowZoningLayer = null;
-  }
-  if (madflowPointLayer) {
-    map.removeLayer(madflowPointLayer);
-    madflowPointLayer = null;
-  }
-  if (madflowErosionLayer) {
-    map.removeLayer(madflowErosionLayer);
-    madflowErosionLayer = null;
-  }
+  madflowZoningLayer = clearLayer(madflowZoningLayer);
+  madflowPointLayer = clearLayer(madflowPointLayer);
+  madflowErosionLayer = clearLayer(madflowErosionLayer);
 
   var zoningFeats = {
     type: "FeatureCollection",

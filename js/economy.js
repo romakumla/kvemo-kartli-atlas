@@ -37,7 +37,7 @@ function loadBotanica() {
 }
 
 function buildBotanicaLayer(data) {
-  if (botanicaLayer) map.removeLayer(botanicaLayer);
+  clearLayer(botanicaLayer);
   botanicaLayer = L.geoJSON(data, {
     style: function (feat) {
       return {
@@ -196,7 +196,7 @@ function loadEnergetika() {
 }
 
 function buildEnergetikaLayer(data) {
-  if (energetikaLayer) map.removeLayer(energetikaLayer);
+  clearLayer(energetikaLayer);
 
   // დიდი → პატარა დალაგება, რომ პატარები ზემოდან იყოს
   var sorted = data.features.slice().sort(function (a, b) {
@@ -452,7 +452,7 @@ function loadCropZones() {
 }
 
 function buildCropZonesLayer(data) {
-  if (cropZonesLayer) map.removeLayer(cropZonesLayer);
+  clearLayer(cropZonesLayer);
   cropZonesLayer = L.geoJSON(data, {
     style: function (feat) {
       return {
@@ -661,7 +661,7 @@ function loadLand() {
 }
 
 function buildLandLayer(data) {
-  if (landLayer) map.removeLayer(landLayer);
+  clearLayer(landLayer);
   var theme = LAND_THEMES[activeLandTheme];
   landLayer = L.geoJSON(data, {
     style: function (feat) {
@@ -951,14 +951,8 @@ function loadSun() {
 }
 
 function buildSunLayers(data) {
-  if (sunZoneLayer) {
-    map.removeLayer(sunZoneLayer);
-    sunZoneLayer = null;
-  }
-  if (sunStationLayer) {
-    map.removeLayer(sunStationLayer);
-    sunStationLayer = null;
-  }
+  sunZoneLayer = clearLayer(sunZoneLayer);
+  sunStationLayer = clearLayer(sunStationLayer);
 
   var zones = {
     type: "FeatureCollection",
@@ -1437,14 +1431,8 @@ function makeAgriPieSVG(p, size) {
 }
 
 function buildAgriLayer(data) {
-  if (agriLayer) {
-    map.removeLayer(agriLayer);
-    agriLayer = null;
-  }
-  if (agriMarkerLayer) {
-    map.removeLayer(agriMarkerLayer);
-    agriMarkerLayer = null;
-  }
+  agriLayer = clearLayer(agriLayer);
+  agriMarkerLayer = clearLayer(agriMarkerLayer);
 
   // მუნიციპალიტეტების მსუბუქი ფონი
   agriLayer = L.geoJSON(data, {
@@ -1675,7 +1663,7 @@ function loadAgriSpec() {
 }
 
 function buildAgriSpecLayer(data) {
-  if (agriSpecLayer) map.removeLayer(agriSpecLayer);
+  clearLayer(agriSpecLayer);
   agriSpecLayer = L.geoJSON(data, {
     style: function (feat) {
       return {
@@ -1814,42 +1802,15 @@ function updateAgriSpecLegend() {
 }
 
 function removeAllEconomyLayers() {
-  if (botanicaLayer) {
-    map.removeLayer(botanicaLayer);
-    botanicaLayer = null;
-  }
-  if (energetikaLayer) {
-    map.removeLayer(energetikaLayer);
-    energetikaLayer = null;
-  }
-  if (cropZonesLayer) {
-    map.removeLayer(cropZonesLayer);
-    cropZonesLayer = null;
-  }
-  if (landLayer) {
-    map.removeLayer(landLayer);
-    landLayer = null;
-  }
-  if (sunZoneLayer) {
-    map.removeLayer(sunZoneLayer);
-    sunZoneLayer = null;
-  }
-  if (sunStationLayer) {
-    map.removeLayer(sunStationLayer);
-    sunStationLayer = null;
-  }
-  if (agriLayer) {
-    map.removeLayer(agriLayer);
-    agriLayer = null;
-  }
-  if (agriMarkerLayer) {
-    map.removeLayer(agriMarkerLayer);
-    agriMarkerLayer = null;
-  }
-  if (agriSpecLayer) {
-    map.removeLayer(agriSpecLayer);
-    agriSpecLayer = null;
-  }
+  botanicaLayer = clearLayer(botanicaLayer);
+  energetikaLayer = clearLayer(energetikaLayer);
+  cropZonesLayer = clearLayer(cropZonesLayer);
+  landLayer = clearLayer(landLayer);
+  sunZoneLayer = clearLayer(sunZoneLayer);
+  sunStationLayer = clearLayer(sunStationLayer);
+  agriLayer = clearLayer(agriLayer);
+  agriMarkerLayer = clearLayer(agriMarkerLayer);
+  agriSpecLayer = clearLayer(agriSpecLayer);
 }
 
 // ===== Start-up (called from app.js) =====

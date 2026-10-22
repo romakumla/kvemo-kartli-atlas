@@ -270,14 +270,8 @@ function loadNeutralLayers() {
 }
 
 function removeNeutralLayers() {
-  if (neutralBoundaryLayer) {
-    map.removeLayer(neutralBoundaryLayer);
-    neutralBoundaryLayer = null;
-  }
-  if (neutralLabelLayer) {
-    map.removeLayer(neutralLabelLayer);
-    neutralLabelLayer = null;
-  }
+  neutralBoundaryLayer = clearLayer(neutralBoundaryLayer);
+  neutralLabelLayer = clearLayer(neutralLabelLayer);
 }
 
 // ===== State =====
@@ -300,6 +294,14 @@ var censusScope = "selected";
 var censusChart = null;
 
 var bottomChart = null;
+
+// ===== ფენის მოხსნა =====
+// თუ ფენა რუკაზეა, მოხსნის; ყოველთვის აბრუნებს null-ს, ამიტომ გამოყენება:
+//   someLayer = clearLayer(someLayer);
+function clearLayer(layer) {
+  if (layer) map.removeLayer(layer);
+  return null;
+}
 
 // ===== საერთო ელემენტები: info card, tooltip, დიაგრამის სათაური =====
 // info card-ის შევსება და გამოჩენა
@@ -520,46 +522,16 @@ function resetChartPanel() {
 }
 
 function removeAllThematic() {
-  if (currentLayer) {
-    map.removeLayer(currentLayer);
-    currentLayer = null;
-  }
-  if (ethnicsLayer) {
-    map.removeLayer(ethnicsLayer);
-    ethnicsLayer = null;
-  }
-  if (religionLayer) {
-    map.removeLayer(religionLayer);
-    religionLayer = null;
-  }
-  if (deathLayerRef.layer) {
-    map.removeLayer(deathLayerRef.layer);
-    deathLayerRef.layer = null;
-  }
-  if (birthLayerRef.layer) {
-    map.removeLayer(birthLayerRef.layer);
-    birthLayerRef.layer = null;
-  }
-  if (densityLayerRef.layer) {
-    map.removeLayer(densityLayerRef.layer);
-    densityLayerRef.layer = null;
-  }
-  if (maritalMenLayer) {
-    map.removeLayer(maritalMenLayer);
-    maritalMenLayer = null;
-  }
-  if (maritalWomenLayer) {
-    map.removeLayer(maritalWomenLayer);
-    maritalWomenLayer = null;
-  }
-  if (idpPolyLayer) {
-    map.removeLayer(idpPolyLayer);
-    idpPolyLayer = null;
-  }
-  if (idpPointLayer) {
-    map.removeLayer(idpPointLayer);
-    idpPointLayer = null;
-  }
+  currentLayer = clearLayer(currentLayer);
+  ethnicsLayer = clearLayer(ethnicsLayer);
+  religionLayer = clearLayer(religionLayer);
+  deathLayerRef.layer = clearLayer(deathLayerRef.layer);
+  birthLayerRef.layer = clearLayer(birthLayerRef.layer);
+  densityLayerRef.layer = clearLayer(densityLayerRef.layer);
+  maritalMenLayer = clearLayer(maritalMenLayer);
+  maritalWomenLayer = clearLayer(maritalWomenLayer);
+  idpPolyLayer = clearLayer(idpPolyLayer);
+  idpPointLayer = clearLayer(idpPointLayer);
   document.getElementById("infoCard").classList.add("hidden");
   document.getElementById("chartEmpty").style.display = "flex";
   document.getElementById("chartCanvas").classList.add("hidden");
