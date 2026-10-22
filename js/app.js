@@ -65,6 +65,7 @@ function resetThemeState() {
 
 // მთავარი პანელი: ნეიტრალური რუკა მუნიციპალიტეტებით
 function showMainView() {
+  newNavigation();
   showOnlyView("mainLayerView");
   resetThemeState();
   resetPopLegend();
@@ -74,6 +75,7 @@ function showMainView() {
 
 // თემის გახსნა: ჩაირთვება პირველი ქვეფენა — ისე, თითქოს მის ღილაკს დააწკაპეს
 function openTheme(theme) {
+  newNavigation();
   showOnlyView(theme.view);
   resetThemeState();
   removeNeutralLayers();
@@ -199,10 +201,14 @@ var _searchData = null;
 var _searchMarker = null;
 
 function loadSearchData(cb) {
-  loadData("data/settlements.geojson", function (d) {
-    _searchData = d.features;
-    cb(_searchData);
-  });
+  loadData(
+    "data/settlements.geojson",
+    function (d) {
+      _searchData = d.features;
+      cb(_searchData);
+    },
+    true, // ძიება ნავიგაციაზე არ არის დამოკიდებული
+  );
 }
 
 (function () {
