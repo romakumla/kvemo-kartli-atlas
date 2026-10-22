@@ -1393,6 +1393,80 @@ var geologyData = null;
 
 var foultsData = null;
 
+// წიაღისეულის საბადოები მუნიციპალიტეტების მიხედვით (ლითონური / არალითონური / ნავთობი და გაზი)
+function showBottomChartMinerals() {
+  var ctx = prepareBottomChart();
+  var groups = [
+    { data: metalOreData, label: "ლითონური", color: "#B5651D" },
+    { data: nonmetalOreData, label: "არალითონური", color: "#7A8B99" },
+    { data: oilGasData, label: "ნავთობი და გაზი", color: "#2C2C2C" },
+  ];
+  var counts = {};
+  groups.forEach(function (g, gi) {
+    ((g.data && g.data.features) || []).forEach(function (f) {
+      var m = muniName(f.properties.raioni) || f.properties.raioni || "–";
+      counts[m] = counts[m] || [0, 0, 0];
+      counts[m][gi]++;
+    });
+  });
+  var munis = Object.keys(counts).sort(function (a, b) {
+    var sa = counts[a][0] + counts[a][1] + counts[a][2];
+    var sb = counts[b][0] + counts[b][1] + counts[b][2];
+    return sb - sa;
+  });
+  var total = munis.reduce(function (t, m) {
+    return t + counts[m][0] + counts[m][1] + counts[m][2];
+  }, 0);
+
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: munis,
+      datasets: groups.map(function (g, gi) {
+        return {
+          label: g.label,
+          data: munis.map(function (m) {
+            return counts[m][gi];
+          }),
+          backgroundColor: g.color + "CC",
+          borderColor: g.color,
+          borderWidth: 1,
+          borderRadius: 3,
+        };
+      }),
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "top",
+          labels: { font: { family: "Fira Sans", size: 10 }, boxWidth: 10 },
+        },
+        title: {
+          display: true,
+          text: "წიაღისეულის საბადოები მუნიციპალიტეტების მიხედვით — სულ " + total,
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 4 },
+        },
+      },
+      scales: {
+        x: {
+          stacked: true,
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
+          grid: { display: false },
+        },
+        y: {
+          stacked: true,
+          beginAtZero: true,
+          ticks: { precision: 0, font: { family: "Fira Sans", size: 10 } },
+        },
+      },
+    },
+  });
+}
+
 var metalOreData = null;
 
 var nonmetalOreData = null;
@@ -1532,6 +1606,8 @@ function renderGeologyLayers() {
           '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
           "</span></div>";
+        showBottomChartMinerals();
+        highlightBottomBars(muniName(p.raioni));
       });
       return marker;
     },
@@ -1566,6 +1642,8 @@ function renderGeologyLayers() {
           '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
           "</span></div>";
+        showBottomChartMinerals();
+        highlightBottomBars(muniName(p.raioni));
       });
       return marker;
     },
@@ -1597,6 +1675,8 @@ function renderGeologyLayers() {
           '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
           "</span></div>";
+        showBottomChartMinerals();
+        highlightBottomBars(muniName(p.raioni));
       });
       return marker;
     },

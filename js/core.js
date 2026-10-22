@@ -369,17 +369,34 @@ function highlightBottomBars(match) {
         : function (l) { return l === String(match); };
   var on = labels.map(function (l, i) { return !!test(l, i); });
   if (on.indexOf(true) === -1) return false;
+  var first = on.indexOf(true);
   ch.data.datasets.forEach(function (ds) {
+    var legend = {};
     ["backgroundColor", "borderColor"].forEach(function (prop) {
       var v = ds[prop];
       if (v === undefined) return;
       var base = labels.map(function (_, i) { return Array.isArray(v) ? v[i] : v; });
+      legend[prop] = base[first];
       ds[prop] = base.map(function (c, i) { return on[i] ? c : fadeColor(c); });
     });
+    ds._legendColor = legend;
   });
   // სვეტის წარწერაც: არჩეული — მუქი, დანარჩენი — ბაცი
   var o = ch.config.options;
   if (["pie", "doughnut", "polarArea", "radar"].indexOf(ch.config.type) === -1) {
+    // ლეგენდის ფერი არ ბაცდება (Chart.js მას პირველი სვეტიდან იღებს)
+    o.plugins = o.plugins || {};
+    o.plugins.legend = o.plugins.legend || {};
+    o.plugins.legend.labels = o.plugins.legend.labels || {};
+    o.plugins.legend.labels.generateLabels = function (chart) {
+      var items = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+      items.forEach(function (it) {
+        var lc = (chart.data.datasets[it.datasetIndex] || {})._legendColor;
+        if (lc && lc.backgroundColor) it.fillStyle = lc.backgroundColor;
+        if (lc && lc.borderColor) it.strokeStyle = lc.borderColor;
+      });
+      return items;
+    };
     var axis = o.indexAxis === "y" ? "y" : "x";
     o.scales = o.scales || {};
     o.scales[axis] = o.scales[axis] || {};
