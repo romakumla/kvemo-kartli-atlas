@@ -781,9 +781,9 @@ function updateLandLegend() {
     else rangeLabel = prev.toLocaleString() + "–" + stop[0].toLocaleString();
     html +=
       '<div class="eth-legend-item" style="margin-bottom:4px;">' +
-      '<span class="eth-dot" style="background:' +
+      '<span class="legend-swatch" style="background:' +
       stop[1] +
-      ';border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span>' +
+      ';border-color:rgba(0,0,0,0.15);"></span>' +
       '<span style="font-size:10px;">' +
       rangeLabel +
       theme.unit +
@@ -1203,9 +1203,9 @@ function updateSunLegend() {
   SUN_ZONES.forEach(function (z) {
     html +=
       '<div class="eth-legend-item" style="margin-bottom:3px;">' +
-      '<span class="eth-dot" style="background:' +
+      '<span class="legend-swatch" style="background:' +
       z.color +
-      ';border:1px solid rgba(0,0,0,0.15);border-radius:3px;"></span>' +
+      ';border-color:rgba(0,0,0,0.15);"></span>' +
       '<span style="font-size:10px;">' +
       z.key +
       "</span></div>";

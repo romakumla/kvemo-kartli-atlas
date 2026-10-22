@@ -222,9 +222,9 @@ function updateTcLegend() {
   for (var i = TC_CATEGORIES.length - 1; i >= 0; i--) {
     html +=
       '<div style="display:flex;align-items:center;margin-bottom:5px;">' +
-      '<span style="display:inline-block;width:16px;height:16px;background:' +
+      '<span class="legend-swatch" style="background:' +
       TC_CATEGORIES[i].color +
-      ';border:1px solid #999;flex-shrink:0;"></span>' +
+      ';border-color:#999;"></span>' +
       '<span style="font-size:10px;margin-left:7px;">' +
       TC_CATEGORIES[i].key +
       "</span></div>";
@@ -770,8 +770,8 @@ function updateViticultureLegend() {
   VIT_ZONES.forEach(function (z) {
     html +=
       '<div style="display:flex;align-items:center;margin-bottom:6px;">' +
-      '<span style="width:15px;height:15px;background:' + z.color +
-      ';border:1px solid ' + darken(z.color) + ';flex-shrink:0;"></span>' +
+      '<span class="legend-swatch" style="background:' + z.color +
+      ';border-color:' + darken(z.color) + ';"></span>' +
       '<span style="font-size:10px;margin-left:7px;line-height:1.3;">' + z.key + "</span></div>";
   });
   html +=
@@ -925,8 +925,8 @@ function updateProtectedAreasLegend() {
   var html =
     '<div class="section-title">დაცული ტერიტორიები</div>' +
     '<div style="display:flex;align-items:center;margin-bottom:8px;">' +
-    '<span style="width:16px;height:16px;background:' + PA_FILL +
-    ';border:1.6px solid ' + PA_STROKE + ';flex-shrink:0;"></span>' +
+    '<span class="legend-swatch" style="background:' + PA_FILL +
+    ';border-color:' + PA_STROKE + ';"></span>' +
     '<span style="font-size:10px;margin-left:7px;">დაცული ტერიტორია</span></div>' +
     '<div class="section-title" style="margin-top:8px;">კატეგორიები</div>';
   cats.forEach(function (c) {

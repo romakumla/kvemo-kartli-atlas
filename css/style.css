@@ -773,6 +773,20 @@ aside {
   font-size: 10px;
   font-weight: 500;
 }
+/* ლეგენდაში ფართობის (პოლიგონის) სიმბოლო — ყველა რუკაზე ერთნაირი:
+   14×14 კვადრატი 1px კონტურით. ფერი — style="background:…", კონტურის ფერი — "border-color:…".
+   წერტილოვანი სიმბოლოები (წრე, ხატულა) რუკის სიმბოლოს იმეორებს და ამ კლასს არ იყენებს. */
+.legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0;
+  flex-shrink: 0;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
 .eth-dot {
   width: 12px;
   height: 12px;
