@@ -149,6 +149,7 @@ function buildHealthLayers() {
       layer.on("click", function () {
         showInfoHealthPoly(p);
         showBottomChartHealth();
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -180,6 +181,8 @@ function buildHealthLayers() {
         });
         marker.on("click", function () {
           showInfoHealthClinic(p);
+          showBottomChartHealth();
+          highlightBottomBars(muniName(p.Municipal_ || p.Municipal1));
         });
         return marker;
       },
@@ -522,6 +525,7 @@ function buildSocialLayer() {
       layer.on("click", function () {
         showInfoSocial(p);
         showBottomChartSocial();
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -957,6 +961,7 @@ function buildZooLayer(key, data, id) {
           layer.on("click", function () {
             showInfoZooMuni(name, total, cfg, muniTotals);
             showBottomChartZoo(muniTotals, cfg);
+            highlightBottomBars(name);
           });
         },
       }).addTo(map);
@@ -1005,6 +1010,7 @@ function buildZooLayer(key, data, id) {
           marker.on("click", function () {
             showInfoZoo(p, cfg);
             showBottomChartZoo(muniTotals, cfg);
+            highlightBottomBars(zooNormMuni(p.Municipal_ || p.Municipal1 || ""));
           });
           return marker;
         },
