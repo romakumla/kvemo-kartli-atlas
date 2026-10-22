@@ -1,6 +1,9 @@
 # ქვემო ქართლის რეგიონის ინტერაქტიული გეოგრაფიული ატლასი
 
-**ვებგვერდი:** <https://romakumla.github.io/kvemo-kartli-atlas/>
+[![DOI](https://zenodo.org/badge/1273368940.svg)](https://doi.org/10.5281/zenodo.23570477)
+
+**ვებგვერდი:** <https://romakumla.github.io/kvemo-kartli-atlas/>  
+**DOI:** [10.5281/zenodo.23570477](https://doi.org/10.5281/zenodo.23570477) (Zenodo; ყოველთვის უახლეს ვერსიაზე მიუთითებს)
 
 ქვემო ქართლის რეგიონის თემატური ვებ ატლასი საქართველოში ერთ-ერთი პირველი ინტერაქტიული რეგიონული გეოგრაფიული ატლასი. მომზადებულია ივანე ჯავახიშვილის სახელობის თბილისის სახელმწიფო უნივერსიტეტის ვახუშტი ბაგრატიონის სახელობის გეოგრაფიის ინსტიტუტში, შოთა რუსთაველის საქართველოს ეროვნული სამეცნიერო ფონდის საგრანტო პროექტის **FR-22-4153** ფარგლებში.
 
@@ -126,8 +129,8 @@ python3 -m http.server 8000
 
 ### ციტირება
 
-> ლიპარტელიანი გ., კუმლაძე რ., ბოლაშვილი ნ., ქურთუბაძე მ., ცხაკაია-გაგუა თ., ჭიჭინაძე თ., სუქნიძე ნ., სოლოღაშვილი ნ., ხორბალაძე ს., წირღვავა გ., ღვინაძე რ., ნიკოლეიშვილი ს., შეროზია ა. (2026). ქვემო ქართლის რეგიონის ინტერაქტიული გეოგრაფიული ატლასი. ვახუშტი ბაგრატიონის სახელობის გეოგრაფიის ინსტიტუტი, თსუ; SRNSFG პროექტი FR-22-4153. <https://romakumla.github.io/kvemo-kartli-atlas/>
+> ლიპარტელიანი გ., კუმლაძე რ., ბოლაშვილი ნ., ქურთუბაძე მ., ცხაკაია-გაგუა თ., ჭიჭინაძე თ., სუქნიძე ნ., სოლოღაშვილი ნ., ხორბალაძე ს., წირღვავა გ., ღვინაძე რ., ნიკოლეიშვილი ს., შეროზია ა. (2026). ქვემო ქართლის რეგიონის ინტერაქტიული გეოგრაფიული ატლასი. ვახუშტი ბაგრატიონის სახელობის გეოგრაფიის ინსტიტუტი, თსუ; SRNSFG პროექტი FR-22-4153. <https://romakumla.github.io/kvemo-kartli-atlas/>. <https://doi.org/10.5281/zenodo.23570477>
 
-> Liparteliani G., Kumladze R., Bolashvili N., Kurtubadze M., Tskhakaia-Gagua T., Chichinadze T., Suknidze N., Sologhashvili N., Khorbaladze S., Tsirghvava G., Ghvinadze R., Nikoleishvili S., Sherozia A. (2026). *Interactive Geographical Atlas of the Kvemo Kartli Region*. Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University. <https://romakumla.github.io/kvemo-kartli-atlas/>
+> Liparteliani G., Kumladze R., Bolashvili N., Kurtubadze M., Tskhakaia-Gagua T., Chichinadze T., Suknidze N., Sologhashvili N., Khorbaladze S., Tsirghvava G., Ghvinadze R., Nikoleishvili S., Sherozia A. (2026). *Interactive Geographical Atlas of the Kvemo Kartli Region*. Vakhushti Bagrationi Institute of Geography, Ivane Javakhishvili Tbilisi State University. <https://romakumla.github.io/kvemo-kartli-atlas/>. <https://doi.org/10.5281/zenodo.23570477>
 
-GitHub-ის გვერდზე „Cite this repository“ ღილაკი (ფაილი `CITATION.cff`) მზა ციტირებას იძლევა APA და BibTeX ფორმატებში. ატლასის მეტამონაცემები Zenodo-სთვის — `.zenodo.json`.
+GitHub-ის გვერდზე „Cite this repository“ ღილაკი (ფაილი `CITATION.cff`) მზა ციტირებას იძლევა APA და BibTeX ფორმატებში. ატლასის მეტამონაცემები Zenodo-სთვის — `.zenodo.json`. ატლასი დაარქივებულია Zenodo-ზე: ყოველი ახალი GitHub release (მაგ. `v1.1.0`) ავტომატურად ახალ ვერსიად იქმნება, საკუთარი DOI-ით; ზემოთ მოცემული DOI ყოველთვის უახლეს ვერსიაზე მიუთითებს.

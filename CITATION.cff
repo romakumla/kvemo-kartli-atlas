@@ -2,6 +2,7 @@ cff-version: 1.2.0
 message: "If you use this atlas, please cite it as below."
 title: "Interactive Geographical Atlas of the Kvemo Kartli Region"
 type: dataset
+doi: "10.5281/zenodo.23570477"
 authors:
   - family-names: "Liparteliani"
     given-names: "Guliko"
