@@ -475,7 +475,9 @@ function fadeColor(c) {
   return "rgba(" + r + "," + g + "," + b + "," + +(a * BAR_FADE_ALPHA).toFixed(3) + ")";
 }
 
-function highlightBottomBars(match) {
+// onlyDataset (არასავალდებულო): მონიშნოს მხოლოდ ამ dataset-ის სვეტი (დაჯგუფებულ
+// დიაგრამაზე — მაგ. მხოლოდ ლითონური საბადოები არჩეულ მუნიციპალიტეტში)
+function highlightBottomBars(match, onlyDataset) {
   var ch = bottomChart;
   if (!ch || !ch.data || !ch.data.labels) return false;
   var labels = ch.data.labels.map(function (l) {
@@ -490,14 +492,15 @@ function highlightBottomBars(match) {
   var on = labels.map(function (l, i) { return !!test(l, i); });
   if (on.indexOf(true) === -1) return false;
   var first = on.indexOf(true);
-  ch.data.datasets.forEach(function (ds) {
+  ch.data.datasets.forEach(function (ds, di) {
+    var dsOn = onlyDataset === undefined || di === onlyDataset;
     var legend = {};
     ["backgroundColor", "borderColor"].forEach(function (prop) {
       var v = ds[prop];
       if (v === undefined) return;
       var base = labels.map(function (_, i) { return Array.isArray(v) ? v[i] : v; });
       legend[prop] = base[first];
-      ds[prop] = base.map(function (c, i) { return on[i] ? c : fadeColor(c); });
+      ds[prop] = base.map(function (c, i) { return on[i] && dsOn ? c : fadeColor(c); });
     });
     ds._legendColor = legend;
   });
