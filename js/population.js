@@ -1690,7 +1690,10 @@ function getCensusData() {
     var muni = selectedProps.Municipal_;
     var mf = allFeatures.filter((f) => f.properties.Municipal_ === muni);
     return {
-      label: selectedProps.Municipal_ || "მუნიციპ.",
+      label:
+        CENSUS_MUNI_NAMES[selectedProps.Municipal1] ||
+        selectedProps.Municipal_ ||
+        "მუნიციპ.",
       pop89: sumPop(mf, "Pop_1989"),
       pop02: sumPop(mf, "Pop_2002"),
       pop14: sumPop(mf, "Pop_2014"),
@@ -1782,19 +1785,53 @@ function renderCensusModal() {
     var p = (((b - a) / a) * 100).toFixed(1);
     return `<span class="${p >= 0 ? "change-pos" : "change-neg"}">${p >= 0 ? "+" : ""}${p}%</span>`;
   }
+  function rowHtml(name, p, cls) {
+    return `<div class="census-table-row${cls ? " " + cls : ""}"><span>${name}</span><span>${fmt(p.Pop_1989)}</span><span>${fmt(p.Pop_2002)}</span><span>${fmt(p.Pop_2014)}</span>${chgCell(p.Pop_1989, p.Pop_2014)}</div>`;
+  }
+
+  // „რეგიონი სულ“: დასახლებების ნაცვლად 7 მუნიციპალიტეტი (დასახლებების ჯამი) + სულ
+  if (censusScope === "all") {
+    var byMuni = {};
+    data.rows.forEach(function (p) {
+      var name = CENSUS_MUNI_NAMES[p.Municipal1] || p.Municipal_ || "–";
+      var m = byMuni[name] || (byMuni[name] = { Pop_1989: 0, Pop_2002: 0, Pop_2014: 0 });
+      m.Pop_1989 += p.Pop_1989 || 0;
+      m.Pop_2002 += p.Pop_2002 || 0;
+      m.Pop_2014 += p.Pop_2014 || 0;
+    });
+    var munis = Object.keys(byMuni).sort(function (a, b) {
+      return byMuni[b].Pop_2014 - byMuni[a].Pop_2014;
+    });
+    document.getElementById("censusTable").innerHTML =
+      `<div class="census-table-row census-table-head"><span>მუნიციპალიტეტი</span><span>1989</span><span>2002</span><span>2014</span><span>ცვლ.</span></div>` +
+      munis.map((n) => rowHtml(n, byMuni[n])).join("") +
+      rowHtml(
+        "სულ",
+        { Pop_1989: data.pop89, Pop_2002: data.pop02, Pop_2014: data.pop14 },
+        "census-table-total",
+      );
+    return;
+  }
+
   var rows = data.rows
     .filter((p) => p.Pop_2014 || p.Pop_1989)
     .sort((a, b) => (b.Pop_2014 || 0) - (a.Pop_2014 || 0))
     .slice(0, 8);
   document.getElementById("censusTable").innerHTML =
     `<div class="census-table-row census-table-head"><span>დასახლება</span><span>1989</span><span>2002</span><span>2014</span><span>ცვლ.</span></div>` +
-    rows
-      .map(
-        (p) =>
-          `<div class="census-table-row"><span>${p.Name_Geo || p.Name_Eng || "–"}</span><span>${fmt(p.Pop_1989)}</span><span>${fmt(p.Pop_2002)}</span><span>${fmt(p.Pop_2014)}</span>${chgCell(p.Pop_1989, p.Pop_2014)}</div>`,
-      )
-      .join("");
+    rows.map((p) => rowHtml(p.Name_Geo || p.Name_Eng || "–", p)).join("");
 }
+
+// settlements.geojson-ის Municipal1 → მუნიციპალიტეტის ქართული სახელი
+var CENSUS_MUNI_NAMES = {
+  "Bolnisi Municipality": "ბოლნისი",
+  "Marneuli Municipality": "მარნეული",
+  "Dmanisi Municipality": "დმანისი",
+  "Rustavi Municipality": "რუსთავი",
+  "Tsalka Municipality": "წალკა",
+  "Tetritskaro Municipality": "თეთრიწყარო",
+  "Gardabani Municipality": "გარდაბანი",
+};
 
 function closeCensus() {
   document.getElementById("censusOverlay").classList.remove("active");
