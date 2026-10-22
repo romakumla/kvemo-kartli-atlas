@@ -818,7 +818,7 @@ function renderEarthquakeLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon, zIndexOffset: 1000 });
-      pointTooltip(marker, "სეისმური სადგური — " + p.Name_Geo, -18);
+      pointTooltip(marker, "სეისმური სადგური" + (p.Code ? " " + p.Code + " (" + p.Station_Geo + ")" : "") + " — " + p.Name_Geo, -18);
       marker.on("click", function () {
         showInfoSeismicStation(p, latlng);
         showBottomChartStations("seismic");
@@ -1110,10 +1110,13 @@ function showInfoSeismicStation(p, latlng) {
     ? `<span class="info-type-badge badge-village" style="background:#FDECEA;color:#C62828;border:1px solid #C6282855;">მოქმედი</span>`
     : `<span class="info-type-badge badge-city" style="background:#f3f4f6;color:#999;border:1px solid #ccc;">შეჩერებული</span>`;
   showInfoCard(`
-    <div class="info-name">სეისმური სადგური</div>
+    <div class="info-name">სეისმური სადგური${p.Code ? " " + p.Code : ""}</div>
     ${badge}
+    ${p.Code ? `<div class="info-row"><span class="info-key">სახელი</span><span class="info-val">${p.Station_Geo}</span></div>` : ""}
+    ${p.Near_Geo ? `<div class="info-row"><span class="info-key">უახლოესი დასახლება</span><span class="info-val">${p.Near_Geo} (~${p.Near_m < 1000 ? p.Near_m + " მ" : (p.Near_m / 1000).toFixed(1) + " კმ"})</span></div>` : ""}
     <div class="info-row"><span class="info-key">განედი</span><span class="info-val">${latlng.lat.toFixed(4)}°</span></div>
     <div class="info-row"><span class="info-key">გრძედი</span><span class="info-val">${latlng.lng.toFixed(4)}°</span></div>
+    ${p.Code ? '<div class="section-note">კოდი და სახელი — საქართველოს სეისმური მონიტორინგის ეროვნული ცენტრის სადგურების სიიდან (ies.iliauni.edu.ge)</div>' : ""}
   `);
 }
 
