@@ -158,6 +158,7 @@ function buildEducationLayers(data) {
       });
       marker.on("click", function () {
         showInfoEduSchool(p);
+        showBottomChartEdu(data);
       });
       return marker;
     },

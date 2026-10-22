@@ -923,7 +923,7 @@ var SUN_ZONES = [
   { key: "2200-2300", color: "#FADB30" },
   { key: "2100-2200", color: "#FEE588" },
   { key: "2000-2100", color: "#EEC98D" },
-  { key: "<2000", color: "#EEC98D" },
+  { key: "<2000", color: "#F5EAD7" },
 ];
 
 var SUN_STATION_TYPES = [
@@ -1044,7 +1044,7 @@ function buildSunLayers(data) {
       });
       layer.on("click", function () {
         showInfoSunZone(p);
-        showBottomChartSun(data);
+        showBottomChartSunZones(data);
       });
     },
   }).addTo(map);
@@ -1239,6 +1239,86 @@ function showBottomChartSun(data) {
         },
         x: {
           ticks: { font: { family: "Fira Sans", size: 11, weight: "500" }, maxRotation: 35 },
+          grid: { display: false },
+        },
+      },
+    },
+  });
+}
+
+// ზონაზე დაწკაპებისას: ფართობი მზის ნათების კლასების მიხედვით (კმ²)
+function showBottomChartSunZones(data) {
+  var canvas = document.getElementById("chartCanvas");
+  document.getElementById("chartEmpty").style.display = "none";
+  canvas.classList.remove("hidden");
+  var ctx = canvas.getContext("2d");
+  if (bottomChart) bottomChart.destroy();
+
+  var area = {};
+  data.features
+    .filter(function (f) {
+      return f.properties.ftype === "zone";
+    })
+    .forEach(function (f) {
+      var k = f.properties.Name_Geo;
+      area[k] = (area[k] || 0) + (f.properties.Area_km2 || 0);
+    });
+  // SUN_ZONES დიდიდან პატარისკენაა; დიაგრამაზე — პატარიდან დიდისკენ
+  var zones = SUN_ZONES.filter(function (z) {
+    return area[z.key] > 0;
+  }).reverse();
+
+  bottomChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: zones.map(function (z) {
+        return z.key;
+      }),
+      datasets: [
+        {
+          label: "ფართობი (კმ²)",
+          data: zones.map(function (z) {
+            return Math.round(area[z.key]);
+          }),
+          backgroundColor: zones.map(function (z) {
+            return z.color + "CC";
+          }),
+          borderColor: zones.map(function (z) {
+            return z.color;
+          }),
+          borderWidth: 1.5,
+          borderRadius: 4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      layout: { padding: { top: 18 } },
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: "მზის ნათების ზონების ფართობი (კმ²), საათი/წელ",
+          font: { family: "Fira Sans", size: 11, weight: "600" },
+          color: "#1A1A18",
+          padding: { bottom: 6 },
+        },
+        tooltip: {
+          callbacks: {
+            label: function (c) {
+              return " " + c.parsed.y.toLocaleString() + " კმ²";
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { font: { family: "Fira Sans", size: 10, weight: "500" } },
+        },
+        x: {
+          ticks: { font: { family: "Fira Sans", size: 11, weight: "500" } },
           grid: { display: false },
         },
       },
