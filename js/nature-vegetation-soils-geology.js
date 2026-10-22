@@ -1303,19 +1303,25 @@ function showBottomChartMinerals() {
       datasets: groups.map(function (g, gi) {
         return {
           label: g.label,
+          // 0 → null: ცარიელი ადგილი არ ტოვდება და სვეტები წარწერის ქვეშ ცენტრდება
           data: munis.map(function (m) {
-            return counts[m][gi];
+            return counts[m][gi] || null;
           }),
           backgroundColor: g.color + "CC",
           borderColor: g.color,
           borderWidth: 1,
           borderRadius: 3,
+          minBarLength: 4, // მცირე რიცხვიც (მაგ. 2 საბადო) რომ გამოჩნდეს
+          maxBarThickness: 36, // ერთი სვეტიც ისეთივე სიგანის იყოს, როგორც სხვები
+          categoryPercentage: 0.45, // ერთი მუნიციპალიტეტის სვეტები ერთმანეთთან ახლოს
+          barPercentage: 0.9,
         };
       }),
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      skipNull: true,
       plugins: {
         legend: { display: true,
           position: "top",
@@ -1331,12 +1337,10 @@ function showBottomChartMinerals() {
       },
       scales: {
         x: {
-          stacked: true,
           ticks: { font: { size: 11, weight: "500" } },
           grid: { display: false },
         },
         y: {
-          stacked: true,
           beginAtZero: true,
           ticks: { precision: 0, font: { size: 10 } },
         },
@@ -1448,7 +1452,7 @@ function renderGeologyLayers() {
           (p.raioni || "-") +
           "</span></div>");
         showBottomChartMinerals();
-        highlightBottomBars(muniName(p.raioni));
+        highlightBottomBars(muniName(p.raioni), 0);
       });
       return marker;
     },
@@ -1478,7 +1482,7 @@ function renderGeologyLayers() {
           (p.raioni || "-") +
           "</span></div>");
         showBottomChartMinerals();
-        highlightBottomBars(muniName(p.raioni));
+        highlightBottomBars(muniName(p.raioni), 1);
       });
       return marker;
     },
@@ -1505,7 +1509,7 @@ function renderGeologyLayers() {
           (p.raioni || "-") +
           "</span></div>");
         showBottomChartMinerals();
-        highlightBottomBars(muniName(p.raioni));
+        highlightBottomBars(muniName(p.raioni), 2);
       });
       return marker;
     },
