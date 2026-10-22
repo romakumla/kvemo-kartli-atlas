@@ -86,11 +86,7 @@ function buildForestLayer(data) {
       var p = feature.properties;
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 1.5, fillOpacity: 0.92 });
       });
@@ -98,8 +94,7 @@ function buildForestLayer(data) {
         forestLayer.resetStyle(layer);
       });
       layer.on("click", function () {
-        document.getElementById("infoCardContent").innerHTML =
-          '<div class="info-name" style="font-size:13px;">' +
+        showInfoCard('<div class="info-name" style="font-size:13px;">' +
           (p.Name_Geo || "") +
           "</div>" +
           '<span class="info-type-badge badge-village" style="background:' +
@@ -112,8 +107,7 @@ function buildForestLayer(data) {
           '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
           "<b>ფართობი:</b> " +
           (p.Area_km2 || 0).toLocaleString() +
-          " კმ²</div>";
-        document.getElementById("infoCard").classList.remove("hidden");
+          " კმ²</div>");
         showBottomChartForest(data);
         highlightBottomBars(p.Name_Geo);
       });
@@ -139,11 +133,7 @@ function buildVegetationLayer(data) {
       var p = feature.properties;
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 1.5, fillOpacity: 0.92 });
       });
@@ -151,8 +141,7 @@ function buildVegetationLayer(data) {
         vegetationLayer.resetStyle(layer);
       });
       layer.on("click", function () {
-        document.getElementById("infoCardContent").innerHTML =
-          '<div class="info-name" style="font-size:13px;">' +
+        showInfoCard('<div class="info-name" style="font-size:13px;">' +
           (p.Name_Geo || "") +
           "</div>" +
           '<span class="info-type-badge badge-village" style="background:' +
@@ -165,8 +154,7 @@ function buildVegetationLayer(data) {
           '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
           "<b>ფართობი:</b> " +
           (p.Area_km2 || 0).toLocaleString() +
-          " კმ²</div>";
-        document.getElementById("infoCard").classList.remove("hidden");
+          " კმ²</div>");
         showBottomChartVegetation(data);
         highlightBottomBars(p.Name_Geo);
       });
@@ -227,13 +215,7 @@ function showBottomChartForest(data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ტყეები — ფართობის განაწილება სახეობების მიხედვით (კმ²)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ტყეები — ფართობის განაწილება სახეობების მიხედვით (კმ²)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -303,13 +285,7 @@ function showBottomChartVegetation(data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "მცენარეული საფარი — ფართობის განაწილება (კმ²)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("მცენარეული საფარი — ფართობის განაწილება (კმ²)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -397,15 +373,14 @@ var soilsBornData = null;
 
 // ===== Info + Chart functions for Soils =====
 function showInfoSoils(p) {
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name" style="font-size:13px;">${p.Name_Geo || ""}</div>
     <span class="info-type-badge badge-village" style="background:${p.Color}33;color:#555;border:1px solid ${p.Color}88;">${p.Name_Eng || ""}</span>
     <div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">
       <b>FAO:</b> ${p.Soil_Name || "-"}<br>
       <b>pH:</b> ${p.soil_pH || "-"} &nbsp;|&nbsp; <b>ტექსტურა:</b> ${p.Soil_textu || "-"}<br>
       <b>ფართობი:</b> ${p.Area_km2 ? p.Area_km2.toLocaleString() + " კმ²" : "-"}
-    </div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    </div>`);
 }
 
 function showBottomChartSoils(data) {
@@ -449,13 +424,7 @@ function showBottomChartSoils(data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ნიადაგის ტიპები — ფართობის განაწილება (კმ²)",
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ნიადაგის ტიპები — ფართობის განაწილება (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
         },
@@ -485,13 +454,12 @@ function showBottomChartSoils(data) {
 
 // ===== Info + Chart functions for Soils Born =====
 function showInfoSoilsBorn(p) {
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name" style="font-size:13px;">ტიპი ${p.Soil_Geo || ""}</div>
     <span class="info-type-badge badge-village" style="background:${p.Color}33;color:#555;border:1px solid ${p.Color}88;">${p.Name_Eng ? p.Name_Eng.split("(")[0].trim() : ""}</span>
     <div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.6;">${p.Name_Geo || "-"}<br>
       <b>ფართობი:</b> ${p.Area_km2 ? p.Area_km2.toLocaleString() + " კმ²" : "-"}
-    </div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    </div>`);
 }
 
 function showBottomChartSoilsBorn(data) {
@@ -537,13 +505,7 @@ function showBottomChartSoilsBorn(data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ნიადაგ-წარმ. ქანები — ფართობის განაწილება (კმ²)",
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ნიადაგ-წარმ. ქანები — ფართობის განაწილება (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
         },
@@ -569,15 +531,14 @@ function showBottomChartSoilsBorn(data) {
 
 // ===== Info + Chart functions for Geology =====
 function showInfoGeology(p) {
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name" style="font-size:15px;font-weight:700;">${p.Index || ""}</div>
     <span class="info-type-badge badge-village" style="background:${p.Color}33;color:#555;border:1px solid ${p.Color}88;">გეოლ. ასაკი</span>
     <div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.6;">
       ${p.Name_Geo || "-"}<br>
       <i>${p.Name_Eng || ""}</i><br>
       <b>ფართობი:</b> ${p.Area_km2 ? p.Area_km2.toLocaleString() + " კმ²" : "-"}
-    </div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    </div>`);
 }
 
 function showBottomChartGeology(data) {
@@ -621,13 +582,7 @@ function showBottomChartGeology(data) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "გეოლოგიური ფენები — ფართობის განაწილება (კმ²)",
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("გეოლოგიური ფენები — ფართობის განაწილება (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
         },
@@ -777,11 +732,7 @@ function _drawHailLayer(type) {
         weight: 1.5,
         fillOpacity: 0.88,
       });
-      marker.bindTooltip(p.Name_Geo + "<br><b>" + val + " კმ²</b>", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -cls.r],
-      });
+      pointTooltip(marker, p.Name_Geo + "<br><b>" + val + " კმ²</b>", -cls.r);
       marker.on("click", function () {
         showInfoHail(p, type);
         showBottomChartHail(data, type);
@@ -808,14 +759,13 @@ function showInfoHail(p, type) {
   var val = type === "total" ? p.Total_km2 : p.P100_km2;
   var label = type === "total" ? "საერთო დაზ. ფართობი" : "100%-ით დაზ. ფართობი";
   var cls = (type === "total" ? _hailClassTotal : _hailClass100)(val);
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name" style="font-size:13px;">${p.Name_Geo || ""}</div>
     <span class="info-type-badge badge-village" style="background:${cls.color}33;color:${cls.color};border:1px solid ${cls.color}88;">${cls.cls} კმ²</span>
     <div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">
       <b>${label}:</b> ${val} კმ²<br>
       <b>საერთო:</b> ${p.Total_km2} კმ² &nbsp;|&nbsp; <b>100%:</b> ${p.P100_km2} კმ²
-    </div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    </div>`);
 }
 
 function showBottomChartHail(data, type) {
@@ -855,13 +805,7 @@ function showBottomChartHail(data, type) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: titleTxt,
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(titleTxt),
         tooltip: { callbacks: { label: (c) => ` ${c.parsed.y} კმ²` } },
       },
       scales: {
@@ -992,11 +936,7 @@ function buildSoilsLayer(data) {
       });
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoSoils(p);
         showBottomChartSoils(data);
@@ -1030,11 +970,7 @@ function buildSoilsBornLayer(data) {
       });
       var _tip = p.Soil_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoSoilsBorn(p);
         showBottomChartSoilsBorn(data);
@@ -1553,11 +1489,7 @@ function renderGeologyLayers() {
 
       var _tip = p.Index || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoGeology(p);
         showBottomChartGeology(geologyData);
@@ -1589,15 +1521,9 @@ function renderGeologyLayers() {
         icon: geoMineralIcon(p.symbol),
         zIndexOffset: 500,
       });
-      marker.bindTooltip(p.Name_Geo + " (" + p.Type_Geo + ")", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -27],
-      });
+      pointTooltip(marker, p.Name_Geo + " (" + p.Type_Geo + ")", -27);
       marker.on("click", function () {
-        document.getElementById("infoCard").classList.remove("hidden");
-        document.getElementById("infoCardContent").innerHTML =
-          '<div class="info-title">' +
+        showInfoCard('<div class="info-title">' +
           (p.Name_Geo || "") +
           "</div>" +
           '<div class="info-row"><span class="info-label">სახეობა:</span><span class="info-value">' +
@@ -1605,7 +1531,7 @@ function renderGeologyLayers() {
           "</span></div>" +
           '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
-          "</span></div>";
+          "</span></div>");
         showBottomChartMinerals();
         highlightBottomBars(muniName(p.raioni));
       });
@@ -1622,15 +1548,9 @@ function renderGeologyLayers() {
         icon: geoMineralIcon(p.symbol),
         zIndexOffset: 400,
       });
-      marker.bindTooltip(p.Name_Geo + " (" + p.Type_Geo + ")", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -27],
-      });
+      pointTooltip(marker, p.Name_Geo + " (" + p.Type_Geo + ")", -27);
       marker.on("click", function () {
-        document.getElementById("infoCard").classList.remove("hidden");
-        document.getElementById("infoCardContent").innerHTML =
-          '<div class="info-title">' +
+        showInfoCard('<div class="info-title">' +
           (p.Name_Geo || "") +
           "</div>" +
           '<div class="info-row"><span class="info-label">სახეობა:</span><span class="info-value">' +
@@ -1641,7 +1561,7 @@ function renderGeologyLayers() {
           "</span></div>" +
           '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
-          "</span></div>";
+          "</span></div>");
         showBottomChartMinerals();
         highlightBottomBars(muniName(p.raioni));
       });
@@ -1658,15 +1578,9 @@ function renderGeologyLayers() {
         icon: geoMineralIcon("navtobi"),
         zIndexOffset: 600,
       });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -27],
-      });
+      pointTooltip(marker, p.Name_Geo, -27);
       marker.on("click", function () {
-        document.getElementById("infoCard").classList.remove("hidden");
-        document.getElementById("infoCardContent").innerHTML =
-          '<div class="info-title">' +
+        showInfoCard('<div class="info-title">' +
           (p.Name_Geo || "") +
           "</div>" +
           '<div class="info-row"><span class="info-label">სახეობა:</span><span class="info-value">' +
@@ -1674,7 +1588,7 @@ function renderGeologyLayers() {
           "</span></div>" +
           '<div class="info-row"><span class="info-label">მუნიციპალიტეტი:</span><span class="info-value">' +
           (p.raioni || "-") +
-          "</span></div>";
+          "</span></div>");
         showBottomChartMinerals();
         highlightBottomBars(muniName(p.raioni));
       });

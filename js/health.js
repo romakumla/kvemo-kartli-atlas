@@ -141,11 +141,7 @@ function buildHealthLayers() {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoHealthPoly(p);
         showBottomChartHealth();
@@ -174,11 +170,7 @@ function buildHealthLayers() {
           className: "",
         });
         var marker = L.marker(latlng, { icon: icon });
-        marker.bindTooltip(p.Name_Geo, {
-          direction: "top",
-          className: "village-label",
-          offset: [0, -sz / 2 - 2],
-        });
+        pointTooltip(marker, p.Name_Geo, -sz / 2 - 2);
         marker.on("click", function () {
           showInfoHealthClinic(p);
           showBottomChartHealth();
@@ -208,8 +200,7 @@ function showInfoHealthPoly(p) {
       );
     })
     .join("");
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:#C84B3122;color:#C84B31;border:1px solid #C84B31;">საავადმყოფო / ჯანდაცვა</span>' +
@@ -232,13 +223,11 @@ function showInfoHealthPoly(p) {
     (svcHtml
       ? '<div style="margin-top:6px;font-size:9px;color:var(--text-muted);font-weight:700;margin-bottom:3px;">მომსახურების სახეები:</div>' +
         svcHtml
-      : "");
-  document.getElementById("infoCard").classList.remove("hidden");
+      : ""));
 }
 
 function showInfoHealthClinic(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:#C84B3122;color:#C84B31;border:1px solid #C84B31;">ამბულატ. კლინიკა</span>' +
@@ -251,8 +240,7 @@ function showInfoHealthClinic(p) {
     "<br>" +
     "<b>ამბ. მომსახ.:</b> " +
     (p.Outpatient || "—") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartHealth() {
@@ -317,13 +305,7 @@ function showBottomChartHealth() {
             padding: 6,
           },
         },
-        title: {
-          display: true,
-          text: "ჯანდაცვის პერსონალი და ამბ. ვიზიტები",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ჯანდაცვის პერსონალი და ამბ. ვიზიტები"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -517,11 +499,7 @@ function buildSocialLayer() {
     },
     onEachFeature: function (f, layer) {
       var p = f.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoSocial(p);
         showBottomChartSocial();
@@ -535,8 +513,7 @@ function buildSocialLayer() {
 }
 
 function showInfoSocial(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:#8A63C822;color:#5C3699;border:1px solid #8A63C8;">სოციალური დახმარება</span>' +
@@ -552,8 +529,7 @@ function showInfoSocial(p) {
     "<br>" +
     "<b>სოც. პაკეტი:</b> " +
     (p.Social_Pac || 0).toLocaleString() +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartSocial() {
@@ -629,13 +605,7 @@ function showBottomChartSocial() {
             padding: 6,
           },
         },
-        title: {
-          display: true,
-          text: "სოციალური დახმარება მუნიციპალიტეტების მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("სოციალური დახმარება მუნიციპალიტეტების მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -953,11 +923,7 @@ function buildZooLayer(key, data, id) {
         onEachFeature: function (feature, layer) {
           var name = feature.properties.Name_Geo;
           var total = muniTotals[name] || 0;
-          layer.bindTooltip(name + ": " + total, {
-            direction: "center",
-            className: "village-label",
-            sticky: true,
-          });
+          areaTooltip(layer, name + ": " + total);
           layer.on("click", function () {
             showInfoZooMuni(name, total, cfg, muniTotals);
             showBottomChartZoo(muniTotals, cfg);
@@ -999,14 +965,7 @@ function buildZooLayer(key, data, id) {
           var marker = L.marker(latlng, { icon: icon });
           var name = p.Name_Geo || p.Municipal1 || p.Municipal_ || "";
           var muni = p.Municipal_ || p.Municipal1 || "";
-          marker.bindTooltip(
-            name + (muni && muni !== name ? " (" + muni + ")" : ""),
-            {
-              direction: "top",
-              className: "village-label",
-              offset: [0, -r / 2 - 2],
-            },
-          );
+          pointTooltip(marker, name + (muni && muni !== name ? " (" + muni + ")" : ""), -r / 2 - 2);
           marker.on("click", function () {
             showInfoZoo(p, cfg);
             showBottomChartZoo(muniTotals, cfg);
@@ -1029,8 +988,7 @@ function showInfoZooMuni(name, total, cfg, muniTotals) {
     sorted.findIndex(function (e) {
       return e[0] === name;
     }) + 1;
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     name +
     " (მუნიციპ.)</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -1053,8 +1011,7 @@ function showInfoZooMuni(name, total, cfg, muniTotals) {
     "/" +
     sorted.length +
     "</div>" +
-    '<div style="margin-top:6px;font-size:9px;color:var(--text-muted);">დეტ. — წერტილზე დაჭ.</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="margin-top:6px;font-size:9px;color:var(--text-muted);">დეტ. — წერტილზე დაჭ.</div>');
 }
 
 function showBottomChartZoo(muniTotals, cfg) {
@@ -1086,13 +1043,7 @@ function showBottomChartZoo(muniTotals, cfg) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: cfg.label + " — მუნ. მიხ.",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(cfg.label + " — მუნ. მიხ."),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1120,8 +1071,7 @@ function showInfoZoo(p, cfg) {
   var muni = p.Municipal_ || p.Municipal1 || "—";
   var cnt = cfg.countCol ? p[cfg.countCol] || "—" : "—";
   var range = p.Brucela__1 || p.Tularemia1 || p.Leptospi_1 || "";
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     name +
     "</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -1148,8 +1098,7 @@ function showInfoZoo(p, cfg) {
       : "") +
     "<b>რეგიონი:</b> " +
     (p.Region_Geo || "ქვემო ქართლი") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function updateZooLegend() {

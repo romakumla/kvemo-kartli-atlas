@@ -59,11 +59,7 @@ function buildArchLayer(data) {
         weight: 1.5,
         fillOpacity: 0.88,
       });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -9],
-      });
+      pointTooltip(marker, p.Name_Geo, -9);
       marker.on("click", function () {
         showInfoArch(p);
         showBottomChartArch(data, p);
@@ -81,8 +77,7 @@ function showInfoArch(p) {
     return a.num === p.Type_Num;
   });
   var label = t ? t.label : "";
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name">' +
+  showInfoCard('<div class="info-name">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -96,8 +91,7 @@ function showInfoArch(p) {
     "</span>" +
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.6;">' +
     (p.Type_Geo || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartArch(data, sel) {
@@ -143,13 +137,7 @@ function showBottomChartArch(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "არქეოლოგიური ძეგლები პერიოდების მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("არქეოლოგიური ძეგლები პერიოდების მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -259,11 +247,7 @@ function buildBattlesLayer(data) {
       });
       var marker = L.marker(latlng, { icon: icon });
       var tooltip = p.Name_Geo + " " + p.Years;
-      marker.bindTooltip(tooltip, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -h / 2 - 2],
-      });
+      pointTooltip(marker, tooltip, -h / 2 - 2);
       marker.on("click", function () {
         showInfoBattle(p);
         showBottomChartBattles(data, p);
@@ -288,8 +272,7 @@ function showInfoBattle(p) {
       : p.Type_Geo === "დამარცხება"
         ? SVG_DEFEAT
         : SVG_RESTORED;
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:14px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:14px;font-weight:700;">' +
     p.Name_Geo +
     " (" +
     p.Years +
@@ -308,8 +291,7 @@ function showInfoBattle(p) {
     '<div style="margin-top:6px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
     "<b>მუნიციპალიტეტი:</b> " +
     (p.Municipali || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartBattles(data, sel) {
@@ -358,13 +340,7 @@ function showBottomChartBattles(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ბრძოლები ქვემო ქართლის ტერიტორიაზე (XI–XVII სს.)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ბრძოლები ქვემო ქართლის ტერიტორიაზე (XI–XVII სს.)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -505,11 +481,7 @@ function buildGermansLayers(data) {
       var p = feature.properties;
       var _tip = p.Municipali || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoGermanPoly(p);
         showBottomChartGermans(data);
@@ -528,11 +500,7 @@ function buildGermansLayers(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(p.Old_Name_G + " (" + p.Name_Geo + ")", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -13],
-      });
+      pointTooltip(marker, p.Old_Name_G + " (" + p.Name_Geo + ")", -13);
       marker.on("click", function () {
         showInfoGermanPoint(p);
         showBottomChartGermans(data, p);
@@ -546,8 +514,7 @@ function buildGermansLayers(data) {
 }
 
 function showInfoGermanPoint(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Old_Name_G +
     "</div>" +
     '<div style="font-size:11px;color:var(--text-muted);margin-bottom:5px;">' +
@@ -566,13 +533,11 @@ function showInfoGermanPoint(p) {
     "<br>" +
     "<b>მუნიციპალიტეტი:</b> " +
     (p.Municipali || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showInfoGermanPoly(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;">' +
     p.Municipali +
     "</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -583,8 +548,7 @@ function showInfoGermanPoly(p) {
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
     "<b>გადასახლებული ოჯახები:</b> " +
     (p.Deported === "0" ? "არ ყოფილა" : p.Deported) +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartGermans(data, sel) {
@@ -632,13 +596,7 @@ function showBottomChartGermans(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "გერმანული დასახლებები შექმნის წლების მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("გერმანული დასახლებები შექმნის წლების მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -759,11 +717,7 @@ function buildFortsLayer(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -t.h / 2 - 2],
-      });
+      pointTooltip(marker, p.Name_Geo, -t.h / 2 - 2);
       marker.on("click", function () {
         showInfoFort(p);
         showBottomChartForts(data, p);
@@ -782,8 +736,7 @@ function showInfoFort(p) {
   var label = t ? t.label : p.Type_Geo;
   var extra = "";
   if (p.Dasaxleba) extra = "<b>ორი სახელი:</b> " + p.Dasaxleba + "<br>";
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -795,8 +748,7 @@ function showInfoFort(p) {
     extra +
     "<b>მუნიციპალიტეტი:</b> " +
     (p.Municipali || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartForts(data, sel) {
@@ -850,13 +802,7 @@ function showBottomChartForts(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ისტორიული თავდაცვითი ნაგებობები ტიპების მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ისტორიული თავდაცვითი ნაგებობები ტიპების მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -989,11 +935,7 @@ function buildEparchyLayers(data) {
     },
     onEachFeature: function (feature, layer) {
       var p = feature.properties;
-      layer.bindTooltip(p.Name_Geo, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo);
       layer.on("click", function () {
         showInfoEparchy(p);
         showBottomChartEparchies(eparchyData, p);
@@ -1044,8 +986,7 @@ function buildEparchyLayers(data) {
 }
 
 function showInfoEparchy(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -1056,13 +997,11 @@ function showInfoEparchy(p) {
     '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
     "<b>ფართობი:</b> " +
     (p.Area || "").replace("sq km", "კმ²") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showInfoEparchyPoint(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:12px;font-weight:700;line-height:1.4;">' +
+  showInfoCard('<div class="info-name" style="font-size:12px;font-weight:700;line-height:1.4;">' +
     p.Name_Geo +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -1073,8 +1012,7 @@ function showInfoEparchyPoint(p) {
     '<div style="margin-top:6px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
     "<b>ეპარქია:</b> " +
     (p.Eparqia || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartEparchies(data, sel) {
@@ -1135,13 +1073,7 @@ function showBottomChartEparchies(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "მონასტრები და ტაძრები ეპარქიების მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("მონასტრები და ტაძრები ეპარქიების მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1209,11 +1141,7 @@ function buildChurchesLayer(data) {
         weight: 1.2,
         fillOpacity: 0.85,
       });
-      marker.bindTooltip(p.Name + " (" + p.Type + ")", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -7],
-      });
+      pointTooltip(marker, p.Name + " (" + p.Type + ")", -7);
       return marker;
     },
   }).addTo(map);
@@ -1310,11 +1238,7 @@ function buildPetroLayer(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -12],
-      });
+      pointTooltip(marker, p.Name_Geo, -12);
       marker.on("click", function () {
         showInfoPetro(p);
         showBottomChartPetro(data, p);
@@ -1327,8 +1251,7 @@ function buildPetroLayer(data) {
 }
 
 function showInfoPetro(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -1337,8 +1260,7 @@ function showInfoPetro(p) {
     '<div style="margin-top:6px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
     "<b>ადგილმდებარეობა:</b> " +
     (p.Place_Geo || "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 // პეტროგლიფის ადგილმდებარეობის ჯგუფი (დიაგრამის სვეტი)
@@ -1394,13 +1316,7 @@ function showBottomChartPetro(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "პეტროგლიფები ადგილმდებარეობის მიხედვით",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("პეტროგლიფები ადგილმდებარეობის მიხედვით"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1487,11 +1403,7 @@ function buildMegaLayer(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -9],
-      });
+      pointTooltip(marker, p.Name_Geo, -9);
       marker.on("click", function () {
         showInfoMega(p);
         showBottomChartMega(data, p);
@@ -1510,8 +1422,7 @@ function showInfoMega(p) {
     p.Dasaxleba && p.Dasaxleba !== p.Name_Geo
       ? "<b>დასახლება:</b> " + p.Dasaxleba + "<br>"
       : "";
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<div style="margin:6px 0;display:flex;align-items:center;gap:8px;">' +
@@ -1529,8 +1440,7 @@ function showInfoMega(p) {
       ? '<div style="margin-top:6px;font-size:10px;color:var(--text-muted);line-height:1.7;">' +
         extra +
         "</div>"
-      : "");
-  document.getElementById("infoCard").classList.remove("hidden");
+      : ""));
 }
 
 function showBottomChartMega(data, sel) {
@@ -1562,13 +1472,7 @@ function showBottomChartMega(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "მეგალითური ნაგებობები ქვემო ქართლში",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("მეგალითური ნაგებობები ქვემო ქართლში"),
         tooltip: {
           callbacks: {
             label: function (c) {

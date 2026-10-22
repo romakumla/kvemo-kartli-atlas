@@ -49,11 +49,7 @@ function buildLandscapeLayer(data, layerRef) {
       var p = feature.properties;
       var _tip = p.LandLabel || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoLandscape(p);
         showBottomChartLandscape(p, data, layerRef.order);
@@ -129,11 +125,10 @@ function updateLandscapeLegend(data, order) {
 }
 
 function showInfoLandscape(p) {
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name" style="font-size:13px;">${p.LandLabel}</div>
     <span class="info-type-badge badge-village" style="background:${p.LandColor}33;color:#333;border:1px solid ${p.LandColor}88;">${p.Area_km2} კმ²</span>
-    <div style="margin-top:10px;font-size:10px;color:var(--text-muted);line-height:1.6;">${p.Name_Geo || p.Name_Eng || "–"}</div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div style="margin-top:10px;font-size:10px;color:var(--text-muted);line-height:1.6;">${p.Name_Geo || p.Name_Eng || "–"}</div>`);
 }
 
 function showBottomChartLandscape(p, data, order) {
@@ -181,13 +176,7 @@ function showBottomChartLandscape(p, data, order) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: `${p.LandLabel} — ლანდშაფტები ფართობის მიხედვით (კმ²)`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${p.LandLabel} — ლანდშაფტები ფართობის მიხედვით (კმ²)`, 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
         },
@@ -282,11 +271,7 @@ function renderHazardLayers() {
       var p = feature.properties;
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoHazardZone(p);
         showBottomChartHazard();
@@ -312,11 +297,7 @@ function renderHazardLayers() {
         weight: 1.2,
         fillOpacity: 0.85,
       });
-      marker.bindTooltip(feature.properties.Name_Geo || "მეწყერი", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -6],
-      });
+      pointTooltip(marker, feature.properties.Name_Geo || "მეწყერი", -6);
       marker.on("click", function () {
         showInfoHazardPoint(feature.properties, "landslide");
         showBottomChartHazard();
@@ -339,11 +320,7 @@ function renderHazardLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(feature.properties.Name_Geo || "კლდეზვავი", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -14],
-      });
+      pointTooltip(marker, feature.properties.Name_Geo || "კლდეზვავი", -14);
       marker.on("click", function () {
         showInfoHazardPoint(feature.properties, "rockfall");
         showBottomChartHazard();
@@ -382,20 +359,18 @@ function updateHazardLegend() {
 }
 
 function showInfoHazardZone(p) {
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || "–"}</div>
     <span class="info-type-badge badge-village" style="background:${p.ZoneColor}55;color:#444;border:1px solid ${p.ZoneColor};">${p.Name_Eng || ""}</span>
-    <div class="info-row" style="margin-top:8px;"><span class="info-key">ფართობი</span><span class="info-val">${p.Area_km2} კმ²</span></div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div class="info-row" style="margin-top:8px;"><span class="info-key">ფართობი</span><span class="info-val">${p.Area_km2} კმ²</span></div>`);
 }
 
 function showInfoHazardPoint(p, type) {
   var color = type === "landslide" ? "#C0392B" : "#E67E22";
   var label = type === "landslide" ? "მეწყერი" : "კლდეზვავი/დაქვათაცვენა";
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
-    <span class="info-type-badge" style="background:${color}22;color:${color};border:1px solid ${color}55;">${label}</span>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <span class="info-type-badge" style="background:${color}22;color:${color};border:1px solid ${color}55;">${label}</span>`);
 }
 
 function showBottomChartHazard() {
@@ -448,13 +423,7 @@ function showBottomChartHazard() {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "მეწყ./კლდეზვ. ზონირება — ფართობი (კმ²)",
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("მეწყ./კლდეზვ. ზონირება — ფართობი (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
         },
@@ -538,11 +507,7 @@ function renderGroundwaterLayers() {
       var p = feature.properties;
       var _tip = p.ShortLabel || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoGWZone(p);
         showBottomChartGW();
@@ -595,11 +560,7 @@ function renderGroundwaterLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(`${p.Number} ${p.Name_Geo}`, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -iconH],
-      });
+      pointTooltip(marker, `${p.Number} ${p.Name_Geo}`, -iconH);
       marker.on("click", function () {
         showInfoGWPoint(p);
         showBottomChartGWPoint(p);
@@ -652,18 +613,17 @@ function updateGWLegend() {
 }
 
 function showInfoGWZone(p) {
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name" style="font-size:12px;">${p.ShortLabel}</div>
     <span class="info-type-badge badge-village" style="background:${p.ZoneColor};color:#333;border:1px solid #5599AA55;">${p.Code}</span>
     <div class="info-row" style="margin-top:8px;"><span class="info-key">ფართობი</span><span class="info-val">${p.Area_km2} კმ²</span></div>
-    <div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">${p.Name_Geo}</div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div style="margin-top:8px;font-size:9px;color:var(--text-muted);line-height:1.5;">${p.Name_Geo}</div>`);
 }
 
 function showInfoGWPoint(p) {
   var isBH = p.Type_Geo === "ჭაბურღილი";
   var color = isBH ? "#1565C0" : "#0288D1";
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Number} ${p.Name_Geo}</div>
     <span class="info-type-badge" style="background:${color}22;color:${color};border:1px solid ${color}55;">${p.Type_Geo}</span>
     <div class="info-row"><span class="info-key">მუნიც.</span><span class="info-val">${p.Munic_Geo || "–"}</span></div>
@@ -675,8 +635,7 @@ function showInfoGWPoint(p) {
     <div class="info-row"><span class="info-key">SO₄</span><span class="info-val">${p.SO4 || 0}%</span></div>
     <div class="info-row"><span class="info-key">Ca</span><span class="info-val">${p.Ca || 0}%</span></div>
     <div class="info-row"><span class="info-key">Mg</span><span class="info-val">${p.Mg || 0}%</span></div>
-    <div class="info-row"><span class="info-key">Na+K</span><span class="info-val">${p.Na_K || 0}%</span></div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div class="info-row"><span class="info-key">Na+K</span><span class="info-val">${p.Na_K || 0}%</span></div>`);
 }
 
 function showBottomChartGW() {
@@ -722,13 +681,7 @@ function showBottomChartGW() {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ჰიდროგეოლ. ზონირება — ფართობი (კმ²)",
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ჰიდროგეოლ. ზონირება — ფართობი (კმ²)", 12),
         tooltip: {
           callbacks: { label: (c) => ` ${c.parsed.y.toLocaleString()} კმ²` },
         },
@@ -796,13 +749,7 @@ function showBottomChartGWPoint(p) {
             padding: 8,
           },
         },
-        title: {
-          display: true,
-          text: `${p.Number} ${p.Name_Geo} — ქიმიური შემადგენლობა (%) | M=${p.Mineral_M} გ/ლ`,
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${p.Number} ${p.Name_Geo} — ქიმიური შემადგენლობა (%) | M=${p.Mineral_M} გ/ლ`),
         tooltip: { callbacks: { label: (c) => ` ${c.label}: ${c.parsed}%` } },
       },
     },
@@ -888,10 +835,7 @@ function renderEarthquakeLayers() {
         weight: 0.6,
         fillOpacity: 0.7,
       });
-      marker.bindTooltip(`მაგნიტუდა ${p.Mw} | ${p.Year}`, {
-        direction: "top",
-        className: "village-label",
-      });
+      pointTooltip(marker, `მაგნიტუდა ${p.Mw} | ${p.Year}`);
       marker.on("click", function () {
         showInfoEQ(p, "instrumental");
         showBottomChartEQ();
@@ -916,11 +860,7 @@ function renderEarthquakeLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(`მაგნიტუდა ${p.Mw} | ${p.Year} (ისტ.)`, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -size / 2],
-      });
+      pointTooltip(marker, `მაგნიტუდა ${p.Mw} | ${p.Year} (ისტ.)`, -size / 2);
       marker.on("click", function () {
         showInfoEQ(p, "historical");
         showBottomChartEQ();
@@ -941,11 +881,7 @@ function renderEarthquakeLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon, zIndexOffset: 1000 });
-      marker.bindTooltip("სეისმური სადგური — " + p.Name_Geo, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -18],
-      });
+      pointTooltip(marker, "სეისმური სადგური — " + p.Name_Geo, -18);
       marker.on("click", function () {
         showInfoSeismicStation(p, latlng);
         showBottomChartStations("seismic");
@@ -1004,12 +940,11 @@ function showInfoEQ(p, period) {
     period === "instrumental"
       ? "ინსტრუმენტული (1900+)"
       : "ისტორიული (1900-მდე)";
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">მაგნიტუდა ${p.Mw}</div>
     <span class="info-type-badge badge-city" style="background:${p.Color}33;color:${darken(p.Color)};border:1px solid ${p.Color}88;">${p.MagClass}</span>
     <div class="info-row"><span class="info-key">წელი</span><span class="info-val">${p.Year}</span></div>
-    <div class="info-row"><span class="info-key">პერიოდი</span><span class="info-val" style="font-size:10px;">${periodLabel}</span></div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div class="info-row"><span class="info-key">პერიოდი</span><span class="info-val" style="font-size:10px;">${periodLabel}</span></div>`);
 }
 
 function showBottomChartEQ() {
@@ -1045,13 +980,7 @@ function showBottomChartEQ() {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: `მიწისძვრები მაგნიტუდის მიხედვით — სულ ${eqNewData.features.length + eqOldData.features.length}`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`მიწისძვრები მაგნიტუდის მიხედვით — სულ ${eqNewData.features.length + eqOldData.features.length}`, 12),
         tooltip: { callbacks: { label: (c) => ` ${c.parsed.y} მიწისძვრა` } },
       },
       scales: {
@@ -1273,11 +1202,7 @@ function buildMeteoLayer(data) {
         showBottomChartStations("meteo");
         highlightBottomBars(p.Active ? "მოქმედი" : "დახურული");
       });
-      marker.bindTooltip(p.Name_Geo || "", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -8],
-      });
+      pointTooltip(marker, p.Name_Geo || "", -8);
       return marker;
     },
   }).addTo(map);
@@ -1295,11 +1220,7 @@ function buildHydroLayer(data) {
         showBottomChartStations("hydro");
         highlightBottomBars(p.Active ? "მოქმედი" : "დახურული");
       });
-      marker.bindTooltip(p.Name_Geo || "", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -12],
-      });
+      pointTooltip(marker, p.Name_Geo || "", -12);
       return marker;
     },
   }).addTo(map);
@@ -1371,20 +1292,19 @@ function showInfoSeismicStation(p, latlng) {
   var badge = p.Active
     ? `<span class="info-type-badge badge-village" style="background:#FDECEA;color:#C62828;border:1px solid #C6282855;">მოქმედი</span>`
     : `<span class="info-type-badge badge-city" style="background:#f3f4f6;color:#999;border:1px solid #ccc;">შეჩერებული</span>`;
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">სეისმური სადგური</div>
     ${badge}
     <div class="info-row"><span class="info-key">განედი</span><span class="info-val">${latlng.lat.toFixed(4)}°</span></div>
     <div class="info-row"><span class="info-key">გრძედი</span><span class="info-val">${latlng.lng.toFixed(4)}°</span></div>
-  `;
-  document.getElementById("infoCard").classList.remove("hidden");
+  `);
 }
 
 function showInfoMeteo(p) {
   var badge = p.Active
     ? `<span class="info-type-badge badge-village" style="background:#FEE8DC;color:#E8540A;border:1px solid #E8540A55;">მოქმედი</span>`
     : `<span class="info-type-badge badge-city" style="background:#f3f4f6;color:#999;border:1px solid #ccc;">დახურული</span>`;
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
     ${badge}
     <div class="info-row"><span class="info-key">სადგ. ID</span><span class="info-val">${p.Station_ID || "–"}</span></div>
@@ -1395,15 +1315,14 @@ function showInfoMeteo(p) {
     <div style="font-size:10px;color:var(--text-muted);line-height:1.5;">${p.Type_Geo || "–"}</div>
     <div class="info-row" style="margin-top:6px;"><span class="info-key">დაწყება</span><span class="info-val">${p.Begin_Obs || "–"}</span></div>
     ${p.End_Obs ? `<div class="info-row"><span class="info-key">დასასრული</span><span class="info-val">${p.End_Obs}</span></div>` : ""}
-  `;
-  document.getElementById("infoCard").classList.remove("hidden");
+  `);
 }
 
 function showInfoHydro(p) {
   var badge = p.Active
     ? `<span class="info-type-badge badge-village" style="background:#E3F0FC;color:#1565C0;border:1px solid #1565C055;">მოქმედი</span>`
     : `<span class="info-type-badge badge-city" style="background:#f3f4f6;color:#999;border:1px solid #ccc;">დახურული</span>`;
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
     ${badge}
     <div class="info-row"><span class="info-key">მდინარე</span><span class="info-val">${p.River || "–"}</span></div>
@@ -1412,8 +1331,7 @@ function showInfoHydro(p) {
     <div class="info-row"><span class="info-key">გახსნა</span><span class="info-val">${p.Year_Open || "–"}</span></div>
     ${p.Year_Close ? `<div class="info-row"><span class="info-key">დახურვა</span><span class="info-val">${p.Year_Close}</span></div>` : ""}
     <div class="info-row"><span class="info-key">პერიოდი</span><span class="info-val" style="font-size:10px;">${p.Year_ || "–"}</span></div>
-  `;
-  document.getElementById("infoCard").classList.remove("hidden");
+  `);
 }
 
 // type: "meteo" | "hydro" | "seismic"
@@ -1455,13 +1373,7 @@ function showBottomChartStations(type) {
             padding: 12,
           },
         },
-        title: {
-          display: true,
-          text: `${title} — სულ ${data.features.length}`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${title} — სულ ${data.features.length}`, 12),
         tooltip: { callbacks: { label: (c) => ` ${c.label}: ${c.parsed}` } },
       },
     },

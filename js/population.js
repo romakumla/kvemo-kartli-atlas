@@ -117,11 +117,7 @@ function buildEthnicsLayer(data) {
       var p = feature.properties;
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoEth(p);
         showBottomChartEth(p);
@@ -186,11 +182,7 @@ function buildReligionLayer(data) {
       var p = feature.properties;
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoRel(p);
         showBottomChartRel(p);
@@ -384,11 +376,7 @@ function buildIDPLayers() {
     onEachFeature: function (f, layer) {
       var p = f.properties;
       var val = Math.round(p[col] || 0);
-      layer.bindTooltip(p.Name_Geo + ": " + val, {
-        direction: "center",
-        className: "village-label",
-        sticky: true,
-      });
+      areaTooltip(layer, p.Name_Geo + ": " + val);
       layer.on("click", function () {
         showInfoIDPMuni(p);
         showBottomChartIDP();
@@ -428,11 +416,7 @@ function buildIDPLayers() {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(p.Name_Geo + " — " + raw, {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -r / 2 - 2],
-      });
+      pointTooltip(marker, p.Name_Geo + " — " + raw, -r / 2 - 2);
       marker.on("click", function () {
         showInfoIDPPoint(p);
         showBottomChartIDP();
@@ -449,8 +433,7 @@ function buildIDPLayers() {
 function showInfoIDPMuni(p) {
   var nat = Math.round(p.Natural_Di || 0),
     arm = Math.round(p.Armed_Conf || 0);
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:#E8621A22;color:#A83D08;border:1px solid #E8621A;">იძ. გადაადგ. პირები</span>' +
@@ -464,13 +447,11 @@ function showInfoIDPMuni(p) {
     '<b>სულ:</b> <span style="font-weight:700;">' +
     (nat + arm).toLocaleString() +
     "</span>" +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showInfoIDPPoint(p) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;font-weight:700;">' +
+  showInfoCard('<div class="info-name" style="font-size:13px;font-weight:700;">' +
     p.Name_Geo +
     "</div>" +
     '<span class="info-type-badge" style="background:#E8621A22;color:#A83D08;border:1px solid #E8621A;">' +
@@ -486,8 +467,7 @@ function showInfoIDPPoint(p) {
     (p.Armed_Conf || "0") +
     "</span><br>" +
     (p.High_Mount === "კი" ? "<b>მაღალმთიანი:</b> კი" : "") +
-    "</div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</div>");
 }
 
 function showBottomChartIDP() {
@@ -545,13 +525,7 @@ function showBottomChartIDP() {
             padding: 6,
           },
         },
-        title: {
-          display: true,
-          text: "იძ. გადაადგ. პირები მუნ. მიხ.",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("იძ. გადაადგ. პირები მუნ. მიხ."),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -733,7 +707,7 @@ function showInfoPop(p) {
   function fmt(n) {
     return n != null ? parseInt(n).toLocaleString("ka-GE") : "–";
   }
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "უცნობი"}</div>
     <span class="info-type-badge ${bc}">${typeGeo}</span>
     <div class="info-row"><span class="info-key">ინგლ. სახელი</span><span class="info-val">${p.Name_Eng || "–"}</span></div>
@@ -743,8 +717,7 @@ function showInfoPop(p) {
     <hr style="margin:8px 0;border-top:1px solid #f0ede8;">
     <div class="info-row"><span class="info-key">1989</span><span class="info-val">${fmt(p.Pop_1989)}</span></div>
     <div class="info-row"><span class="info-key">2002</span><span class="info-val">${fmt(p.Pop_2002)}</span></div>
-    <div class="info-row"><span class="info-key">2014</span><span class="info-val pop-num">${fmt(p.Pop_2014)}</span></div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div class="info-row"><span class="info-key">2014</span><span class="info-val pop-num">${fmt(p.Pop_2014)}</span></div>`);
 }
 
 function showInfoEth(p) {
@@ -757,12 +730,11 @@ function showInfoEth(p) {
       <span class="eth-bar-pct">${pct}%</span></div>`;
     })
     .join("");
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
     <div style="margin-top:8px;font-size:10px;color:var(--text-muted);margin-bottom:4px;">ეროვნული შემადგენლობა (2014)</div>
     <div class="eth-bar-wrap">${bars}</div>
-    <div class="info-row" style="margin-top:8px;"><span class="info-key">დომინანტი</span><span class="info-val" style="color:${ETH_COLORS[dom]}">${ETH_LABELS[dom]}</span></div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div class="info-row" style="margin-top:8px;"><span class="info-key">დომინანტი</span><span class="info-val" style="color:${ETH_COLORS[dom]}">${ETH_LABELS[dom]}</span></div>`);
 }
 
 function showInfoRel(p) {
@@ -775,12 +747,11 @@ function showInfoRel(p) {
       <span class="eth-bar-pct">${pct}%</span></div>`;
     })
     .join("");
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
     <div style="margin-top:8px;font-size:10px;color:var(--text-muted);margin-bottom:4px;">აღმსარებლობა (2014)</div>
     <div class="eth-bar-wrap">${bars}</div>
-    <div class="info-row" style="margin-top:8px;"><span class="info-key">დომინანტი</span><span class="info-val" style="color:${REL_COLORS[dom]}">${REL_LABELS[dom]}</span></div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    <div class="info-row" style="margin-top:8px;"><span class="info-key">დომინანტი</span><span class="info-val" style="color:${REL_COLORS[dom]}">${REL_LABELS[dom]}</span></div>`);
 }
 
 // ===== Density helpers =====
@@ -825,11 +796,7 @@ function buildDensityLayer(data) {
       var p = feature.properties;
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoDensity(p);
         showBottomChartDensity(p);
@@ -895,11 +862,10 @@ function showInfoDensity(p) {
       </span>
     </div>`;
   }
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
     <div style="margin-top:6px;font-size:10px;color:var(--text-muted);margin-bottom:8px;">მოსახლეობის სიმჭიდროვე</div>
-    ${row("1989", "De_1989")}${row("2002", "De_2002")}${row("2014", "De_2014")}${row("2024", "De_2024")}`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    ${row("1989", "De_1989")}${row("2002", "De_2002")}${row("2014", "De_2014")}${row("2024", "De_2024")}`);
 }
 
 function showBottomChartDensity(p) {
@@ -928,13 +894,7 @@ function showBottomChartDensity(p) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: `${p.Name_Geo || ""} — მოსახლეობის სიმჭიდროვე (კაცი/კმ²)`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${p.Name_Geo || ""} — მოსახლეობის სიმჭიდროვე (კაცი/კმ²)`, 12),
         tooltip: { callbacks: { label: (c) => ` ${c.parsed.y} კაცი/კმ²` } },
       },
       scales: {
@@ -1172,13 +1132,12 @@ function showInfoMarital(p, gender) {
       <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${MARITAL_COLORS[key]};flex-shrink:0;"></span>${MARITAL_LABELS[key]}</span>
       <span class="info-val">${val} ‰</span></div>`;
   }
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || "–"}</div>
     <span class="info-type-badge badge-village">${gLabel} · ${yr}</span>
     <div style="margin-top:8px;">
     ${row("Married")}${row("NMarried")}${row("Widow")}${row("Divorced")}${row("NoData")}
-    </div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+    </div>`);
 }
 
 function showBottomChartMarital(p, gender) {
@@ -1212,13 +1171,7 @@ function showBottomChartMarital(p, gender) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: `${p.Name_Geo} — ქორწინებითი მდგომარეობა · ${gLabel} · ${yr} (‰)`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${p.Name_Geo} — ქორწინებითი მდგომარეობა · ${gLabel} · ${yr} (‰)`, 12),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1305,11 +1258,7 @@ function buildRateLayer(data, f12, f22, colorMap, ref) {
       var p = feature.properties;
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoRate(p, f12, f22, colorMap, ref.type);
         showBottomChartRate(p, f12, f22, ref.type);
@@ -1408,7 +1357,7 @@ function showInfoRate(p, f12, f22, colorMap, type) {
   var label = type === "death" ? "მოკვდავობა" : "შობადობა";
   var v12 = p[f12] || "–",
     v22 = p[f22] || "–";
-  document.getElementById("infoCardContent").innerHTML = `
+  showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
     <div style="margin-top:6px;font-size:10px;color:var(--text-muted);margin-bottom:8px;">${label}ის ზოგ. კოეფიციენტი (‰)</div>
     <div class="info-row"><span class="info-key">2012</span>
@@ -1418,8 +1367,7 @@ function showInfoRate(p, f12, f22, colorMap, type) {
     <div class="info-row"><span class="info-key">2022</span>
       <span class="info-val" style="display:flex;align-items:center;gap:6px;">
         <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${getRateColor(v22, colorMap)};border:1px solid rgba(0,0,0,.15);flex-shrink:0;"></span>${v22}
-      </span></div>`;
-  document.getElementById("infoCard").classList.remove("hidden");
+      </span></div>`);
 }
 
 function showBottomChartRate(p, f12, f22, type) {
@@ -1459,13 +1407,7 @@ function showBottomChartRate(p, f12, f22, type) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: `${p.Name_Geo || ""} — ${label}ის კოეფ. (‰)`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${p.Name_Geo || ""} — ${label}ის კოეფ. (‰)`, 12),
         tooltip: {
           callbacks: {
             label: (c) =>
@@ -1519,13 +1461,7 @@ function showBottomChart(p) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: `${name}  —  ${p.Type_Geo || ""}  |  ${p.Municipal_ || ""}`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${name}  —  ${p.Type_Geo || ""}  |  ${p.Municipal_ || ""}`, 12),
         tooltip: {
           callbacks: { label: (c) => " " + c.parsed.y.toLocaleString("ka-GE") },
         },
@@ -1577,13 +1513,7 @@ function showBottomChartEth(p) {
             padding: 10,
           },
         },
-        title: {
-          display: true,
-          text: `${p.Name_Geo || ""} — ეროვნული შემადგენლობა 2014`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${p.Name_Geo || ""} — ეროვნული შემადგენლობა 2014`, 12),
         tooltip: { callbacks: { label: (c) => ` ${c.label}: ${c.parsed}%` } },
       },
     },
@@ -1618,13 +1548,7 @@ function showBottomChartRel(p) {
             padding: 10,
           },
         },
-        title: {
-          display: true,
-          text: `${p.Name_Geo || ""} — აღმსარებლობა 2014`,
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(`${p.Name_Geo || ""} — აღმსარებლობა 2014`, 12),
         tooltip: { callbacks: { label: (c) => ` ${c.label}: ${c.parsed}%` } },
       },
     },

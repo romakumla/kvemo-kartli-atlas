@@ -67,11 +67,7 @@ function _buildTempLayer(data, refObj, onClickFn) {
       var p = feature.properties;
       var _zoneName = p.Label || p.Name_Geo || "";
       if (_zoneName)
-        lyr.bindTooltip(_zoneName, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(lyr, _zoneName);
       lyr.on("mouseover", function () {
         lyr.setStyle({ weight: 1.4, fillOpacity: 0.95 });
       });
@@ -156,8 +152,7 @@ function loadPrecip() {
 }
 
 function _showInfoAvgTemp(p, data) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;">საშ. ტემპერატურა</div>' +
+  showInfoCard('<div class="info-name" style="font-size:13px;">საშ. ტემპერატურა</div>' +
     '<span class="info-type-badge badge-village" style="background:' +
     p.Color +
     "55;color:#333;border:1px solid " +
@@ -165,14 +160,12 @@ function _showInfoAvgTemp(p, data) {
     ';">' +
     p.Label +
     " °C</span>" +
-    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური საშუალო  |  1990–2022</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური საშუალო  |  1990–2022</div>');
   showBottomChartTemp(data, "avg", p);
 }
 
 function _showInfoMaxTemp(p, data) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;">მაქს. ტემპერატურა</div>' +
+  showInfoCard('<div class="info-name" style="font-size:13px;">მაქს. ტემპერატურა</div>' +
     '<span class="info-type-badge badge-village" style="background:' +
     p.Color +
     "55;color:#333;border:1px solid " +
@@ -180,14 +173,12 @@ function _showInfoMaxTemp(p, data) {
     ';">' +
     p.Label +
     " °C</span>" +
-    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური მაქსიმუმი  |  1990–2022</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური მაქსიმუმი  |  1990–2022</div>');
   showBottomChartTemp(data, "max", p);
 }
 
 function _showInfoPrecip(p, data) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;">ატმ. ნალექები</div>' +
+  showInfoCard('<div class="info-name" style="font-size:13px;">ატმ. ნალექები</div>' +
     '<span class="info-type-badge badge-village" style="background:' +
     p.Color +
     "55;color:#333;border:1px solid " +
@@ -195,8 +186,7 @@ function _showInfoPrecip(p, data) {
     ';">' +
     p.Label +
     " მმ</span>" +
-    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური ჯამი  |  1990–2022</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">მრავალწლიური ჯამი  |  1990–2022</div>');
   showBottomChartTemp(data, "precip", p);
 }
 
@@ -251,13 +241,7 @@ function showBottomChartTemp(data, type, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: titles[type],
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(titles[type]),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -380,11 +364,7 @@ function _buildClimateLayer(data, layerRef, onClickFn) {
       var p = feature.properties;
       var _zoneName = p.Label || p.Name_Geo || "";
       if (_zoneName)
-        layer.bindTooltip(_zoneName, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _zoneName);
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 1.4, fillOpacity: 0.9 });
       });
@@ -469,8 +449,7 @@ function loadFrostDays() {
 }
 
 function _showInfoHotDays(p, data) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;">ცხელი დღეები</div>' +
+  showInfoCard('<div class="info-name" style="font-size:13px;">ცხელი დღეები</div>' +
     '<span class="info-type-badge badge-village" style="background:' +
     p.Color +
     "55;color:#333;border:1px solid " +
@@ -478,14 +457,12 @@ function _showInfoHotDays(p, data) {
     ';">' +
     p.Label +
     " დღე</span>" +
-    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">დღის t° > 30°C  |  1990–2022</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">დღის t° > 30°C  |  1990–2022</div>');
   showBottomChartClimate(data, "hot", p);
 }
 
 function _showInfoTropNights(p, data) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;">ტროპიკული ღამეები</div>' +
+  showInfoCard('<div class="info-name" style="font-size:13px;">ტროპიკული ღამეები</div>' +
     '<span class="info-type-badge badge-village" style="background:' +
     p.Color +
     "55;color:#333;border:1px solid " +
@@ -493,14 +470,12 @@ function _showInfoTropNights(p, data) {
     ';">' +
     p.Label +
     " ღამე</span>" +
-    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">ღამის t° > 20°C  |  1990–2022</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">ღამის t° > 20°C  |  1990–2022</div>');
   showBottomChartClimate(data, "trop", p);
 }
 
 function _showInfoFrostDays(p, data) {
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name" style="font-size:13px;">ყინვიანი დღეები</div>' +
+  showInfoCard('<div class="info-name" style="font-size:13px;">ყინვიანი დღეები</div>' +
     '<span class="info-type-badge badge-village" style="background:' +
     p.Color +
     "55;color:#333;border:1px solid " +
@@ -508,8 +483,7 @@ function _showInfoFrostDays(p, data) {
     ';">' +
     p.Label +
     " დღე</span>" +
-    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">t° < 0°C  |  1990–2022</div>';
-  document.getElementById("infoCard").classList.remove("hidden");
+    '<div style="margin-top:8px;font-size:10px;color:var(--text-muted);">t° < 0°C  |  1990–2022</div>');
   showBottomChartClimate(data, "frost", p);
 }
 
@@ -563,13 +537,7 @@ function showBottomChartClimate(data, type, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: titles[type],
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle(titles[type]),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -701,11 +669,7 @@ function buildHeatWavesLayer(data) {
       var p = feature.properties;
       var _tip = p.Label || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 1.5, fillOpacity: 0.9 });
       });
@@ -713,8 +677,7 @@ function buildHeatWavesLayer(data) {
         heatWavesLayer.resetStyle(layer);
       });
       layer.on("click", function () {
-        document.getElementById("infoCardContent").innerHTML =
-          '<div class="info-name" style="font-size:13px;">სითბური ტალღების ტენდენცია</div>' +
+        showInfoCard('<div class="info-name" style="font-size:13px;">სითბური ტალღების ტენდენცია</div>' +
           '<span class="info-type-badge badge-village" style="background:' +
           p.Color +
           "55;color:#333;border:1px solid " +
@@ -728,8 +691,7 @@ function buildHeatWavesLayer(data) {
           " – " +
           p.ContourMax +
           "<br>" +
-          "<b>პერიოდი:</b> 1990–2022</div>";
-        document.getElementById("infoCard").classList.remove("hidden");
+          "<b>პერიოდი:</b> 1990–2022</div>");
         showBottomChartHeatWaves(data, p);
       });
     },
@@ -755,11 +717,7 @@ function buildDroughtLayer(data) {
       var p = feature.properties;
       var _tip = p.Category ? p.Category + " (" + p.Label + ")" : p.Label || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("mouseover", function () {
         layer.setStyle({ weight: 1.5, fillOpacity: 0.9 });
       });
@@ -767,8 +725,7 @@ function buildDroughtLayer(data) {
         droughtLayer.resetStyle(layer);
       });
       layer.on("click", function () {
-        document.getElementById("infoCardContent").innerHTML =
-          '<div class="info-name" style="font-size:13px;">გვალვის ინდექსი</div>' +
+        showInfoCard('<div class="info-name" style="font-size:13px;">გვალვის ინდექსი</div>' +
           '<span class="info-type-badge badge-village" style="background:' +
           p.Color +
           "55;color:#333;border:1px solid " +
@@ -780,8 +737,7 @@ function buildDroughtLayer(data) {
           "<b>ინდექსი:</b> " +
           p.Label +
           "<br>" +
-          "<b>პერიოდი:</b> 1990–2022</div>";
-        document.getElementById("infoCard").classList.remove("hidden");
+          "<b>პერიოდი:</b> 1990–2022</div>");
         showBottomChartDrought(data, p);
       });
     },
@@ -836,13 +792,7 @@ function showBottomChartHeatWaves(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "სითბური ტალღების ტენდენცია — ფართობი (კმ²)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("სითბური ტალღების ტენდენცია — ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -924,13 +874,7 @@ function showBottomChartDrought(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "გვალვის ინდექსი — კატეგორიების ფართობი (კმ²)",
-          font: { family: "Fira Sans", size: 11, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("გვალვის ინდექსი — კატეგორიების ფართობი (კმ²)"),
         tooltip: {
           callbacks: {
             label: function (c) {
@@ -1106,11 +1050,7 @@ function renderMadflowLayers(data) {
       });
       var _tip = p.Name_Geo || "";
       if (_tip)
-        layer.bindTooltip(_tip, {
-          direction: "center",
-          className: "village-label",
-          sticky: true,
-        });
+        areaTooltip(layer, _tip);
       layer.on("click", function () {
         showInfoMadflowZone(p);
         showBottomChartMadflow(data, p);
@@ -1132,11 +1072,7 @@ function renderMadflowLayers(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(feature.properties.Name_Geo || "ღვარცოფი", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -10],
-      });
+      pointTooltip(marker, feature.properties.Name_Geo || "ღვარცოფი", -10);
       marker.on("click", function () {
         showInfoMadflowPoint(feature.properties, "madflow");
         showBottomChartMadflow(data);
@@ -1160,11 +1096,7 @@ function renderMadflowLayers(data) {
         className: "",
       });
       var marker = L.marker(latlng, { icon: icon });
-      marker.bindTooltip(feature.properties.Name_Geo || "ეროზია", {
-        direction: "top",
-        className: "village-label",
-        offset: [0, -10],
-      });
+      pointTooltip(marker, feature.properties.Name_Geo || "ეროზია", -10);
       marker.on("click", function () {
         showInfoMadflowPoint(feature.properties, "erosion");
         showBottomChartMadflow(data);
@@ -1179,8 +1111,7 @@ function renderMadflowLayers(data) {
 
 function showInfoMadflowZone(p) {
   var color = MADFLOW_ZONE_COLORS[p.Name_Geo] || "#BDBDBD";
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name">' +
+  showInfoCard('<div class="info-name">' +
     (p.Name_Geo || "") +
     "</div>" +
     '<span class="info-type-badge badge-village" style="background:' +
@@ -1192,16 +1123,14 @@ function showInfoMadflowZone(p) {
     "</span>" +
     '<div class="info-row" style="margin-top:8px;"><span class="info-key">ფართობი</span><span class="info-val">' +
     (p.Area_km2 || 0).toLocaleString() +
-    " კმ²</span></div>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    " კმ²</span></div>");
 }
 
 function showInfoMadflowPoint(p, type) {
   // ღვარცოფი — ყვითელი (მუქი ტონი წაკითხვადობისთვის), ნაპირგარეცხვა — ლურჯი
   var color = type === "madflow" ? "#F57F17" : "#1565C0";
   var label = type === "madflow" ? "ღვარცოფი" : "მდინარის ნაპირგარეცხვა";
-  document.getElementById("infoCardContent").innerHTML =
-    '<div class="info-name">' +
+  showInfoCard('<div class="info-name">' +
     (p.Name_Geo || p.Name_Eng || "–") +
     "</div>" +
     '<span class="info-type-badge" style="background:' +
@@ -1212,8 +1141,7 @@ function showInfoMadflowPoint(p, type) {
     color +
     '55;">' +
     label +
-    "</span>";
-  document.getElementById("infoCard").classList.remove("hidden");
+    "</span>");
 }
 
 function showBottomChartMadflow(data, sel) {
@@ -1266,13 +1194,7 @@ function showBottomChartMadflow(data, sel) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        title: {
-          display: true,
-          text: "ღვარცოფის საფრთხის ზონირება — ფართობი (კმ²)",
-          font: { family: "Fira Sans", size: 12, weight: "600" },
-          color: "#1A1A18",
-          padding: { bottom: 6 },
-        },
+        title: chartTitle("ღვარცოფის საფრთხის ზონირება — ფართობი (კმ²)", 12),
         tooltip: {
           callbacks: {
             label: function (c) {
