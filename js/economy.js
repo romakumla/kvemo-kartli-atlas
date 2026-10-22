@@ -923,7 +923,7 @@ var SUN_ZONES = [
   { key: "2200-2300", color: "#FADB30" },
   { key: "2100-2200", color: "#FEE588" },
   { key: "2000-2100", color: "#EEC98D" },
-  { key: "<2000", color: "#EEC98D" },
+  { key: "<2000", color: "#F5EAD7" },
 ];
 
 var SUN_STATION_TYPES = [
