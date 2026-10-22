@@ -1713,85 +1713,18 @@ function updateArtLegend() {
 
 // ===== Start-up (called from app.js) =====
 function initEducation() {
-  // ===== განათლება checkbox =====
-  document
-    .getElementById("chkEducation")
-    .addEventListener("change", function (e) {
-      if (e.target.checked) {
-        document.getElementById("chkHealth").checked = false;
-        document.getElementById("healthView").style.display = "none";
-        removeAllHealthLayers();
-        document.getElementById("mainLayerView").style.display = "none";
-        document.getElementById("sublayerView").style.display = "none";
-        document.getElementById("natureView").style.display = "none";
-        document.getElementById("historyView").style.display = "none";
-        document.getElementById("economyView").style.display = "none";
-        document.getElementById("tourismView").style.display = "none";
-        document.getElementById("educationView").style.display = "";
-        showChartPanel();
-        resetChartPanel();
-        hideSettlementLegend();
-        setInfoBtn(null);
-        document.getElementById("filterSection").style.display = "none";
-        document.getElementById("infoCard").classList.add("hidden");
-        document.getElementById("chkPopulation").checked = false;
-        document.getElementById("chkNature").checked = false;
-        document.getElementById("chkHistory").checked = false;
-        document.getElementById("chkEconomy").checked = false;
-        document.getElementById("chkTourism").checked = false;
-        removeAllThematic();
-        removeAllNatureLayers();
-        removeAllHistoryLayers();
-        removeAllEconomyLayers();
-        removeAllTourismLayers();
-        removeNeutralLayers();
-        document.querySelectorAll("[data-edusub]").forEach(function (b) {
-          b.classList.remove("active");
-        });
-        document.querySelector("[data-edusub='schools']").classList.add("active");
-        loadEducation();
-      } else {
-        document.getElementById("educationView").style.display = "none";
-        document.getElementById("mainLayerView").style.display = "";
-        removeAllEducationLayers();
-        resetPopLegend();
-        loadNeutralLayers();
-      }
-    });
-
-
-  document
-    .getElementById("btnEducationBack")
-    .addEventListener("click", function () {
-      document.getElementById("chkEducation").checked = false;
-      document.getElementById("educationView").style.display = "none";
-      document.getElementById("mainLayerView").style.display = "";
-      removeAllEducationLayers();
-      hideChartPanel();
-      document.getElementById("infoCard").classList.add("hidden");
-      resetPopLegend();
-      loadNeutralLayers();
-    });
-
-
-  document.querySelectorAll("[data-edusub]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
-      document.querySelectorAll("[data-edusub]").forEach(function (b) {
-        b.classList.remove("active");
-      });
-      this.classList.add("active");
-      removeAllEducationLayers();
-      document.getElementById("infoCard").classList.add("hidden");
-      resetChartPanel();
-      resetPopLegend();
-      if (this.dataset.edusub === "schools") loadEducation();
-      else if (this.dataset.edusub === "kindergarten") loadKindergarten();
-      else if (this.dataset.edusub === "oikonymy") loadOikonymy();
-      else if (this.dataset.edusub === "libraries") loadLibraries();
-      else if (this.dataset.edusub === "tourism") loadTourism();
-      else if (this.dataset.edusub === "art_disciplines") loadArtDisciplines();
-      setInfoBtn(EDU_SUB_INFO[this.dataset.edusub] || null);
-    });
+  // ქვეფენების ღილაკები (თემის გახსნა/„უკან“ — app.js, THEMES)
+  bindSublayerButtons("edusub", function () {
+    removeAllEducationLayers();
+    document.getElementById("infoCard").classList.add("hidden");
+    resetChartPanel();
+    resetPopLegend();
+    if (this.dataset.edusub === "schools") loadEducation();
+    else if (this.dataset.edusub === "kindergarten") loadKindergarten();
+    else if (this.dataset.edusub === "oikonymy") loadOikonymy();
+    else if (this.dataset.edusub === "libraries") loadLibraries();
+    else if (this.dataset.edusub === "tourism") loadTourism();
+    else if (this.dataset.edusub === "art_disciplines") loadArtDisciplines();
+    setInfoBtn(EDU_SUB_INFO[this.dataset.edusub] || null);
   });
 }

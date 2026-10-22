@@ -940,82 +940,15 @@ function updateProtectedAreasLegend() {
 
 // ===== Start-up (called from app.js) =====
 function initTourism() {
-  // ===== ტურიზმი checkbox (ამჟამად disabled — მალე გააქტიურდება) =====
-  document
-    .getElementById("chkTourism")
-    .addEventListener("change", function (e) {
-      if (e.target.checked) {
-        document.getElementById("mainLayerView").style.display = "none";
-        document.getElementById("sublayerView").style.display = "none";
-        document.getElementById("natureView").style.display = "none";
-        document.getElementById("historyView").style.display = "none";
-        document.getElementById("economyView").style.display = "none";
-        document.getElementById("educationView").style.display = "none";
-        document.getElementById("healthView").style.display = "none";
-        document.getElementById("tourismView").style.display = "";
-        removeAllHistoryLayers();
-        removeAllEconomyLayers();
-        removeAllEducationLayers();
-        removeAllHealthLayers();
-        showChartPanel();
-        resetChartPanel();
-        hideSettlementLegend();
-        setInfoBtn(null);
-        document.getElementById("filterSection").style.display = "none";
-        document.getElementById("infoCard").classList.add("hidden");
-        document.getElementById("chkPopulation").checked = false;
-        document.getElementById("chkNature").checked = false;
-        document.getElementById("chkHistory").checked = false;
-        document.getElementById("chkEconomy").checked = false;
-        document.getElementById("chkEducation").checked = false;
-        document.getElementById("chkHealth").checked = false;
-        removeAllThematic();
-        removeAllNatureLayers();
-        removeNeutralLayers();
-        document.querySelectorAll("[data-toursub]").forEach(function (b) {
-          b.classList.remove("active");
-        });
-        document.querySelector("[data-toursub='tourism_climate']").classList.add("active");
-        loadTourismClimate();
-      } else {
-        document.getElementById("tourismView").style.display = "none";
-        document.getElementById("mainLayerView").style.display = "";
-        removeAllTourismLayers();
-        resetPopLegend();
-        loadNeutralLayers();
-      }
-    });
-
-
-  document
-    .getElementById("btnTourismBack")
-    .addEventListener("click", function () {
-      document.getElementById("chkTourism").checked = false;
-      document.getElementById("tourismView").style.display = "none";
-      document.getElementById("mainLayerView").style.display = "";
-      removeAllTourismLayers();
-      hideChartPanel();
-      document.getElementById("infoCard").classList.add("hidden");
-      resetPopLegend();
-      loadNeutralLayers();
-    });
-
-
-  document.querySelectorAll("[data-toursub]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
-      document.querySelectorAll("[data-toursub]").forEach(function (b) {
-        b.classList.remove("active");
-      });
-      this.classList.add("active");
-      removeAllTourismLayers();
-      resetChartPanel();
-      document.getElementById("infoCard").classList.add("hidden");
-      if (this.dataset.toursub === "tourism_climate") loadTourismClimate();
-      else if (this.dataset.toursub === "tourism_types") loadTourismTypes();
-      else if (this.dataset.toursub === "viticulture") loadViticulture();
-      else if (this.dataset.toursub === "protected_areas") loadProtectedAreas();
-      setInfoBtn(TOUR_SUB_INFO[this.dataset.toursub] || null);
-    });
+  // ქვეფენების ღილაკები (თემის გახსნა/„უკან“ — app.js, THEMES)
+  bindSublayerButtons("toursub", function () {
+    removeAllTourismLayers();
+    resetChartPanel();
+    document.getElementById("infoCard").classList.add("hidden");
+    if (this.dataset.toursub === "tourism_climate") loadTourismClimate();
+    else if (this.dataset.toursub === "tourism_types") loadTourismTypes();
+    else if (this.dataset.toursub === "viticulture") loadViticulture();
+    else if (this.dataset.toursub === "protected_areas") loadProtectedAreas();
+    setInfoBtn(TOUR_SUB_INFO[this.dataset.toursub] || null);
   });
 }

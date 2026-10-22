@@ -1471,84 +1471,20 @@ var HEALTH_SUB_INFO = { health: "health_infra", social: "social" };
 
 // ===== Start-up (called from app.js) =====
 function initHistory() {
-  // ===== ისტორია checkbox =====
-  document.getElementById("chkHistory").addEventListener("change", function (e) {
-    if (e.target.checked) {
-      document.getElementById("mainLayerView").style.display = "none";
-      document.getElementById("sublayerView").style.display = "none";
-      document.getElementById("natureView").style.display = "none";
-      document.getElementById("historyView").style.display = "";
-      showChartPanel();
-      resetChartPanel();
-      hideSettlementLegend();
-      setInfoBtn(null);
-      document.getElementById("filterSection").style.display = "none";
-      document.getElementById("infoCard").classList.add("hidden");
-      document.getElementById("chkPopulation").checked = false;
-      document.getElementById("chkNature").checked = false;
-      document.getElementById("chkEconomy").checked = false;
-      document.getElementById("chkEducation").checked = false;
-      document.getElementById("chkTourism").checked = false;
-      document.getElementById("economyView").style.display = "none";
-      document.getElementById("educationView").style.display = "none";
-      document.getElementById("tourismView").style.display = "none";
-      removeAllThematic();
-      removeAllNatureLayers();
-      removeAllEconomyLayers();
-      removeAllEducationLayers();
-      removeAllTourismLayers();
-      removeNeutralLayers();
-      document.querySelectorAll("[data-histsub]").forEach(function (b) {
-        b.classList.remove("active");
-      });
-      document
-        .querySelector("[data-histsub='archaeology']")
-        .classList.add("active");
-      loadArchaeology();
-    } else {
-      document.getElementById("historyView").style.display = "none";
-      document.getElementById("mainLayerView").style.display = "";
-      removeAllHistoryLayers();
-      resetPopLegend();
-      loadNeutralLayers();
-    }
-  });
-
-
-  document
-    .getElementById("btnHistoryBack")
-    .addEventListener("click", function () {
-      document.getElementById("chkHistory").checked = false;
-      document.getElementById("historyView").style.display = "none";
-      document.getElementById("mainLayerView").style.display = "";
-      removeAllHistoryLayers();
-      hideChartPanel();
-      document.getElementById("infoCard").classList.add("hidden");
-      resetPopLegend();
-      loadNeutralLayers();
-    });
-
-
-  document.querySelectorAll("[data-histsub]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
-      document.querySelectorAll("[data-histsub]").forEach(function (b) {
-        b.classList.remove("active");
-      });
-      this.classList.add("active");
-      removeAllHistoryLayers();
-      document.getElementById("infoCard").classList.add("hidden");
-      resetChartPanel();
-      resetPopLegend();
-      var sub = this.dataset.histsub;
-      if (sub === "archaeology") loadArchaeology();
-      else if (sub === "battles") loadBattles();
-      else if (sub === "germans") loadGermans();
-      else if (sub === "forts") loadForts();
-      else if (sub === "eparchies") loadEparchies();
-      else if (sub === "petroglyphs") loadPetroglyphs();
-      else if (sub === "megaliths") loadMegaliths();
-      setInfoBtn(HIST_SUB_INFO[sub] || null);
-    });
+  // ქვეფენების ღილაკები (თემის გახსნა/„უკან“ — app.js, THEMES)
+  bindSublayerButtons("histsub", function () {
+    removeAllHistoryLayers();
+    document.getElementById("infoCard").classList.add("hidden");
+    resetChartPanel();
+    resetPopLegend();
+    var sub = this.dataset.histsub;
+    if (sub === "archaeology") loadArchaeology();
+    else if (sub === "battles") loadBattles();
+    else if (sub === "germans") loadGermans();
+    else if (sub === "forts") loadForts();
+    else if (sub === "eparchies") loadEparchies();
+    else if (sub === "petroglyphs") loadPetroglyphs();
+    else if (sub === "megaliths") loadMegaliths();
+    setInfoBtn(HIST_SUB_INFO[sub] || null);
   });
 }

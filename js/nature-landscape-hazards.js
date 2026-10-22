@@ -1227,101 +1227,38 @@ var NATURE_SUB_INFO = {
 
 // ===== Start-up (called from app.js) =====
 function initNatureLandscapeHazards() {
-  // Nature checkbox
-  document.getElementById("chkNature").addEventListener("change", function (e) {
-    if (e.target.checked) {
-      document.getElementById("chkHistory").checked = false;
-      document.getElementById("chkEconomy").checked = false;
-      document.getElementById("chkEducation").checked = false;
-      document.getElementById("chkTourism").checked = false;
-      document.getElementById("historyView").style.display = "none";
-      document.getElementById("economyView").style.display = "none";
-      document.getElementById("educationView").style.display = "none";
-      document.getElementById("tourismView").style.display = "none";
-      removeAllHistoryLayers();
-      removeAllEconomyLayers();
-      removeAllEducationLayers();
-      removeAllTourismLayers();
-      document.getElementById("mainLayerView").style.display = "none";
-      document.getElementById("sublayerView").style.display = "none";
-      document.getElementById("natureView").style.display = "";
-      showChartPanel();
-      resetChartPanel();
-      hideSettlementLegend();
-      setInfoBtn(null);
-      removeNeutralLayers();
-      // პირველი ქვე-ფენა ავტომატურად
-      removeAllNatureLayers();
-      document
-        .querySelectorAll("[data-naturesub]")
-        .forEach((b) => b.classList.remove("active"));
-      document
-        .querySelector("[data-naturesub='geology']")
-        .classList.add("active");
-      loadGeology();
-      setInfoBtn(NATURE_SUB_INFO.geology);
-      document.getElementById("filterSection").style.display = "none";
-      document.getElementById("infoCard").classList.add("hidden");
-    } else {
-      document.getElementById("natureView").style.display = "none";
-      document.getElementById("mainLayerView").style.display = "";
-      removeAllNatureLayers();
-      resetPopLegend();
-      loadNeutralLayers();
-    }
-  });
-
-
-  document.getElementById("btnNatureBack").addEventListener("click", function () {
-    document.getElementById("chkNature").checked = false;
-    document.getElementById("natureView").style.display = "none";
-    document.getElementById("mainLayerView").style.display = "";
+  // ქვეფენების ღილაკები (თემის გახსნა/„უკან“ — app.js, THEMES)
+  bindSublayerButtons("naturesub", function () {
+    var sub = this.dataset.naturesub;
+    // წინა ფენები გამოვრთოთ
     removeAllNatureLayers();
-    hideChartPanel();
     document.getElementById("infoCard").classList.add("hidden");
+    resetChartPanel();
     resetPopLegend();
-    loadNeutralLayers();
-  });
-
-
-  document.querySelectorAll("[data-naturesub]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (this.classList.contains("active")) return; // იგივეზე ხელახლა დაწკაპება
-      document
-        .querySelectorAll("[data-naturesub]")
-        .forEach((b) => b.classList.remove("active"));
-      this.classList.add("active");
-      var sub = this.dataset.naturesub;
-      // წინა ფენები გამოვრთოთ
-      removeAllNatureLayers();
-      document.getElementById("infoCard").classList.add("hidden");
-      resetChartPanel();
-      resetPopLegend();
-      if (sub === "agrovlimat") loadAgrovlimat();
-      else if (sub === "meteo") loadMeteo();
-      else if (sub === "hydro") loadHydro();
-      else if (sub === "landscape") loadLandscape();
-      else if (sub === "landscape_antrop") loadLandscapeAntrop();
-      else if (sub === "hazard") loadHazard();
-      else if (sub === "groundwater") loadGroundwater();
-      else if (sub === "earthquake") loadEarthquake();
-      else if (sub === "madflow") loadMadflow();
-      else if (sub === "geology") loadGeology();
-      else if (sub === "forest") loadForest();
-      else if (sub === "vegetation") loadVegetation();
-      else if (sub === "avg_temp") loadAvgTemp();
-      else if (sub === "max_temp") loadMaxTemp();
-      else if (sub === "precip") loadPrecip();
-      else if (sub === "hot_days") loadHotDays();
-      else if (sub === "trop_nights") loadTropNights();
-      else if (sub === "frost_days") loadFrostDays();
-      else if (sub === "heat_waves") loadHeatWaves();
-      else if (sub === "drought") loadDrought();
-      else if (sub === "hail_total") loadHailTotal();
-      else if (sub === "soils") loadSoils();
-      else if (sub === "soils_born") loadSoilsBorn();
-      // ღილაკი ბოლოს ვდგამთ — ჩატვირთვის შტოზე დამოკიდებული აღარაა
-      setInfoBtn(NATURE_SUB_INFO[sub] || null);
-    });
+    if (sub === "agrovlimat") loadAgrovlimat();
+    else if (sub === "meteo") loadMeteo();
+    else if (sub === "hydro") loadHydro();
+    else if (sub === "landscape") loadLandscape();
+    else if (sub === "landscape_antrop") loadLandscapeAntrop();
+    else if (sub === "hazard") loadHazard();
+    else if (sub === "groundwater") loadGroundwater();
+    else if (sub === "earthquake") loadEarthquake();
+    else if (sub === "madflow") loadMadflow();
+    else if (sub === "geology") loadGeology();
+    else if (sub === "forest") loadForest();
+    else if (sub === "vegetation") loadVegetation();
+    else if (sub === "avg_temp") loadAvgTemp();
+    else if (sub === "max_temp") loadMaxTemp();
+    else if (sub === "precip") loadPrecip();
+    else if (sub === "hot_days") loadHotDays();
+    else if (sub === "trop_nights") loadTropNights();
+    else if (sub === "frost_days") loadFrostDays();
+    else if (sub === "heat_waves") loadHeatWaves();
+    else if (sub === "drought") loadDrought();
+    else if (sub === "hail_total") loadHailTotal();
+    else if (sub === "soils") loadSoils();
+    else if (sub === "soils_born") loadSoilsBorn();
+    // ღილაკი ბოლოს ვდგამთ — ჩატვირთვის შტოზე დამოკიდებული აღარაა
+    setInfoBtn(NATURE_SUB_INFO[sub] || null);
   });
 }
