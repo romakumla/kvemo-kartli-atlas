@@ -857,6 +857,10 @@ function showBottomChartAgro(p, data) {
       },
     },
   });
+  if (p)
+    highlightBottomBars(function (l, i) {
+      return sorted[i] === p.ZoneKey;
+    });
 }
 
 // ===== Start-up (called from app.js) =====

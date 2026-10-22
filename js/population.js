@@ -392,6 +392,7 @@ function buildIDPLayers() {
       layer.on("click", function () {
         showInfoIDPMuni(p);
         showBottomChartIDP();
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -434,6 +435,8 @@ function buildIDPLayers() {
       });
       marker.on("click", function () {
         showInfoIDPPoint(p);
+        showBottomChartIDP();
+        highlightBottomBars(muniName(p.Municipal_));
       });
       return marker;
     },
