@@ -878,7 +878,7 @@ function updateLandLegend() {
   // theme switcher (year-btn style)
   html +=
     '<div style="margin-top:12px;"><div style="font-size:9px;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;">თემა</div>';
-  html += '<div style="display:flex;flex-direction:column;gap:5px;">';
+  html += '<div class="panel-btn-col">';
   [
     ["ownership", "საკუთრების ფორმა"],
     ["status", "მეურნ. რაოდენობა"],
@@ -890,7 +890,7 @@ function updateLandLegend() {
       active +
       '" data-landtheme="' +
       pair[0] +
-      '" style="text-align:left;">' +
+      '">' +
       pair[1] +
       "</button>";
   });

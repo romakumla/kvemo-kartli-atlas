@@ -367,19 +367,14 @@ function updateHealthLegend() {
     '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.06em;">' +
     HEALTH_METRIC_LABELS[metric] +
     "</div>";
-  html +=
-    '<div style="display:flex;gap:3px;margin-bottom:9px;flex-wrap:wrap;">';
+  html += '<div class="panel-btn-col">';
   ["doctors", "nurses", "outpatient"].forEach(function (m) {
-    var a =
-      m === metric
-        ? "background:#1A5F8A;color:#fff;"
-        : "background:#e4e0da;color:#555;";
     html +=
-      "<button onclick=\"setHealthMetric('" +
+      '<button class="year-btn' +
+      (m === metric ? " active" : "") +
+      "\" onclick=\"setHealthMetric('" +
       m +
-      '\')" style="' +
-      a +
-      'border:none;border-radius:10px;padding:3px 8px;font-size:9px;cursor:pointer;font-family:Fira Sans,sans-serif;line-height:1.4;">' +
+      "')\">" +
       HEALTH_METRIC_LABELS[m] +
       "</button>";
   });
@@ -687,19 +682,14 @@ function updateSocialLegend() {
     '<div style="font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.06em;">' +
     SOCIAL_METRIC_LABELS[metric] +
     "</div>";
-  html +=
-    '<div style="display:flex;gap:3px;margin-bottom:9px;flex-wrap:wrap;">';
+  html += '<div class="panel-btn-col">';
   ["registered", "receiving", "pension", "social_pac"].forEach(function (m) {
-    var a =
-      m === metric
-        ? "background:#5C3699;color:#fff;"
-        : "background:#e4e0da;color:#555;";
     html +=
-      "<button onclick=\"setSocialMetric('" +
+      '<button class="year-btn' +
+      (m === metric ? " active" : "") +
+      "\" onclick=\"setSocialMetric('" +
       m +
-      '\')" style="' +
-      a +
-      'border:none;border-radius:10px;padding:3px 7px;font-size:9px;cursor:pointer;font-family:Fira Sans,sans-serif;line-height:1.4;">' +
+      "')\">" +
       SOCIAL_METRIC_LABELS[m] +
       "</button>";
   });
@@ -1174,24 +1164,23 @@ function updateZooLegend() {
       '<div style="font-size:9px;color:var(--text-muted);margin:6px 0 3px;font-weight:700;">' +
       g.label +
       "</div>";
+    // სამი ვარიანტი (ჯილეხი): „ყველა“ ცალკე ხაზზე, ქვემოთ ცხოველები | ადამიანები
     html +=
-      '<div style="display:flex;gap:3px;flex-wrap:wrap;margin-bottom:2px;">';
+      '<div class="panel-btn-row' +
+      (g.keys.length > 2 ? " first-full" : "") +
+      '" style="margin-bottom:2px;">';
     g.keys.forEach(function (k) {
       var z = getZooCfg(k);
       var active = k === activeZooKey;
-      var bg = active ? z.color : "#e4e0da";
-      var col = active ? "#fff" : "#555";
       var shortLabel = z.label.replace(/^[^—]+—\s*/, "");
       if (z.key === "anthrax_all") shortLabel = "ყველა";
       if (z.key === "leptospirosis") shortLabel = "ადამ./ცხ.";
       html +=
-        "<button onclick=\"switchZooLayer('" +
+        '<button class="year-btn' +
+        (active ? " active" : "") +
+        "\" onclick=\"switchZooLayer('" +
         k +
-        '\')" style="background:' +
-        bg +
-        ";color:" +
-        col +
-        ';border:none;border-radius:10px;padding:3px 7px;font-size:9px;cursor:pointer;font-family:Fira Sans,sans-serif;line-height:1.4;">' +
+        "')\">" +
         shortLabel +
         "</button>";
     });

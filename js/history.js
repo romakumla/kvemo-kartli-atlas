@@ -1187,7 +1187,10 @@ function loadChurches() {
     })
     .then(function (d) {
       churchesData = d;
+      if (!churchesVisible) return; // ჩატვირთვისას უკვე გამორთეს
       buildChurchesLayer(d);
+      // ღილაკზე ეკლესიების რაოდენობა — პანელი ჯერ კიდევ ეპარქიებზეა?
+      if (document.getElementById("btnToggleChurches")) updateEparchiesLegend();
     });
 }
 
@@ -1253,22 +1256,17 @@ function updateEparchiesLegend() {
   // ეკლესიების toggle ღილაკი
   html +=
     '<div style="margin-top:10px;padding-top:8px;border-top:1px solid #e5e0d8;">' +
-    '<button id="btnToggleChurches" onclick="toggleChurches()" class="' +
-    (churchesVisible ? "active" : "") +
-    '" ' +
-    "style=\"display:flex;align-items:center;gap:6px;width:100%;padding:6px 8px;font-size:10px;font-family:'Fira Sans',sans-serif;" +
-    "border:1.5px solid #8B5A2B;border-radius:6px;cursor:pointer;transition:all .15s;" +
-    (churchesVisible
-      ? "background:#8B5A2B;color:#fff;"
-      : "background:transparent;color:#8B5A2B;") +
-    '">' +
+    '<div class="panel-btn-col">' +
+    '<button id="btnToggleChurches" onclick="toggleChurches()" class="year-btn' +
+    (churchesVisible ? " active" : "") +
+    '" style="display:flex;align-items:center;gap:6px;">' +
     '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>' +
     (churchesVisible
       ? "ეკლესიები ჩართულია (" +
         (churchesData ? churchesData.features.length : "...") +
         ")"
       : "ეკლესიების ჩვენება") +
-    "</button></div>";
+    "</button></div></div>";
   el.innerHTML = html;
 }
 

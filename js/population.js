@@ -587,19 +587,14 @@ function updateIDPLegend() {
     IDP_LABELS[metric] +
     "</div>";
   html +=
-    '<div style="display:flex;gap:4px;margin-bottom:9px;flex-wrap:wrap;">';
+    '<div class="panel-btn-col">';
   ["natural", "armed"].forEach(function (m) {
-    var c = m === "natural" ? "#E8621A" : "#8A63C8";
-    var a =
-      m === metric
-        ? "background:" + c + ";color:#fff;"
-        : "background:#e4e0da;color:#555;";
     html +=
-      "<button onclick=\"setIDPMetric('" +
+      '<button class="year-btn' +
+      (m === metric ? " active" : "") +
+      "\" onclick=\"setIDPMetric('" +
       m +
-      '\')" style="' +
-      a +
-      'border:none;border-radius:10px;padding:3px 8px;font-size:9px;cursor:pointer;font-family:Fira Sans,sans-serif;line-height:1.4;">' +
+      "')\">" +
       IDP_LABELS[m] +
       "</button>";
   });
