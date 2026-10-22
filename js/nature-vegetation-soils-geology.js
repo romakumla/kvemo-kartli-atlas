@@ -41,33 +41,19 @@ var VEG_LEGEND = [
 ];
 
 function loadForest() {
-  if (forestData) {
-    buildForestLayer(forestData);
+  loadData("data/forest.geojson", function (d) {
+    forestData = d;
+    buildForestLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/forest.geojson"))
-    .then((r) => r.json())
-    .then((d) => {
-      forestData = d;
-      buildForestLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function loadVegetation() {
-  if (vegetationData) {
-    buildVegetationLayer(vegetationData);
+  loadData("data/vegetation.geojson", function (d) {
+    vegetationData = d;
+    buildVegetationLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/vegetation.geojson"))
-    .then((r) => r.json())
-    .then((d) => {
-      vegetationData = d;
-      buildVegetationLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildForestLayer(data) {
@@ -675,29 +661,11 @@ function loadHail100() {
 }
 
 function _loadHailBoth(cb) {
-  var loaded = 0;
-  var needed = (!hailTotalData ? 1 : 0) + (!hail100Data ? 1 : 0);
-  if (needed === 0) {
+  loadDataAll(["data/hail_total.geojson", "data/hail_100.geojson"], function (d) {
+    hailTotalData = d[0];
+    hail100Data = d[1];
     cb();
-    return;
-  }
-  function tryDraw() {
-    if (++loaded === needed) cb();
-  }
-  if (!hailTotalData)
-    fetch(dataUrl("data/hail_total.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        hailTotalData = d;
-        tryDraw();
-      });
-  if (!hail100Data)
-    fetch(dataUrl("data/hail_100.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        hail100Data = d;
-        tryDraw();
-      });
+  });
 }
 
 function _drawHailLayer(type) {
@@ -873,33 +841,19 @@ function updateHailLegend(type) {
 }
 
 function loadSoils() {
-  if (soilsData) {
-    buildSoilsLayer(soilsData);
+  loadData("data/soils.geojson", function (d) {
+    soilsData = d;
+    buildSoilsLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/soils.geojson"))
-    .then((r) => r.json())
-    .then((d) => {
-      soilsData = d;
-      buildSoilsLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function loadSoilsBorn() {
-  if (soilsBornData) {
-    buildSoilsBornLayer(soilsBornData);
+  loadData("data/soils_born.geojson", function (d) {
+    soilsBornData = d;
+    buildSoilsBornLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/soils_born.geojson"))
-    .then((r) => r.json())
-    .then((d) => {
-      soilsBornData = d;
-      buildSoilsBornLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildSoilsLayer(data) {
@@ -1413,50 +1367,23 @@ function geoMineralIcon(symbolKey) {
 }
 
 function loadGeology() {
-  var loaded = 0;
-  function tryRender() {
-    if (++loaded === 5) renderGeologyLayers();
-  }
-  if (!geologyData)
-    fetch(dataUrl("data/geology.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        geologyData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!foultsData)
-    fetch(dataUrl("data/foults.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        foultsData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!metalOreData)
-    fetch(dataUrl("data/metal_ore.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        metalOreData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!nonmetalOreData)
-    fetch(dataUrl("data/nonmetal_ore.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        nonmetalOreData = d;
-        tryRender();
-      });
-  else tryRender();
-  if (!oilGasData)
-    fetch(dataUrl("data/oil_gas.geojson"))
-      .then((r) => r.json())
-      .then((d) => {
-        oilGasData = d;
-        tryRender();
-      });
-  else tryRender();
+  loadDataAll(
+    [
+      "data/geology.geojson",
+      "data/foults.geojson",
+      "data/metal_ore.geojson",
+      "data/nonmetal_ore.geojson",
+      "data/oil_gas.geojson",
+    ],
+    function (d) {
+      geologyData = d[0];
+      foultsData = d[1];
+      metalOreData = d[2];
+      nonmetalOreData = d[3];
+      oilGasData = d[4];
+      renderGeologyLayers();
+    },
+  );
 }
 
 function renderGeologyLayers() {

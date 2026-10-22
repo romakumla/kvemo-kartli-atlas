@@ -75,39 +75,15 @@ function getHealthColor(val, metric) {
 }
 
 function loadHealth() {
-  var loaded = 0;
-  var total = (!healthServicesData ? 1 : 0) + (!healthClinicsData ? 1 : 0);
-  function onLoaded() {
-    loaded++;
-    if (loaded >= total) {
+  loadDataAll(
+    ["data/muni/health_services.json", "data/health_clinics.geojson"],
+    function (d) {
+      healthServicesData = d[0];
+      healthClinicsData = d[1];
       buildHealthLayers();
       loadNatureMuniCenters();
-    }
-  }
-  if (!healthServicesData) {
-    loadMuniData("data/muni/health_services.json")
-      .then(function (r) {
-        return r.json();
-      })
-      .then(function (d) {
-        healthServicesData = d;
-        onLoaded();
-      });
-  }
-  if (!healthClinicsData) {
-    fetch(dataUrl("data/health_clinics.geojson"))
-      .then(function (r) {
-        return r.json();
-      })
-      .then(function (d) {
-        healthClinicsData = d;
-        onLoaded();
-      });
-  }
-  if (healthServicesData && healthClinicsData) {
-    buildHealthLayers();
-    loadNatureMuniCenters();
-  }
+    },
+  );
 }
 
 function buildHealthLayers() {
@@ -443,20 +419,11 @@ function getSocialColor(val, metric) {
 }
 
 function loadSocial() {
-  if (socialData) {
+  loadData("data/muni/social.json", function (d) {
+    socialData = d;
     buildSocialLayer();
     loadNatureMuniCenters();
-    return;
-  }
-  loadMuniData("data/muni/social.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      socialData = d;
-      buildSocialLayer();
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildSocialLayer() {
@@ -749,7 +716,6 @@ var ZOO_LAYERS = [
   },
 ];
 
-var zooCache = {}; // key -> geojson data
 
 var zooLeafLayers = {}; // key -> L.geoJSON layer
 
@@ -770,19 +736,9 @@ var zooMuniGeoms = null; // municipalities.geojson — ერთხელ იტ
 function loadZoo(key) {
   activeZooKey = key;
   var id = ++zooBuildId;
-  if (zooCache[key]) {
-    buildZooLayer(key, zooCache[key], id);
-    return;
-  }
-  var cfg = getZooCfg(key);
-  fetch(dataUrl("data/" + cfg.file))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      zooCache[key] = d;
-      if (id === zooBuildId) buildZooLayer(key, d, id);
-    });
+  loadData("data/" + getZooCfg(key).file, function (d) {
+    if (id === zooBuildId) buildZooLayer(key, d, id);
+  });
 }
 
 function removeZooMapLayers() {

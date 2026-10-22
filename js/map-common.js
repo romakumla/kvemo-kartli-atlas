@@ -173,18 +173,11 @@ function buildAgrovlimatLayer(data) {
 }
 
 function loadAgrovlimat() {
-  if (agrovlimatData) {
-    buildAgrovlimatLayer(agrovlimatData);
+  loadData("data/agrovlimat.geojson", function (data) {
+    agrovlimatData = data;
+    buildAgrovlimatLayer(data);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/agrovlimat.geojson"))
-    .then((r) => r.json())
-    .then((data) => {
-      agrovlimatData = data;
-      buildAgrovlimatLayer(data);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 // ============================================================

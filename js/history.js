@@ -30,20 +30,11 @@ function getArchColor(n) {
 }
 
 function loadArchaeology() {
-  if (archData) {
-    buildArchLayer(archData);
+  loadData("data/archeology.geojson", function (d) {
+    archData = d;
+    buildArchLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/archeology.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      archData = d;
-      buildArchLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildArchLayer(data) {
@@ -202,20 +193,11 @@ var SVG_RESTORED =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.08 10.89" width="22" height="22"><path fill="#E31E26" d="M5.54,0.18c-2.9,0-5.26,2.36-5.26,5.26c0,2.9,2.36,5.26,5.26,5.26c2.9,0,5.26-2.36,5.26-5.26C10.8,2.54,8.44,0.18,5.54,0.18 M5.91,9.93V8.13H5.17v1.79C3.79,9.81,2.59,9.1,1.84,8.03L3.45,7.1L3.08,6.45L1.47,7.38C1.19,6.79,1.02,6.14,1.02,5.44c0-0.69,0.17-1.34,0.45-1.93l1.59,0.92l0.37-0.64l-1.6-0.92c0.75-1.07,1.96-1.79,3.33-1.91v1.83h0.74V0.96c1.37,0.11,2.57,0.82,3.32,1.89L7.6,3.79l0.37,0.64L9.6,3.5c0.29,0.59,0.46,1.25,0.46,1.95c0,0.68-0.16,1.33-0.44,1.91L8.01,6.42L7.64,7.06L9.26,8C8.51,9.09,7.3,9.81,5.91,9.93"/></svg>';
 
 function loadBattles() {
-  if (battlesData) {
-    buildBattlesLayer(battlesData);
+  loadData("data/battles.geojson", function (d) {
+    battlesData = d;
+    buildBattlesLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/battles.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      battlesData = d;
-      buildBattlesLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildBattlesLayer(data) {
@@ -425,20 +407,11 @@ function germanOctagonSVG(color, num) {
 }
 
 function loadGermans() {
-  if (germansData) {
-    buildGermansLayers(germansData);
+  loadData("data/muni/germans.json", function (d) {
+    germansData = d;
+    buildGermansLayers(d);
     loadNatureMuniCenters();
-    return;
-  }
-  loadMuniData("data/muni/germans.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      germansData = d;
-      buildGermansLayers(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildGermansLayers(data) {
@@ -676,20 +649,11 @@ var FORT_TYPES = [
 ];
 
 function loadForts() {
-  if (fortsData) {
-    buildFortsLayer(fortsData);
+  loadData("data/fortifications.geojson", function (d) {
+    fortsData = d;
+    buildFortsLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/fortifications.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      fortsData = d;
-      buildFortsLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildFortsLayer(data) {
@@ -874,20 +838,11 @@ var EP_TYPES = [
 ];
 
 function loadEparchies() {
-  if (eparchyData) {
-    buildEparchyLayers(eparchyData);
+  loadData("data/eparchies.geojson", function (d) {
+    eparchyData = d;
+    buildEparchyLayers(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/eparchies.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      eparchyData = d;
-      buildEparchyLayers(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildEparchyLayers(data) {
@@ -1096,17 +1051,13 @@ function loadChurches() {
     buildChurchesLayer(churchesData);
     return;
   }
-  fetch(dataUrl("data/churches.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      churchesData = d;
-      if (!churchesVisible) return; // ჩატვირთვისას უკვე გამორთეს
-      buildChurchesLayer(d);
-      // ღილაკზე ეკლესიების რაოდენობა — პანელი ჯერ კიდევ ეპარქიებზეა?
-      if (document.getElementById("btnToggleChurches")) updateEparchiesLegend();
-    });
+  loadData("data/churches.geojson", function (d) {
+    churchesData = d;
+    if (!churchesVisible) return; // ჩატვირთვისას უკვე გამორთეს
+    buildChurchesLayer(d);
+    // ღილაკზე ეკლესიების რაოდენობა — პანელი ჯერ კიდევ ეპარქიებზეა?
+    if (document.getElementById("btnToggleChurches")) updateEparchiesLegend();
+  });
 }
 
 function buildChurchesLayer(data) {
@@ -1187,20 +1138,11 @@ var SVG_PETRO =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.08 13.42" width="20" height="19"><polygon fill="#BD1B88" stroke="#010101" stroke-width="0.25" points="0.36,5.2 2.91,13.07 11.17,13.07 13.72,5.2 7.03,0.34"/></svg>';
 
 function loadPetroglyphs() {
-  if (petroData) {
-    buildPetroLayer(petroData);
+  loadData("data/petroglyphs.geojson", function (d) {
+    petroData = d;
+    buildPetroLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/petroglyphs.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      petroData = d;
-      buildPetroLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildPetroLayer(data) {
@@ -1350,20 +1292,11 @@ var SVG_MEGA_ORANGE =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.83 6.58" width="15" height="15"><rect x="0.35" y="0.22" width="6.14" height="6.14" fill="#E45225" stroke="#010101" stroke-width="0.25"/></svg>';
 
 function loadMegaliths() {
-  if (megaData) {
-    buildMegaLayer(megaData);
+  loadData("data/megaliths.geojson", function (d) {
+    megaData = d;
+    buildMegaLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/megaliths.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      megaData = d;
-      buildMegaLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildMegaLayer(data) {

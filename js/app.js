@@ -192,18 +192,10 @@ var _searchData = null;
 var _searchMarker = null;
 
 function loadSearchData(cb) {
-  if (_searchData) {
+  loadData("data/settlements.geojson", function (d) {
+    _searchData = d.features;
     cb(_searchData);
-    return;
-  }
-  fetch(dataUrl("data/settlements.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      _searchData = d.features;
-      cb(_searchData);
-    });
+  });
 }
 
 (function () {

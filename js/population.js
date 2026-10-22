@@ -209,48 +209,27 @@ var ethnicsData = null;
 var religionData = null;
 
 function loadSettlements(cb) {
-  if (allSettlements) {
-    allFeatures = allSettlements;
+  loadData("data/settlements.geojson", function (data) {
+    allSettlements = data.features;
+    allFeatures = data.features;
     if (cb) cb();
-    return;
-  }
-  fetch(dataUrl("data/settlements.geojson"))
-    .then((r) => r.json())
-    .then((data) => {
-      allSettlements = data.features;
-      allFeatures = data.features;
-      if (cb) cb();
-    });
+  });
 }
 
 function loadEthnics(cb) {
-  if (ethnicsData) {
-    buildEthnicsLayer(ethnicsData);
+  loadData("data/muni/ethnics.json", function (data) {
+    ethnicsData = data;
+    buildEthnicsLayer(data);
     if (cb) cb();
-    return;
-  }
-  loadMuniData("data/muni/ethnics.json")
-    .then((r) => r.json())
-    .then((data) => {
-      ethnicsData = data;
-      buildEthnicsLayer(data);
-      if (cb) cb();
-    });
+  });
 }
 
 function loadReligion(cb) {
-  if (religionData) {
-    buildReligionLayer(religionData);
+  loadData("data/muni/religion.json", function (data) {
+    religionData = data;
+    buildReligionLayer(data);
     if (cb) cb();
-    return;
-  }
-  loadMuniData("data/muni/religion.json")
-    .then((r) => r.json())
-    .then((data) => {
-      religionData = data;
-      buildReligionLayer(data);
-      if (cb) cb();
-    });
+  });
 }
 
 // ============================================================
@@ -318,33 +297,14 @@ function getIdpColor(val, metric) {
 }
 
 function loadIDP() {
-  var loaded = 0,
-    total = (!idpPolyData ? 1 : 0) + (!idpPointData ? 1 : 0);
-  function onDone() {
-    loaded++;
-    if (loaded >= total) buildIDPLayers();
-  }
-  if (!idpPolyData) {
-    loadMuniData("data/muni/idp_municipalities.json")
-      .then(function (r) {
-        return r.json();
-      })
-      .then(function (d) {
-        idpPolyData = d;
-        onDone();
-      });
-  }
-  if (!idpPointData) {
-    fetch(dataUrl("data/idp_settlements.geojson"))
-      .then(function (r) {
-        return r.json();
-      })
-      .then(function (d) {
-        idpPointData = d;
-        onDone();
-      });
-  }
-  if (idpPolyData && idpPointData) buildIDPLayers();
+  loadDataAll(
+    ["data/muni/idp_municipalities.json", "data/idp_settlements.geojson"],
+    function (d) {
+      idpPolyData = d[0];
+      idpPointData = d[1];
+      buildIDPLayers();
+    },
+  );
 }
 
 function buildIDPLayers() {
@@ -807,16 +767,10 @@ function buildDensityLayer(data) {
 }
 
 function loadDensity() {
-  if (densityData) {
-    buildDensityLayer(densityData);
-    return;
-  }
-  loadMuniData("data/muni/density.json")
-    .then((r) => r.json())
-    .then((data) => {
-      densityData = data;
-      buildDensityLayer(data);
-    });
+  loadData("data/muni/density.json", function (data) {
+    densityData = data;
+    buildDensityLayer(data);
+  });
 }
 
 function updateDensityLegend() {
@@ -1002,30 +956,11 @@ function buildMaritalLayer(data, gender) {
 }
 
 function loadMarital() {
-  if (maritalMenData && maritalWomenData) {
+  loadDataAll(["data/marital_men.geojson", "data/marital_women.geojson"], function (d) {
+    maritalMenData = d[0];
+    maritalWomenData = d[1];
     renderMaritalLayers();
-    return;
-  }
-  var pending = 2;
-  function done() {
-    if (--pending === 0) renderMaritalLayers();
-  }
-  if (!maritalMenData) {
-    fetch(dataUrl("data/marital_men.geojson"))
-      .then((r) => r.json())
-      .then((data) => {
-        maritalMenData = data;
-        done();
-      });
-  } else done();
-  if (!maritalWomenData) {
-    fetch(dataUrl("data/marital_women.geojson"))
-      .then((r) => r.json())
-      .then((data) => {
-        maritalWomenData = data;
-        done();
-      });
-  } else done();
+  });
 }
 
 // ქორწინების ტექსტი გენდერის მიხედვით იცვლება
@@ -1260,57 +1195,31 @@ function buildRateLayer(data, f12, f22, colorMap, ref) {
 }
 
 function loadDeathRate() {
-  if (deathData) {
+  loadData("data/muni/death_rate.json", function (data) {
+    deathData = data;
     buildRateLayer(
-      deathData,
+      data,
       "Death_2012",
       "Death_2022",
       DEATH_COLORS,
       deathLayerRef,
     );
     updateRateLegend("death");
-    return;
-  }
-  loadMuniData("data/muni/death_rate.json")
-    .then((r) => r.json())
-    .then((data) => {
-      deathData = data;
-      buildRateLayer(
-        data,
-        "Death_2012",
-        "Death_2022",
-        DEATH_COLORS,
-        deathLayerRef,
-      );
-      updateRateLegend("death");
-    });
+  });
 }
 
 function loadBirthRate() {
-  if (birthData) {
+  loadData("data/muni/birth_rate.json", function (data) {
+    birthData = data;
     buildRateLayer(
-      birthData,
+      data,
       "Birth_2012",
       "Birth_2022",
       BIRTH_COLORS,
       birthLayerRef,
     );
     updateRateLegend("birth");
-    return;
-  }
-  loadMuniData("data/muni/birth_rate.json")
-    .then((r) => r.json())
-    .then((data) => {
-      birthData = data;
-      buildRateLayer(
-        data,
-        "Birth_2012",
-        "Birth_2022",
-        BIRTH_COLORS,
-        birthLayerRef,
-      );
-      updateRateLegend("birth");
-    });
+  });
 }
 
 function updateRateLegend(type) {

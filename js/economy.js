@@ -20,20 +20,11 @@ var BOTANICA_TYPES = [
 ];
 
 function loadBotanica() {
-  if (botanicaData) {
-    buildBotanicaLayer(botanicaData);
+  loadData("data/botanica.geojson", function (d) {
+    botanicaData = d;
+    buildBotanicaLayer(d);
     loadNatureMuniCenters();
-    return;
-  }
-  fetch(dataUrl("data/botanica.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      botanicaData = d;
-      buildBotanicaLayer(d);
-      loadNatureMuniCenters();
-    });
+  });
 }
 
 function buildBotanicaLayer(data) {
@@ -181,18 +172,10 @@ function getPowerRadius(mw) {
 
 function loadEnergetika() {
   loadNatureMuniCenters();
-  if (energetikaData) {
-    buildEnergetikaLayer(energetikaData);
-    return;
-  }
-  fetch(dataUrl("data/energetika.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      energetikaData = d;
-      buildEnergetikaLayer(d);
-    });
+  loadData("data/energetika.geojson", function (d) {
+    energetikaData = d;
+    buildEnergetikaLayer(d);
+  });
 }
 
 function buildEnergetikaLayer(data) {
@@ -437,18 +420,10 @@ var CROP_ZONES = [
 
 function loadCropZones() {
   loadNatureMuniCenters();
-  if (cropZonesData) {
-    buildCropZonesLayer(cropZonesData);
-    return;
-  }
-  fetch(dataUrl("data/crop_zones.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      cropZonesData = d;
-      buildCropZonesLayer(d);
-    });
+  loadData("data/crop_zones.geojson", function (d) {
+    cropZonesData = d;
+    buildCropZonesLayer(d);
+  });
 }
 
 function buildCropZonesLayer(data) {
@@ -646,18 +621,10 @@ function getLandColor(val, stops) {
 
 function loadLand() {
   loadNatureMuniCenters();
-  if (landData) {
-    buildLandLayer(landData);
-    return;
-  }
-  loadMuniData("data/muni/land.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      landData = d;
-      buildLandLayer(d);
-    });
+  loadData("data/muni/land.json", function (d) {
+    landData = d;
+    buildLandLayer(d);
+  });
 }
 
 function buildLandLayer(data) {
@@ -936,18 +903,10 @@ var SUN_POWER_RADIUS = {
 
 function loadSun() {
   loadNatureMuniCenters();
-  if (sunData) {
-    buildSunLayers(sunData);
-    return;
-  }
-  fetch(dataUrl("data/sun.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      sunData = d;
-      buildSunLayers(d);
-    });
+  loadData("data/sun.geojson", function (d) {
+    sunData = d;
+    buildSunLayers(d);
+  });
 }
 
 function buildSunLayers(data) {
@@ -1310,18 +1269,10 @@ var AGRI_PROGRAMS = [
 
 function loadAgri() {
   loadNatureMuniCenters();
-  if (agriData) {
-    buildAgriLayer(agriData);
-    return;
-  }
-  loadMuniData("data/muni/agri_beneficiaries.json")
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      agriData = d;
-      buildAgriLayer(d);
-    });
+  loadData("data/muni/agri_beneficiaries.json", function (d) {
+    agriData = d;
+    buildAgriLayer(d);
+  });
 }
 
 // აგრობენეფიციართა წრიული (donut) დიაგრამა
@@ -1648,18 +1599,10 @@ var AGRI_SPEC_TYPES = [
 
 function loadAgriSpec() {
   loadNatureMuniCenters();
-  if (agriSpecData) {
-    buildAgriSpecLayer(agriSpecData);
-    return;
-  }
-  fetch(dataUrl("data/agri_spec.geojson"))
-    .then(function (r) {
-      return r.json();
-    })
-    .then(function (d) {
-      agriSpecData = d;
-      buildAgriSpecLayer(d);
-    });
+  loadData("data/agri_spec.geojson", function (d) {
+    agriSpecData = d;
+    buildAgriSpecLayer(d);
+  });
 }
 
 function buildAgriSpecLayer(data) {
