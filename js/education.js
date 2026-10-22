@@ -133,6 +133,7 @@ function buildEducationLayers(data) {
       layer.on("click", function () {
         showInfoEduMuni(p);
         showBottomChartEdu(data);
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -159,6 +160,7 @@ function buildEducationLayers(data) {
       marker.on("click", function () {
         showInfoEduSchool(p);
         showBottomChartEdu(data);
+        highlightBottomBars(muniName(p.Municipal));
       });
       return marker;
     },
@@ -520,6 +522,7 @@ function buildKgLayer(data) {
       layer.on("click", function () {
         showInfoKg(p);
         showBottomChartKg(data);
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -562,6 +565,7 @@ function buildKgLayer(data) {
     m.on("click", function () {
       showInfoKg(p);
       showBottomChartKg(data);
+      highlightBottomBars(p.Name_Geo);
     });
     markers.push(m);
   });
@@ -826,6 +830,7 @@ function buildOikLayer(data) {
       marker.on("click", function () {
         showInfoOik(p);
         showBottomChartOik(data);
+        highlightBottomBars(muniName(p.Municipal));
       });
       return marker;
     },
@@ -876,11 +881,7 @@ function showBottomChartOik(data) {
   // მუნიციპალიტეტების მიხედვით ქართული vs არაქართული
   var byMuni = {};
   data.features.forEach(function (f) {
-    var m = (f.properties.Municipal || "")
-      .replace(" მუნიციპალი", "")
-      .replace(" მუნიციპა", "")
-      .replace(" მუნიც", "")
-      .replace("ქალაქ ", "");
+    var m = muniName(f.properties.Municipal) || f.properties.Municipal || "";
     if (!byMuni[m]) byMuni[m] = { ka: 0, other: 0 };
     if (f.properties.OikKa) byMuni[m].ka++;
     else byMuni[m].other++;
@@ -1184,6 +1185,7 @@ function buildLibLayer(data) {
       layer.on("click", function () {
         showInfoLibrary(p);
         showBottomChartLibrary(data);
+        highlightBottomBars(p.Name_Geo);
       });
     },
   }).addTo(map);
@@ -1205,7 +1207,11 @@ function buildLibLayer(data) {
     var icon = L.divIcon({ html: svg, iconSize: [size, size], iconAnchor: [size/2, size/2], className: "" });
     var marker = L.marker([lat, lng], { icon: icon });
     marker.bindTooltip(p.Name_Geo + ": " + cnt + " ბიბლ.", { direction: "top", className: "village-label" });
-    marker.on("click", function () { showInfoLibrary(p); showBottomChartLibrary(data); });
+    marker.on("click", function () {
+      showInfoLibrary(p);
+      showBottomChartLibrary(data);
+      highlightBottomBars(p.Name_Geo);
+    });
     libMarkLayer.addLayer(marker);
   });
 
@@ -1754,16 +1760,14 @@ function artMapClickCollapse() {
 
 // ერთიანი "აქვს / არ აქვს" დიაგრამა სტატისტიკის ველისთვის
 // (ტურიზმის სახეობების იმავე პრინციპით)
-function drawPresenceChart(title, cats, activeKeys) {
+// კატეგორიების დიაგრამა რეალური რაოდენობებით (რეგიონი); activeKeys-ის
+// კატეგორიები სრული ფერით, დანარჩენი — ბაცად (highlightBottomBars)
+function drawCategoryCountChart(title, cats, counts, unit, activeKeys) {
   var canvas = document.getElementById("chartCanvas");
   document.getElementById("chartEmpty").style.display = "none";
   canvas.classList.remove("hidden");
   var ctx = canvas.getContext("2d");
   if (bottomChart) bottomChart.destroy();
-
-  function on(k) {
-    return activeKeys.indexOf(k) !== -1;
-  }
 
   bottomChart = new Chart(ctx, {
     type: "bar",
@@ -1773,11 +1777,9 @@ function drawPresenceChart(title, cats, activeKeys) {
       }),
       datasets: [
         {
-          data: cats.map(function () {
-            return 1;
-          }),
+          data: counts,
           backgroundColor: cats.map(function (c) {
-            return on(c.key) ? c.color : c.color + "26";
+            return c.color;
           }),
           borderWidth: 0,
           borderRadius: 3,
@@ -1787,6 +1789,7 @@ function drawPresenceChart(title, cats, activeKeys) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: { padding: { top: 18 } },
       plugins: {
         legend: { display: false },
         title: {
@@ -1802,15 +1805,16 @@ function drawPresenceChart(title, cats, activeKeys) {
               return cats[c[0].dataIndex].label;
             },
             label: function (c) {
-              return on(cats[c.dataIndex].key)
-                ? "წარმოდგენილია"
-                : "არ არის წარმოდგენილი";
+              return " " + c.parsed.y + " " + unit;
             },
           },
         },
       },
       scales: {
-        y: { beginAtZero: true, max: 1, display: false, grid: { display: false } },
+        y: {
+          beginAtZero: true,
+          ticks: { precision: 0, font: { family: "Fira Sans", size: 10, weight: "500" } },
+        },
         x: {
           ticks: {
             font: { family: "Fira Sans", size: 11, weight: "500" },
@@ -1818,31 +1822,52 @@ function drawPresenceChart(title, cats, activeKeys) {
             maxRotation: 0,
             minRotation: 0,
             padding: 4,
-            color: function (c) {
-              return on(cats[c.index].key) ? "#1A1A18" : "#b0b0b0";
-            },
           },
           grid: { display: false },
         },
       },
     },
   });
+
+  highlightBottomBars(function (l, i) {
+    return activeKeys.indexOf(cats[i].key) !== -1;
+  });
 }
 
+// დასახლებები სახელოვნებო დარგების მიხედვით (რეგიონი); დაწკაპებულის დარგები გამოყოფილია
 function showBottomChartArt(p, cats) {
-  drawPresenceChart(
-    p.Name_Geo + " — სახელოვნებო დარგები",
+  var settlements = artData.features.filter(function (f) {
+    return f.properties.ftype === "settlement";
+  });
+  var counts = ART_CATEGORIES.map(function (c) {
+    return settlements.filter(function (f) {
+      var v = f.properties[c.key];
+      return v && v !== "არა";
+    }).length;
+  });
+  drawCategoryCountChart(
+    "დასახლებები სახელოვნებო დარგების მიხედვით — " + p.Name_Geo,
     ART_CATEGORIES,
+    counts,
+    "დასახლება",
     cats.map(function (c) {
       return c.key;
     })
   );
 }
 
+// მუზეუმები სახეობების მიხედვით (რეგიონი); დაწკაპებული მუზეუმის სახეობა გამოყოფილია
 function showBottomChartMuseum(p, t) {
-  drawPresenceChart(
-    p.Name_Geo + " — " + t.label,
+  var counts = TOURISM_TYPES.map(function (tt) {
+    return tourismData.features.filter(function (f) {
+      return getTourismType(f.properties.Museums_Ge).key === tt.key;
+    }).length;
+  });
+  drawCategoryCountChart(
+    "მუზეუმები სახეობების მიხედვით — " + p.Name_Geo + ": " + t.label,
     TOURISM_TYPES,
+    counts,
+    "მუზეუმი",
     [t.key]
   );
 }

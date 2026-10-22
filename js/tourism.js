@@ -401,7 +401,7 @@ function buildTourismTypesLayer(data) {
 
       marker.on("click", function () {
         showInfoTt(p, types);
-        showBottomChartTt(p, types);
+        showBottomChartTt(p, types, data);
       });
       return marker;
     },
@@ -441,27 +441,20 @@ function showInfoTt(p, types) {
 }
 
 // ტურიზმის სახეობების სტატისტიკა — ქვედა chart პანელი
-function showBottomChartTt(p, types) {
+// დასახლებების რაოდენობა ტურიზმის სახეობების მიხედვით (რეგიონი);
+// დაწკაპებული დასახლების სახეობები სრული ფერით, დანარჩენი — ბაცად
+function showBottomChartTt(p, types, data) {
   var canvas = document.getElementById("chartCanvas");
   document.getElementById("chartEmpty").style.display = "none";
   canvas.classList.remove("hidden");
   var ctx = canvas.getContext("2d");
   if (bottomChart) bottomChart.destroy();
 
-  var activeKeys = types.map(function (t) {
-    return t.key;
-  });
-
-  function isActive(key) {
-    return activeKeys.indexOf(key) !== -1;
-  }
-
-  // ყველა სახეობა თანაბარი სვეტით — მხოლოდ ფერი განასხვავებს აქტიურს არააქტიურისგან
-  var values = TT_TYPES.map(function () {
-    return 1;
-  });
-  var bg = TT_TYPES.map(function (t) {
-    return isActive(t.key) ? t.color : t.color + "26";
+  var counts = TT_TYPES.map(function (t) {
+    return data.features.filter(function (f) {
+      var v = f.properties[t.key];
+      return v && v !== "არა";
+    }).length;
   });
 
   bottomChart = new Chart(ctx, {
@@ -472,9 +465,11 @@ function showBottomChartTt(p, types) {
       }),
       datasets: [
         {
-          label: "ტურიზმის სახეობა",
-          data: values,
-          backgroundColor: bg,
+          label: "დასახლებები",
+          data: counts,
+          backgroundColor: TT_TYPES.map(function (t) {
+            return t.color;
+          }),
           borderWidth: 0,
           borderRadius: 3,
         },
@@ -483,13 +478,15 @@ function showBottomChartTt(p, types) {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: { padding: { top: 18 } },
       plugins: {
         legend: { display: false },
         title: {
           display: true,
           text:
+            "დასახლებები ტურიზმის სახეობების მიხედვით — " +
             p.Name_Geo +
-            " — " +
+            ": " +
             types
               .map(function (t) {
                 return t.label;
@@ -505,18 +502,15 @@ function showBottomChartTt(p, types) {
               return TT_TYPES[c[0].dataIndex].label;
             },
             label: function (c) {
-              return isActive(TT_TYPES[c.dataIndex].key)
-                ? "წარმოდგენილია"
-                : "არ არის წარმოდგენილი";
-            },          },
+              return " " + c.parsed.y + " დასახლება";
+            },
+          },
         },
       },
       scales: {
         y: {
           beginAtZero: true,
-          max: 1,
-          display: false,
-          grid: { display: false },
+          ticks: { precision: 0, font: { family: "Fira Sans", size: 10, weight: "500" } },
         },
         x: {
           ticks: {
@@ -525,14 +519,18 @@ function showBottomChartTt(p, types) {
             maxRotation: 0,
             minRotation: 0,
             padding: 4,
-            color: function (c) {
-              return isActive(TT_TYPES[c.index].key) ? "#1A1A18" : "#b0b0b0";
-            },
           },
           grid: { display: false },
         },
       },
     },
+  });
+
+  var keys = types.map(function (t) {
+    return t.key;
+  });
+  highlightBottomBars(function (l, i) {
+    return keys.indexOf(TT_TYPES[i].key) !== -1;
   });
 }
 
@@ -727,10 +725,7 @@ function showBottomChartCellars(sel) {
       labels: pts.map(function (p) { return p.Name_Geo; }),
       datasets: [{
         data: pts.map(function (p) { return p.Cellars; }),
-        backgroundColor: pts.map(function (p) {
-          return p.Name_Geo === sel.Name_Geo && p.Cellars === sel.Cellars
-            ? CELLAR_COLOR : CELLAR_COLOR + "33";
-        }),
+        backgroundColor: CELLAR_COLOR,
         borderWidth: 0,
         borderRadius: 3,
       }],
@@ -760,6 +755,10 @@ function showBottomChartCellars(sel) {
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return pts[i].Name_Geo === sel.Name_Geo && pts[i].Cellars === sel.Cellars;
+    });
 }
 
 // ზონების ფართობები — ქვედა სტატისტიკის ველი
@@ -798,7 +797,7 @@ function showBottomChartVitZones(sel) {
             return Math.round(sums[z.key] * 10) / 10;
           }),
           backgroundColor: VIT_ZONES.map(function (z) {
-            return z.key === sel.Zone ? z.color : z.color + "99";
+            return z.color;
           }),
           borderWidth: 0,
           borderRadius: 3,
@@ -852,15 +851,16 @@ function showBottomChartVitZones(sel) {
             autoSkip: false,
             maxRotation: 0,
             minRotation: 0,
-            color: function (c) {
-              return VIT_ZONES[c.index].key === sel.Zone ? "#1A1A18" : "#999";
-            },
           },
           grid: { display: false },
         },
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return VIT_ZONES[i].key === sel.Zone;
+    });
 }
 
 function updateViticultureLegend() {
@@ -988,9 +988,7 @@ function showBottomChartProtectedAreas(sel) {
       }),
       datasets: [{
         data: names.map(function (n) { return Math.round(sums[n] * 100) / 100; }),
-        backgroundColor: names.map(function (n) {
-          return n === sel.Name_Geo ? PA_STROKE : PA_FILL;
-        }),
+        backgroundColor: PA_STROKE,
         borderWidth: 0,
         borderRadius: 3,
         minBarLength: 6,
@@ -1029,15 +1027,16 @@ function showBottomChartProtectedAreas(sel) {
           ticks: {
             font: { family: "Fira Sans", size: 11, weight: "500" },
             autoSkip: false, maxRotation: 0, minRotation: 0,
-            color: function (c) {
-              return names[c.index] === sel.Name_Geo ? "#1A1A18" : "#999";
-            },
           },
           grid: { display: false },
         },
       },
     },
   });
+  if (sel)
+    highlightBottomBars(function (l, i) {
+      return names[i] === sel.Name_Geo;
+    });
 }
 
 function updateProtectedAreasLegend() {

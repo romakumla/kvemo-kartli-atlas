@@ -288,6 +288,99 @@ var censusChart = null;
 
 var bottomChart = null;
 
+// ===== ქვედა დიაგრამა: დაწკაპებული ობიექტის გამოყოფა =====
+// ქვედა დიაგრამები ყველა სვეტით სრული ფერით იხატება. რუკაზე ობიექტის
+// დაწკაპებისას highlightBottomBars() სრულ ფერს მხოლოდ ამ ობიექტის სვეტ(ებ)ს
+// უტოვებს, დანარჩენს აბაცებს, ასე რომ რუკა და დიაგრამა ერთსა და იმავეზე
+// მიუთითებს. ბაცი სვეტის სიძლიერე ყველა დიაგრამაზე ერთია (BAR_FADE_ALPHA).
+//   match — სვეტის წარწერა, წარწერების მასივი, ან ფუნქცია (label, index) → true/false
+// თუ არცერთი სვეტი არ დაემთხვა, დიაგრამა უცვლელი რჩება (ყველა სვეტი სრული ფერით).
+var BAR_FADE_ALPHA = 0.25;
+
+// მუნიციპალიტეტის სახელი მონაცემებში სხვადასხვა ფორმითაა: „ბოლნისი“,
+// შეკვეცილი „ბოლნისის მუნიციპა“, „ქალაქ რუსთავის მუნ“, „Bolnisi Municipality“.
+// muniName() ყველას ერთ ფორმამდე დაიყვანს: „ბოლნისი“. უცნობზე — "".
+var MUNI_FORMS = [
+  ["ბოლნისი", "ბოლნისის", "Bolnisi"],
+  ["მარნეული", "მარნეულის", "Marneuli"],
+  ["დმანისი", "დმანისის", "Dmanisi"],
+  ["რუსთავი", "რუსთავის", "Rustavi"],
+  ["წალკა", "წალკის", "Tsalka", "walka"],
+  ["თეთრიწყარო", "თეთრიწყაროს", "Tetritskaro", "tetriwkaro", "Tetri-tskaro"],
+  ["გარდაბანი", "გარდაბნის", "Gardabani"],
+];
+function muniName(raw) {
+  var s = String(raw || "").trim().replace(/^(ქალაქ|q\.)\s+/, "").toLowerCase();
+  for (var i = 0; i < MUNI_FORMS.length; i++) {
+    var f = MUNI_FORMS[i];
+    for (var k = 0; k < f.length; k++) {
+      var form = f[k].toLowerCase();
+      if (s === form || (k > 0 && s.indexOf(form + " ") === 0)) return f[0];
+    }
+  }
+  return "";
+}
+
+function fadeColor(c) {
+  if (typeof c !== "string") return c;
+  var s = c.trim();
+  var r, g, b, a = 1, m;
+  if (s.charAt(0) === "#") {
+    var h = s.slice(1);
+    if (h.length === 3 || h.length === 4)
+      h = h.split("").map(function (x) { return x + x; }).join("");
+    if (h.length !== 6 && h.length !== 8) return c;
+    r = parseInt(h.slice(0, 2), 16);
+    g = parseInt(h.slice(2, 4), 16);
+    b = parseInt(h.slice(4, 6), 16);
+    if (h.length === 8) a = parseInt(h.slice(6, 8), 16) / 255;
+  } else if ((m = s.match(/^rgba?\(([^)]+)\)$/i))) {
+    var p = m[1].split(",").map(function (x) { return parseFloat(x); });
+    r = p[0]; g = p[1]; b = p[2];
+    if (p.length > 3) a = p[3];
+  } else {
+    return c;
+  }
+  return "rgba(" + r + "," + g + "," + b + "," + +(a * BAR_FADE_ALPHA).toFixed(3) + ")";
+}
+
+function highlightBottomBars(match) {
+  var ch = bottomChart;
+  if (!ch || !ch.data || !ch.data.labels) return false;
+  var labels = ch.data.labels.map(function (l) {
+    return Array.isArray(l) ? l.join(" ") : String(l);
+  });
+  var test =
+    typeof match === "function"
+      ? match
+      : Array.isArray(match)
+        ? function (l) { return match.indexOf(l) !== -1; }
+        : function (l) { return l === String(match); };
+  var on = labels.map(function (l, i) { return !!test(l, i); });
+  if (on.indexOf(true) === -1) return false;
+  ch.data.datasets.forEach(function (ds) {
+    ["backgroundColor", "borderColor"].forEach(function (prop) {
+      var v = ds[prop];
+      if (v === undefined) return;
+      var base = labels.map(function (_, i) { return Array.isArray(v) ? v[i] : v; });
+      ds[prop] = base.map(function (c, i) { return on[i] ? c : fadeColor(c); });
+    });
+  });
+  // სვეტის წარწერაც: არჩეული — მუქი, დანარჩენი — ბაცი
+  var o = ch.config.options;
+  if (["pie", "doughnut", "polarArea", "radar"].indexOf(ch.config.type) === -1) {
+    var axis = o.indexAxis === "y" ? "y" : "x";
+    o.scales = o.scales || {};
+    o.scales[axis] = o.scales[axis] || {};
+    o.scales[axis].ticks = o.scales[axis].ticks || {};
+    o.scales[axis].ticks.color = function (c) {
+      return on[c.index] ? "#1A1A18" : "#999";
+    };
+  }
+  ch.update();
+  return true;
+}
+
 var activeSublayer = null;
 
 var popLayerActive = false;
