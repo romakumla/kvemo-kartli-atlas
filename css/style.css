@@ -1879,15 +1879,29 @@ aside {
     display: flex;
   }
   .title-geo, .title-sub { display: none; }
+  /* ატლასის სახელი სახლის ხატულით — დაჭერით მთავარ გვერდზე (საიტი თავიდან იტვირთება) */
   .title-mobile {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     font-size: 14px;
     font-weight: 700;
     color: var(--text);
+    text-decoration: none;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: calc(100vw - 24px);
+    padding: 2px 10px;
+    border-radius: 14px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .title-mobile svg {
+    flex-shrink: 0;
+    color: var(--red);
+  }
+  .title-mobile:active {
+    background: var(--red-light);
   }
 
   /* ნავიგაცია — მთელი სიგანე */

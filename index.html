@@ -33,7 +33,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=BPG+Nino+Mtavruli&family=Fira+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261023e" />
+  <link rel="stylesheet" href="css/style.css?v=20261023f" />
   <style>
     .clickable {
       cursor: pointer;
@@ -118,7 +118,7 @@
   <!-- Header -->
   <header id="appHeader">
     <div class="header-inner">
-      <div class="header-logo clickable" onclick="window.location.reload()" title="მთავარ გვერდზე დაბრუნება">
+      <div class="header-logo clickable" onclick="goHome()" title="მთავარ გვერდზე დაბრუნება">
         <img src="files/logo-foundation.png" alt="შოთა რუსთაველის ეროვნული სამეცნიერო ფონდი" class="header-atlas-logo">
         <div class="header-logo-divider"></div>
         <img src="files/logo-institute.png" alt="ვახუშტი ბაგრატიონის გეოგრაფიის ინსტიტუტი" class="header-inst-logo">
@@ -127,7 +127,10 @@
         <div class="header-title">
           <span class="title-geo">ქვემო ქართლის რეგიონის</span>
           <span class="title-sub">ინტერაქტიული ატლასი</span>
-          <span class="title-mobile">ქვემო ქართლის ინტერაქტიული ატლასი</span>
+          <a class="title-mobile" href="./" onclick="goHome(); return false;" title="მთავარ გვერდზე დაბრუნება">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            ქვემო ქართლის ინტერაქტიული ატლასი
+          </a>
         </div>
       </div>
       <div class="header-meta">
@@ -1310,6 +1313,10 @@
   <script src="js/app.js?v=20261023b"></script>
 
   <script>
+    // მთავარ გვერდზე: საიტის თავიდან ჩატვირთვა რუკის ბმულის (#…) გარეშე
+    function goHome() {
+      window.location.href = window.location.pathname + window.location.search;
+    }
     function openModal(id) {
       document.getElementById(id).classList.add('open');
       document.body.style.overflow = 'hidden';
