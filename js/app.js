@@ -18,16 +18,16 @@ initHealth();
 setInfoBtn(null);
 
 // ===== თემების ნავიგაცია =====
-// თითოეული თემა: მონიშვნის ველი მარცხენა პანელში (chk), თემის პანელი (view),
-// „უკან“ ღილაკი (back) და ქვეფენების ღილაკების ატრიბუტი (sub → [data-sub]).
+// თითოეული თემა: ბმულის სახელი (key, #key/ქვეფენა), მონიშვნის ველი მარცხენა პანელში (chk),
+// თემის პანელი (view), „უკან“ ღილაკი (back) და ქვეფენების ღილაკების ატრიბუტი (sub → [data-sub]).
 var THEMES = [
-  { chk: "chkPopulation", view: "sublayerView", back: "btnBack", sub: "sublayer" },
-  { chk: "chkNature", view: "natureView", back: "btnNatureBack", sub: "naturesub" },
-  { chk: "chkHistory", view: "historyView", back: "btnHistoryBack", sub: "histsub" },
-  { chk: "chkEconomy", view: "economyView", back: "btnEconomyBack", sub: "econsub" },
-  { chk: "chkEducation", view: "educationView", back: "btnEducationBack", sub: "edusub" },
-  { chk: "chkTourism", view: "tourismView", back: "btnTourismBack", sub: "toursub" },
-  { chk: "chkHealth", view: "healthView", back: "btnHealthBack", sub: "healthsub" },
+  { key: "population", chk: "chkPopulation", view: "sublayerView", back: "btnBack", sub: "sublayer" },
+  { key: "nature", chk: "chkNature", view: "natureView", back: "btnNatureBack", sub: "naturesub" },
+  { key: "history", chk: "chkHistory", view: "historyView", back: "btnHistoryBack", sub: "histsub" },
+  { key: "economy", chk: "chkEconomy", view: "economyView", back: "btnEconomyBack", sub: "econsub" },
+  { key: "education", chk: "chkEducation", view: "educationView", back: "btnEducationBack", sub: "edusub" },
+  { key: "tourism", chk: "chkTourism", view: "tourismView", back: "btnTourismBack", sub: "toursub" },
+  { key: "health", chk: "chkHealth", view: "healthView", back: "btnHealthBack", sub: "healthsub" },
 ];
 
 // ჩანს მხოლოდ ერთი პანელი (მთავარი ან ერთ-ერთი თემის); მონიშნულია მხოლოდ მისი ველი
@@ -71,10 +71,12 @@ function showMainView() {
   resetPopLegend();
   hideChartPanel();
   loadNeutralLayers();
+  updateLinkHash();
 }
 
-// თემის გახსნა: ჩაირთვება პირველი ქვეფენა — ისე, თითქოს მის ღილაკს დააწკაპეს
-function openTheme(theme) {
+// თემის გახსნა: ჩაირთვება ქვეფენა subKey (ბმულიდან) ან პირველი —
+// ისე, თითქოს მის ღილაკს დააწკაპეს
+function openTheme(theme, subKey) {
   newNavigation();
   showOnlyView(theme.view);
   resetThemeState();
@@ -85,7 +87,44 @@ function openTheme(theme) {
   buttons.forEach(function (b) {
     b.classList.remove("active");
   });
-  buttons[0].click();
+  var target = buttons[0];
+  buttons.forEach(function (b) {
+    if (subKey && b.dataset[theme.sub] === subKey) target = b;
+  });
+  target.click();
+}
+
+// ===== ბმული კონკრეტულ რუკაზე: …/kvemo-kartli-atlas/#nature/forest =====
+// მისამართის ზოლში ყოველთვის ჩანს გახსნილი რუკის ბმული (გასაზიარებლად);
+// ბმულით შემოსვლისას ან მისამართის შეცვლისას ის რუკა იხსნება.
+function currentLinkHash() {
+  for (var i = 0; i < THEMES.length; i++) {
+    var t = THEMES[i];
+    if (document.getElementById(t.view).style.display === "none") continue;
+    var active = document.querySelector("[data-" + t.sub + "].active");
+    return "#" + t.key + (active ? "/" + active.dataset[t.sub] : "");
+  }
+  return "";
+}
+
+function updateLinkHash() {
+  var h = currentLinkHash();
+  if (h === location.hash || (!h && !location.hash)) return;
+  // replaceState: ისტორიაში ახალი ჩანაწერი არ ჩნდება და hashchange არ ეშვება
+  history.replaceState(null, "", location.pathname + location.search + h);
+}
+
+function openFromLinkHash() {
+  var parts = location.hash.replace(/^#/, "").split("/");
+  var theme = THEMES.filter(function (t) {
+    return t.key === parts[0];
+  })[0];
+  if (!theme) {
+    if (location.hash) showMainView();
+    return;
+  }
+  if (location.hash === currentLinkHash()) return; // უკვე ეს რუკაა გახსნილი
+  openTheme(theme, parts[1]);
 }
 
 THEMES.forEach(function (theme) {
@@ -95,6 +134,16 @@ THEMES.forEach(function (theme) {
   });
   document.getElementById(theme.back).addEventListener("click", showMainView);
 });
+
+// ქვეფენის ღილაკზე დაჭერის შემდეგ (bindSublayerButtons-ის მერე) — ბმულის განახლება
+THEMES.forEach(function (theme) {
+  document.querySelectorAll("[data-" + theme.sub + "]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      setTimeout(updateLinkHash, 0);
+    });
+  });
+});
+window.addEventListener("hashchange", openFromLinkHash);
 
 // ===== Sublayer buttons (მხოლოდ მოსახლეობის პანელი) =====
 // მნიშვნელოვანი: სელექტორი უნდა იყოს [data-sublayer], და არა ".sublayer-btn",
@@ -392,3 +441,6 @@ if (document.readyState === "loading") {
 } else {
   setTimeout(initMobilePanels, 100);
 }
+
+// ბმულით შემოსვლისას (მაგ. …/#nature/forest) — პირდაპირ ამ რუკაზე
+if (location.hash) openFromLinkHash();
