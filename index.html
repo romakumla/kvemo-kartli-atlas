@@ -33,7 +33,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=BPG+Nino+Mtavruli&family=Fira+Sans:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261023a" />
+  <link rel="stylesheet" href="css/style.css?v=20261023e" />
   <style>
     .clickable {
       cursor: pointer;
@@ -127,6 +127,7 @@
         <div class="header-title">
           <span class="title-geo">ქვემო ქართლის რეგიონის</span>
           <span class="title-sub">ინტერაქტიული ატლასი</span>
+          <span class="title-mobile">ქვემო ქართლის ინტერაქტიული ატლასი</span>
         </div>
       </div>
       <div class="header-meta">
@@ -1193,6 +1194,7 @@
 
   <!-- Bottom chart panel -->
   <div id="chartPanel">
+    <button id="mobChartClose" aria-label="დიაგრამის დახურვა" title="დახურვა">&times;</button>
     <div id="chartEmpty">
       <svg viewBox="0 0 24 24" fill="currentColor" width="20">
         <path
@@ -1294,18 +1296,18 @@
   </div>
 
   <!-- ატლასის სკრიპტი: ფაილები ამ თანმიმდევრობით უნდა ჩაიტვირთოს (app.js — ბოლოს) -->
-  <script src="js/core.js?v=20261023a"></script>
-  <script src="js/population.js?v=20261023a"></script>
-  <script src="js/map-common.js?v=20261023a"></script>
-  <script src="js/nature-landscape-hazards.js?v=20261023a"></script>
-  <script src="js/nature-climate.js?v=20261023a"></script>
-  <script src="js/nature-vegetation-soils-geology.js?v=20261023a"></script>
-  <script src="js/history.js?v=20261023a"></script>
-  <script src="js/economy.js?v=20261023a"></script>
-  <script src="js/education.js?v=20261023a"></script>
-  <script src="js/tourism.js?v=20261023a"></script>
-  <script src="js/health.js?v=20261023a"></script>
-  <script src="js/app.js?v=20261023a"></script>
+  <script src="js/core.js?v=20261023b"></script>
+  <script src="js/population.js?v=20261023b"></script>
+  <script src="js/map-common.js?v=20261023b"></script>
+  <script src="js/nature-landscape-hazards.js?v=20261023b"></script>
+  <script src="js/nature-climate.js?v=20261023b"></script>
+  <script src="js/nature-vegetation-soils-geology.js?v=20261023b"></script>
+  <script src="js/history.js?v=20261023b"></script>
+  <script src="js/economy.js?v=20261023b"></script>
+  <script src="js/education.js?v=20261023b"></script>
+  <script src="js/tourism.js?v=20261023b"></script>
+  <script src="js/health.js?v=20261023b"></script>
+  <script src="js/app.js?v=20261023b"></script>
 
   <script>
     function openModal(id) {
@@ -1329,15 +1331,17 @@
   <div id="mobBackdrop"></div>
 
   <!-- Mobile panel toggle buttons -->
-  <button id="mobLeftBtn" aria-label="თემატური ფენები">
+  <button id="mobLeftBtn" aria-label="რუკები">
     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
       <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
     </svg>
+    <span>რუკები</span>
   </button>
-  <button id="mobRightBtn" aria-label="ფონური რუკა">
+  <button id="mobRightBtn" aria-label="ლეგენდა და ფონური რუკა">
     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
       <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
     </svg>
+    <span>ლეგენდა</span>
   </button>
 </body>
 

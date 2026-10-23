@@ -64,7 +64,23 @@ function loadMuniData(url) {
 }
 
 // ===== Map =====
-var map = L.map("map", { zoomControl: false }).setView([41.4937, 44.5242], 10);
+// ===== მობილური ვერსია =====
+// ამ სიგანემდე (ტელეფონი, ვერტიკალური პლანშეტი) ჩანს მობილური განლაგება — იხ. css/style.css
+var MOBILE_MAX_WIDTH = 900;
+function isMobileView() {
+  return window.innerWidth <= MOBILE_MAX_WIDTH;
+}
+
+// მობილურზე zoom-ის ნაბიჯი 0.25 — რეგიონი ეკრანს უკეთ ავსებს (დიდ ეკრანზე უცვლელად 1)
+var map = L.map("map", { zoomControl: false, zoomSnap: isMobileView() ? 0.25 : 1 }).setView([41.4937, 44.5242], 10);
+
+// რეგიონის ჩვენება: დიდ ეკრანზე — ცენტრი, zoom 10 (როგორც აქამდე);
+// პატარაზე — მთელი რეგიონი ეკრანზე ეტევა
+function showWholeRegion() {
+  if (!borderBounds) return;
+  if (isMobileView()) map.fitBounds(borderBounds, { padding: [8, 8] });
+  else map.setView(borderBounds.getCenter(), 10);
+}
 
 L.control.zoom({ position: "topright" }).addTo(map);
 
@@ -82,7 +98,7 @@ var homeControl = L.Control.extend({
     c.style.cssText =
       "background:white;width:30px;height:30px;display:flex;justify-content:center;align-items:center;cursor:pointer;";
     c.onclick = function () {
-      if (borderBounds) map.setView(borderBounds.getCenter(), 10);
+      showWholeRegion();
     };
     return c;
   },
@@ -431,6 +447,8 @@ function chartTitle(text, size) {
 // ყოველი ქვედა დიაგრამა ასე იწყება: ტილო ჩანს, „ცარიელის“ წარწერა იმალება,
 // წინა დიაგრამა იშლება. აბრუნებს ახალი დიაგრამის ხატვის კონტექსტს (ctx).
 function prepareBottomChart() {
+  // მობილურზე დიაგრამა ქვემოდან ამოსრიალდება (body.mob-chart, css/style.css)
+  if (isMobileView()) document.body.classList.add("mob-chart");
   var canvas = document.getElementById("chartCanvas");
   document.getElementById("chartEmpty").style.display = "none";
   canvas.classList.remove("hidden");
@@ -591,6 +609,7 @@ function showChartPanel() {
 }
 
 function hideChartPanel() {
+  document.body.classList.remove("mob-chart");
   document.getElementById("chartPanel").style.display = "none";
   document.body.classList.remove("chart-open");
   refreshMapSize();
@@ -605,6 +624,7 @@ function hideChartPanel() {
 }
 
 function resetChartPanel() {
+  document.body.classList.remove("mob-chart");
   document.getElementById("chartEmpty").style.display = "flex";
   document.getElementById("chartCanvas").classList.add("hidden");
   if (bottomChart) {
@@ -788,6 +808,6 @@ function initCore() {
       }).addTo(map);
       borderBounds = bl.getBounds();
       map.invalidateSize();
-      map.setView(borderBounds.getCenter(), 10);
+      showWholeRegion();
     });
 }
