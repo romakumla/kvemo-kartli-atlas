@@ -23,7 +23,7 @@ Chart.defaults.plugins.legend.display = false;
 // მისამართს DATA_VERSION-ს უმატებს (?v=…), ამიტომ მისი შეცვლისას ბრაუზერი
 // ფაილებს ხელახლა ჩამოტვირთავს. data/-ში ნებისმიერი ცვლილებისას ეს
 // თარიღი განაახლეთ.
-var DATA_VERSION = "20261023a";
+var DATA_VERSION = "20261023b";
 function dataUrl(path) {
   return path + (path.indexOf("?") === -1 ? "?" : "&") + "v=" + DATA_VERSION;
 }
