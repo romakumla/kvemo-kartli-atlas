@@ -244,7 +244,7 @@ function showInfoBattle(p) {
   var colorMap = {
     გამარჯვება: "#E31E26",
     დამარცხება: "#A08000",
-    "დაბრუნებული ქალაქ": "#E31E26",
+    "დაბრუნებული ქალაქი (აღმაშენებელი)": "#E31E26",
   };
   var color = colorMap[p.Type_Geo] || "#666";
   var svgIcon =
@@ -278,16 +278,16 @@ function showInfoBattle(p) {
 function showBottomChartBattles(data, sel) {
   var ctx = prepareBottomChart();
 
-  var types = ["გამარჯვება", "დამარცხება", "დაბრუნებული ქალაქ"];
+  var types = ["გამარჯვება", "დამარცხება", "დაბრუნებული ქალაქი (აღმაშენებელი)"];
   var colors = {
     გამარჯვება: "#E31E26",
     დამარცხება: "#FCEE23",
-    "დაბრუნებული ქალაქ": "#FF8C00",
+    "დაბრუნებული ქალაქი (აღმაშენებელი)": "#FF8C00",
   };
-  var counts = { გამარჯვება: 0, დამარცხება: 0, "დაბრუნებული ქალაქ": 0 };
+  var counts = { გამარჯვება: 0, დამარცხება: 0, "დაბრუნებული ქალაქი (აღმაშენებელი)": 0 };
   data.features.forEach(function (f) {
     var t = f.properties.Type_Geo;
-    if (t.indexOf("დაბრუნებული") > -1) counts["დაბრუნებული ქალაქ"]++;
+    if (t.indexOf("დაბრუნებული") > -1) counts["დაბრუნებული ქალაქი (აღმაშენებელი)"]++;
     else if (counts[t] !== undefined) counts[t]++;
   });
 
@@ -295,7 +295,7 @@ function showBottomChartBattles(data, sel) {
   var vals = [
     counts["გამარჯვება"],
     counts["დამარცხება"],
-    counts["დაბრუნებული ქალაქ"],
+    counts["დაბრუნებული ქალაქი (აღმაშენებელი)"],
   ];
   var bColors = ["#E31E26CC", "#FCEE23CC", "#FF8C00CC"];
   var bBorder = ["#E31E26", "#FCEE23", "#FF8C00"];
