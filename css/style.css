@@ -1159,6 +1159,12 @@ aside {
 }
 
 /* ===== Site Navigation ===== */
+/* ენის გადამრთველი (EN / ქარ) — js/i18n.js */
+.nav-link.lang-switch {
+  border: 1px solid var(--border);
+  font-weight: 600;
+  margin-left: 4px;
+}
 .site-nav {
   display: flex;
   align-items: center;
