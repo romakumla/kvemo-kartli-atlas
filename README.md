@@ -21,6 +21,22 @@
 - **ტურიზმი** - საკურორტო-ტურისტული შეფასება, ტურიზმის სახეობები, მევენახეობა და მარნები, დაცული ტერიტორიები
 - **ჯანდაცვა და სოციალური მომსახურება** - ჯანდაცვის ინფრასტრუქტურა, სოციალური დახმარება, ზოონოზური დაავადებები
 
+## ბმული კონკრეტულ რუკაზე
+
+ნებისმიერ რუკას თავისი ბმული აქვს: `https://romakumla.github.io/kvemo-kartli-atlas/#თემა/ქვეფენა`, მაგ.
+<https://romakumla.github.io/kvemo-kartli-atlas/#nature/forest> (ტყეები) ან <https://romakumla.github.io/kvemo-kartli-atlas/#history/megaliths> (მეგალითები).
+საიტზე რუკის არჩევისას ბმული მისამართის ზოლში თავისით ჩნდება — შეგიძლიათ დააკოპიროთ და გააზიაროთ. ქვეფენის გარეშე (`#nature`) თემის პირველი რუკა იხსნება.
+
+| თემა | ქვეფენები |
+|---|---|
+| `population` | `population`, `ethnics`, `religion`, `death_rate`, `birth_rate`, `density`, `marital`, `idp` |
+| `nature` | `geology`, `groundwater`, `earthquake`, `hazard`, `madflow`, `hail_total`, `meteo`, `hydro`, `avg_temp`, `max_temp`, `precip`, `hot_days`, `trop_nights`, `frost_days`, `heat_waves`, `drought`, `soils`, `soils_born`, `forest`, `vegetation`, `landscape`, `landscape_antrop`, `agrovlimat` |
+| `history` | `archaeology`, `battles`, `germans`, `forts`, `eparchies`, `petroglyphs`, `megaliths` |
+| `economy` | `botanica`, `crop_zones`, `agrispec`, `land`, `agri`, `energetika`, `sun` |
+| `education` | `schools`, `kindergarten`, `oikonymy`, `libraries`, `tourism`, `art_disciplines` |
+| `tourism` | `tourism_climate`, `tourism_types`, `viticulture`, `protected_areas` |
+| `health` | `health`, `social`, `zoo` |
+
 ## ტექნოლოგია და სტრუქტურა
 
 სტატიკური საიტია, აწყობის (build) ეტაპის გარეშე: [Leaflet 1.9.4](https://leafletjs.com), [Chart.js 4.4.1](https://www.chartjs.org) და სუფთა JavaScript. გამოქვეყნებულია GitHub Pages-ზე.
