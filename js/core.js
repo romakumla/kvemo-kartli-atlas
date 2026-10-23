@@ -517,7 +517,8 @@ function fadeColor(c) {
 function highlightBottomBars(match, onlyDataset) {
   var ch = bottomChart;
   if (!ch || !ch.data || !ch.data.labels) return false;
-  var labels = ch.data.labels.map(function (l) {
+  // ინგლისურ რეჟიმში წარწერები ნათარგმნია; შედარება — ქართულ ორიგინალთან (js/i18n.js)
+  var labels = (ch.data.labels.$orig || ch.data.labels).map(function (l) {
     return Array.isArray(l) ? l.join(" ") : String(l);
   });
   var test =
