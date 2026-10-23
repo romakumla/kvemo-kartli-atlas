@@ -1254,7 +1254,7 @@ function showInfoRate(p, f12, f22, colorMap, type) {
     v22 = p[f22] || "–";
   showInfoCard(`
     <div class="info-name">${p.Name_Geo || p.Name_Eng || "–"}</div>
-    <div style="margin-top:6px;font-size:10px;color:var(--text-muted);margin-bottom:8px;">${label}ის ზოგ. კოეფიციენტი (‰)</div>
+    <div style="margin-top:6px;font-size:10px;color:var(--text-muted);margin-bottom:8px;">${label.slice(0, -1)}ის ზოგ. კოეფიციენტი (‰)</div>
     <div class="info-row"><span class="info-key">2012</span>
       <span class="info-val" style="display:flex;align-items:center;gap:6px;">
         <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${getRateColor(v12, colorMap)};border:1px solid rgba(0,0,0,.15);flex-shrink:0;"></span>${v12}
@@ -1301,7 +1301,7 @@ function showBottomChartRate(p, f12, f22, type) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        title: chartTitle(`${p.Name_Geo || ""} — ${label}ის კოეფ. (‰)`, 12),
+        title: chartTitle(`${p.Name_Geo || ""} — ${label.slice(0, -1)}ის კოეფ. (‰)`, 12),
         tooltip: {
           callbacks: {
             label: (c) =>
