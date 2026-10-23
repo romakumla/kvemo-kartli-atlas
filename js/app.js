@@ -430,8 +430,22 @@ function initMobilePanels() {
     .querySelectorAll('.layer-item input[type="checkbox"]')
     .forEach(function (cb) {
       cb.addEventListener("change", function () {
-        if (window.innerWidth <= 768) setTimeout(closeAll, 300);
+        if (isMobileView()) setTimeout(closeAll, 300);
       });
+    });
+
+  // რუკის (ქვეფენის) არჩევის შემდეგ პანელი თავისით იხურება — რუკა ჩანს
+  document.querySelectorAll("#layerPanel .sublayer-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (isMobileView()) setTimeout(closeAll, 250);
+    });
+  });
+
+  // დიაგრამის დახურვა მობილურზე
+  var chartClose = document.getElementById("mobChartClose");
+  if (chartClose)
+    chartClose.addEventListener("click", function () {
+      document.body.classList.remove("mob-chart");
     });
 }
 
