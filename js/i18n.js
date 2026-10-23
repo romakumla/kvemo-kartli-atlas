@@ -19,11 +19,31 @@ var LANG = (function () {
 
 var GEO_CHARS = /[Ⴀ-ჿ]/;
 
+// ლექსიკონში ძებნა; თუ ზუსტი ჩანაწერი არ არის — ორი ნიმუში:
+//   „10–20 დღე“ → „10–20 days“ (ერთეულები: I18N_UNITS)
+//   „მეწყერი (121)“, „ნალექი (1990–2022)“ → ფრჩხილის წინა ნაწილი ითარგმნება, ფრჩხილი რჩება
+//   (ან ითარგმნება, თუ ქართულია და ლექსიკონშია)
+var NUM_UNIT = /^([<>≤≥]?\s*[-−–\d.,\s]*\d)\s*(\S+)$/;
+var PAREN_TAIL = /^(.*\S)\s*\(([^()]+)\)$/;
+function i18nLookup(key) {
+  var en = I18N_EN[key];
+  if (en !== undefined) return en;
+  var m = NUM_UNIT.exec(key);
+  if (m && I18N_UNITS[m[2]]) return m[1] + " " + I18N_UNITS[m[2]];
+  m = PAREN_TAIL.exec(key);
+  if (m) {
+    var base = i18nLookup(m[1]);
+    var inner = GEO_CHARS.test(m[2]) ? i18nLookup(m[2]) : m[2];
+    if (base !== undefined && inner !== undefined) return base + " (" + inner + ")";
+  }
+  return undefined;
+}
+
 // ქართული ტექსტის თარგმანი (თუ ლექსიკონშია), სხვა შემთხვევაში — უცვლელად
 function t(text) {
   if (LANG !== "en" || typeof text !== "string" || !GEO_CHARS.test(text)) return text;
   var key = text.replace(/\s+/g, " ").trim();
-  var en = I18N_EN[key];
+  var en = i18nLookup(key);
   if (en === undefined) return text;
   // წინა/ბოლო გამოტოვებები ვინარჩუნებთ (ტექსტი სხვა ელემენტებს ეკვრის)
   var lead = /^\s*/.exec(text)[0], trail = /\s*$/.exec(text)[0];
